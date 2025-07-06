@@ -1,17 +1,17 @@
-# Jekyll設定 - 書籍作成時にこれらの値を更新してください
-title: "書籍タイトル"
-description: "書籍の説明文"
+# Jekyll設定
+title: "デジタル革命の舞台裏"
+description: "コンピュータサイエンスを築いた天才たちの物語 - エイダ・ラブレスからスティーブ・ジョブズまで、デジタル時代を創った10人の革新者たちの人間ドラマ"
 author: 
   name: ITDO Inc. (株式会社アイティードゥ)
   github: itdojp
-  email: info@itdo.jp
-baseurl: "/your-book-repository-name"
+  email: knowledge@itdo.jp
+baseurl: "/cs-visionaries-book"
 url: "https://itdojp.github.io"
 
-# Repository settings for links - 書籍作成時に更新してください  
+# Repository settings for links
 repository:
-  github: itdojp/your-book-repository-name  # GitHub repository path
-  zenn: books/your-book-repository-name      # Zenn book path
+  github: itdojp/cs-visionaries-book  # GitHub repository path
+  zenn: books/cs-visionaries-book      # Zenn book path
 
 # テーマ
 remote_theme: pages-themes/minimal@v0.2.0

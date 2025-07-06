@@ -1,12 +1,15 @@
 {
   "book": {
-    "title": "Book Publishing Template v3.0 サンプル",
-    "description": "モダンデザインシステムを使用した技術書籍テンプレートのサンプル",
+    "title": "デジタル革命の舞台裏",
+    "subtitle": "コンピュータサイエンスを築いた天才たちの物語",
+    "description": "スマートフォンの中に眠る天才たちの遺産。エイダ・ラブレスからスティーブ・ジョブズ、現代のAI研究者まで、デジタル時代を創った10人の革新者たちの人間ドラマを通じて、技術の本質とビジネスへの示唆を探る一冊。",
     "author": {
-      "name": "Book Publishing Template",
-      "email": "example@example.com"
+      "name": "ITDO Inc. (株式会社アイティードゥ)",
+      "email": "knowledge@itdo.jp",
+      "github": "itdojp",
+      "website": "https://itdo.jp"
     },
-    "version": "3.0.0",
+    "version": "1.0.0",
     "language": "ja"
   },
   "contentSections": [
