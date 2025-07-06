@@ -1,9 +1,12 @@
 ---
-layout: default
+layout: book
 title: "第4章：東洋の島国から世界を変えた技術者"
 ---
 
 # 第4章：東洋の島国から世界を変えた技術者
+
+{% include navigation.html %}
+
 
 
 ## 〜嶋正利（1943-）・高橋秀俊（1915-1985）〜

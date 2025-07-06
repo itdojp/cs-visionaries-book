@@ -1,9 +1,12 @@
 ---
-layout: default
+layout: book
 title: "第3章：コンピュータに言葉を教えた海軍少将"
 ---
 
 # 第3章：コンピュータに言葉を教えた海軍少将
+
+{% include navigation.html %}
+
 
 
 ## 〜グレース・ホッパー（1906-1992）〜

@@ -1,21 +1,28 @@
 # Jekyll設定
 title: "デジタル革命の舞台裏"
 description: "コンピュータサイエンスを築いた天才たちの物語 - エイダ・ラブレスからスティーブ・ジョブズまで、デジタル時代を創った10人の革新者たちの人間ドラマ"
-author: 
-  name: ITDO Inc. (株式会社アイティードゥ)
-  github: itdojp
-  email: knowledge@itdo.jp
 baseurl: "/cs-visionaries-book"
 url: "https://itdojp.github.io"
 
-# Repository settings for links
-repository:
-  github: itdojp/cs-visionaries-book  # GitHub repository path
-  zenn: books/cs-visionaries-book      # Zenn book path
+# GitHub Pages用の簡素な設定
+markdown: kramdown
+highlighter: rouge
 
-# 基本的なJekyll設定（テーマなし）
-# theme: minima
-plugins: []
+# デフォルト設定
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+  - scope:
+      path: "chapters"
+    values:
+      layout: "book"
+  - scope:
+      path: "appendices"
+    values:
+      layout: "book"
 
 # 言語設定
 lang: ja

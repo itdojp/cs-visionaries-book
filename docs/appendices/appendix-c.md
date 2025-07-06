@@ -1,9 +1,12 @@
 ---
-layout: default
+layout: book
 title: "付録C：参考文献・推薦図書"
 ---
 
 # 付録C：参考文献・推薦図書
+
+{% include navigation.html %}
+
 
 
 

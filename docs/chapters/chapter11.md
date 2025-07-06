@@ -1,9 +1,12 @@
 ---
-layout: default
+layout: book
 title: "第11章：量子の不可思議な世界で計算する夢想家たち"
 ---
 
 # 第11章：量子の不可思議な世界で計算する夢想家たち
+
+{% include navigation.html %}
+
 
 
 ## 〜IBM・Google・IonQ研究者〜

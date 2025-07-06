@@ -1,9 +1,12 @@
 ---
-layout: default
+layout: book
 title: "第8章：つながりを価値に変えた大学生"
 ---
 
 # 第8章：つながりを価値に変えた大学生
+
+{% include navigation.html %}
+
 
 
 ## 〜マーク・ザッカーバーグ（1984-）〜

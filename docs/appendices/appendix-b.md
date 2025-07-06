@@ -1,9 +1,12 @@
 ---
-layout: default
+layout: book
 title: "付録B：用語解説"
 ---
 
 # 付録B：用語解説
+
+{% include navigation.html %}
+
 
 
 

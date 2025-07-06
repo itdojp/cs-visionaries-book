@@ -1,9 +1,12 @@
 ---
-layout: default
+layout: book
 title: "付録A：コンピュータサイエンス重要事件年表"
 ---
 
 # 付録A：コンピュータサイエンス重要事件年表
+
+{% include navigation.html %}
+
 
 
 

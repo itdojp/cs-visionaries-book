@@ -1,9 +1,12 @@
 ---
-layout: default
+layout: book
 title: "第7章：世界の情報を整理する魔法使い"
 ---
 
 # 第7章：世界の情報を整理する魔法使い
+
+{% include navigation.html %}
+
 
 
 ## 〜ラリー・ペイジ（1973-）&セルゲイ・ブリン（1973-）〜

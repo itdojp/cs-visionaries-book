@@ -21,33 +21,40 @@
     {% assign current_found = false %}
     {% assign prev_item = nil %}
     {% assign next_item = nil %}
+    {% assign all_items = '' | split: '' %}
     
+    <!-- Build complete navigation list -->
+    {% for item in navigation.home %}
+      {% assign all_items = all_items | push: item %}
+    {% endfor %}
+    {% for item in navigation.introduction %}
+      {% assign all_items = all_items | push: item %}
+    {% endfor %}
     {% for item in navigation.chapters %}
-      {% if current_found == false and page.url contains item.path %}
+      {% assign all_items = all_items | push: item %}
+    {% endfor %}
+    {% for item in navigation.appendices %}
+      {% assign all_items = all_items | push: item %}
+    {% endfor %}
+    
+    <!-- Find current position and set prev/next -->
+    {% for item in all_items %}
+      {% assign item_url = item.path | remove: '.html' %}
+      {% assign current_url = page.url | remove: '.html' | remove: 'index' %}
+      {% if current_url == '' %}{% assign current_url = '/' %}{% endif %}
+      {% if item_url == current_url or page.url contains item.path %}
         {% assign current_found = true %}
-      {% elsif current_found == false %}
-        {% assign prev_item = item %}
-      {% elsif current_found == true and next_item == nil %}
-        {% assign next_item = item %}
+        {% if forloop.index0 > 0 %}
+          {% assign prev_index = forloop.index0 | minus: 1 %}
+          {% assign prev_item = all_items[prev_index] %}
+        {% endif %}
+        {% unless forloop.last %}
+          {% assign next_index = forloop.index0 | plus: 1 %}
+          {% assign next_item = all_items[next_index] %}
+        {% endunless %}
         {% break %}
       {% endif %}
     {% endfor %}
-    
-    {% if current_found == false %}
-      {% for item in navigation.appendices %}
-        {% if current_found == false and page.url contains item.path %}
-          {% assign current_found = true %}
-          {% if forloop.first and navigation.chapters.size > 0 %}
-            {% assign prev_item = navigation.chapters.last %}
-          {% endif %}
-        {% elsif current_found == false %}
-          {% assign prev_item = item %}
-        {% elsif current_found == true and next_item == nil %}
-          {% assign next_item = item %}
-          {% break %}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
     
     {% if prev_item %}
       <a href="{{ site.baseurl }}{{ prev_item.path }}" class="nav-prev">

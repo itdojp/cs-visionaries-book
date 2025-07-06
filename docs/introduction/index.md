@@ -1,9 +1,12 @@
 ---
-layout: default
+layout: book
 title: "序章：スマホの中に眠る天才たちの遺産"
 ---
 
 # 序章：スマホの中に眠る天才たちの遺産
+
+{% include navigation.html %}
+
 
 ## あなたの一日は、10人の天才が作った技術で始まる
 

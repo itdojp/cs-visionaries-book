@@ -1,9 +1,12 @@
 ---
-layout: default
+layout: book
 title: "付録D：索引"
 ---
 
 # 付録D：索引
+
+{% include navigation.html %}
+
 
 
 

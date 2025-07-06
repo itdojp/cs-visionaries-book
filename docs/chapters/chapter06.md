@@ -1,9 +1,12 @@
 ---
-layout: default
+layout: book
 title: "第6章：情報を誰でもアクセス可能にした理想主義者"
 ---
 
 # 第6章：情報を誰でもアクセス可能にした理想主義者
+
+{% include navigation.html %}
+
 
 
 ## 〜ティム・バーナーズ=リー（1955-）〜

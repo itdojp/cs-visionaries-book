@@ -1,9 +1,12 @@
 ---
-layout: default
+layout: book
 title: "第12章：未来のデジタル世界を築くのは誰か"
 ---
 
 # 第12章：未来のデジタル世界を築くのは誰か
+
+{% include navigation.html %}
+
 
 
 

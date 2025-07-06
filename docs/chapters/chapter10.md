@@ -1,9 +1,12 @@
 ---
-layout: default
+layout: book
 title: "第10章：人工知能に魂を宿そうとする現代の錬金術師たち"
 ---
 
 # 第10章：人工知能に魂を宿そうとする現代の錬金術師たち
+
+{% include navigation.html %}
+
 
 
 ## 〜ジェフリー・ヒントン（1947-）&現代AI研究者〜

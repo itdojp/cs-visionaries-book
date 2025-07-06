@@ -1,9 +1,12 @@
 ---
-layout: default
+layout: book
 title: "第1章：機械に魂を吹き込んだ貴婦人"
 ---
 
 # 第1章：機械に魂を吹き込んだ貴婦人
+
+{% include navigation.html %}
+
 
 ## 〜エイダ・ラブレス（1815-1852）〜
 
