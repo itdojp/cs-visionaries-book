@@ -1,11 +1,10 @@
 ---
-layout: book
+layout: default
 title: "第5章：ガレージから始まった美の革命"
 ---
 
 # 第5章：ガレージから始まった美の革命
 
-{% include navigation.html %}
 
 ## 〜スティーブ・ジョブズ（1955-2011）&スティーブ・ウォズニアック（1950-）〜
 
@@ -818,4 +817,3 @@ iMac の成功により、Apple の復活が始まった。しかし、ジョブ
 
 次章では、この個人コンピュータの普及と並行して進化した「情報の民主化」技術—World Wide Web の誕生物語を見ていく。
 
-{% include navigation.html %}

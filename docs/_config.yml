@@ -13,10 +13,9 @@ repository:
   github: itdojp/cs-visionaries-book  # GitHub repository path
   zenn: books/cs-visionaries-book      # Zenn book path
 
-# テーマ - GitHub Pages標準テーマ
-theme: minima
-plugins:
-  - jekyll-feed
+# 基本的なJekyll設定（テーマなし）
+# theme: minima
+plugins: []
 
 # 言語設定
 lang: ja

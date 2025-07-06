@@ -1,11 +1,10 @@
 ---
-layout: book
+layout: default
 title: "付録D：索引"
 ---
 
 # 付録D：索引
 
-{% include navigation.html %}
 
 
 ## 人名索引
@@ -320,4 +319,3 @@ title: "付録D：索引"
 
 この索引は、読者が本書の内容を効率的に参照できるよう、重要な人名・事項・技術用語を体系的に整理したものです。ページ番号は架空のものですが、実際の書籍では正確なページ番号が記載されます。
 
-{% include navigation.html %}

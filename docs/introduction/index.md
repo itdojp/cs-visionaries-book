@@ -1,5 +1,5 @@
 ---
-layout: book
+layout: default
 title: "序章：スマホの中に眠る天才たちの遺産"
 ---
 

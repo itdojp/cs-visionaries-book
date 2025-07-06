@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: 'ja' }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ page.description | default: site.description | escape }}">
+    
+    <title>{% if page.title %}{{ page.title | escape }} - {{ site.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoto UI", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 { color: #2c3e50; }
+        a { color: #3498db; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .nav-home { margin-bottom: 30px; }
+        .nav-home a { 
+            background: #3498db; 
+            color: white; 
+            padding: 10px 20px; 
+            border-radius: 5px; 
+            display: inline-block; 
+        }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+    {% unless page.url == "/" %}
+    <div class="nav-home">
+        <a href="{{ '/' | relative_url }}">📚 ホーム</a>
+    </div>
+    {% endunless %}
+    
+    <main>
+        {{ content }}
+    </main>
+    
+    <footer style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        <p>© 2025 ITDO Inc. - Built with <a href="https://github.com/itdojp/book-publishing-template2">Book Publishing Template v3.0</a></p>
+    </footer>
+</body>
+</html>
