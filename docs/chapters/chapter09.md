@@ -5,7 +5,6 @@ title: "第9章：クラウドの雲を操る魔術師"
 
 # 第9章：クラウドの雲を操る魔術師
 
-{% include navigation.html %}
 
 
 

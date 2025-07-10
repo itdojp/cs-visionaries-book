@@ -1,8 +1,16 @@
 # Jekyll設定
 title: "デジタル革命の舞台裏"
 description: "コンピュータサイエンスを築いた天才たちの物語 - エイダ・ラブレスからスティーブ・ジョブズまで、デジタル時代を創った10人の革新者たちの人間ドラマ"
+author: 
+  name: "ITDO Inc."
+  github: "itdojp"
+  email: "knowledge@itdo.jp"
 baseurl: "/cs-visionaries-book"
 url: "https://itdojp.github.io"
+
+# Repository settings for links
+repository:
+  github: https://github.com/itdojp/cs-visionaries-book
 
 # GitHub Pages用の簡素な設定
 markdown: kramdown

@@ -5,7 +5,6 @@ title: "第2章：暗号を解いた孤独な天才"
 
 # 第2章：暗号を解いた孤独な天才
 
-{% include navigation.html %}
 
 
 

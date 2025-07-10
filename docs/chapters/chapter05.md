@@ -5,7 +5,6 @@ title: "第5章：ガレージから始まった美の革命"
 
 # 第5章：ガレージから始まった美の革命
 
-{% include navigation.html %}
 
 
 
