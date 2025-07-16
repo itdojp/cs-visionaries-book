@@ -23,7 +23,7 @@ gantt
     COBOL開発                          :milestone, 1959, 0
     
     section PC革命期
-    日本の半導体技術者たち             :1970, 20y
+    日本の半導体技術者たち             :1970, 1990
     Intel 4004開発                     :milestone, 1971, 0
     Steve Jobs & Wozniak               :1955, 56y
     Apple II発売                       :milestone, 1977, 0
