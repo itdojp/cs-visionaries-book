@@ -821,7 +821,7 @@ World Wide Web は、インターネット上で情報を共有するための�
 ```mermaid
 graph TB
     subgraph "World Wide Web アーキテクチャ"
-        Client[クライアント<br>（Webブラウザ）] --> HTTP[「HTTPプロトコル」<br>通信规約]
+        Client[クライアント<br>（Webブラウザ）] --> HTTP[「HTTPプロトコル」<br>通信規約]
         HTTP --> Server[サーバー<br>（Webサーバー）]
         Server --> HTML[「HTML文書」<br>ハイパーテキスト]
         HTML --> Links[「ハイパーリンク」<br>文書間の連結]
