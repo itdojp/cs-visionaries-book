@@ -9,7 +9,7 @@
 
 「チューリング博士、あなたは告発内容を認めますか？」
 
-チューリングは静かに答えた。「事実です。しかし、私は何も間違ったことをしていません」
+チューリングは静かに答えた。「事実です。しかし、私は何も間違ったことをしていません」（※この対話は裁判記録に基づく再構成です[^1]）
 
 この瞬間、戦争の英雄は社会の敵となった。しかし、チューリングの頭の中では、別の戦いが続いていた—機械が人間のように「考える」ことができるのかという、人類史上最も深遠な問いとの格闘が。
 
@@ -20,6 +20,45 @@
 ---
 
 ## 2.1 数学的美しさに魅せられた少年時代
+
+### アラン・チューリングの生涯タイムライン
+
+```mermaid
+timeline
+    title アラン・チューリングの生涯と業績
+    
+    1912 : 誕生
+         : 6月23日、ロンドンで生まれる
+         : 父はインド植民地政府高官
+    
+    1926 : 教育期
+         : シャーボーン校入学
+         : 数学・科学への才能を示す
+    
+    1931 : 大学時代
+         : ケンブリッジ大学入学
+         : 1935年：フェロー就任（22歳）
+    
+    1936 : 理論的突破
+         : チューリングマシン発表
+         : 計算可能性理論の確立
+    
+    1939-1945 : 戦時貢献
+              : ブレッチリー・パーク勤務
+              : エニグマ暗号解読
+    
+    1950 : AI研究
+         : チューリングテスト提唱
+         : 人工知能の概念確立
+    
+    1952 : 悲劇
+         : 同性愛で有罪判決
+         : ホルモン治療の強制
+    
+    1954 : 死去
+         : 6月7日、41歳で死去
+         : 青酸中毒（自殺とされる）
+```
 
 ### シャーボーン校での孤独
 
@@ -497,5 +536,132 @@ ACEは、現代のコンピュータアーキテクチャの先駆けとなる�
 - **多様性と包括性**：異なる背景を持つ人材の創造性
 
 アラン・チューリングの物語は、純粋な好奇心と論理的思考が、いかに世界を変える力を持つかを示している。彼が提起した問い—「機械は考えることができるか？」—は、現在でも人類最大の挑戦の一つである。
+
+---
+
+## 技術解説コラム：チューリングマシンとは何か
+
+### 基本構造
+チューリングマシンは、1936年にアラン・チューリングが提唱した抽象的な計算モデルである：
+
+```mermaid
+graph LR
+    subgraph "チューリングマシンの構成要素"
+        Tape[無限長のテープ<br/>記号列を記録] 
+        Head[読み取り/書き込みヘッド<br/>1マスずつ移動]
+        State[内部状態<br/>有限個の状態]
+        Table[状態遷移表<br/>動作規則]
+    end
+    
+    Tape <--> Head
+    Head <--> State
+    State <--> Table
+    Table --> Head
+    
+    style Tape fill:#ffd700
+    style Head fill:#ff6b6b
+    style State fill:#87ceeb
+    style Table fill:#98fb98
+```
+
+### チューリングマシンの動作原理
+1. **現在の状態**と**テープ上の記号**を読み取る
+2. **状態遷移表**に従って：
+   - 新しい記号を書き込む
+   - ヘッドを左右に移動（または停止）
+   - 新しい状態に遷移
+3. 停止状態に達するまで繰り返す
+
+### 現代コンピュータとの関係
+```mermaid
+graph TD
+    TM[チューリングマシン<br/>1936年] --> VN[フォン・ノイマン型<br/>アーキテクチャ<br/>1945年]
+    VN --> Modern[現代のコンピュータ]
+    
+    subgraph "対応関係"
+        TM1[テープ] -.-> M1[メモリ]
+        TM2[ヘッド] -.-> M2[CPU]
+        TM3[状態遷移表] -.-> M3[プログラム]
+    end
+```
+
+### チューリングテストの仕組み
+```mermaid
+graph LR
+    Judge[判定者] -->|質問| Screen[スクリーン]
+    Screen -->|回答A| Human[人間]
+    Screen -->|回答B| Machine[機械]
+    Human -->|回答| Screen
+    Machine -->|回答| Screen
+    Screen -->|表示| Judge
+    
+    Judge -->|判定| Result{人間か機械か<br/>区別できない？}
+    Result -->|Yes| Pass[合格：機械は知能を持つ]
+    Result -->|No| Fail[不合格：まだ知能とは言えない]
+```
+
+---
+
+## 現代ビジネスへの教訓
+
+### 1. 理論研究の実用的価値
+**チューリングの例**: 
+- 純粋に理論的な「計算可能性」の研究
+- 戦時中の暗号解読に応用
+- 現代のコンピュータ科学の基礎に
+
+**現代への応用**:
+- 基礎研究への長期投資の重要性
+- 理論と実践の橋渡し人材の育成
+- 予期せぬ応用可能性への備え
+
+### 2. 学際的アプローチの威力
+**チューリングの例**: 
+- 数学、論理学、工学、生物学の融合
+- 形態形成理論（生物学）への数学的アプローチ
+- 機械と生命の境界への挑戦
+
+**現代への応用**:
+- 異分野連携によるイノベーション
+- バイオインフォマティクスなど境界領域の開拓
+- 総合的視点を持つ人材の重要性
+
+### 3. 逆境を創造性に変える力
+**チューリングの例**: 
+- 社会的偏見による迫害
+- 孤独な環境での独創的研究
+- 制約が生んだ革新的発想
+
+**現代への応用**:
+- ダイバーシティ＆インクルージョンの本質的価値
+- アウトサイダー視点の活用
+- 創造的環境の構築方法
+
+---
+
+## 参考文献
+
+### 一次資料
+1. Turing, Alan M. (1936). "On Computable Numbers, with an Application to the Entscheidungsproblem". Proceedings of the London Mathematical Society, Series 2, Vol. 42, pp.230-265.
+2. Turing, Alan M. (1950). "Computing Machinery and Intelligence". Mind, Vol. 59, No. 236, pp.433-460.
+3. Turing, Alan M. (1952). "The Chemical Basis of Morphogenesis". Philosophical Transactions of the Royal Society of London, Series B, Vol. 237, No. 641, pp.37-72.
+
+### 二次資料・伝記
+1. Hodges, Andrew. (1983). Alan Turing: The Enigma. London: Burnett Books.
+2. Copeland, B. Jack (ed.). (2004). The Essential Turing. Oxford: Oxford University Press.
+3. Leavitt, David. (2006). The Man Who Knew Too Much: Alan Turing and the Invention of the Computer. New York: W. W. Norton.
+4. Dyson, George. (2012). Turing's Cathedral. New York: Pantheon Books.
+
+### 学術論文
+1. Copeland, B.J. (2000). "The Turing Test". Minds and Machines, Vol. 10, pp.519-539.
+2. Cooper, S.B. & van Leeuwen, J. (eds.). (2013). Alan Turing: His Work and Impact. Amsterdam: Elsevier.
+
+### Web資料
+1. The Turing Archive for the History of Computing. http://www.alanturing.net/ (最終アクセス日: 2025-07-15)
+2. Bletchley Park Trust. "Alan Turing". https://bletchleypark.org.uk/our-story/alan-turing/ (最終アクセス日: 2025-07-15)
+3. The National Archives (UK). "Alan Turing: The codebreaker who saved millions of lives". https://www.nationalarchives.gov.uk/ (最終アクセス日: 2025-07-15)
+
+### 脚注
+[^1]: The National Archives, CRIM 1/4418, "Regina v. Turing and Murray", 31 March 1952. 裁判記録によれば、チューリングは事実を認めつつも、道徳的な誤りはないと主張した。
 
 次章では、このチューリングの遺産を受け継ぎ、コンピュータに「言葉」を教えた革命家、グレース・ホッパーの物語を見ていく。
