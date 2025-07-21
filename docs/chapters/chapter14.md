@@ -786,11 +786,11 @@ Amazon DynamoDBチームの報告:
 ```
 
 **マイクロサービス設計**：
-```
-User Service ←→ API Gateway ←→ Order Service
-     ↕                              ↕
+```text
+User Service <-> API Gateway <-> Order Service
+     |                              |
 Authentication Service     Payment Service
-                                   ↕  
+                                   |  
                           Inventory Service
 ```
 
@@ -866,11 +866,11 @@ Committer Nodes (Storage):
 ### エッジコンピューティングと5G
 
 **エッジ環境での分散合意**：
-```
+```text
 Cloud Data Center
-       ↕ (High latency)
+       | (High latency)
 Edge Computing Node
-       ↕ (Low latency)  
+       | (Low latency)  
 IoT Devices
 ```
 
