@@ -5,11 +5,6 @@ title: "付録D：索引"
 
 # 付録D：索引
 
-{% include navigation.html %}
-
-
-
-
 ## 人名索引
 
 ### A
