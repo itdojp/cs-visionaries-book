@@ -707,7 +707,7 @@ CONSTANTS
   Proposer = {p1, p2}
   Acceptor = {a1, a2, a3}
   Value = {v1, v2}
-  Quorum = {{a1,a2}, {a1,a3}, {a2,a3}}
+  Quorum = {\{a1,a2}, {a1,a3}, {a2,a3}}
 
 PROPERTY Safety
 PROPERTY Liveness
