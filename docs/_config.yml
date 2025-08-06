@@ -1,20 +1,26 @@
 # Jekyll設定
 title: "デジタル革命の舞台裏"
 description: "コンピュータサイエンスを築いた天才たちの物語 - エイダ・ラブレスからスティーブ・ジョブズまで、デジタル時代を創った10人の革新者たちの人間ドラマ"
-author: 
-  name: "ITDO Inc."
-  github: "itdojp"
-  email: "knowledge@itdo.jp"
+author: "株式会社アイティードゥ"
+version: "1.0.0"
 baseurl: "/cs-visionaries-book"
 url: "https://itdojp.github.io"
 
-# Repository settings for links
-repository:
-  github: https://github.com/itdojp/cs-visionaries-book
+# リポジトリ情報
+repository: "https://github.com/itdojp/cs-visionaries-book"
 
-# GitHub Pages用の簡素な設定
+# Jekyll設定
 markdown: kramdown
 highlighter: rouge
+permalink: pretty
+
+# プラグイン
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-relative-links
+  - jekyll-optional-front-matter
 
 # デフォルト設定
 defaults:
@@ -22,7 +28,7 @@ defaults:
       path: ""
       type: "pages"
     values:
-      layout: "default"
+      layout: "book"
   - scope:
       path: "chapters"
     values:
