@@ -90,7 +90,6 @@ permalink: /
 - [付録A：年表]({{ site.baseurl }}/appendices/appendix-a/)
 - [付録B：用語解説]({{ site.baseurl }}/appendices/appendix-b/)
 - [付録C：参考文献]({{ site.baseurl }}/appendices/appendix-c/)
-- [付録D：索引]({{ site.baseurl }}/appendices/appendix-d/)
 
 ### 取り上げる革新者たち
 
