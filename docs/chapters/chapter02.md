@@ -1,5 +1,6 @@
 ---
 layout: book
+order: 4
 title: "第2章：暗号を解いた孤独な天才"
 ---
 

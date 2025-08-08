@@ -1,5 +1,6 @@
 ---
 layout: book
+order: 7
 title: "第5章：UNIXという名の永続する哲学"
 ---
 

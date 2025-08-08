@@ -1,5 +1,6 @@
 ---
 layout: book
+order: 21
 title: "付録D：索引"
 ---
 

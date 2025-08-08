@@ -1,5 +1,6 @@
 ---
 layout: book
+order: 20
 title: "付録C：参考文献・推薦図書"
 ---
 

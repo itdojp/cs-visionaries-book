@@ -1,5 +1,6 @@
 ---
 layout: book
+order: 6
 title: "第4章：東洋の島国から世界を変えた技術者"
 ---
 

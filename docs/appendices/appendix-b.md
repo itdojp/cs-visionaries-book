@@ -1,5 +1,6 @@
 ---
 layout: book
+order: 19
 title: "付録B：用語解説"
 ---
 

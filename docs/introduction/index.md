@@ -1,5 +1,6 @@
 ---
 layout: book
+order: 2
 title: "序章：スマホの中に眠る天才たちの遺産"
 ---
 

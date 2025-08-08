@@ -1,5 +1,6 @@
 ---
 layout: book
+order: 3
 title: "第1章：機械に魂を吹き込んだ貴婦人"
 ---
 

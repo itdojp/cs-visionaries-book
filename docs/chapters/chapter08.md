@@ -1,5 +1,6 @@
 ---
 layout: book
+order: 10
 title: "第8章：暗号の扉を開いた数学的革命"
 ---
 
