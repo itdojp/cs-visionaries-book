@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="700" viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-family: 'Noto Sans JP', sans-serif; font-size: 20px; font-weight: bold; fill: #2c3e50; }
+      .paradigm-title { font-family: 'Noto Sans JP', sans-serif; font-size: 14px; font-weight: bold; fill: #fff; }
+      .component-title { font-family: 'Noto Sans JP', sans-serif; font-size: 12px; font-weight: bold; fill: #2c3e50; }
+      .text-content { font-family: 'Noto Sans JP', sans-serif; font-size: 11px; fill: #2c3e50; }
+      .small-text { font-family: 'Noto Sans JP', sans-serif; font-size: 10px; fill: #7f8c8d; }
+      .mechanical-box { fill: #95a5a6; stroke: #7f8c8d; stroke-width: 2; }
+      .electronic-box { fill: #3498db; stroke: #2980b9; stroke-width: 2; }
+      .personal-box { fill: #e74c3c; stroke: #c0392b; stroke-width: 2; }
+      .network-box { fill: #2ecc71; stroke: #27ae60; stroke-width: 2; }
+      .mobile-box { fill: #f39c12; stroke: #e67e22; stroke-width: 2; }
+      .ai-box { fill: #9b59b6; stroke: #8e44ad; stroke-width: 2; }
+      .component { fill: #fff; stroke: #95a5a6; stroke-width: 1; }
+      .evolution-arrow { stroke: #34495e; stroke-width: 3; fill: none; marker-end: url(#arrowhead); }
+      .paradigm-shift { stroke: #e74c3c; stroke-width: 2; stroke-dasharray: 10,5; fill: none; }
+      .complexity-curve { stroke: #9b59b6; stroke-width: 2; fill: none; }
+    </style>
+    <marker id="arrowhead" markerWidth="12" markerHeight="12" refX="10" refY="3" orient="auto">
+      <polygon points="0 0, 12 3, 0 6" fill="#34495e"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="450" y="30" class="title" text-anchor="middle">コンピューティング・パラダイムの進化</text>
+
+  <!-- Mechanical Computing -->
+  <g id="mechanical">
+    <rect x="50" y="70" width="140" height="100" class="mechanical-box" rx="10"/>
+    <text x="120" y="95" class="paradigm-title" text-anchor="middle">機械的計算</text>
+    <text x="120" y="115" class="paradigm-title" text-anchor="middle">(1800年代)</text>
+    
+    <rect x="65" y="125" width="110" height="35" class="component" rx="3"/>
+    <text x="120" y="145" class="text-content" text-anchor="middle">歯車・差分機関</text>
+  </g>
+
+  <!-- Electronic Computing -->
+  <g id="electronic">
+    <rect x="210" y="70" width="140" height="100" class="electronic-box" rx="10"/>
+    <text x="280" y="95" class="paradigm-title" text-anchor="middle">電子計算機</text>
+    <text x="280" y="115" class="paradigm-title" text-anchor="middle">(1940-60年代)</text>
+    
+    <rect x="225" y="125" width="110" height="35" class="component" rx="3"/>
+    <text x="280" y="145" class="text-content" text-anchor="middle">真空管・トランジスタ</text>
+  </g>
+
+  <!-- Personal Computing -->
+  <g id="personal">
+    <rect x="370" y="70" width="140" height="100" class="personal-box" rx="10"/>
+    <text x="440" y="95" class="paradigm-title" text-anchor="middle">パーソナル</text>
+    <text x="440" y="115" class="paradigm-title" text-anchor="middle">(1970-80年代)</text>
+    
+    <rect x="385" y="125" width="110" height="35" class="component" rx="3"/>
+    <text x="440" y="145" class="text-content" text-anchor="middle">マイクロプロセッサ</text>
+  </g>
+
+  <!-- Network Computing -->
+  <g id="network">
+    <rect x="530" y="70" width="140" height="100" class="network-box" rx="10"/>
+    <text x="600" y="95" class="paradigm-title" text-anchor="middle">ネットワーク</text>
+    <text x="600" y="115" class="paradigm-title" text-anchor="middle">(1990年代)</text>
+    
+    <rect x="545" y="125" width="110" height="35" class="component" rx="3"/>
+    <text x="600" y="145" class="text-content" text-anchor="middle">インターネット・Web</text>
+  </g>
+
+  <!-- Mobile Computing -->
+  <g id="mobile">
+    <rect x="690" y="70" width="140" height="100" class="mobile-box" rx="10"/>
+    <text x="760" y="95" class="paradigm-title" text-anchor="middle">モバイル</text>
+    <text x="760" y="115" class="paradigm-title" text-anchor="middle">(2000年代)</text>
+    
+    <rect x="705" y="125" width="110" height="35" class="component" rx="3"/>
+    <text x="760" y="145" class="text-content" text-anchor="middle">スマートフォン・アプリ</text>
+  </g>
+
+  <!-- AI/Quantum Era -->
+  <g id="ai-quantum">
+    <rect x="370" y="190" width="160" height="100" class="ai-box" rx="10"/>
+    <text x="450" y="215" class="paradigm-title" text-anchor="middle">AI・量子時代</text>
+    <text x="450" y="235" class="paradigm-title" text-anchor="middle">(2010年代以降)</text>
+    
+    <rect x="385" y="245" width="130" height="35" class="component" rx="3"/>
+    <text x="450" y="265" class="text-content" text-anchor="middle">機械学習・量子コンピュータ</text>
+  </g>
+
+  <!-- Evolution Arrows -->
+  <path d="M 190 120 L 210 120" class="evolution-arrow"/>
+  <path d="M 350 120 L 370 120" class="evolution-arrow"/>
+  <path d="M 510 120 L 530 120" class="evolution-arrow"/>
+  <path d="M 670 120 L 690 120" class="evolution-arrow"/>
+  <path d="M 600 170 L 450 190" class="evolution-arrow"/>
+  <path d="M 440 170 L 450 190" class="evolution-arrow"/>
+
+  <!-- Paradigm Shifts -->
+  <line x1="120" y1="180" x2="120" y2="320" class="paradigm-shift"/>
+  <line x1="280" y1="180" x2="280" y2="320" class="paradigm-shift"/>
+  <line x1="440" y1="180" x2="440" y2="320" class="paradigm-shift"/>
+  <line x1="600" y1="180" x2="600" y2="320" class="paradigm-shift"/>
+  <line x1="760" y1="180" x2="760" y2="320" class="paradigm-shift"/>
+
+  <!-- Paradigm Analysis -->
+  <g id="analysis">
+    <rect x="50" y="310" width="800" height="350" fill="#f8f9fa" stroke="#dee2e6" stroke-width="1" rx="5"/>
+    <text x="450" y="335" class="component-title" text-anchor="middle">パラダイム転換の分析と特徴</text>
+    
+    <!-- Mechanical Era Details -->
+    <rect x="70" y="350" width="150" height="120" fill="#f5f5f5" stroke="#95a5a6" stroke-width="1" rx="3"/>
+    <text x="145" y="370" class="text-content" text-anchor="middle" font-weight="bold">機械的計算時代</text>
+    <text x="80" y="390" class="small-text">主要人物: バベッジ、エイダ</text>
+    <text x="80" y="405" class="small-text">革新: アルゴリズム概念</text>
+    <text x="80" y="420" class="small-text">制約: 物理的機構の限界</text>
+    <text x="80" y="440" class="small-text">パラダイム:</text>
+    <text x="80" y="455" class="small-text">機械による論理処理の可能性</text>
+
+    <!-- Electronic Era Details -->
+    <rect x="240" y="350" width="150" height="120" fill="#e6f3ff" stroke="#3498db" stroke-width="1" rx="3"/>
+    <text x="315" y="370" class="text-content" text-anchor="middle" font-weight="bold">電子計算機時代</text>
+    <text x="250" y="390" class="small-text">主要人物: チューリング、ホッパー</text>
+    <text x="250" y="405" class="small-text">革新: プログラム可能性</text>
+    <text x="250" y="420" class="small-text">制約: 専門技術者が必要</text>
+    <text x="250" y="440" class="small-text">パラダイム:</text>
+    <text x="250" y="455" class="small-text">汎用計算機による問題解決</text>
+
+    <!-- Personal Era Details -->
+    <rect x="410" y="350" width="150" height="120" fill="#ffe6e6" stroke="#e74c3c" stroke-width="1" rx="3"/>
+    <text x="485" y="370" class="text-content" text-anchor="middle" font-weight="bold">パーソナル時代</text>
+    <text x="420" y="390" class="small-text">主要人物: ジョブズ、ウォズ</text>
+    <text x="420" y="405" class="small-text">革新: 個人の道具化</text>
+    <text x="420" y="420" class="small-text">制約: スタンドアロン</text>
+    <text x="420" y="440" class="small-text">パラダイム:</text>
+    <text x="420" y="455" class="small-text">技術の民主化・創造力拡張</text>
+
+    <!-- Network Era Details -->
+    <rect x="580" y="350" width="150" height="120" fill="#e6ffe6" stroke="#2ecc71" stroke-width="1" rx="3"/>
+    <text x="655" y="370" class="text-content" text-anchor="middle" font-weight="bold">ネットワーク時代</text>
+    <text x="590" y="390" class="small-text">主要人物: バーナーズ=リー</text>
+    <text x="590" y="405" class="small-text">革新: 情報の共有・検索</text>
+    <text x="590" y="420" class="small-text">制約: 情報の質・信頼性</text>
+    <text x="590" y="440" class="small-text">パラダイム:</text>
+    <text x="590" y="455" class="small-text">集合知・協働プラットフォーム</text>
+
+    <!-- Modern Era Details -->
+    <rect x="70" y="490" width="300" height="90" fill="#fff3cd" stroke="#f39c12" stroke-width="1" rx="3"/>
+    <text x="220" y="510" class="text-content" text-anchor="middle" font-weight="bold">現代：モバイル・AI・量子時代</text>
+    <text x="80" y="530" class="small-text">主要人物: 現代の研究者・起業家群</text>
+    <text x="80" y="545" class="small-text">革新: ユビキタス・知能化・並列処理の飛躍的向上</text>
+    <text x="80" y="560" class="small-text">パラダイム: 人間とAIの協働、量子優位性、現実とバーチャルの融合</text>
+    <text x="80" y="575" class="small-text">制約: 倫理・プライバシー・エネルギー消費・量子エラー訂正</text>
+
+    <!-- Paradigm Shift Patterns -->
+    <rect x="390" y="490" width="360" height="90" fill="#f3e6ff" stroke="#9b59b6" stroke-width="1" rx="3"/>
+    <text x="570" y="510" class="text-content" text-anchor="middle" font-weight="bold">パラダイム転換の共通パターン</text>
+    <text x="400" y="530" class="text-content" font-weight="bold">1. 制約の克服 → 新たな可能性の発見</text>
+    <text x="400" y="545" class="text-content" font-weight="bold">2. 専門家から一般ユーザーへの普及</text>
+    <text x="400" y="560" class="text-content" font-weight="bold">3. 単機能から多機能・統合化への進化</text>
+    <text x="400" y="575" class="text-content" font-weight="bold">4. 個人ツールから社会インフラへの発展</text>
+
+    <!-- Future Implications -->
+    <text x="450" y="605" class="component-title" text-anchor="middle">未来への示唆と次なるパラダイム</text>
+    
+    <rect x="70" y="620" width="760" height="30" fill="#fff" stroke="#95a5a6" stroke-width="1" rx="3"/>
+    <text x="80" y="640" class="text-content">次世代パラダイム候補: 生物学的コンピューティング、脳-機械インターフェース、空間コンピューティング、分散自律組織 (DAO)</text>
+    <text x="80" y="655" class="small-text">共通して求められる要素: 持続可能性、人間性の保持、倫理的配慮、グローバル協調</text>
+  </g>
+
+  <!-- Complexity Curve -->
+  <path d="M 120 320 Q 280 300 440 280 Q 600 260 760 240" class="complexity-curve"/>
+  <text x="450" y="255" class="small-text" text-anchor="middle">複雑性・能力の指数的向上</text>
+</svg>
