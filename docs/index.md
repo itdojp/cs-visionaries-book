@@ -5,7 +5,6 @@ description: "コンピュータサイエンスを築いた天才たちの物語
 author: "株式会社アイティードゥ"
 version: "1.0.0"
 order: 1
-permalink: /
 ---
 
 # デジタル革命の先駆者たち
