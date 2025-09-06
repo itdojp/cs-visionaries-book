@@ -33,9 +33,9 @@ chapters:
 - title: 第16章：人工知能に革命をもたらした深層学習の父
   path: /chapters/chapter16/
 appendices:
-- title: 付録A：コンピュータサイエンス重要事件年表
+- title: appendix-a
   path: /appendices/appendix-a/
-- title: 付録B：用語解説
+- title: appendix-b
   path: /appendices/appendix-b/
-- title: 付録C：参考文献・推薦図書
+- title: appendix-c
   path: /appendices/appendix-c/
