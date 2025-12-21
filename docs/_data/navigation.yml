@@ -1,5 +1,5 @@
 introduction:
-- title: 序章
+- title: 序章：スマホの中に眠る天才たちの遺産
   path: /introduction/
 chapters:
 - title: 第1章：機械に魂を吹き込んだ貴婦人
@@ -33,9 +33,9 @@ chapters:
 - title: 第16章：人工知能に革命をもたらした深層学習の父
   path: /chapters/chapter16/
 appendices:
-- title: appendix-a
+- title: 付録A：コンピュータサイエンス重要事件年表
   path: /appendices/appendix-a/
-- title: appendix-b
+- title: 付録B：用語解説
   path: /appendices/appendix-b/
-- title: appendix-c
+- title: 付録C：参考文献・推薦図書
   path: /appendices/appendix-c/
