@@ -1,6 +1,6 @@
 ---
 layout: book
-title: "デジタル革命の舞台裏"
+title: "デジタル革命の先駆者たち"
 description: "コンピュータサイエンスを築いた天才たちの物語 - エイダ・ラブレスからスティーブ・ジョブズまで、デジタル時代を創った10人の革新者たちの人間ドラマ"
 author: "株式会社アイティードゥ"
 version: "1.0.0"
@@ -120,9 +120,20 @@ ITコンサルティング・教育事業を展開。技術の本質を分かり
 - GitHub: [@itdojp](https://github.com/itdojp)
 - Website: [https://itdo.jp](https://itdo.jp)
 
-## ライセンス
+## 📄 ライセンス
 
-© 2025 ITDO Inc. All rights reserved.
+本書は **Creative Commons BY-NC-SA 4.0** ライセンスで公開されています。  
+**🔓 教育・研究・個人学習での利用は自由** ですが、**💼 商用利用には事前許諾** が必要です。
+
+📋 [詳細なライセンス条件](https://github.com/itdojp/it-engineer-knowledge-architecture/blob/main/LICENSE.md)
+
+**お問い合わせ**  
+株式会社アイティードゥ（ITDO Inc.）  
+Email: [knowledge@itdo.jp](mailto:knowledge@itdo.jp)
+
+---
+
+© 2025 株式会社アイティードゥ (ITDO Inc.)
 
 ---
 
