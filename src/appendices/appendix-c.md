@@ -189,7 +189,7 @@
 
 ### 主要参考文献
 - Stone, Brad. *"The Everything Store: Jeff Bezos and the Age of Amazon"* (2013)
-- Bezos, Jeff. *"Amazon.com Shareholder Letters"* (1997-2021)
+- Bezos, Jeff. *"Amazon.com Shareholder Letters"* (1997〜2021)
 - Khan, Lina M. *"Amazon's Antitrust Paradox"* (2017)
 
 ### 推薦図書
@@ -298,17 +298,17 @@
 
 ### レベル別学習ステップ
 
-**Step 1: 基礎理解（1-3ヶ月）**
+**Step 1: 基礎理解（1〜3ヶ月）**
 1. 興味のある人物の入門書を1冊完読
 2. その分野の基本概念を理解
 3. 実際に手を動かす（プログラミング、実験等）
 
-**Step 2: 知識拡張（3-6ヶ月）**
-1. 同分野の中級書2-3冊を読破
+**Step 2: 知識拡張（3〜6ヶ月）**
+1. 同分野の中級書2〜3冊を読破
 2. オンライン講座で体系的学習
 3. 小さなプロジェクトに挑戦
 
-**Step 3: 深掘り・専門化（6ヶ月-1年）**
+**Step 3: 深掘り・専門化（6ヶ月〜1年）**
 1. 専門書・原典論文の読解
 2. オープンソースプロジェクトへの貢献
 3. 自分なりの創作・研究活動
