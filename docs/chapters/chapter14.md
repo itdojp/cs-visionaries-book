@@ -830,7 +830,7 @@ data:
 - **解決**: Proof of Work + 最長チェーンルール
 - **理論**: Lamport の因果順序 + Byzantine Agreement
 
-**Ethereum のPoof of Stake**
+**Ethereum のProof of Stake**
 - **Casper protocol**: ランポート理論ベースの合意
 - **Finality**: 確率的確定性から決定論的確定性へ
 - **Slashing**: 悪意ある行動への経済的ペナルティ
