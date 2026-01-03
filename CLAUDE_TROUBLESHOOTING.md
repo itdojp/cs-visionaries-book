@@ -46,7 +46,7 @@
 ### 2. GitHub Pages デプロイメント方式
 
 #### "Deploy from a branch" vs "GitHub Actions"
-- **違い**: 
+- **違い**
   - Branch: GitHubが自動的にJekyllビルド
   - Actions: カスタムビルドプロセスを使用可能
 - **選択基準**
