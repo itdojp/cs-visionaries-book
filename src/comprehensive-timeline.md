@@ -8,17 +8,17 @@ gantt
     dateFormat YYYY
     
     section 基礎理論期
-    Ada Lovelace (1815-1852)           :1815, 37y
+    Ada Lovelace (1815〜1852)           :1815, 37y
     世界初のプログラム (Note G)        :milestone, 1843, 0
     
     section 理論確立期
-    Alan Turing (1912-1954)            :1912, 42y
+    Alan Turing (1912〜1954)            :1912, 42y
     チューリングマシン発表             :milestone, 1936, 0
     エニグマ解読                       :1939, 6y
     チューリングテスト提唱             :milestone, 1950, 0
     
     section 実装期
-    Grace Hopper (1906-1992)           :1906, 86y
+    Grace Hopper (1906〜1992)           :1906, 86y
     最初のコンパイラ開発               :milestone, 1952, 0
     COBOL開発                          :milestone, 1959, 0
     
@@ -30,7 +30,7 @@ gantt
     Macintosh発売                      :milestone, 1984, 0
     
     section インターネット期
-    Tim Berners-Lee (1955-)            :1955, 70y
+    Tim Berners-Lee (1955〜)            :1955, 70y
     World Wide Web発明                 :milestone, 1991, 0
     
     section 検索エンジン期
@@ -38,11 +38,11 @@ gantt
     Google創立                         :milestone, 1998, 0
     
     section SNS期
-    Mark Zuckerberg (1984-)            :1984, 41y
+    Mark Zuckerberg (1984〜)            :1984, 41y
     Facebook創立                       :milestone, 2004, 0
     
     section クラウド期
-    Jeff Bezos (1964-)                 :1964, 61y
+    Jeff Bezos (1964〜)                 :1964, 61y
     Amazon創立                         :milestone, 1994, 0
     AWS開始                            :milestone, 2006, 0
     
@@ -96,23 +96,23 @@ graph TD
 ```mermaid
 graph LR
     subgraph "第1波: 理論基盤"
-        Theory[1843-1950<br/>理論的基礎]
+        Theory[1843〜1950<br/>理論的基礎]
     end
     
     subgraph "第2波: ハードウェア"
-        Hardware[1950-1980<br/>コンピュータ実装]
+        Hardware[1950〜1980<br/>コンピュータ実装]
     end
     
     subgraph "第3波: ソフトウェア"
-        Software[1980-1995<br/>PC・OS・アプリ]
+        Software[1980〜1995<br/>PC・OS・アプリ]
     end
     
     subgraph "第4波: ネットワーク"
-        Network[1995-2010<br/>インターネット・Web]
+        Network[1995〜2010<br/>インターネット・Web]
     end
     
     subgraph "第5波: AI・データ"
-        AI[2010-現在<br/>AI・ビッグデータ]
+        AI[2010〜現在<br/>AI・ビッグデータ]
     end
     
     Theory --> Hardware --> Software --> Network --> AI

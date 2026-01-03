@@ -40,7 +40,7 @@
   <g id="electronic">
     <rect x="210" y="70" width="140" height="100" class="electronic-box" rx="10"/>
     <text x="280" y="95" class="paradigm-title" text-anchor="middle">電子計算機</text>
-    <text x="280" y="115" class="paradigm-title" text-anchor="middle">(1940-60年代)</text>
+    <text x="280" y="115" class="paradigm-title" text-anchor="middle">(1940〜60年代)</text>
     
     <rect x="225" y="125" width="110" height="35" class="component" rx="3"/>
     <text x="280" y="145" class="text-content" text-anchor="middle">真空管・トランジスタ</text>
@@ -50,7 +50,7 @@
   <g id="personal">
     <rect x="370" y="70" width="140" height="100" class="personal-box" rx="10"/>
     <text x="440" y="95" class="paradigm-title" text-anchor="middle">パーソナル</text>
-    <text x="440" y="115" class="paradigm-title" text-anchor="middle">(1970-80年代)</text>
+    <text x="440" y="115" class="paradigm-title" text-anchor="middle">(1970〜80年代)</text>
     
     <rect x="385" y="125" width="110" height="35" class="component" rx="3"/>
     <text x="440" y="145" class="text-content" text-anchor="middle">マイクロプロセッサ</text>
