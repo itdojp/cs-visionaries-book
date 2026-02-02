@@ -1,142 +1,138 @@
-<!-- Sidebar Navigation - cs-visionaries-book -->
+<!-- Sidebar Navigation (data-driven) -->
+{% assign navigation = site.data.navigation %}
+
 <div class="sidebar-content">
-    <!-- Book Info -->
     <div class="book-info">
-        <h2 class="book-title">📚 デジタル革命の舞台裏</h2>
-        
-        <p class="book-subtitle">コンピュータサイエンスを築いた天才たちの物語</p>
-        
+        <h2 class="book-title">{{ site.title | escape }}</h2>
+        {% if site.subtitle %}
+        <p class="book-subtitle">{{ site.subtitle | escape }}</p>
+        {% elsif site.description %}
+        <p class="book-subtitle">{{ site.description | escape }}</p>
+        {% endif %}
     </div>
 
-    <!-- Table of Contents -->
     <div class="toc">
         <h3 class="toc-title">目次</h3>
-        
-        <!-- Introduction -->
+
         <div class="toc-section">
             <ul class="toc-list">
                 <li class="toc-item">
                     <a href="{{ '/' | relative_url }}" class="toc-link {% if page.url == '/' %}active{% endif %}">
-                        🏠 はじめに
-                    </a>
-                </li>
-                <li class="toc-item">
-                    <a href="{{ '/introduction/' | relative_url }}" class="toc-link {% if page.url contains 'introduction' %}active{% endif %}">
-                        📖 序章：スマホの中に眠る天才たちの遺産
+                        はじめに
                     </a>
                 </li>
             </ul>
         </div>
 
-        <!-- Main Chapters -->
-        <div class="toc-section">
-            <h3 class="toc-section-title">📖 メインコンテンツ</h3>
-            <ul class="toc-list">
-                <li class="toc-item toc-chapter">
-                    <a href="{{ '/chapters/chapter01/' | relative_url }}" class="toc-link {% if page.url contains 'chapter01' %}active{% endif %}">
-                        <span class="chapter-number">1.</span>機械に魂を吹き込んだ貴婦人 〜エイダ・ラブレス〜
-                    </a>
-                </li>
-                <li class="toc-item toc-chapter">
-                    <a href="{{ '/chapters/chapter02/' | relative_url }}" class="toc-link {% if page.url contains 'chapter02' %}active{% endif %}">
-                        <span class="chapter-number">2.</span>暗号を解いた孤独な天才 〜アラン・チューリング〜
-                    </a>
-                </li>
-                <li class="toc-item toc-chapter">
-                    <a href="{{ '/chapters/chapter03/' | relative_url }}" class="toc-link {% if page.url contains 'chapter03' %}active{% endif %}">
-                        <span class="chapter-number">3.</span>コンピュータに言葉を教えた海軍少将 〜グレース・ホッパー〜
-                    </a>
-                </li>
-                <li class="toc-item toc-chapter">
-                    <a href="{{ '/chapters/chapter04/' | relative_url }}" class="toc-link {% if page.url contains 'chapter04' %}active{% endif %}">
-                        <span class="chapter-number">4.</span>東洋の島国から世界を変えた技術者 〜嶋正利・高橋秀俊〜
-                    </a>
-                </li>
-                <li class="toc-item toc-chapter">
-                    <a href="{{ '/chapters/chapter05/' | relative_url }}" class="toc-link {% if page.url contains 'chapter05' %}active{% endif %}">
-                        <span class="chapter-number">5.</span>ガレージから始まった美の革命 〜スティーブ・ジョブズ&ウォズニアック〜
-                    </a>
-                </li>
-                <li class="toc-item toc-chapter">
-                    <a href="{{ '/chapters/chapter06/' | relative_url }}" class="toc-link {% if page.url contains 'chapter06' %}active{% endif %}">
-                        <span class="chapter-number">6.</span>情報を誰でもアクセス可能にした理想主義者 〜ティム・バーナーズ＝リー〜
-                    </a>
-                </li>
-                <li class="toc-item toc-chapter">
-                    <a href="{{ '/chapters/chapter07/' | relative_url }}" class="toc-link {% if page.url contains 'chapter07' %}active{% endif %}">
-                        <span class="chapter-number">7.</span>世界の情報を整理する魔法使い 〜ラリー・ペイジ&セルゲイ・ブリン〜
-                    </a>
-                </li>
-                <li class="toc-item toc-chapter">
-                    <a href="{{ '/chapters/chapter08/' | relative_url }}" class="toc-link {% if page.url contains 'chapter08' %}active{% endif %}">
-                        <span class="chapter-number">8.</span>つながりを価値に変えた大学生 〜マーク・ザッカーバーグ〜
-                    </a>
-                </li>
-                <li class="toc-item toc-chapter">
-                    <a href="{{ '/chapters/chapter09/' | relative_url }}" class="toc-link {% if page.url contains 'chapter09' %}active{% endif %}">
-                        <span class="chapter-number">9.</span>クラウドの向こうに無限の可能性を見た男 〜ジェフ・ベゾス〜
-                    </a>
-                </li>
-                <li class="toc-item toc-chapter">
-                    <a href="{{ '/chapters/chapter10/' | relative_url }}" class="toc-link {% if page.url contains 'chapter10' %}active{% endif %}">
-                        <span class="chapter-number">10.</span>人工知能に魂を宿そうとする現代の錬金術師たち
-                    </a>
-                </li>
-                <li class="toc-item toc-chapter">
-                    <a href="{{ '/chapters/chapter11/' | relative_url }}" class="toc-link {% if page.url contains 'chapter11' %}active{% endif %}">
-                        <span class="chapter-number">11.</span>量子の不可思議な世界で計算する夢想家たち
-                    </a>
-                </li>
-                <li class="toc-item toc-chapter">
-                    <a href="{{ '/chapters/chapter12/' | relative_url }}" class="toc-link {% if page.url contains 'chapter12' %}active{% endif %}">
-                        <span class="chapter-number">12.</span>未来のデジタル世界を築くのは誰か
-                    </a>
-                </li>
-            </ul>
-        </div>
+        {% if navigation %}
+            {% if navigation.introduction %}
+            <div class="toc-section">
+                <h4 class="toc-section-title">導入</h4>
+                <ul class="toc-list">
+                    {% for item in navigation.introduction %}
+                    <li class="toc-item">
+                        <a href="{{ item.path | relative_url }}" class="toc-link {% if page.url == item.path %}active{% endif %}" {% if page.url == item.path %}aria-current="page"{% endif %}>
+                            {{ item.title | escape }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
 
-        <!-- Appendices -->
-        <div class="toc-section">
-            <h3 class="toc-section-title">📋 付録</h3>
-            <ul class="toc-list">
-                <li class="toc-item">
-                    <a href="{{ '/appendices/appendix-a/' | relative_url }}" class="toc-link {% if page.url contains 'appendix-a' %}active{% endif %}">
-                        付録A: 年表
-                    </a>
-                </li>
-                <li class="toc-item">
-                    <a href="{{ '/appendices/appendix-b/' | relative_url }}" class="toc-link {% if page.url contains 'appendix-b' %}active{% endif %}">
-                        付録B: 用語解説
-                    </a>
-                </li>
-                <li class="toc-item">
-                    <a href="{{ '/appendices/appendix-c/' | relative_url }}" class="toc-link {% if page.url contains 'appendix-c' %}active{% endif %}">
-                        付録C: 参考文献
-                    </a>
-                </li>
-            </ul>
-        </div>
+            {% if navigation.chapters %}
+            <div class="toc-section">
+                <h4 class="toc-section-title">本編</h4>
+                <ul class="toc-list">
+                    {% for chapter in navigation.chapters %}
+                    <li class="toc-item toc-chapter">
+                        <a href="{{ chapter.path | relative_url }}" class="toc-link {% if page.url == chapter.path or page.url contains chapter.path %}active{% endif %}" {% if page.url == chapter.path or page.url contains chapter.path %}aria-current="page"{% endif %}>
+                            {{ chapter.title | escape }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
 
-        <!-- Additional Resources -->
-        <div class="toc-section">
-            <h3 class="toc-section-title">📚 リソース</h3>
-            <ul class="toc-list">
-                <li class="toc-item">
-                    <a href="https://github.com/itdojp/cs-visionaries-book" class="toc-link" target="_blank" rel="noopener">
-                        💾 GitHubリポジトリ
-                    </a>
-                </li>
-                <li class="toc-item">
-                    <a href="https://itdojp.github.io/it-engineer-knowledge-architecture/" class="toc-link" target="_blank" rel="noopener">
-                        📚 書籍一覧
-                    </a>
-                </li>
-                <li class="toc-item">
-                    <a href="https://itdo.jp" class="toc-link" target="_blank" rel="noopener">
-                        🏢 株式会社アイティードゥ
-                    </a>
-                </li>
-            </ul>
+            {% if navigation.additional %}
+            <div class="toc-section">
+                <h4 class="toc-section-title">追加</h4>
+                <ul class="toc-list">
+                    {% for item in navigation.additional %}
+                    <li class="toc-item">
+                        <a href="{{ item.path | relative_url }}" class="toc-link {% if page.url == item.path or page.url contains item.path %}active{% endif %}" {% if page.url == item.path or page.url contains item.path %}aria-current="page"{% endif %}>
+                            {{ item.title | escape }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if navigation.resources %}
+            <div class="toc-section">
+                <h4 class="toc-section-title">リソース</h4>
+                <ul class="toc-list">
+                    {% for item in navigation.resources %}
+                    <li class="toc-item">
+                        <a href="{{ item.path | relative_url }}" class="toc-link {% if page.url == item.path or page.url contains item.path %}active{% endif %}" {% if page.url == item.path or page.url contains item.path %}aria-current="page"{% endif %}>
+                            {{ item.title | escape }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if navigation.appendices %}
+            <div class="toc-section">
+                <h4 class="toc-section-title">付録</h4>
+                <ul class="toc-list">
+                    {% for item in navigation.appendices %}
+                    <li class="toc-item">
+                        <a href="{{ item.path | relative_url }}" class="toc-link {% if page.url == item.path or page.url contains item.path %}active{% endif %}" {% if page.url == item.path or page.url contains item.path %}aria-current="page"{% endif %}>
+                            {{ item.title | escape }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if navigation.afterword %}
+            <div class="toc-section">
+                <h4 class="toc-section-title">あとがき</h4>
+                <ul class="toc-list">
+                    {% for item in navigation.afterword %}
+                    <li class="toc-item">
+                        <a href="{{ item.path | relative_url }}" class="toc-link {% if page.url == item.path or page.url contains item.path %}active{% endif %}" {% if page.url == item.path or page.url contains item.path %}aria-current="page"{% endif %}>
+                            {{ item.title | escape }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <div class="sidebar-footer">
+        {% assign repo_url = site.github.repository_url | default: site.repository_url | default: site.repository.github | default: site.repository %}
+        {% if repo_url and repo_url != '' %}
+            {% unless repo_url contains 'http' %}
+                {% assign repo_url = 'https://github.com/' | append: repo_url %}
+            {% endunless %}
+        {% endif %}
+
+        <div class="external-links">
+            {% if repo_url and site.show_github_links != false %}
+            <a href="{{ repo_url }}" target="_blank" rel="noopener" class="external-link">GitHub</a>
+            {% endif %}
+            {% if site.contact.email %}
+            <a href="mailto:{{ site.contact.email | escape }}" class="external-link">Contact</a>
+            {% endif %}
         </div>
     </div>
 </div>
+
