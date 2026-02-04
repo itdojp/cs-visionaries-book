@@ -196,10 +196,7 @@ pre[data-lang]::before {
     opacity: 0;
 }
 
-.code-block-wrapper:hover .copy-button,
-.code-block-wrapper:focus-within .copy-button,
-pre:hover .copy-button,
-pre:focus-within .copy-button {
+.code-block-wrapper:hover .copy-button {
     opacity: 1;
 }
 
