@@ -1,8 +1,8 @@
 # Template Integration Checklist
 
-> ⚠️ **Note**: This checklist is for v2.0 of the book-publishing-template which uses a simplified single-repository architecture.
+> ⚠️ **Note**: This checklist targets the single-repository book template workflow (build output published via GitHub Pages).
 
-Use this checklist to track your book-publishing-template v2.0 integration progress.
+Use this checklist to track your template integration progress.
 
 ## 📋 Integration Status
 
@@ -84,6 +84,6 @@ Follow the [Quick Start](QUICK-START.md) to begin writing.
 ## 📚 Documentation References
 
 - [Quick Start](QUICK-START.md) - Quick local development and preview setup
-- [Template Guide](book-template-guide.md) - Complete template guide (features, structure, workflows, and checklists)
+- [Template Guide](book-template-guide.md) - Template overview (features, structure, and general usage)
 - [GitHub Pages Setup](GITHUB-PAGES-SETUP.md) - GitHub Pages deployment and setup
 - [Changelog](CHANGELOG.md) - Template updates and integration tracking
