@@ -109,7 +109,7 @@ title: "第14章：分散システムに数学的厳密性をもたらした理�
 分散システムの最も基本的な問題は「同時性（simultaneity）」である。「AというイベントとBというイベントは同時に起こったのか？」という問いに答えることが、意外に困難だった。
 
 **単一マシンでの同時性**
-```
+```text
 CPU Clock: 1000, 1001, 1002, 1003...
 Event A: 1001
 Event B: 1003
@@ -117,7 +117,7 @@ Event B: 1003
 ```
 
 **分散システムでの問題**
-```
+```text
 マシン1 Clock: 1000, 1001, 1002...  
 マシン2 Clock: 2000, 2001, 2002...
 Event A (マシン1): 1001
@@ -141,7 +141,7 @@ Event B (マシン2): 2001
 2. **メッセージ送受信**：AがメッセージXの送信、BがメッセージXの受信
 3. **推移性**：A→C かつ C→B ならば A→B
 
-```
+```text
 プロセス1: ---A----------C-------->
                |          |
 プロセス2: ----B-------D----------->
@@ -164,7 +164,7 @@ Happens-Before関係を実装するため、ランポートは「論理クロッ
 3. **受信イベント**：メッセージ受信時、max(自分の論理クロック, 受信メッセージのクロック) + 1
 
 **動作例**
-```
+```text
 プロセス1: 1 --2-- 3 ----4----->
               |         |
 プロセス2: 1--2---3------4---5--->
@@ -253,7 +253,7 @@ def concurrent(v1, v2):
 1982年、ランポートは分散システムの信頼性に関する最も重要な理論的問題を定式化した。「The Byzantine Generals Problem（ビザンチン将軍問題）」である。
 
 **問題設定**
-```
+```text
 ビザンチン帝国の将軍たちが、敵の都市を包囲している。
 - n人の将軍がいる
 - うち最大f人が裏切り者（ビザンチン故障）
@@ -265,7 +265,7 @@ def concurrent(v1, v2):
 ```
 
 **現実のシステムでの対応**
-```
+```text
 将軍      ↔ プロセッサ/サーバー
 裏切り者  ↔ 故障・悪意あるノード
 攻撃/撤退 ↔ システムの動作決定
@@ -324,7 +324,7 @@ Byzantine Agreement が可能な必要十分条件は次のとおりです。
 **証明の概略**
 
 **不可能性の証明（n ≤ 3f の場合）**
-```
+```text
 3つのプロセス A, B, C で、最大1つがビザンチン故障する場合を考える。
 
 シナリオ1: Cが故障
@@ -372,7 +372,7 @@ def OM(m, commander, lieutenants):
 ```
 
 **アルゴリズムの動作例（n=4, f=1）**
-```
+```text
 司令官: "攻撃"
 副官A, B, C に送信
 
@@ -464,7 +464,7 @@ C → A: "攻撃", C → B: "攻撃"
 **プロトコルの2段階**
 
 **Phase 1: Prepare**
-```
+```text
 Proposer → Acceptors: Prepare(n)
 - n: 提案番号（単調増加）
 
@@ -476,7 +476,7 @@ else:
 ```
 
 **Phase 2: Accept**  
-```
+```text
 if 過半数のAcceptorからPromiseを受信:
     value = 受信したPromiseの中で最大提案番号の値 
            (なければ自分の提案値)
@@ -491,7 +491,7 @@ else:
 ```
 
 **動作例**
-```
+```text
 時刻0: システム開始
 Proposer A: 値 "X" を提案したい
 Proposer B: 値 "Y" を提案したい
@@ -526,7 +526,7 @@ Acceptor1,2,3: Accepted(2, "X")
 - ただし、同時提案者がいると「活性（liveness）問題」が発生する可能性
 
 **数学的証明のポイント**
-```
+```text
 定理: 二つの異なる値v1, v2が合意されることはない
 
 証明概略:
@@ -745,7 +745,7 @@ Model checking completed. No error has been found.
 - 分散トランザクション設計
 
 **実際の成果例**
-```
+```text
 Amazon DynamoDBチームの報告:
 「TLA+により、設計段階で35個の重要なバグを発見。
 これらは従来のテスト手法では検出困難だった。
@@ -778,7 +778,7 @@ Amazon DynamoDBチームの報告:
 ### マイクロサービスアーキテクチャの理論基盤
 
 **従来のモノリシック設計**
-```
+```text
 単一アプリケーション
 ├── User Service
 ├── Order Service  
@@ -787,7 +787,7 @@ Amazon DynamoDBチームの報告:
 ```
 
 **マイクロサービス設計**
-```
+```text
 User Service ←→ API Gateway ←→ Order Service
      ↕                              ↕
 Authentication Service     Payment Service
@@ -836,7 +836,7 @@ data:
 - **Slashing**: 悪意ある行動への経済的ペナルティ
 
 **Hyperledger Fabric のPBFT**
-```
+```text
 Orderer Nodes (Consensus):
   Practical Byzantine Fault Tolerance
   ↓
@@ -867,7 +867,7 @@ Committer Nodes (Storage):
 ### エッジコンピューティングと5G
 
 **エッジ環境での分散合意**
-```
+```text
 Cloud Data Center
        ↕ (High latency)
 Edge Computing Node
