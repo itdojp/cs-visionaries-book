@@ -259,7 +259,7 @@ HTML（HyperText Markup Language）の設計において、ティムは重要な
 
 **[図解：初期Webの概念図とアーキテクチャ]**
 
-```
+```text
 World Wide Web の基本構成（1990年）：
 
 ┌─────────────────┐    ┌─────────────────┐
@@ -341,7 +341,7 @@ World Wide Web の基本構成（1990年）：
 URL は「http://info.cern.ch/hypertext/WWW/TheProject.html」。シンプルなテキストページだったが、そこに書かれていた内容は人類の歴史を変えるものだった：
 
 **初期ページの内容**：
-```
+```text
 World Wide Web
 The WorldWideWeb (W3) is a wide-area hypermedia information 
 retrieval initiative aiming to give universal access to a 
@@ -400,14 +400,14 @@ HTTP（HyperText Transfer Protocol）の設計も、シンプリシティを重�
 **HTTP の基本構造**：
 
 **リクエスト例**：
-```
+```text
 GET /hypertext/WWW/TheProject.html HTTP/1.0
 Host: info.cern.ch
 User-Agent: WorldWideWeb/1.0
 ```
 
 **レスポンス例**：
-```
+```text
 HTTP/1.0 200 OK
 Content-Type: text/html
 Content-Length: 1024
@@ -427,7 +427,7 @@ Content-Length: 1024
 URL（Uniform Resource Locator）は、ティムの最も重要な発明の一つだった。これにより、世界中のあらゆる情報に統一的なアドレスを与えることができた。
 
 **URL の構造**：
-```
+```text
 http://info.cern.ch/hypertext/WWW/TheProject.html
  │      │         │
  │      │         └─ ファイルパス
@@ -448,7 +448,7 @@ URL システムの重要性は、現在の検索エンジンやSNSの時代に�
 WWW の最も革新的な特徴は、「分散型」システムだったことである。従来の情報システムは、中央のサーバーがすべての情報を管理していた。しかし、Web は異なっていた。
 
 **従来の集中型システム**：
-```
+```text
     ┌─────────────┐
     │  中央サーバー │
     │    (全情報)   │
@@ -460,7 +460,7 @@ WWW の最も革新的な特徴は、「分散型」システムだったこと�
 ```
 
 **Web の分散型システム**：
-```
+```text
 ┌──────┐   ┌──────┐   ┌──────┐
 │サーバー1│ ◄─► │サーバー2│ ◄─► │サーバー3│
 └──────┘   └──────┘   └──────┘
@@ -727,7 +727,7 @@ Solid は、Web の「リ・デセントラリゼーション（再分散化）�
 - 匿名性とアカウンタビリティのバランス
 
 **Solid の技術アーキテクチャ**：
-```
+```text
 従来のWebアプリ：
 アプリ ← データ統合 → サーバー（企業管理）
          ↓
