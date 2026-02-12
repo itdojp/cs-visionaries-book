@@ -196,7 +196,7 @@ _start:
 数ヶ月の開発の後、リーナスは自分のプロジェクトについて外部に発表することにした。1991年8月25日、彼はMinixニュースグループ（comp.os.minix）に有名な投稿を行った。投稿の原文は次のとおりです。
 
 **原文（英語）**
-```
+```text
 From: torvalds@klaava.Helsinki.FI (Linus Benedict Torvalds)
 Newsgroups: comp.os.minix
 Subject: What would you like to see most in minix?
@@ -401,7 +401,7 @@ Linux 1.0は1994年3月に公開された。開発開始から約3年で、本�
 - **コンサルティング**：導入・移行支援サービス
 
 **Red Hat Enterprise Linux（RHEL）の価値**
-```
+```text
 無料のLinuxカーネル
 ＋統合・検証済みパッケージ群
 ＋長期安定性保証
@@ -453,7 +453,7 @@ Linux 1.0は1994年3月に公開された。開発開始から約3年で、本�
 2005年、Googleはスマートフォン向けOS「Android」を発表した。AndroidはLinuxカーネルをベースとし、Java仮想マシンを搭載したモバイルプラットフォームだった。
 
 **Android の技術構成**
-```
+```text
 Java アプリケーション
 ↓
 Android Framework（Java/Kotlin）
@@ -556,7 +556,7 @@ Linuxの開発は「BDFL（Benevolent Dictator For Life：終身優しい独裁�
 現在、Git はソフトウェア開発の標準ツールとなっている。GitHub、GitLab、Bitbucket 等のサービスで全世界の開発者が使用している。
 
 **Git導入による開発効率向上**
-```
+```text
 従来のCVS/SVN時代：
 - ブランチ作成：数分〜数時間
 - マージ：手動で困難
