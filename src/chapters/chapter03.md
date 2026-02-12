@@ -148,7 +148,7 @@ Mark Iは完全に「機械的」だった。電子部品は使用されてお�
 グレースの最初の仕事は、Mark Iに「話しかける」方法を理解することだった。機械は数字しか理解せず、すべての命令は数値コードで表現する必要があった。
 
 **Mark Iの命令形式**：
-```
+```text
 01: 数値を読み込む
 02: 数値を記憶装置に保存
 10: 加算を実行
@@ -159,7 +159,7 @@ Mark Iは完全に「機械的」だった。電子部品は使用されてお�
 
 例えば、「2 + 3 = 5」という単純な計算でも、以下のような長い命令列が必要だった：
 
-```
+```text
 命令1: 01-000-002  (数値「2」を読み込む)
 命令2: 02-001-000  (記憶装置1番に保存)
 命令3: 01-000-003  (数値「3」を読み込む)
@@ -186,7 +186,7 @@ Mark Iは完全に「機械的」だった。電子部品は使用されてお�
 
 **[図解：Mark Iの構造と動作原理]**
 
-```
+```text
 Mark I の全体構成：
 
 ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
@@ -265,14 +265,14 @@ A-0 システムは大きな進歩だったが、グレースの野心はそれ�
 1954年、グレースは「Short Code」というシステムを開発した。これは、英語に近い記号的表現でプログラムを書けるシステムだった：
 
 **従来の機械語**：
-```
+```text
 10 47 0003
 11 47 0004  
 07 50 0005
 ```
 
 **Short Code**：
-```
+```text
 X3 = Y + Z
 IF X3 > 100 THEN GOTO LABEL1
 PRINT X3
@@ -291,7 +291,7 @@ FLOW-MATIC の特徴：
 - **実用的な速度**：機械語と比較可能な実行速度
 
 FLOW-MATIC のサンプルプログラム：
-```
+```text
 INPUT INVENTORY FILE-A PRICE FILE-B ; OUTPUT PRICED-INVENTORY FILE-C.
 HSP D.
 COMPARE PRODUCT-NO (A) WITH PRODUCT-NO (B) ; IF GREATER GO TO OPERATION 10 ; 
@@ -320,7 +320,7 @@ COBOL の革新的特徴：
 4. **大規模データ処理**：企業の業務システムに最適化
 
 COBOL プログラムの例：
-```
+```text
 IDENTIFICATION DIVISION.
 PROGRAM-ID. PAYROLL-CALCULATION.
 
@@ -363,22 +363,22 @@ COBOL の登場は、企業におけるコンピュータ利用を劇的に拡�
 **プログラミング言語の進化**：
 
 **機械語（1940年代）**：
-```
+```text
 10110000 01000001  // 数値をレジスタに読み込み
 ```
 
 **アセンブリ言語（1950年代）**：
-```
+```text
 MOV AX, 65  // 数値をレジスタに読み込み
 ```
 
 **COBOL（1959年）**：
-```
+```text
 ADD HOURS-WORKED TO TOTAL-HOURS
 ```
 
 **C言語（1972年）**：
-```
+```text
 total_hours += hours_worked;
 ```
 
@@ -388,7 +388,7 @@ total_hours += hours_worked
 ```
 
 **自然言語風プログラミング（2020年代）**：
-```
+```text
 Add the hours worked to the total hours
 ```
 
@@ -526,7 +526,7 @@ WRITE REPORT-LINE FROM CUSTOMER-DETAIL-LINE
 
 **[図解：COBOL プログラムの構造]**
 
-```
+```text
 COBOL プログラムの4つの部門（DIVISION）：
 
 ┌─────────────────────────────────────┐
