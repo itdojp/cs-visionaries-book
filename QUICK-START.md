@@ -32,7 +32,8 @@ npm run preview
 ### Step 4: GitHubへプッシュ
 
 ```bash
-git add -A
+git status
+git add -p  # または: git add <ファイル/ディレクトリ>
 git commit -m "Initial commit"
 # GitHubでリポジトリを作成後
 # git remote add origin https://github.com/yourusername/my-book.git
