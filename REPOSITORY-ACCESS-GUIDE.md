@@ -154,7 +154,8 @@ node easy-setup.js
 npm run build
 
 # 4. Gitにコミット
-git add -A
+git status
+git add -p  # または: git add <ファイル/ディレクトリ>
 git commit -m "Initial commit"
 
 # 5. GitHubにリポジトリ作成してプッシュ

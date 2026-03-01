@@ -97,26 +97,19 @@ order: 1
 ## 目次
 
 ### 序章
-- [序章：スマホの中に眠る天才たちの遺産]({{ site.baseurl }}/introduction/)
+{% for item in site.data.navigation.introduction %}
+- [{{ item.title }}]({{ item.path | relative_url }})
+{% endfor %}
 
 ### 本編
-- [第1章：機械に魂を吹き込んだ貴婦人 〜エイダ・ラブレス〜]({{ site.baseurl }}/chapters/chapter01/)
-- [第2章：暗号を解いた孤独な天才 〜アラン・チューリング〜]({{ site.baseurl }}/chapters/chapter02/)
-- [第3章：コンピュータに言葉を教えた海軍少将 〜グレース・ホッパー〜]({{ site.baseurl }}/chapters/chapter03/)
-- [第4章：東洋の島国から世界を変えた技術者 〜嶋正利・高橋秀俊〜]({{ site.baseurl }}/chapters/chapter04/)
-- [第5章：ガレージから始まった美の革命 〜スティーブ・ジョブズ&ウォズニアック〜]({{ site.baseurl }}/chapters/chapter05/)
-- [第6章：情報を誰でもアクセス可能にした理想主義者 〜ティム・バーナーズ＝リー〜]({{ site.baseurl }}/chapters/chapter06/)
-- [第7章：世界の情報を整理する魔法使い 〜ラリー・ペイジ&セルゲイ・ブリン〜]({{ site.baseurl }}/chapters/chapter07/)
-- [第8章：つながりを価値に変えた大学生 〜マーク・ザッカーバーグ〜]({{ site.baseurl }}/chapters/chapter08/)
-- [第9章：クラウドの向こうに無限の可能性を見た男 〜ジェフ・ベゾス〜]({{ site.baseurl }}/chapters/chapter09/)
-- [第10章：人工知能に魂を宿そうとする現代の錬金術師たち]({{ site.baseurl }}/chapters/chapter10/)
-- [第11章：量子の不可思議な世界で計算する夢想家たち]({{ site.baseurl }}/chapters/chapter11/)
-- [第12章：未来のデジタル世界を築くのは誰か]({{ site.baseurl }}/chapters/chapter12/)
+{% for item in site.data.navigation.chapters %}
+- [{{ item.title }}]({{ item.path | relative_url }})
+{% endfor %}
 
 ### 付録
-- [付録A：年表]({{ site.baseurl }}/appendices/appendix-a/)
-- [付録B：用語解説]({{ site.baseurl }}/appendices/appendix-b/)
-- [付録C：参考文献]({{ site.baseurl }}/appendices/appendix-c/)
+{% for item in site.data.navigation.appendices %}
+- [{{ item.title }}]({{ item.path | relative_url }})
+{% endfor %}
 
 ### 取り上げる革新者たち
 
