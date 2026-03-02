@@ -214,6 +214,13 @@
 - Krizhevsky, Alex. *"ImageNet Classification with Deep Convolutional Neural Networks"* (2012)
 - Vaswani, Ashish. *"Attention Is All You Need"* (2017)
 - Russell, Stuart. *"Human Compatible: Artificial Intelligence and the Problem of Control"* (2019)
+- OpenAI. *"Introducing ChatGPT"* (2022-11-30) https://openai.com/index/chatgpt/
+- OpenAI. *"GPT-4"* (2023-03-14) https://openai.com/research/gpt-4
+- OpenAI. *"Introducing GPTs"* (2023-11-06) https://openai.com/blog/introducing-gpts/
+- OpenAI. *"Hello GPT-4o"* (2024-05-13) https://openai.com/index/hello-gpt-4o/
+- OpenAI. *"Introducing OpenAI o1-preview"* (2024-09-12) https://openai.com/index/introducing-openai-o1-preview/
+- OpenAI. *"Introducing GPT-4.1 in the API"* (2025-04-14) https://openai.com/index/gpt-4-1/
+- European Commission. *"AI Act"*（段階適用のタイムライン）https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
 
 ### 推薦図書
 **入門レベル**
