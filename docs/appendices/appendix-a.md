@@ -441,24 +441,27 @@ title: "付録A：コンピュータサイエンス重要事件年表"
 **2022年**
 - **4月**：イーロン・マスク、Twitter買収発表
 - **8月**：DALL-E 2、Midjourney等**画像生成AI**ブーム
-- **11月30日**：**ChatGPT**公開
+- **11月30日**：**ChatGPT**公開[^chatgpt]
   - 短期間で急速に普及
 
 **2023年**
-- **3月14日**：**GPT-4**発表
+- **3月14日**：**GPT-4**発表[^gpt4]
 - **5月**：Google、**Bard**対話AI公開
 - **5月**：ジェフリー・ヒントン、Googleを退職しAI安全性について警鐘
-- **11月**：OpenAI、**GPTs**機能発表（カスタムAI作成）
+- **11月**：OpenAI、**GPTs**機能発表（カスタムAI作成）[^gpts]
 
 **2024年**
-- **生成AI**の企業・教育現場への本格導入
-- **量子コンピュータ**実用化への技術的マイルストーン
-- **Apple Vision Pro**発売（空間コンピューティング）
+- **5月13日**：OpenAI、**GPT-4o**を発表（音声/画像/テキストのマルチモーダル）[^gpt4o]
+- **8月1日**：EU、**AI Act**が発効（段階適用の起算日）[^eu_ai_act]
+- **9月12日**：OpenAI、**OpenAI o1-preview**を発表（推論モデル）[^o1_preview]
 
-**2025年（予測）**
-- **AGI（汎用人工知能）**への技術的接近
-- **6G**通信技術の実用化開始
-- **量子インターネット**実証実験拡大
+**2025年**
+- **2月2日**：AI Act の「禁止されるAIの実践」およびAIリテラシー義務が適用開始（段階適用）[^eu_ai_act]
+- **4月14日**：OpenAI、**GPT-4.1**をAPI向けに発表（最大100万トークンの長コンテキスト）[^gpt4_1]
+- **8月2日**：AI Act のガバナンス規定および汎用目的AI（GPAI）モデル義務が適用開始（段階適用）[^eu_ai_act]
+
+**2026年**
+- **8月2日**：AI Act が原則として全面適用（例外: 一部の高リスク規定は猶予あり）[^eu_ai_act]
 
 ---
 
@@ -479,3 +482,10 @@ title: "付録A：コンピュータサイエンス重要事件年表"
 この年表は、コンピュータサイエンスの歴史が個人の天才的発明から、集合知による協働開発へと変化してきた過程を示している。特に2020年代以降は、AI、量子コンピュータ、Web3、メタバースなど複数の革新技術が同時並行で発展し、相互に影響を与え合いながら新しいデジタル社会を形成している。
 
 [^openai]: OpenAI, "Introducing OpenAI" (2015-12-11) https://openai.com/blog/introducing-openai
+[^chatgpt]: OpenAI, "Introducing ChatGPT" (2022-11-30) https://openai.com/index/chatgpt/
+[^gpt4]: OpenAI, "GPT-4" (2023-03-14) https://openai.com/research/gpt-4
+[^gpts]: OpenAI, "Introducing GPTs" (2023-11-06) https://openai.com/blog/introducing-gpts/
+[^gpt4o]: OpenAI, "Hello GPT-4o" (2024-05-13) https://openai.com/index/hello-gpt-4o/
+[^o1_preview]: OpenAI, "Introducing OpenAI o1-preview" (2024-09-12) https://openai.com/index/introducing-openai-o1-preview/
+[^gpt4_1]: OpenAI, "Introducing GPT-4.1 in the API" (2025-04-14) https://openai.com/index/gpt-4-1/
+[^eu_ai_act]: European Commission, "AI Act" (Application timeline) https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
