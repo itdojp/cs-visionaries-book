@@ -220,7 +220,7 @@
 - OpenAI. *"Hello GPT-4o"* (2024-05-13) https://openai.com/index/hello-gpt-4o/
 - OpenAI. *"Introducing OpenAI o1-preview"* (2024-09-12) https://openai.com/index/introducing-openai-o1-preview/
 - OpenAI. *"Introducing GPT-4.1 in the API"* (2025-04-14) https://openai.com/index/gpt-4-1/
-- European Commission. *"AI Act"*（段階適用のタイムライン）https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+- European Commission. *"AI Act"* (2024-06-13) （段階適用のタイムライン） https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
 
 ### 推薦図書
 **入門レベル**
