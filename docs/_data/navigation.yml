@@ -39,3 +39,5 @@ appendices:
   path: /appendices/appendix-b/
 - title: 付録C：参考文献・推薦図書
   path: /appendices/appendix-c/
+- title: 付録D：AI時代形成の統合図（Compute×Data×Algorithm×Productization×Governance）
+  path: /appendices/appendix-d/
