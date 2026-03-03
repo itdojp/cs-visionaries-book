@@ -213,6 +213,10 @@
 - Hinton, Geoffrey E. *"Learning representations by back-propagating errors"* (1986)
 - Krizhevsky, Alex. *"ImageNet Classification with Deep Convolutional Neural Networks"* (2012)
 - Vaswani, Ashish. *"Attention Is All You Need"* (2017)
+- Lewis, Patrick et al. *"Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks"* (2020) https://arxiv.org/abs/2005.11401
+- Yao, Shunyu et al. *"ReAct: Synergizing Reasoning and Acting in Language Models"* (2022) https://arxiv.org/abs/2210.03629
+- Mitchell, Margaret et al. *"Model Cards for Model Reporting"* (2019) https://arxiv.org/abs/1810.03993
+- NIST. *"AI Risk Management Framework (AI RMF 1.0)"* (2023) https://www.nist.gov/itl/ai-risk-management-framework
 - Russell, Stuart. *"Human Compatible: Artificial Intelligence and the Problem of Control"* (2019)
 - OpenAI. *"Introducing ChatGPT"* (2022-11-30) https://openai.com/index/chatgpt/
 - OpenAI. *"GPT-4"* (2023-03-14) https://openai.com/research/gpt-4
