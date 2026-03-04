@@ -77,7 +77,7 @@
     <text x="630" y="145" class="era-title" text-anchor="middle">ネットワーク時代</text>
     
     <rect x="575" y="155" width="110" height="75" class="component" rx="3"/>
-    <text x="630" y="175" class="visionary-title" text-anchor="middle">ティム・バーナーズ=リー</text>
+    <text x="630" y="175" class="visionary-title" text-anchor="middle">ティム・バーナーズ＝リー</text>
     <text x="630" y="190" class="small-text" text-anchor="middle">(1955〜)</text>
     <text x="585" y="205" class="text-content">• World Wide Web</text>
     <text x="585" y="220" class="text-content">• 情報の民主化</text>
@@ -136,7 +136,7 @@
     <!-- Network Revolution -->
     <rect x="670" y="310" width="160" height="110" fill="#e6ffe6" stroke="#2ecc71" stroke-width="1" rx="3"/>
     <text x="750" y="330" class="text-content" text-anchor="middle" font-weight="bold">ネットワーク革命</text>
-    <text x="680" y="350" class="small-text">ティム・バーナーズ=リー:</text>
+    <text x="680" y="350" class="small-text">ティム・バーナーズ＝リー:</text>
     <text x="680" y="365" class="small-text">• 情報共有の民主化</text>
     <text x="680" y="380" class="small-text">• オープンスタンダード</text>
     <text x="680" y="395" class="small-text">• 現代の影響: IoT、Web3</text>
