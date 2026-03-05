@@ -125,25 +125,25 @@ title: "付録C：参考文献・推薦図書"
 
 ---
 
-## 第6章：ティム・バーナーズ＝リー
+## 第6章：エドスガー・ダイクストラ
 
 ### 主要参考文献
-- Berners-Lee, Tim. *"Weaving the Web"* (1999)
-- Berners-Lee, Tim. *"Information Management: A Proposal"* (1989)
-- Gillies, James. *"How the Web was Born"* (2000)
+- Dijkstra, Edsger W. "Go To Statement Considered Harmful" (1968)
+- Dijkstra, Edsger W. "The Humble Programmer" (1972)
+- Dijkstra, Edsger W. *A Discipline of Programming* (1976)
 
 ### 推薦図書
 **入門レベル**
-- ティム・バーナーズ＝リー『Webの創成』（毎日コミュニケーションズ、2001）
-- 村井純『インターネット』（岩波新書、1995）
+- Dijkstra, Edsger W. "Go To Statement Considered Harmful" (1968)
+- Dijkstra, Edsger W. "The Humble Programmer" (1972)
 
 **中級レベル**
-- 砂原秀樹『インターネット技術のすべて』（技術評論社、2018）
-- 江崎浩『次世代インターネット』（岩波書店、2016）
+- Dahl, Ole-Johan; Dijkstra, Edsger W.; Hoare, C. A. R. *Structured Programming* (1972)
+- Dijkstra, Edsger W. *A Discipline of Programming* (1976)
 
 **専門レベル**
-- W3C. *"World Wide Web Consortium Process Document"* (2020)
-- RFC 1945: *"Hypertext Transfer Protocol -- HTTP/1.0"* (1996)
+- Dijkstra, Edsger W. *Selected Writings on Computing: A Personal Perspective* (1982)
+- Dijkstra, Edsger W. "EWD manuscripts (Edsger W. Dijkstra Archive)" (online)
 
 ---
 
