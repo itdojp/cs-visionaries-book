@@ -1033,4 +1033,4 @@ GUI は単なる技術改良ではなく、「人間中心設計」という思�
 [^8]: Steve Jobs interview with Byte Magazine (1989年12月号). GUI普及への確信について語った発言。
 [^9]: Steve Jobs, Apple Town Hall Meeting (1997年9月). 復帰後の製品戦略説明における発言。
 
-次章では、この個人コンピュータの普及と並行して進化した「情報の民主化」技術—World Wide Web の誕生物語を見ていく。
+次章では、この個人コンピュータの普及と並行して進化した「情報の民主化」技術—World Wide Webの誕生物語を見ていく。
