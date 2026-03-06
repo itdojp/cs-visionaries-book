@@ -515,7 +515,7 @@ quit
 
 ## 11.5 World Wide Webとインターネット商用化
 
-### 1989年のTim Berners-Lee とWWW発明
+### 1989年のティム・バーナーズ＝リーとWorld Wide Webの発明
 
 1989年3月、スイスのCERN（欧州原子核研究機構）で働いていたティム・バーナーズ＝リーが「Information Management: A Proposal」という文書を提出した。これが、World Wide Webの出発点となった。
 
