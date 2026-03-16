@@ -8,6 +8,8 @@ on:
   workflow_dispatch:
 
 env:
+  # Temporary opt-in during GitHub Actions' Node 20 -> Node 24 transition.
+  # Ref: https://github.blog/changelog/2026-03-06-github-actions-transitions-from-node-20-to-node-24/
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 
 permissions:
@@ -18,23 +20,23 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout
-      uses: actions/checkout@v6
+      - name: Checkout
+        uses: actions/checkout@v6
       
-    - name: Setup Node.js
-      uses: actions/setup-node@v6
-      with:
-        node-version: '20'
-        cache: 'npm'
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+          cache: 'npm'
         
-    - name: Install dependencies
-      run: |
-        npm install fs-extra gray-matter --no-optional --no-save
+      - name: Install dependencies
+        run: |
+          npm install fs-extra gray-matter --no-optional --no-save
         
-    - name: Check Jekyll Liquid conflicts
-      run: |
-        npm run check-conflicts
+      - name: Check Jekyll Liquid conflicts
+        run: |
+          npm run check-conflicts
         
-    - name: Build book
-      run: |
-        npm run build
+      - name: Build book
+        run: |
+          npm run build
