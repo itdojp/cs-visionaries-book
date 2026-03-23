@@ -207,7 +207,7 @@
 
 ---
 
-## 第10章：ジェフリー・ヒントン他AI研究者
+## 第10章：現代AI研究者と社会実装
 
 ### 主要参考文献
 - Hinton, Geoffrey E. *"Learning representations by back-propagating errors"* (1986)
@@ -225,6 +225,8 @@
 - OpenAI. *"Introducing OpenAI o1-preview"* (2024-09-12) https://openai.com/index/introducing-openai-o1-preview/
 - OpenAI. *"Introducing GPT-4.1 in the API"* (2025-04-14) https://openai.com/index/gpt-4-1/
 - European Commission. *"AI Act"* (2024-06-13) （段階適用のタイムライン） https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+
+注記: 現行版では、第16章がヒントンを中心とした深層学習の技術史、第10章が生成AIを含む現代AIの社会実装・評価・ガードレールを扱う。
 
 ### 推薦図書
 **入門レベル**
