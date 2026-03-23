@@ -67,14 +67,14 @@ flowchart LR
 
 |章|主題|AI時代形成の要素|接続の要点（1行）|
 |---|---|---|---|
-|第6章|Web|Data / Distribution|Webはデータと流通の標準化を進め、学習・運用の土台を作った|
-|第7章|データベース|Data|DBは“整理されたデータ”と“問い合わせ”を可能にし、再現性を上げた|
-|第8章|暗号|Governance|暗号と認証は、AIサービスの安全な流通と責任分界の前提になる|
-|第9章|HCI（道具化）|Productization|人間の作業を拡張するUI/ワークフロー設計は、AI導入の成否を左右する|
-|第13章|Linux|Compute / Productization|標準OSはクラウド/運用の共通基盤となり、スケールの前提を作った|
-|第14章|分散システム|Compute / Productization|分散合意・信頼性は大規模運用の前提であり、AI提供形態に直結する|
-|第16章|深層学習の技術史|Algorithm|深層学習の学習法と表現学習が、生成AIのアルゴリズム基盤を作った|
-|第10章|現代AIの社会実装|Productization / Governance|ツール統合・評価・規制対応が揃って初めて業務へ定着する|
+|[第11章]({{ "/chapters/chapter11/" | relative_url }})|Web|Data / Distribution|Webはデータと流通の標準化を進め、学習・運用の土台を作った|
+|[第7章]({{ "/chapters/chapter07/" | relative_url }})|データベース|Data|DBは“整理されたデータ”と“問い合わせ”を可能にし、再現性を上げた|
+|[第8章]({{ "/chapters/chapter08/" | relative_url }})|暗号|Governance|暗号と認証は、AIサービスの安全な流通と責任分界の前提になる|
+|[第9章]({{ "/chapters/chapter09/" | relative_url }})|HCI（道具化）|Productization|人間の作業を拡張するUI/ワークフロー設計は、AI導入の成否を左右する|
+|[第13章]({{ "/chapters/chapter13/" | relative_url }})|Linux|Compute / Productization|標準OSはクラウド/運用の共通基盤となり、スケールの前提を作った|
+|[第14章]({{ "/chapters/chapter14/" | relative_url }})|分散システム|Compute / Productization|分散合意・信頼性は大規模運用の前提であり、AI提供形態に直結する|
+|[第16章]({{ "/chapters/chapter16/" | relative_url }})|深層学習の技術史|Algorithm|深層学習の学習法と表現学習が、生成AIのアルゴリズム基盤を作った|
+|[第10章]({{ "/chapters/chapter10/" | relative_url }})|現代AIの社会実装|Productization / Governance|ツール統合・評価・規制対応が揃って初めて業務へ定着する|
 
 ## 5. 読み方（AI時代形成を最短で掴む）
 
@@ -139,6 +139,4 @@ flowchart LR
 - **2022年** ChatGPT公開, 312
 - **2023年** GPT-4発表, 312
 
-この索引は、読者が本書の内容を効率的に参照できるよう、重要な人名・事項・技術用語を体系的に整理したものです。ページ番号は架空のものですが、実際の書籍では正確なページ番号が記載されます。
-
-{% include navigation.html %}
+この付録は、人物史と技術潮流を AI 時代形成の観点で読み直すための補助地図です。ページ番号は架空のものですが、実際の書籍では対応箇所を参照できるように整備されます。
