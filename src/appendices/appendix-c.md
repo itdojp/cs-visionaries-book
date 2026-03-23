@@ -119,25 +119,25 @@
 
 ---
 
-## 第6章：エドスガー・ダイクストラ
+## 第6章：ティム・バーナーズ＝リー
 
 ### 主要参考文献
-- Dijkstra, Edsger W. "Go To Statement Considered Harmful" (1968)
-- Dijkstra, Edsger W. "The Humble Programmer" (1972)
-- Dijkstra, Edsger W. *A Discipline of Programming* (1976)
+- Berners-Lee, Tim. *Weaving the Web* (1999)
+- Berners-Lee, Tim. "Information Management: A Proposal" (1989)
+- World Wide Web Consortium. "A Little History of the World Wide Web" (online)
 
 ### 推薦図書
 **入門レベル**
-- Dijkstra, Edsger W. "Go To Statement Considered Harmful" (1968)
-- Dijkstra, Edsger W. "The Humble Programmer" (1972)
+- ティム・バーナーズ＝リー『Webの創成』（毎日コミュニケーションズ、2001）
+- Berners-Lee, Tim. *Weaving the Web* (1999)
 
 **中級レベル**
-- Dahl, Ole-Johan; Dijkstra, Edsger W.; Hoare, C. A. R. *Structured Programming* (1972)
-- Dijkstra, Edsger W. *A Discipline of Programming* (1976)
+- Gillies, James & Cailliau, Robert. *How the Web Was Born* (2000)
+- World Wide Web Consortium. "A Little History of the World Wide Web" (online)
 
 **専門レベル**
-- Dijkstra, Edsger W. *Selected Writings on Computing: A Personal Perspective* (1982)
-- Dijkstra, Edsger W. "EWD manuscripts (Edsger W. Dijkstra Archive)" (online)
+- CERN. "The birth of the Web" (online exhibition)
+- Berners-Lee, Tim. "Long Live the Web" (2010)
 
 ---
 
@@ -207,7 +207,7 @@
 
 ---
 
-## 第10章：ジェフリー・ヒントン他AI研究者
+## 第10章：現代AI研究者と社会実装
 
 ### 主要参考文献
 - Hinton, Geoffrey E. *"Learning representations by back-propagating errors"* (1986)
@@ -225,6 +225,8 @@
 - OpenAI. *"Introducing OpenAI o1-preview"* (2024-09-12) https://openai.com/index/introducing-openai-o1-preview/
 - OpenAI. *"Introducing GPT-4.1 in the API"* (2025-04-14) https://openai.com/index/gpt-4-1/
 - European Commission. *"AI Act"* (2024-06-13) （段階適用のタイムライン） https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+
+注記: src 版の現行構成では、第10章がヒントンを中心とした深層学習の技術史と、生成AIを含む現代AIの社会実装・評価・ガードレールをあわせて扱う。
 
 ### 推薦図書
 **入門レベル**

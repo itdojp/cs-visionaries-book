@@ -1,10 +1,11 @@
 ---
 layout: book
-order: 20
 title: "付録C：参考文献・推薦図書"
 ---
 
 # 付録C：参考文献・推薦図書
+
+
 
 本書の執筆にあたって参考にした文献と、さらに学習を深めたい読者のための推薦図書を章別に整理しました。
 
@@ -213,7 +214,7 @@ title: "付録C：参考文献・推薦図書"
 
 ---
 
-## 第10章：ジェフリー・ヒントン他AI研究者
+## 第10章：現代AI研究者と社会実装
 
 ### 主要参考文献
 - Hinton, Geoffrey E. *"Learning representations by back-propagating errors"* (1986)
@@ -231,6 +232,8 @@ title: "付録C：参考文献・推薦図書"
 - OpenAI. *"Introducing OpenAI o1-preview"* (2024-09-12) https://openai.com/index/introducing-openai-o1-preview/
 - OpenAI. *"Introducing GPT-4.1 in the API"* (2025-04-14) https://openai.com/index/gpt-4-1/
 - European Commission. *"AI Act"* (2024-06-13) （段階適用のタイムライン） https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+
+注記: 現行版では、第16章がヒントンを中心とした深層学習の技術史、第10章が生成AIを含む現代AIの社会実装・評価・ガードレールを扱う。
 
 ### 推薦図書
 **入門レベル**
@@ -360,3 +363,5 @@ title: "付録C：参考文献・推薦図書"
 - **ピア学習**：同レベルの学習者との相互学習
 
 この参考文献リストは、読者の皆さんの技術的成長の出発点となることを願っています。重要なのは、完璧に理解することではなく、継続的に学習し、実践し、創造することです。デジタル革命の次の章を書くのは、あなた自身なのですから。
+
+{% include navigation.html %}
