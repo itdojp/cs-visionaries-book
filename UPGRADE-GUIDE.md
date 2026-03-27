@@ -1,6 +1,7 @@
 # 🔄 Book Publishing Template アップグレードガイド
 
 > 既存のテンプレートをv2.0に移行して、より使いやすい環境を手に入れましょう
+> 注記: template 系統の旧移行ガイドです。現行 repo の build / preview / canonical source の確認には使わず、`README.md`、`QUICK-START.md`、`REPOSITORY-ACCESS-GUIDE.md`、`docs/index.md`、`package.json` を優先してください。
 
 ## 🎯 アップグレードの利点
 

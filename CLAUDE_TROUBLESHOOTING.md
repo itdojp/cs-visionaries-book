@@ -3,6 +3,8 @@
 このドキュメントは、Claude Codeが書籍テンプレートプロジェクトで遭遇した問題と解決策をまとめたものです。
 同じ問題を繰り返さないよう、作業前に必ず参照してください。
 
+> 注記: template 由来のトラブルシューティング履歴を含む参考資料です。現行 repo の canonical source や reader-facing な正本を判断する場合は、`README.md`、`QUICK-START.md`、`REPOSITORY-ACCESS-GUIDE.md`、`docs/index.md` を優先してください。
+
 ## 目次
 1. [GitHub Pages 関連](#github-pages-関連)
 2. [Jekyll 関連](#jekyll-関連)

@@ -1,6 +1,8 @@
-# 📋 引き継ぎサマリー - 他のClaude Code向け
+# Legacy / 参考のみ: 引き継ぎサマリー - 他のClaude Code向け
 
-> 簡潔な引き継ぎ情報 - 詳細は HANDOVER.md と TECHNICAL-CONTEXT.md を参照
+> template 由来の履歴サマリー。現行 repo の正本確認には使わず、詳細は README.md / QUICK-START.md / REPOSITORY-ACCESS-GUIDE.md / docs/index.md / package.json を優先すること。
+
+注記: この文書は template 由来の履歴サマリーです。現行 repo の build / preview / canonical source を確認する場合は、`README.md`、`QUICK-START.md`、`REPOSITORY-ACCESS-GUIDE.md`、`docs/index.md`、`package.json` を優先してください。
 
 ## 🎯 プロジェクト状況（2024/06/29完了）
 

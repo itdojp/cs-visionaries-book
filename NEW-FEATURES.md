@@ -1,6 +1,7 @@
 # 書籍コンテンツ作成システム - 新機能ガイド
 
 > ⚠️ **注意**: このドキュメントで説明されている機能の一部は v2.0 では未実装です。基本的な機能は動作しますが、高度な機能は今後のアップデートで追加予定です。
+> 注記: template 由来の機能ガイドです。現行 repo の reader-facing / operational canonical source ではないため、実運用の確認には `README.md`、`QUICK-START.md`、`REPOSITORY-ACCESS-GUIDE.md`、`docs/index.md` を優先してください。
 
 ## 🎯 自動目次生成機能
 

@@ -1,6 +1,7 @@
 # 📊 Book Publishing Template 比較表
 
 > 現行版とv2.0の詳細比較 - どちらを選ぶべきかの判断材料
+> 注記: template 比較の参考資料です。現行 repo の canonical source や reader-facing な正本を判断する一次資料としては使わず、`README.md`、`QUICK-START.md`、`REPOSITORY-ACCESS-GUIDE.md`、`docs/index.md` を優先してください。
 
 ## 🎯 概要比較
 

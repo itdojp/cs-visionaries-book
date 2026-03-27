@@ -1,6 +1,7 @@
 # Template Integration Checklist
 
 > ⚠️ **Note**: This checklist targets the single-repository book template workflow (build output published via GitHub Pages).
+> ⚠️ **Legacy / 参考のみ**: この文書は template 由来の移行チェックリストです。現行 repo の reader-facing な正本や運用手順の確認には使わず、`README.md`、`QUICK-START.md`、`REPOSITORY-ACCESS-GUIDE.md`、`docs/index.md` を優先してください。
 
 Use this checklist to track your template integration progress.
 
