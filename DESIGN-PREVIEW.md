@@ -1,8 +1,10 @@
-# 📱 Book Publishing Template v3.0 - デザインプレビュー
+> この文書は template 由来の legacy preview です。現行書籍の reader-facing な正本は `docs/index.md` と公開サイト `https://itdojp.github.io/cs-visionaries-book/` です。repository の役割分担は `REPOSITORY-ACCESS-GUIDE.md` を参照してください。
+
+# 📱 Legacy Template Preview - デザインプレビュー
 
 ## 🔗 ライブプレビュー
 
-**✨ [ライブデザインプレビューを見る](https://itdojp.github.io/cs-visionaries-book/)**
+**✨ [現行書籍サイトを見る](https://itdojp.github.io/cs-visionaries-book/)**
 
 > 上記リンクをクリックして、実際のデザインをインタラクティブに体験できます。右上のボタンでライト/ダークモードの切り替えも可能です。
 

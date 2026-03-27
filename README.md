@@ -1,9 +1,12 @@
-# デジタル革命の先駆者たち（コンピュータサイエンス偉人伝）
+# デジタル革命の舞台裏（コンピュータサイエンス人物史・技術潮流ガイド）
 
-エイダ・ラブレスから現代のAI研究者まで、デジタル時代を創った革新者たちの人間ドラマを通じて、現代テクノロジーの本質とビジネスへの示唆を整理する読み物です。
+計算理論、ソフトウェア基盤、Web、検索、SNS、クラウド、現代AI、量子、未来予測まで、現代のデジタル社会を形作った人物と技術潮流をたどる読み物です。人物章とテーマ章を組み合わせ、現代テクノロジーの本質とビジネスへの示唆を整理します。
 
-- 公開ページ（GitHub Pages）: https://itdojp.github.io/cs-visionaries-book/
-- 目次（リポジトリ内）: `docs/index.md`
+- 公開トップページ: https://itdojp.github.io/cs-visionaries-book/
+- 現行の reader-facing な正式導線は公開トップページを正とします。`docs/index.md` はその公開入力です。
+- 編集起点は `src/` です。公開向けの確認は `docs/` と GitHub Pages を基準に行います。
+- `cs-visionaries-book-orig/` は旧原稿アーカイブであり、現行の正本ではありません。
+- path role matrix: `src/` = authoring、`docs/` = reader-facing output、`docs/_data/navigation.yml` = generated data、`docs/_site/` = disposable artifact、`cs-visionaries-book/` / `cs-visionaries-book-orig/` = legacy / non-canonical
 - シリーズ: https://github.com/itdojp/it-engineer-knowledge-architecture
 
 ## 想定読者（抜粋）
@@ -16,7 +19,7 @@
 
 誤字脱字、事実誤認の指摘、改善提案は Issues / Pull Request で受け付けます。
 
-- GitHub Issues: https://github.com/itdojp/cs-visionaries-book/issues
+- GitHub Issues: https://github.com/itdojp/cs-visionaries-book/issues/new/choose
 - Email: knowledge@itdo.jp
 
 ## ライセンス
