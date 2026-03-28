@@ -1,8 +1,8 @@
 {
   "book": {
     "title": "デジタル革命の舞台裏",
-    "subtitle": "コンピュータサイエンスを築いた天才たちの物語",
-    "description": "スマートフォンの中に眠る天才たちの遺産。エイダ・ラブレスからスティーブ・ジョブズ、現代のAI研究者まで、デジタル時代を創った10人の革新者たちの人間ドラマを通じて、技術の本質とビジネスへの示唆を探る一冊。",
+    "subtitle": "コンピュータサイエンスを築いた人物と技術潮流の物語",
+    "description": "コンピュータサイエンスを築いた人物と技術潮流の物語 - 計算理論、ソフトウェア基盤、インターネット、AIまで、現代のデジタル社会を形作った発想と意思決定をたどる。",
     "author": {
       "name": "ITDO Inc. (株式会社アイティードゥ)",
       "email": "knowledge@itdo.jp",
@@ -10,7 +10,21 @@
       "website": "https://itdo.jp"
     },
     "version": "1.0.0",
-    "language": "ja"
+    "language": "ja",
+    "keywords": [
+      "コンピュータ史",
+      "技術史",
+      "インターネット",
+      "AI",
+      "オープンソース"
+    ],
+    "audience": [
+      "技術史に関心がある読者",
+      "エンジニア",
+      "プロダクトマネージャー",
+      "技術リーダー"
+    ],
+    "lastReviewed": "2026-03-25"
   },
   "contentSections": [
     {
@@ -68,5 +82,10 @@
   "shared": {
     "version": "3.2.2",
     "lastSync": "2026-02-04T23:02:07.568Z"
+  },
+  "license": "CC-BY-NC-SA-4.0",
+  "repository": {
+    "url": "https://github.com/itdojp/cs-visionaries-book.git",
+    "branch": "main"
   }
 }
