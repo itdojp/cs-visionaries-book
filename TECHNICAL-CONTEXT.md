@@ -2,8 +2,8 @@
 
 > 引き継ぎ担当者向けの詳細な技術情報
 
-注記: この文書には template 由来の設計メモが一部残っています。reader-facing な正本と現在の公開構成を確認する場合は、まず `docs/index.md` と GitHub Pages を優先し、技術運用上の正本は `package.json` と `scripts/build-simple.js` を参照してください。
-通常の検証対象は `src/`、`package.json`、`scripts/build-simple.js`、build 後の `docs/` です。legacy directory や template 文書は、現行 build / navigation の正常性確認には含めない前提で扱います。
+注記: この文書には template 由来の設計メモが一部残っています。reader-facing な正本と現在の公開構成を確認する場合は、まず `docs/index.md` と GitHub Pages を優先し、技術運用上の正本は `package.json`、`book-config.json`、`scripts/build-simple.js` を参照してください。
+通常の検証対象は `src/`、`package.json`、`book-config.json`、`scripts/build-simple.js`、build 後の `docs/` です。legacy directory や template 文書は、現行 build / navigation の正常性確認には含めない前提で扱います。
 
 ## 🏗️ アーキテクチャ設計思想
 

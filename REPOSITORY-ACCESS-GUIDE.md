@@ -26,8 +26,8 @@ cs-visionaries-book/
 - reader-facing な章立て・導線: `docs/index.md` と GitHub Pages
 - 執筆・改稿の起点: `src/`
 - 目次や前後導線の編集起点: `scripts/build-simple.js` と `book-config.json`
-- `docs/_data/navigation.yml` は generated data として扱い、build 結果を確認する
-- `docs/_includes/navigation.html` と `docs/_includes/page-navigation.html` も generated include であり、通常は `templates/` 側を編集起点にする
+- `docs/_data/navigation.yml` は build-managed data として扱いますが、現行の `scripts/build-simple.js` は単一ファイル構成の章/付録ナビゲーションを完全には自動生成しません。`npm run build` の後に差分を確認し、必要なら `docs/_data/navigation.yml` を手動で調整してください
+- `docs/_includes/navigation.html` と `docs/_includes/page-navigation.html` は generated include であり、通常は `templates/` 側を編集起点にします
 - book metadata: `book-config.json`
 - `docs/_site/` は破棄可能な build artifact であり、編集対象でも正本でもない
 

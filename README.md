@@ -6,7 +6,7 @@
 - 現行の reader-facing な正式導線は公開トップページを正とします。`docs/index.md` はその公開入力です。
 - 編集起点は `src/` です。公開向けの確認は `docs/` と GitHub Pages を基準に行います。
 - `cs-visionaries-book-orig/` は旧原稿アーカイブであり、現行の正本ではありません。
-- path role matrix: `src/` = authoring、`docs/` = reader-facing output、`docs/_data/navigation.yml` = generated data、`docs/_site/` = disposable artifact、`cs-visionaries-book/` / `cs-visionaries-book-orig/` = legacy / non-canonical
+- path role matrix: `src/` = authoring、`docs/` = reader-facing output、`docs/_data/navigation.yml` = build-managed data（現行は手動調整が必要）、`docs/_site/` = disposable artifact、`cs-visionaries-book/` / `cs-visionaries-book-orig/` = legacy / non-canonical
 - シリーズ: https://github.com/itdojp/it-engineer-knowledge-architecture
 
 ## 想定読者（抜粋）
