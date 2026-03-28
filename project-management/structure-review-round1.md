@@ -1,5 +1,7 @@
 # 1. 書籍の概要
 
+> 注記: この文書は構造レビュー時点のスナップショットです。現行の reader-facing な正本や章立て確認には使わず、`docs/index.md`、GitHub Pages、`README.md`、`REPOSITORY-ACCESS-GUIDE.md` を優先してください。
+
 - 想定読者（`docs/index.md` / `docs/introduction/index.md` の記述ベース）
   - 技術史を「人物の物語」から学びたい一般読者〜エンジニア。
   - 各章のコラム（技術解説/ビジネス教訓）を通じて、現代の開発・組織運営に引き寄せたい読者。
