@@ -19,7 +19,7 @@ order: 1
 
 ## 概要
 
-本書では、計算理論、ソフトウェア基盤、インターネット、検索、クラウド、AI、オープンソース、分散システムといった転換点を、人物史とテーマ章を組み合わせてたどります。先駆者たちの挑戦、苦悩、そして意思決定を通じて、現代テクノロジーの本質とビジネスへの示唆を読み解く一冊です。
+本書では、計算理論、ソフトウェア基盤、Web、検索、SNS、クラウド、現代AI、量子計算、未来予測といった転換点を、人物史とテーマ章を組み合わせてたどります。先駆者たちの挑戦、苦悩、そして意思決定を通じて、現代テクノロジーの本質とビジネスへの示唆を読み解く一冊です。
 
 ## 学習成果
 
@@ -30,10 +30,48 @@ order: 1
 
 ## 読み方ガイド
 
-- 技術史の大きな流れをつかみたい場合は、序章の後に本編をナビゲーション順に読み進めてください。現行版は、人物章に加えて UNIX・Linux・分散システム・現代AIのようなテーマ章も含む構成です。
+- 技術史の大きな流れをつかみたい場合は、序章の後に本ページの目次順に読み進めてください。現行版は、人物章に加えて Web、検索、SNS、クラウド、現代AI、量子、未来予測のようなテーマ章も含む構成です。
 - 特定の人物やテーマ（暗号、インターネット、クラウド、AIなど）に関心がある場合は、まず該当章から読み始め、その後で前後の章にさかのぼって関連する人物の物語を補完してください。
 - エンジニアとして学びを得たい場合は、各章で扱われる技術的なブレイクスルーや設計の背景に注目し、「自分の開発現場ならどう応用できるか」を考えながら読むと効果的です。
 - マネジメントやビジネスの観点を重視する場合は、各章に散りばめられたビジネス上の教訓や組織・戦略のエピソードを中心に読み、詳細な読み分けは後述の「本書の使い方」を参考にしてください。
+
+### 補助導線
+
+- 年表から全体像を確認したい場合は、[付録A: コンピュータサイエンス重要事件年表]({{ '/appendices/appendix-a/' | relative_url }}) を起点にしてください。
+- 用語や略語を確認したい場合は、[付録B: 用語解説]({{ '/appendices/appendix-b/' | relative_url }}) を併用してください。
+- 参考文献や読書会用の次の一冊を探したい場合は、[付録C: 参考文献・推薦図書]({{ '/appendices/appendix-c/' | relative_url }}) を参照してください。
+- AI時代形成を短時間で整理したい場合は、[付録D: AI時代形成の統合ビュー]({{ '/appendices/appendix-d/' | relative_url }}) を補助地図として先に読み、その後で該当章へ戻ると追いやすくなります。
+- 図版や年表を使って議論する場合は、出典・時点・評価軸を確認し、本文の要約だけで断定しないでください。
+
+### 付録の使い分け
+
+- 付録A: 年代と出来事の位置関係を確認したいときに使います。
+- 付録B: 用語や略語の意味を確認したいときに使います。
+- 付録C: 出典、推薦図書、読書会の次の一冊を探したいときに使います。
+- 付録D: AI時代形成を要素別に短時間で整理する補助地図として使います。
+
+### 確認したい内容別の正本
+
+| 確認したい内容 | 最初に見る場所 | 正本として扱う場所 |
+| --- | --- | --- |
+| 正式な読み順・章立て | このトップページの目次 | トップページの目次 |
+| 用語・略語の意味 | [付録B]({{ '/appendices/appendix-b/' | relative_url }}) | 付録B |
+| 年代・出来事の並び | [付録A]({{ '/appendices/appendix-a/' | relative_url }}) | 付録A |
+| 出典・推薦図書 | [付録C]({{ '/appendices/appendix-c/' | relative_url }}) | 付録C |
+| AI時代形成の横断図 | [付録D]({{ '/appendices/appendix-d/' | relative_url }}) | 付録D |
+| AI の主導入 | [第10章]({{ '/chapters/chapter10/' | relative_url }}) | 第10章 |
+
+注記: `cs-visionaries-book-orig/`、ネストした `cs-visionaries-book/`、template 由来の旧ガイド文書は reader-facing な正本ではありません。公開トップページ、各章、付録を優先して参照してください。
+
+## クイックスタート
+
+- 最短で全体像をつかみたい場合:
+  - [序章]({{ '/introduction/' | relative_url }}) → [第1章]({{ '/chapters/chapter01/' | relative_url }}) → [第6章]({{ '/chapters/chapter06/' | relative_url }}) → [第10章]({{ '/chapters/chapter10/' | relative_url }}) → [付録A]({{ '/appendices/appendix-a/' | relative_url }})
+- AI時代への接続を先に確認したい場合:
+  - [付録D（補助地図）]({{ '/appendices/appendix-d/' | relative_url }}) → [第10章]({{ '/chapters/chapter10/' | relative_url }}) → [第6章]({{ '/chapters/chapter06/' | relative_url }}) / [第7章]({{ '/chapters/chapter07/' | relative_url }}) / [第9章]({{ '/chapters/chapter09/' | relative_url }}) → [付録C]({{ '/appendices/appendix-c/' | relative_url }})
+- 注記: 現行公開版では、AI の主導入は [第10章]({{ '/chapters/chapter10/' | relative_url }}) です。深層学習の技術史や関連文献を深掘りしたい場合は、[付録C]({{ '/appendices/appendix-c/' | relative_url }}) の AI 関連文献と関連人物章をあわせて参照してください。
+- 用語と背景を引きながら読みたい場合:
+  - [付録B]({{ '/appendices/appendix-b/' | relative_url }}) → [序章]({{ '/introduction/' | relative_url }}) → 興味のある章 → [付録C]({{ '/appendices/appendix-c/' | relative_url }})
 
 ## 人物・テーマ選択基準
 
@@ -96,6 +134,9 @@ order: 1
 
 ## 目次
 
+注記: 公開版の正式な章立て・章題・読み順は、本ページの目次を正とします。序章は導入、付録Cは参考文献導線、付録Dは AI 時代形成を横断して読むための補助地図として参照してください。
+注記: repository view の `docs/index.md` では次の Liquid ループが展開されません。静的な reader-facing 目次を確認する場合は GitHub Pages を参照してください。
+
 ### 序章
 {% for item in site.data.navigation.introduction %}
 - [{{ item.title }}]({{ item.path | relative_url }})
@@ -116,13 +157,13 @@ order: 1
 - **計算理論とプログラミングの起点** - エイダ・ラブレスやアラン・チューリングが切り開いた発想
 - **ソフトウェアの実用化** - グレース・ホッパーに象徴される「機械に言葉を与える」転換
 - **半導体とマイクロプロセッサ** - 日本の技術者たちを含むハードウェア革新の系譜
-- **UNIXとソフトウェア設計思想** - 現代システム開発に残る基盤技術の成立
-- **ネットワークとWebの拡大** - インターネット、検索、クラウドを押し広げた設計者と起業家
-- **現代AIの社会実装** - 生成AI時代へ接続する研究者と実装の潮流
-- **オープンソースの革命** - Linuxに代表される協調開発モデルの台頭
-- **分散システムの理論化** - 大規模システムを支える数学的厳密性の確立
-- **未来のデジタル社会** - Web3、量子計算、AI倫理など次の転換点
-- **深層学習の技術史** - ジェフリー・ヒントンを軸にたどるAI研究の長期的展開
+- **Webの公開と普及** - オープンな仕様とリンク構造が情報流通を変えた転換点
+- **検索と情報発見** - 膨大な情報から意味のある結果を返す仕組みの成立
+- **SNSと連結の設計** - 人のつながりをプロダクトとして拡張した意思決定
+- **クラウドと運用基盤** - 計算資源をサービス化し、開発速度を変えた転換点
+- **現代AIの社会実装** - 生成AI時代の評価、責任分界、規制対応まで含めた実装の潮流
+- **量子計算と次の計算資源** - 現行計算機では難しい問題へ向き合うための新しい試み
+- **未来のデジタル社会** - Web3、AI倫理、次のプラットフォームをめぐる論点
 
 ## 本書の特徴
 
@@ -143,13 +184,33 @@ ITコンサルティング・教育事業を展開。技術の本質を分かり
 
 ## ライセンス
 
-本書は **Creative Commons BY-NC-SA 4.0** ライセンスで公開しています。  
+本書は **Creative Commons BY-NC-SA 4.0** ライセンスで公開しています。
 教育・研究・個人学習での利用は自由ですが、商用利用は別途契約（事前許諾）が必要です。
 
 [詳細なライセンス条件](https://github.com/itdojp/it-engineer-knowledge-architecture/blob/main/LICENSE.md)
 
-**お問い合わせ**  
-株式会社アイティードゥ（ITDO Inc.）  
+## 利用と更新情報
+
+- 公開版: [GitHub Pages](https://itdojp.github.io/cs-visionaries-book/)
+- リポジトリ: [GitHub Repository](https://github.com/itdojp/cs-visionaries-book)
+- 版差確認: [コミット履歴](https://github.com/itdojp/cs-visionaries-book/commits/main/) / [Pull Requests](https://github.com/itdojp/cs-visionaries-book/pulls)
+- 誤り指摘: [Issue template](https://github.com/itdojp/cs-visionaries-book/issues/new/choose)
+- 参考資料: 各章末の参考文献と付録をあわせて参照してください
+
+### 版差・更新確認の手順
+
+1. まず [公開トップページ](https://itdojp.github.io/cs-visionaries-book/) の目次で現行の reader-facing 構成を確認します。
+2. 次に [コミット履歴](https://github.com/itdojp/cs-visionaries-book/commits/main/) と [Pull Requests](https://github.com/itdojp/cs-visionaries-book/pulls) で変更の有無を確認します。
+3. 時系列や出来事の位置関係を確認したい場合は [付録A]({{ '/appendices/appendix-a/' | relative_url }}) を見直します。
+4. 出典や読書会向けの参考文献を確認したい場合は [付録C]({{ '/appendices/appendix-c/' | relative_url }}) を見直します。
+5. 年代、制度、製品仕様、社会的評価を厳密に扱う場合は、本文だけで断定せず一次資料を確認します。
+
+本書は現行の公開構成を前提に整理しています。特に AI、Web3、制度変更、製品仕様、社会的評価のように変化しやすい論点は、本書の要約だけで断定せず、一次資料や更新履歴を確認してください。
+
+人物史や技術史の記述は、読者が大きな流れをつかめるように要約している箇所があります。年代、制度、製品仕様、社会的評価を実務や研究で厳密に扱う場合は、本書だけで断定せず、一次資料や研究書を必ず確認してください。
+
+**お問い合わせ**
+株式会社アイティードゥ（ITDO Inc.）
 Email: [knowledge@itdo.jp](mailto:knowledge@itdo.jp)
 
 ---

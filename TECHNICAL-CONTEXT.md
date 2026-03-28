@@ -2,6 +2,9 @@
 
 > 引き継ぎ担当者向けの詳細な技術情報
 
+注記: この文書には template 由来の設計メモが一部残っています。reader-facing な正本と現在の公開構成を確認する場合は、まず `docs/index.md` と GitHub Pages を優先し、技術運用上の正本は `package.json`、`book-config.json`、`scripts/build-simple.js` を参照してください。
+通常の検証対象は `src/`、`package.json`、`book-config.json`、`scripts/build-simple.js`、build 後の `docs/` です。legacy directory や template 文書は、現行 build / navigation の正常性確認には含めない前提で扱います。
+
 ## 🏗️ アーキテクチャ設計思想
 
 ### 設計原則
@@ -115,7 +118,7 @@ Resolution Rate: 67%（解決までの平均時間: 2.3日）
 
 ### v2.0での解決策
 ```text
-Setup関連 → easy-setup.js (自動設定)
+Setup関連 → easy-setup.js（legacy。現行導線では使わない）
 Build失敗 → build-simple.js (軽量依存)
 Deploy失敗 → 簡素化されたワークフロー
 ドキュメント → QUICK-START.md (5分ガイド)
@@ -128,10 +131,10 @@ Deploy失敗 → 簡素化されたワークフロー
 ### ファイル構成の設計思想
 ```text
 v2.0テンプレート構造:
-├── easy-setup.js           # 単一責任: 初期設定のみ
+├── easy-setup.js           # legacy setup script（現行の正規導線ではない）
 ├── scripts/
 │   └── build-simple.js     # 単一責任: ビルドのみ
-├── package-simple.json     # 最小構成パッケージ定義
+├── package-simple.json     # legacy/simple package 定義（現行の正規導線は package.json）
 ├── QUICK-START.md          # ユーザー中心ドキュメント
 └── src/                    # 標準的なコンテンツ構造
     ├── introduction/
@@ -140,7 +143,7 @@ v2.0テンプレート構造:
 
 ### 主要スクリプト解析
 
-#### easy-setup.js
+#### easy-setup.js（legacy）
 ```javascript
 // 設計パターン: Wizard Pattern
 // 責任: 対話式設定、ファイル生成、検証
@@ -271,6 +274,9 @@ class MigrationTool {
 ## 🧪 テスト戦略
 
 ### 自動テスト設計
+
+注記: ここで示す `easy-setup.js` テストは template 由来の legacy 例です。現行 repo の正常系は `npm run build`、`docs/_data/navigation.yml` の再生成、`docs/` の Jekyll build を基準に確認してください。
+
 ```javascript
 // tests/integration/template-test.js
 describe('Template Integration Tests', () => {
@@ -280,7 +286,7 @@ describe('Template Integration Tests', () => {
       title: 'Test Book',
       author: 'Test Author',
       githubUser: 'testuser',
-      publicRepo: 'test-book-public'
+      publicRepo: 'cs-visionaries-book'
     });
     
     expect(result.success).toBe(true);
@@ -290,9 +296,9 @@ describe('Template Integration Tests', () => {
   test('build-simple generates correct output', async () => {
     await runBuildSimple();
     
-    expect(fs.existsSync('public/index.md')).toBe(true);
-    expect(fs.existsSync('public/chapters')).toBe(true);
-    expect(fs.existsSync('public/assets')).toBe(true);
+    expect(fs.existsSync('docs/index.md')).toBe(true);
+    expect(fs.existsSync('docs/chapters')).toBe(true);
+    expect(fs.existsSync('docs/assets')).toBe(true);
   });
 });
 ```
