@@ -1,6 +1,8 @@
-# 🔄 Book Publishing Template v2.0 プロジェクト引き継ぎドキュメント
+# Legacy: Book Publishing Template v2.0 プロジェクト引き継ぎドキュメント
 
-> 他のClaude Codeへの作業引き継ぎ用包括的ガイド
+> template 由来の履歴記録。現行 repo の運用手順や reader-facing な正本を確認する一次資料としては使わないこと。
+
+注記: この文書は template 由来の履歴記録です。現行 repo の reader-facing な正本は `docs/index.md` と GitHub Pages、運用上の正本は `README.md`、`QUICK-START.md`、`REPOSITORY-ACCESS-GUIDE.md`、`package.json`、`scripts/build-simple.js` を優先してください。
 
 ## 📋 プロジェクト概要
 

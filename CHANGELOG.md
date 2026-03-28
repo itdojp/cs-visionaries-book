@@ -1,6 +1,8 @@
 # Changelog
 
-All notable changes to this book-publishing-template will be documented in this file.
+> この changelog は template 由来の legacy 履歴です。現行書籍そのものの reader-facing な更新履歴ではありません。現行の確認基準は `docs/index.md`、GitHub Pages、commit history です。
+
+この changelog は template 由来の legacy 履歴として残しています。現行書籍そのものの reader-facing な更新履歴ではありません。新しい変更追跡は `README.md`、`REPOSITORY-ACCESS-GUIDE.md`、`docs/index.md`、GitHub のコミット履歴を参照してください。
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).

@@ -1,5 +1,7 @@
 # GitHub Actions Workflows
 
+> 注記: このディレクトリは template 用の参考資料です。現行 repo の canonical workflow ではありません。現在の書籍 repo では `.github/workflows/` 配下の実ファイルと `REPOSITORY-ACCESS-GUIDE.md` を正として扱ってください。
+
 このディレクトリには、GitHub Pagesの設定方式に応じた2つのワークフローテンプレートが含まれています。
 
 ## ワークフローの選択

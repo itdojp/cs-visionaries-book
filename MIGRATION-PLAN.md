@@ -1,5 +1,7 @@
 # 📈 既存テンプレートからv2.0への段階的移行計画
 
+> 注記: template 系統の旧移行計画です。現行 repo の build / preview / canonical source の確認には使わず、`README.md`、`QUICK-START.md`、`REPOSITORY-ACCESS-GUIDE.md`、`docs/index.md`、`package.json` を優先してください。
+
 ## 🎯 移行の目的
 
 既存の`book-publishing-template`からv2.0への円滑な移行を実現し、ユーザーの利便性を最大化する。
