@@ -4,7 +4,7 @@
 
 現行 repo の reader-facing な正本は `docs/index.md` と GitHub Pages、運用上の正本は `package.json` と `scripts/build-simple.js` です。以下は template 履歴の参考情報として扱ってください。
 
-# 完全ガイド
+## 完全ガイド
 
 このドキュメントは、Book Publishing Template v2.0を使用するための完全なガイドです。
 
