@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 
+console.error('Deprecated: easy-setup.js is a legacy template helper and is disabled for this repository.');
+console.error('Use README.md, QUICK-START.md, and REPOSITORY-ACCESS-GUIDE.md as the current setup and maintenance guides.');
+process.exit(1);
+
 /**
  * 📚 Easy Setup Script for Book Publishing Template
  * 
