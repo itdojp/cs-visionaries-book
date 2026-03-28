@@ -55,7 +55,7 @@ npm run preview
 
 補足:
 - `npm run build` は `src/` から `docs/` を更新します。
-- `npm run preview` は `docs/` を簡易 preview します。
+- `npm run preview` は `npm run build` 実行後の `public/` を `npx http-server public -p 8080` で簡易 preview します。
 - Jekyll include や公開導線を厳密に確認する場合は `cd docs && bundle exec jekyll build` を使います。
 
 ## 競合検出
