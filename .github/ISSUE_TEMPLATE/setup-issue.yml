@@ -1,19 +1,19 @@
-name: 🚨 Setup Issue / セットアップ問題
-description: Report problems during setup process / セットアップ中の問題を報告
+name: 🚨 Build or Preview Issue / ビルド・プレビュー問題
+description: Report problems while building or previewing this repository / このリポジトリのビルド・プレビュー問題を報告
 title: "[Setup Issue] "
 labels: ["setup", "bug", "high-priority"]
 body:
   - type: markdown
     attributes:
       value: |
-        Having trouble with setup? Let us help you get started!
-        セットアップでお困りですか？解決をお手伝いします！
+        Having trouble building or previewing this repository? Share the failure details.
+        ビルドまたはプレビューで問題がある場合は、失敗内容を共有してください。
 
   - type: input
     id: step-failed
     attributes:
       label: Which step failed? / どのステップで失敗しましたか？
-      description: "Example: git clone, npm install, node easy-setup.js..."
+      description: "Example: npm install, npm run build, bundle exec jekyll build..."
       placeholder: "Step that caused the issue"
     validations:
       required: true
@@ -67,9 +67,9 @@ body:
       label: Steps to reproduce / 再現手順
       description: What steps did you take before the error occurred?
       placeholder: |
-        1. git clone https://github.com/itdojp/book-publishing-template2.git
-        2. cd book-publishing-template2
-        3. node easy-setup.js
+        1. git clone https://github.com/itdojp/cs-visionaries-book.git
+        2. cd cs-visionaries-book
+        3. npm install
         4. ...
     validations:
       required: true
@@ -82,6 +82,8 @@ body:
       options:
         - label: I have Node.js 20+ installed / Node.js 20以上がインストール済み
           required: true
+        - label: I have Ruby and Bundler installed if I ran Jekyll build / Jekyll build を実行した場合は Ruby と Bundler を導入済み
+          required: false
         - label: I have git installed / gitがインストール済み
           required: true
         - label: I can access GitHub / GitHubにアクセス可能

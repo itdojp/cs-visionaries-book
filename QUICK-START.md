@@ -1,171 +1,84 @@
-# 🚀 Quick Start Guide - 5分で始める書籍出版
+# Quick Start Guide
 
-> **改善版テンプレート**: 複雑な設定を自動化し、すぐに執筆を開始できます
+このリポジトリで現行の公開書籍を更新・確認するための最短手順です。reader-facing な正本は `docs/index.md` と GitHub Pages を基準に確認してください。
 
-## ⚡ 超高速セットアップ
+## 前提条件
 
-### Step 1: テンプレートをクローン
+- Node.js 20 以上
+- npm
+- Ruby / Bundler（Jekyll preview を使う場合）
+- Git
 
-```bash
-git clone https://github.com/itdojp/book-publishing-template2.git my-book
-cd my-book
-```
-
-### Step 2: 自動セットアップ実行
+## 最短セットアップ
 
 ```bash
-# Node.js 20以上が必要
-node easy-setup.js
+git clone https://github.com/itdojp/cs-visionaries-book.git
+cd cs-visionaries-book
+npm ci
 ```
 
-**質問に答えるだけ**: 書籍タイトル、著者名、GitHubユーザー名を入力
+注記: `npm run setup` / `easy-setup.js` は template 由来の legacy スクリプトであり、この repository の正規導線ではありません。現行 repo では `README.md`、`QUICK-START.md`、`REPOSITORY-ACCESS-GUIDE.md` の手順を基準にしてください。
 
-### Step 3: ビルドテスト
+## ビルドと確認
+
+### 公開用 Markdown を再生成
 
 ```bash
 npm run build
-npm run preview
 ```
 
-ブラウザで http://localhost:8080 を開いて確認
-
-### Step 4: GitHubへプッシュ
-
-```bash
-git status
-git add -p  # または: git add <ファイル/ディレクトリ>
-git commit -m "Initial commit"
-# GitHubでリポジトリを作成後
-# git remote add origin https://github.com/yourusername/my-book.git
-git push -u origin main
-```
-
-### Step 5: GitHub Pages設定（1分）
-
-1. GitHubのリポジトリページを開く
-2. **Settings** > **Pages** へ移動
-3. **Source**: Deploy from a branch
-4. **Branch**: main, **Folder**: /docs
-5. **Save** をクリック
-
-**完了！** 数分後に `https://yourusername.github.io/my-book/` でアクセス可能
-
----
-
-## 📝 執筆開始
-
-### ディレクトリ構造
+出力先は `docs/` です。現行のソース構成は次のとおりです。
 
 ```text
-my-book/
-├── src/
-│   ├── introduction/index.md    # はじめに
-│   └── chapters/
-│       └── chapter01/index.md   # 第1章
-├── assets/images/               # 画像
-└── book-config.json            # 設定
+src/
+├── introduction/index.md
+├── chapters/chapter01.md
+├── ...
+├── chapters/chapter12.md
+└── appendices/appendix-a.md ... appendix-d.md
 ```
 
-### 新しい章を追加
+### ローカル preview
 
-```bash
-mkdir src/chapters/chapter02
-echo "# 第2章 応用編
-
-詳細な内容..." > src/chapters/chapter02/index.md
-```
-
-### 数式を追加
-
-```markdown
-$$E = mc^2$$
-
-インライン数式: $x = \frac{-b \pm \sqrt{b^2-4ac}}{2a}$
-```
-
-### 図表を追加
-
-```markdown
-```mermaid
-graph TD
-    A[開始] --> B{条件}
-    B -->|Yes| C[処理A]
-    B -->|No| D[処理B]
-```\
-```
-
----
-
-## 🔄 日常ワークフロー
-
-### 1. 執筆
-
-```bash
-# ファイルを編集
-vim src/chapters/chapter01/index.md
-```
-
-### 2. プレビュー
+簡易 preview:
 
 ```bash
 npm run preview
-# http://localhost:8080 で確認
 ```
 
-### 3. 公開
+Jekyll のページ遷移や include を含めて確認する場合は、`docs/` 配下で次を実行します。
 
 ```bash
-npm run build  # docs/フォルダにビルド
-git add .
-git commit -m "Add new content"
-git push
-
-# GitHub Actionsで自動ビルド（オプション）
+cd docs
+bundle exec jekyll build
+bundle exec jekyll serve --livereload --baseurl ""
 ```
 
----
+## 日常的な更新手順
 
-## ❓ トラブルシューティング
+1. `src/` 側の該当ファイルを編集する
+2. `npm run build` で `docs/` を更新する
+3. 必要に応じて `cd docs && bundle exec jekyll build` で公開ページ相当を確認する
+4. 公開版の目次・章導線は `docs/index.md` を正として確認する
 
-### ビルドエラー
+## よく使うコマンド
 
 ```bash
-npm run clean
-npm run build
+npm run build           # docs/ を更新
+npm run build:safe      # 競合検出込みの build
+npm run check-conflicts # Jekyll conflict を dry-run 検査
+npm run lint:light      # src/**/*.md の軽量 lint
 ```
 
-### GitHub Pagesが表示されない
+## 注意点
 
-1. Settings > Pages で設定を確認
-2. Branch: main, Folder: /docs が選択されているか確認
-3. ビルド後に`docs/`フォルダがコミットされているか確認
+- reader-facing な章立て・章番号は公開トップページを正とします。テンプレート由来の古い説明が残っている場合でも、`docs/index.md` を優先してください。
+- 原稿本文の編集は原則 `src/` を起点に行い、`npm run build` 後に `docs/` 側へ意図どおり反映されたことを確認してください。公開導線に関わる変更は `docs/index.md` と該当章・付録の両方で build 結果を確認します。
+- 機密情報や未公開メモはリポジトリに置かないでください。
 
-### プレビューが表示されない
+## 参照先
 
-```bash
-# ポート8080が使用中の場合
-npx http-server docs -p 3000
-```
-
----
-
-## 📚 さらに詳しく
-
-- **完全ガイド**: [README.md](README.md)
-- **リポジトリ構成**: [REPOSITORY-ACCESS-GUIDE.md](REPOSITORY-ACCESS-GUIDE.md)
-- **設定詳細**: [book-config.json](book-config.json)
-- **サポート**: [Issues](https://github.com/itdojp/book-publishing-template2/issues)
-
----
-
-## 🎯 改善ポイント
-
-このテンプレートの改善点は次のとおりです。
-
-- ✅ **1コマンドセットアップ**: `node easy-setup.js`
-- ✅ **軽量ビルド**: 重い依存関係を排除
-- ✅ **明確なエラーメッセージ**: 問題箇所が分かりやすい
-- ✅ **自動設定生成**: 手動設定を最小化
-- ✅ **段階的セットアップ**: 必要な時に高度な機能を追加
-
-**Happy Writing! 📖✨**
+- 完全ガイド: `README.md`
+- リポジトリ構成: `REPOSITORY-ACCESS-GUIDE.md`
+- 公開トップ: `https://itdojp.github.io/cs-visionaries-book/`
+- フィードバック送信先: GitHub Issues
