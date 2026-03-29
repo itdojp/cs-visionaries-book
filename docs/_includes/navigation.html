@@ -18,43 +18,58 @@
   <!-- Previous/Next navigation -->
   <div class="chapter-nav">
     {% assign navigation = site.data.navigation %}
-    {% assign current_found = false %}
+    {% assign all_pages = '' | split: '' %}
     {% assign prev_item = nil %}
     {% assign next_item = nil %}
-    {% assign all_items = '' | split: '' %}
-    
-    <!-- Build complete navigation list -->
-    {% for item in navigation.home %}
-      {% assign all_items = all_items | push: item %}
-    {% endfor %}
-    {% for item in navigation.introduction %}
-      {% assign all_items = all_items | push: item %}
-    {% endfor %}
-    {% for item in navigation.chapters %}
-      {% assign all_items = all_items | push: item %}
-    {% endfor %}
-    {% for item in navigation.appendices %}
-      {% assign all_items = all_items | push: item %}
-    {% endfor %}
-    
-    <!-- Find current position and set prev/next -->
-    {% for item in all_items %}
-      {% assign item_url = item.path | remove: '.html' %}
-      {% assign current_url = page.url | remove: '.html' | remove: 'index' %}
-      {% if current_url == '' %}{% assign current_url = '/' %}{% endif %}
-      {% if item_url == current_url or page.url contains item.path %}
-        {% assign current_found = true %}
-        {% if forloop.index0 > 0 %}
-          {% assign prev_index = forloop.index0 | minus: 1 %}
-          {% assign prev_item = all_items[prev_index] %}
-        {% endif %}
-        {% unless forloop.last %}
-          {% assign next_index = forloop.index0 | plus: 1 %}
-          {% assign next_item = all_items[next_index] %}
-        {% endunless %}
+
+    {% if navigation.introduction %}
+      {% for item in navigation.introduction %}
+        {% assign all_pages = all_pages | push: item %}
+      {% endfor %}
+    {% endif %}
+
+    {% if navigation.chapters %}
+      {% for item in navigation.chapters %}
+        {% assign all_pages = all_pages | push: item %}
+      {% endfor %}
+    {% endif %}
+
+    {% if navigation.appendices %}
+      {% for item in navigation.appendices %}
+        {% assign all_pages = all_pages | push: item %}
+      {% endfor %}
+    {% endif %}
+
+    {% if navigation.afterword %}
+      {% for item in navigation.afterword %}
+        {% assign all_pages = all_pages | push: item %}
+      {% endfor %}
+    {% endif %}
+
+    {% assign current_index = nil %}
+
+    {% for item in all_pages %}
+      {% assign normalized_item_path = item.path | remove_first: "/" | append: "/" %}
+      {% assign normalized_page_url = page.url | remove_first: "/" | append: "/" %}
+
+      {% if normalized_page_url == normalized_item_path %}
+        {% assign current_index = forloop.index0 %}
         {% break %}
       {% endif %}
     {% endfor %}
+
+    {% if current_index != nil %}
+      {% assign prev_index = current_index | minus: 1 %}
+      {% assign next_index = current_index | plus: 1 %}
+
+      {% if prev_index >= 0 %}
+        {% assign prev_item = all_pages[prev_index] %}
+      {% endif %}
+
+      {% if next_index < all_pages.size %}
+        {% assign next_item = all_pages[next_index] %}
+      {% endif %}
+    {% endif %}
     
     {% if prev_item %}
       <a href="{{ site.baseurl }}{{ prev_item.path }}" class="nav-prev">
@@ -69,8 +84,8 @@
       </span>
     {% endif %}
     
-    <a href="{{ site.baseurl }}/" class="nav-home">
-      <span class="label">目次へ</span>
+    <a href="{{ '/' | relative_url }}" class="nav-home">
+      <span class="label">正式な目次へ</span>
     </a>
     
     {% if next_item %}

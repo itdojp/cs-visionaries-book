@@ -42,21 +42,21 @@
     <!-- Normalize URLs for comparison -->
     {% assign normalized_item_path = item.path | remove_first: "/" | append: "/" %}
     {% assign normalized_page_url = page.url | remove_first: "/" | append: "/" %}
-    
+
     {% if normalized_page_url == normalized_item_path %}
         {% assign current_index = forloop.index0 %}
         {% break %}
     {% endif %}
 {% endfor %}
 
-{% if current_index %}
+{% if current_index != nil %}
     {% assign prev_index = current_index | minus: 1 %}
     {% assign next_index = current_index | plus: 1 %}
-    
+
     {% if prev_index >= 0 %}
         {% assign prev_item = all_pages[prev_index] %}
     {% endif %}
-    
+
     {% if next_index < all_pages.size %}
         {% assign next_item = all_pages[next_index] %}
     {% endif %}
@@ -98,8 +98,9 @@
                         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                         <polyline points="9,22 9,12 15,12 15,22"></polyline>
                     </svg>
-                    <span class="page-nav-label">目次</span>
+                    <span class="page-nav-label">正式な目次</span>
                 </div>
+                <div class="page-nav-title">正式な読み順・章立て</div>
             </a>
         </div>
 
@@ -271,34 +272,34 @@
         grid-template-columns: 1fr;
         gap: var(--space-3);
     }
-    
+
     .page-nav-toc {
         order: -1;
     }
-    
+
     .page-nav-next {
         text-align: left;
     }
-    
+
     .page-nav-next .page-nav-direction {
         justify-content: flex-start;
     }
-    
+
     .page-nav-next .page-nav-arrow {
         margin-left: 0;
         margin-right: var(--space-2);
         order: -1;
     }
-    
+
     .page-nav-link {
         min-height: 70px;
         padding: var(--space-3);
     }
-    
+
     .page-nav-home {
         min-height: 50px;
     }
-    
+
     .page-nav-title {
         font-size: var(--font-size-sm);
     }
@@ -309,28 +310,28 @@
         margin: var(--space-8) 0 var(--space-6);
         padding: var(--space-4) 0;
     }
-    
+
     .page-nav-container {
         gap: var(--space-2);
     }
-    
+
     .page-nav-link {
         padding: var(--space-3);
         min-height: 60px;
     }
-    
+
     .page-nav-home {
         min-height: 45px;
     }
-    
+
     .page-nav-direction {
         margin-bottom: var(--space-1);
     }
-    
+
     .page-nav-title {
         font-size: var(--font-size-sm);
     }
-    
+
     .page-nav-label {
         font-size: var(--font-size-xs);
     }
@@ -341,7 +342,7 @@
     .page-nav-link {
         border-width: 2px;
     }
-    
+
     .page-nav-link:hover:not(.page-nav-disabled) {
         border-width: 3px;
     }
@@ -352,7 +353,7 @@
     .page-nav-link {
         transition: none;
     }
-    
+
     .page-nav-link:hover:not(.page-nav-disabled) {
         transform: none;
     }
