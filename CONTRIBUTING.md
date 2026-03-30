@@ -4,7 +4,7 @@
 
 ## 📋 コントリビューション方針
 
-## Canonical Source
+### Canonical Source
 
 - reader-facing な正式導線は公開トップページと `docs/index.md` を正とします。
 - `src/` は執筆用ソース、`docs/chapters` / `docs/appendices` は build 後の公開入力として扱います。
