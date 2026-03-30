@@ -24,7 +24,12 @@
       "プロダクトマネージャー",
       "技術リーダー"
     ],
-    "lastReviewed": "2026-03-25"
+    "lastReviewed": "2026-03-25T00:00:00Z",
+    "license": "CC-BY-NC-SA-4.0",
+    "repository": {
+      "url": "https://github.com/itdojp/cs-visionaries-book.git",
+      "branch": "main"
+    }
   },
   "contentSections": [
     {
