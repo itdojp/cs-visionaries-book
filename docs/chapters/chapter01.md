@@ -231,6 +231,8 @@ B5 = 1/6
 エイダが書いたベルヌーイ数のアルゴリズムを、現代のプログラミング言語（Python）で表現すると：
 
 ```python
+from math import comb
+
 def bernoulli_numbers(n):
     B = [0] * (n + 1)
     B[0] = 1
