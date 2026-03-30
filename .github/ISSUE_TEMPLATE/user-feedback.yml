@@ -1,16 +1,16 @@
-name: 📝 User Feedback / ユーザーフィードバック
-description: Share your experience with v2.0 template / v2.0テンプレートの使用感をお聞かせください
+name: 📝 Book Feedback / 書籍フィードバック
+description: Share feedback about this book and its published site / 本書と公開サイトへのフィードバック
 title: "[Feedback] "
 labels: ["feedback", "user-experience"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thank you for using Book Publishing Template v2.0! 
-        Your feedback helps us improve the experience for everyone.
+        Thank you for reading this book.
+        Your feedback helps improve the published content and reader experience.
         
-        Book Publishing Template v2.0をご利用いただき、ありがとうございます！
-        皆様のフィードバックが、より良いテンプレートづくりに役立ちます。
+        本書をご利用いただき、ありがとうございます。
+        皆様のフィードバックが、公開コンテンツと読書体験の改善に役立ちます。
 
   - type: dropdown
     id: user-type
@@ -18,9 +18,9 @@ body:
       label: User Type / ユーザータイプ
       description: Which describes you best? / あなたに最も近いタイプは？
       options:
-        - First-time user / 初回利用者
-        - Migrating from v1 template / v1テンプレートからの移行
-        - Experienced user / 経験豊富なユーザー
+        - General reader / 一般読者
+        - Engineer / 技術者
+        - Editor or contributor / 編集者・コントリビューター
     validations:
       required: true
 
@@ -28,7 +28,7 @@ body:
     id: overall-satisfaction
     attributes:
       label: Overall Satisfaction / 総合満足度
-      description: How satisfied are you with the v2.0 template? / v2.0テンプレートにどの程度満足していますか？
+      description: How satisfied are you with this book and site? / 本書と公開サイトにどの程度満足していますか？
       options:
         - 5 - Very satisfied / とても満足
         - 4 - Satisfied / 満足
@@ -42,7 +42,7 @@ body:
     id: setup-experience
     attributes:
       label: Setup Experience / セットアップ体験
-      description: How was the setup process? / セットアップはいかがでしたか？
+      description: How easy was it to find what you needed? / 必要な情報へどの程度たどり着きやすかったですか？
       options:
         - 5 - Very easy / とても簡単
         - 4 - Easy / 簡単
@@ -56,10 +56,10 @@ body:
     id: liked-features
     attributes:
       label: What you liked most / 最も気に入った機能
-      description: What features or aspects do you like most about v2.0? / v2.0で最も気に入った機能や側面は何ですか？
+      description: What features or aspects do you like most about this book and site? / 本書と公開サイトで最も気に入った機能や側面は何ですか？
       placeholder: |
-        Example: Easy setup with easy-setup.js, faster build times, clear error messages...
-        例：easy-setup.jsによる簡単セットアップ、ビルド時間の短縮、分かりやすいエラーメッセージ...
+        Example: chapter flow, appendix usefulness, cross-links, clarity of explanations...
+        例：章構成、付録の使いやすさ、クロスリンク、説明の明確さ...
     validations:
       required: false
 
@@ -69,8 +69,8 @@ body:
       label: Pain points / 困った点
       description: What challenges or issues did you encounter? / どのような課題や問題に遭遇しましたか？
       placeholder: |
-        Example: Documentation unclear in some parts, missing features from v1...
-        例：一部ドキュメントが不明確、v1からの機能不足...
+        Example: confusing chapter mapping, outdated wording, broken navigation...
+        例：章対応の分かりにくさ、古い表現、ナビゲーション不備...
     validations:
       required: false
 
@@ -80,8 +80,8 @@ body:
       label: Feature requests / 機能要望
       description: What features would you like to see added? / 追加して欲しい機能はありますか？
       placeholder: |
-        Example: PDF generation, better theme customization, plugin system...
-        例：PDF生成、テーマカスタマイズ機能、プラグインシステム...
+        Example: more historical sources, better glossary, reading routes, figure index...
+        例：史料の追加、用語集の改善、読み方ガイド、図版索引...
     validations:
       required: false
 
@@ -89,9 +89,9 @@ body:
     id: would-recommend
     attributes:
       label: Recommendation / 推薦
-      description: Would you recommend v2.0 to others? / v2.0を他の人に推薦しますか？
+      description: Would you recommend this book to others? / 本書を他の人に推薦しますか？
       options:
-        - label: Yes, I would recommend v2.0 to others / はい、他の人にv2.0を推薦します
+        - label: Yes, I would recommend this book / はい、本書を推薦します
         - label: I would suggest improvements first / 改善してから推薦したいです
         - label: No, I would not recommend it / いいえ、推薦しません
 

@@ -2,7 +2,7 @@
 
 ## 概要
 
-Book Publishing Template v3.0では、GitHub Pagesの2つの設定方式に対応しています。
+このリポジトリの公開出力先は `docs/` です。reader-facing な正本は GitHub Pages と `docs/index.md` を基準に確認してください。
 
 ## 推奨設定：Legacy方式（Deploy from a branch）
 
@@ -22,8 +22,8 @@ Book Publishing Template v3.0では、GitHub Pagesの2つの設定方式に対�
    - `Save` をクリック
 
 4. **確認**
-   - GitHub Actionsが自動実行される
-   - 数分後に `https://[ユーザー名].github.io/[リポジトリ名]/` でアクセス可能
+   - 数分後に `https://itdojp.github.io/cs-visionaries-book/` でアクセス可能
+   - `docs/index.md` の内容が反映されているか確認
 
 ### 特徴
 - ✅ 設定が簡単
@@ -47,16 +47,11 @@ Book Publishing Template v3.0では、GitHub Pagesの2つの設定方式に対�
 
 4. **ワークフロー変更**
    ```bash
-   # 現在のワークフローをバックアップ
-   cp .github/workflows/build.yml .github/workflows/build-legacy.yml
-   
-   # Actions対応ワークフローをコピー
-   cp templates/github-workflows/build-actions.yml .github/workflows/build.yml
-   
-   # コミット・プッシュ
-   git add .github/workflows/build.yml
-   git commit -m "Switch to GitHub Actions workflow"
-   git push
+   # このリポジトリでは Pages は main ブランチの /docs フォルダ公開を前提に運用している
+   # GitHub Actions 方式へ切り替える場合は
+   # - docs/ を artifact として publish する workflow
+   # - Pages の Source を GitHub Actions に変更
+   # を同時に整備する
    ```
 
 ### 特徴
@@ -105,6 +100,8 @@ Book Publishing Template v3.0では、GitHub Pagesの2つの設定方式に対�
 2. **手動ビルド実行**
    ```bash
    npm run build
+   cd docs && bundle install
+   bundle exec jekyll build
    ```
 
 3. **ログの確認**
@@ -132,6 +129,6 @@ Book Publishing Template v3.0では、GitHub Pagesの2つの設定方式に対�
 
 ## 推奨
 
-**初回セットアップや安定性重視の場合**: Legacy方式を推奨
+**このリポジトリの現行運用**: `Deploy from a branch` で `main /docs` を使う
 
-**高度なカスタマイズや最新機能を使いたい場合**: GitHub Actions方式を検討
+**別方式へ切り替える場合**: GitHub Actions 側で `docs/` artifact を publish する workflow を別途整備する
