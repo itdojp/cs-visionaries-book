@@ -5,7 +5,14 @@
 
 class ThemeManager {
     constructor() {
+        this.storageKey = 'theme';
+        this.legacyStorageKey = 'book-theme';
+        this.mediaQuery = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
         this.init();
+    }
+
+    static normalizeTheme(theme) {
+        return theme === 'dark' ? 'dark' : 'light';
     }
 
     init() {
@@ -23,49 +30,70 @@ class ThemeManager {
         }
     }
 
-    setupSystemThemeListener() {
-        // Listen for system theme changes
-        if (window.matchMedia) {
-            const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-            mediaQuery.addEventListener('change', (e) => {
-                // Only update if user hasn't manually set a preference
-                if (!localStorage.getItem('theme')) {
-                    this.setTheme(e.matches ? 'dark' : 'light');
+    getStoredTheme() {
+        try {
+            const storedTheme = localStorage.getItem(this.storageKey) || localStorage.getItem(this.legacyStorageKey);
+            if (storedTheme === 'dark' || storedTheme === 'light') {
+                if (storedTheme !== localStorage.getItem(this.storageKey)) {
+                    localStorage.setItem(this.storageKey, storedTheme);
                 }
-            });
+                return storedTheme;
+            }
+        } catch (error) {
+            console.warn('Theme preference is unavailable:', error);
+        }
+        return null;
+    }
+
+    persistTheme(theme) {
+        try {
+            localStorage.setItem(this.storageKey, ThemeManager.normalizeTheme(theme));
+        } catch (error) {
+            console.warn('Theme preference could not be persisted:', error);
+        }
+    }
+
+    systemPrefersDark() {
+        return Boolean(this.mediaQuery && this.mediaQuery.matches);
+    }
+
+    setupSystemThemeListener() {
+        if (!this.mediaQuery) {
+            return;
+        }
+
+        const handleChange = (event) => {
+            if (!this.getStoredTheme()) {
+                this.setTheme(event.matches ? 'dark' : 'light');
+            }
+        };
+
+        if (typeof this.mediaQuery.addEventListener === 'function') {
+            this.mediaQuery.addEventListener('change', handleChange);
+        } else if (typeof this.mediaQuery.addListener === 'function') {
+            this.mediaQuery.addListener(handleChange);
         }
     }
 
     applyInitialTheme() {
-        const savedTheme = localStorage.getItem('theme');
-        const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        let theme;
-        if (savedTheme) {
-            theme = savedTheme;
-        } else if (systemPrefersDark) {
-            theme = 'dark';
-        } else {
-            theme = 'light';
-        }
-
+        const theme = this.getStoredTheme() || (this.systemPrefersDark() ? 'dark' : 'light');
         this.setTheme(theme);
     }
 
     toggleTheme() {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const currentTheme = ThemeManager.normalizeTheme(document.documentElement.getAttribute('data-theme'));
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
         this.setTheme(newTheme);
-        localStorage.setItem('theme', newTheme);
+        this.persistTheme(newTheme);
     }
 
     setTheme(theme) {
-        document.documentElement.setAttribute('data-theme', theme);
-        this.updateThemeToggleIcon(theme);
+        const normalizedTheme = ThemeManager.normalizeTheme(theme);
+        document.documentElement.setAttribute('data-theme', normalizedTheme);
+        this.updateThemeToggleIcon(normalizedTheme);
 
-        // Dispatch custom event for other components
         window.dispatchEvent(new CustomEvent('themechange', {
-            detail: { theme }
+            detail: { theme: normalizedTheme }
         }));
     }
 
@@ -85,11 +113,10 @@ class ThemeManager {
     }
 
     getCurrentTheme() {
-        return document.documentElement.getAttribute('data-theme');
+        return ThemeManager.normalizeTheme(document.documentElement.getAttribute('data-theme'));
     }
 }
 
-// Initialize theme manager when DOM is ready
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         window.themeManager = new ThemeManager();

@@ -17,8 +17,8 @@
     <link rel="stylesheet" href="{{ '/assets/css/syntax-highlighting.css' | relative_url }}">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ '/assets/favicon.ico' | relative_url }}">
-    <link rel="apple-touch-icon" href="{{ '/assets/apple-touch-icon.png' | relative_url }}">
+    <link rel="icon" type="image/png" href="{{ '/assets/images/itdo_logo_48x48_blue.png' | relative_url }}">
+    <link rel="apple-touch-icon" href="{{ '/assets/images/itdo_logo_48x48_blue.png' | relative_url }}">
 
     <!-- Open Graph -->
     <meta property="og:title" content="{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}">
@@ -33,11 +33,22 @@
 
     <!-- Theme Detection Script -->
     <script>
-        // Detect system theme preference and apply immediately to prevent flash
-        (function() {
-            const theme = localStorage.getItem('theme') ||
-                         (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-            document.documentElement.setAttribute('data-theme', theme);
+        (function () {
+            var root = document.documentElement;
+            var theme = 'light';
+            try {
+                var stored = localStorage.getItem('theme') || localStorage.getItem('book-theme');
+                if (stored === 'dark' || stored === 'light') {
+                    theme = stored;
+                } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    theme = 'dark';
+                }
+            } catch (error) {
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    theme = 'dark';
+                }
+            }
+            root.setAttribute('data-theme', theme === 'dark' ? 'dark' : 'light');
         })();
     </script>
 </head>
@@ -143,7 +154,7 @@
                 <!-- Edit on GitHub -->
                 {% if repository_url and page.path %}
                 <div class="edit-page">
-                    <a href="{{ repository_url }}/edit/main/{{ page.path }}"
+                    <a href="{{ repository_url }}/edit/main/docs/{{ page.path }}"
                        target="_blank"
                        rel="noopener"
                        class="edit-link">
@@ -167,6 +178,6 @@
     <script src="{{ '/assets/js/sidebar.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/search.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/code-copy.js' | relative_url }}"></script>
-    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/safe-main.js' | relative_url }}"></script>
 </body>
 </html>
