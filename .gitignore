@@ -89,6 +89,7 @@ pids/
 
 # Documentation build
 docs/_build/
+docs/_site/
 docs/.vuepress/dist/
 
 # Misc

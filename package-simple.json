@@ -1,8 +1,8 @@
 {
-  "name": "book-publishing-template-improved",
+  "name": "cs-visionaries-book",
   "version": "2.0.0",
-  "description": "Improved Book Publishing Template with Easy Setup",
-  "author": "Book Publishing Template Contributors",
+  "description": "Legacy/simple compatibility manifest for the digital revolution backstage guide: computer science visionaries, trends, and modern technology history",
+  "author": "ITDO JP Contributors",
   "license": "CC-BY-NC-SA-4.0",
   "engines": {
     "node": ">=20.0.0"
@@ -15,7 +15,7 @@
     "clean": "rm -rf docs output temp",
     "lint:light": "markdownlint 'src/**/*.md' --ignore node_modules",
     "test:light": "npm run lint:light && npm run build",
-    "help": "echo 'Available commands:\n  npm run setup - Interactive setup\n  npm run build - Build the book\n  npm run preview - Local preview'"
+    "help": "echo 'Available commands:\n  npm run build - Build the book\n  npm run preview - Local preview (docs/)'"
   },
   "dependencies": {
     "fs-extra": "^11.1.0",
@@ -31,18 +31,18 @@
   },
   "keywords": [
     "book",
-    "publishing",
-    "markdown",
+    "computer-science",
+    "history",
+    "technology-trends",
     "github-pages",
-    "template",
-    "easy-setup"
+    "digital-transformation"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/itdojp/book-publishing-template.git"
+    "url": "git+https://github.com/itdojp/cs-visionaries-book.git"
   },
   "bugs": {
-    "url": "https://github.com/itdojp/book-publishing-template/issues"
+    "url": "https://github.com/itdojp/cs-visionaries-book/issues"
   },
-  "homepage": "https://github.com/itdojp/book-publishing-template#readme"
+  "homepage": "https://github.com/itdojp/cs-visionaries-book#readme"
 }
