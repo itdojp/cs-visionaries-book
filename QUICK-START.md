@@ -44,12 +44,14 @@ src/
 
 ```bash
 npm run preview
+# internally serves docs/ after npm run build
 ```
 
 Jekyll のページ遷移や include を含めて確認する場合は、`docs/` 配下で次を実行します。
 
 ```bash
 cd docs
+bundle install
 bundle exec jekyll build
 bundle exec jekyll serve --livereload --baseurl ""
 ```
@@ -58,7 +60,7 @@ bundle exec jekyll serve --livereload --baseurl ""
 
 1. `src/` 側の該当ファイルを編集する
 2. `npm run build` で `docs/` を更新する
-3. 必要に応じて `cd docs && bundle exec jekyll build` で公開ページ相当を確認する
+3. 必要に応じて `cd docs && bundle install && bundle exec jekyll build` で公開ページ相当を確認する
 4. 公開版の目次・章導線は `docs/index.md` を正として確認する
 
 ## よく使うコマンド

@@ -56,7 +56,7 @@ body:
     id: liked-features
     attributes:
       label: What you liked most / 最も気に入った機能
-      description: What features or aspects do you like most about v2.0? / v2.0で最も気に入った機能や側面は何ですか？
+      description: What features or aspects do you like most about this book and site? / 本書と公開サイトで最も気に入った機能や側面は何ですか？
       placeholder: |
         Example: chapter flow, appendix usefulness, cross-links, clarity of explanations...
         例：章構成、付録の使いやすさ、クロスリンク、説明の明確さ...

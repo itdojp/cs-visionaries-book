@@ -1,6 +1,6 @@
 name: 🚨 Build or Preview Issue / ビルド・プレビュー問題
 description: Report problems while building or previewing this repository / このリポジトリのビルド・プレビュー問題を報告
-title: "[Setup Issue] "
+title: "[Build/Preview Issue] "
 labels: ["setup", "bug", "high-priority"]
 body:
   - type: markdown

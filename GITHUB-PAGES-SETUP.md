@@ -47,7 +47,7 @@
 
 4. **ワークフロー変更**
    ```bash
-   # このリポジトリでは Pages は /docs ブランチ公開を前提に運用している
+   # このリポジトリでは Pages は main ブランチの /docs フォルダ公開を前提に運用している
    # GitHub Actions 方式へ切り替える場合は
    # - docs/ を artifact として publish する workflow
    # - Pages の Source を GitHub Actions に変更
@@ -100,7 +100,8 @@
 2. **手動ビルド実行**
    ```bash
    npm run build
-   cd docs && bundle exec jekyll build
+   cd docs && bundle install
+   bundle exec jekyll build
    ```
 
 3. **ログの確認**
