@@ -1,21 +1,21 @@
 {
   "name": "cs-visionaries-book",
   "version": "2.0.0",
-  "description": "Digital revolution backstage guide: computer science visionaries, trends, and modern technology history",
+  "description": "Legacy/simple compatibility manifest for the digital revolution backstage guide: computer science visionaries, trends, and modern technology history",
   "author": "ITDO JP Contributors",
   "license": "CC-BY-NC-SA-4.0",
   "engines": {
     "node": ">=20.0.0"
   },
   "scripts": {
-    "setup": "node -e \"console.error('Deprecated: easy-setup.js is a legacy template path. Use README.md, QUICK-START.md, and npm run build instead.'); process.exit(1)\"",
+    "setup": "node easy-setup.js",
     "build": "node scripts/build-simple.js",
     "build:full": "node scripts/build.js",
     "preview": "npm run build && npx http-server docs -p 8080 --silent",
     "clean": "rm -rf docs output temp",
     "lint:light": "markdownlint 'src/**/*.md' --ignore node_modules",
     "test:light": "npm run lint:light && npm run build",
-    "help": "echo 'Available commands:\n  npm run build - Build the book\n  npm run preview - Local preview'"
+    "help": "echo 'Available commands:\n  npm run build - Build the book\n  npm run preview - Local preview (docs/)'"
   },
   "dependencies": {
     "fs-extra": "^11.1.0",
