@@ -1,5 +1,8 @@
-# Navigation structure for book chapters and appendices
-# This file will be generated automatically by the build script based on the book structure
+# Template navigation example for new repos
+# This file is not the canonical navigation for the current repository.
+# In this repository, reader-facing canonical TOC is docs/index.md and GitHub Pages.
+# docs/_data/navigation.yml is generated data produced by scripts/build-simple.js.
+# Do not treat this template file or generated navigation data as the current book's source of truth.
 
 chapters: []
 appendices: []
