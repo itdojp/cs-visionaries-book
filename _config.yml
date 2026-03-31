@@ -1,7 +1,7 @@
 # Jekyll設定
 title: "デジタル革命の舞台裏"
-description: "コンピュータサイエンスを築いた天才たちの物語 - エイダ・ラブレスからスティーブ・ジョブズまで、デジタル時代を創った10人の革新者たちの人間ドラマ"
-author: 
+description: "コンピュータサイエンスを築いた人物と技術潮流の物語 - 計算理論、ソフトウェア基盤、インターネット、AIまで、現代のデジタル社会を形作った発想と意思決定をたどる"
+author:
   name: ITDO Inc. (株式会社アイティードゥ)
   github: itdojp
   email: knowledge@itdo.jp
