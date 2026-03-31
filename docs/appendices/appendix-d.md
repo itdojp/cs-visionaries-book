@@ -68,7 +68,7 @@ flowchart LR
 |Productization|API提供、UX、評価（Evals）とガードレール|第5章（PC/UX）、第9章（クラウド）、第10章（現代AI）|
 |Governance|セキュリティ/暗号、規制、監査・責任分界|第2章（暗号）、第10章（現代AI）、付録A/付録C|
 
-現行版の参照先メモ: [Web / インターネット（第6章）](https://itdojp.github.io/cs-visionaries-book/chapters/chapter06.html)、[検索（第7章）](https://itdojp.github.io/cs-visionaries-book/chapters/chapter07.html)、[SNS（第8章）](https://itdojp.github.io/cs-visionaries-book/chapters/chapter08.html)、[クラウド（第9章）](https://itdojp.github.io/cs-visionaries-book/chapters/chapter09.html)、[AI（第10章）](https://itdojp.github.io/cs-visionaries-book/chapters/chapter10.html) です。章番号で迷った場合は、トップページの目次を正としてください。
+現行版の参照先メモ: [Web / インターネット（第6章）](https://itdojp.github.io/cs-visionaries-book/chapters/chapter06/)、[検索（第7章）](https://itdojp.github.io/cs-visionaries-book/chapters/chapter07/)、[SNS（第8章）](https://itdojp.github.io/cs-visionaries-book/chapters/chapter08/)、[クラウド（第9章）](https://itdojp.github.io/cs-visionaries-book/chapters/chapter09/)、[AI（第10章）](https://itdojp.github.io/cs-visionaries-book/chapters/chapter10/) です。章番号で迷った場合は、トップページの目次を正としてください。
 
 ## 4. 章→AIスタック対応（本書内マッピング）
 
@@ -91,8 +91,8 @@ flowchart LR
 
 1. 付録D（本付録）で地図を掴む
 2. 付録A（年表）で主要イベントの位置関係を確認する
-3. [第10章（現代AIの社会実装）](https://itdojp.github.io/cs-visionaries-book/chapters/chapter10.html) を読み、必要に応じて [付録C](https://itdojp.github.io/cs-visionaries-book/appendices/appendix-c.html) の AI 文献で技術史を補う
-4. データ/運用/ガバナンスの章（[第6章](https://itdojp.github.io/cs-visionaries-book/chapters/chapter06.html) / [第7章](https://itdojp.github.io/cs-visionaries-book/chapters/chapter07.html) / [第2章](https://itdojp.github.io/cs-visionaries-book/chapters/chapter02.html) / [第9章](https://itdojp.github.io/cs-visionaries-book/chapters/chapter09.html)）を必要に応じて補完する
+3. [第10章（現代AIの社会実装）](https://itdojp.github.io/cs-visionaries-book/chapters/chapter10/) を読み、必要に応じて [付録C](https://itdojp.github.io/cs-visionaries-book/appendices/appendix-c/) の AI 文献で技術史を補う
+4. データ/運用/ガバナンスの章（[第6章](https://itdojp.github.io/cs-visionaries-book/chapters/chapter06/) / [第7章](https://itdojp.github.io/cs-visionaries-book/chapters/chapter07/) / [第2章](https://itdojp.github.io/cs-visionaries-book/chapters/chapter02/) / [第9章](https://itdojp.github.io/cs-visionaries-book/chapters/chapter09/)）を必要に応じて補完する
 
 注記: 現行公開版では、第10章が AI の主導入です。深層学習の技術史や関連研究は、付録C の文献と関連人物章を併用して追うと位置づけを整理しやすくなります。
 
@@ -104,7 +104,7 @@ flowchart LR
 - **1998〜2007年**: Google、Facebook、AWS、iPhone が、検索・SNS・クラウド・モバイルの大規模分配を定着させた。
 - **2012〜2023年**: AlexNet、AlphaGo、生成AIの普及により、Algorithm / Productization / Governance を同時に扱う現代 AI の段階に入った。
 
-詳細な年号、出来事の並び、補助的な節目を確認したい場合は、まず [付録A](https://itdojp.github.io/cs-visionaries-book/appendices/appendix-a.html) を参照してください。本付録では、AI 時代形成を理解するための代表イベントだけを残しています。
+詳細な年号、出来事の並び、補助的な節目を確認したい場合は、まず [付録A](https://itdojp.github.io/cs-visionaries-book/appendices/appendix-a/) を参照してください。本付録では、AI 時代形成を理解するための代表イベントだけを残しています。
 
 この付録は、人物史と技術潮流を AI 時代形成の観点で読み直すための補助地図です。年表や章対応を確認するときは、付録Aとトップページの目次をあわせて参照してください。
 

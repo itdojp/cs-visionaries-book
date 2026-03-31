@@ -1,5 +1,6 @@
 ---
 layout: book
+order: 1
 title: "付録A：コンピュータサイエンス重要事件年表"
 ---
 
