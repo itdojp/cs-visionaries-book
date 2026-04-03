@@ -2,12 +2,18 @@
 
 計算理論、ソフトウェア基盤、Web、検索、SNS、クラウド、現代AI、量子、未来予測まで、現代のデジタル社会を形作った人物と技術潮流をたどる読み物です。人物章とテーマ章を組み合わせ、現代テクノロジーの本質とビジネスへの示唆を整理します。
 
-- 公開トップページ: https://itdojp.github.io/cs-visionaries-book/
+- 公開トップページ: [cs-visionaries-book](https://itdojp.github.io/cs-visionaries-book/)
 - 現行の reader-facing な正式導線は公開トップページを正とします。`docs/index.md` はその公開入力です。
 - 編集起点は `src/` です。公開向けの確認は `docs/` と GitHub Pages を基準に行います。
 - `cs-visionaries-book-orig/` は旧原稿アーカイブであり、現行の正本ではありません。
-- path role matrix: `src/` = authoring、`docs/` = reader-facing output、`docs/_data/navigation.yml` = build-managed data（現行は手動調整が必要）、`docs/_site/` = disposable artifact、`cs-visionaries-book/` / `cs-visionaries-book-orig/` = legacy / non-canonical
-- シリーズ: https://github.com/itdojp/it-engineer-knowledge-architecture
+- path role matrix:
+  - `src/` = authoring
+  - `docs/` = reader-facing output
+  - `docs/_data/navigation.yml` = auto-generated build data
+    （手動編集禁止。更新は `npm run build` を再実行）
+  - `docs/_site/` = disposable artifact
+  - `cs-visionaries-book/` / `cs-visionaries-book-orig/` = legacy / non-canonical
+- シリーズ: [itdojp/it-engineer-knowledge-architecture](https://github.com/itdojp/it-engineer-knowledge-architecture)
 
 ## 想定読者（抜粋）
 
@@ -17,10 +23,10 @@
 
 ## フィードバック（誤り指摘・改善提案）
 
-誤字脱字、事実誤認の指摘、改善提案は Issues / Pull Request で受け付けます。
+誤字脱字、事実誤認の指摘、改善提案は Issues / PR で受け付けます。
 
-- GitHub Issues: https://github.com/itdojp/cs-visionaries-book/issues/new/choose
-- Email: knowledge@itdo.jp
+- GitHub Issues: [itdojp/cs-visionaries-book/issues/new/choose](https://github.com/itdojp/cs-visionaries-book/issues/new/choose)
+- Email: [knowledge@itdo.jp](mailto:knowledge@itdo.jp)
 
 ## ライセンス
 
