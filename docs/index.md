@@ -193,14 +193,14 @@ ITコンサルティング・教育事業を展開。技術の本質を分かり
 
 - 公開版: [GitHub Pages](https://itdojp.github.io/cs-visionaries-book/)
 - リポジトリ: [GitHub Repository](https://github.com/itdojp/cs-visionaries-book)
-- 版差確認: [コミット履歴](https://github.com/itdojp/cs-visionaries-book/commits/main/) / [Pull Requests](https://github.com/itdojp/cs-visionaries-book/pulls)
+- 版差確認: [コミット履歴](https://github.com/itdojp/cs-visionaries-book/commits/main/) / [PR 一覧](https://github.com/itdojp/cs-visionaries-book/pulls)
 - 誤り指摘: [Issue template](https://github.com/itdojp/cs-visionaries-book/issues/new/choose)
 - 参考資料: 各章末の参考文献と付録をあわせて参照してください
 
 ### 版差・更新確認の手順
 
 1. まず [公開トップページ](https://itdojp.github.io/cs-visionaries-book/) の目次で現行の reader-facing 構成を確認します。
-2. 次に [コミット履歴](https://github.com/itdojp/cs-visionaries-book/commits/main/) と [Pull Requests](https://github.com/itdojp/cs-visionaries-book/pulls) で変更の有無を確認します。
+2. 次に [コミット履歴](https://github.com/itdojp/cs-visionaries-book/commits/main/) と [PR 一覧](https://github.com/itdojp/cs-visionaries-book/pulls) で変更の有無を確認します。
 3. 時系列や出来事の位置関係を確認したい場合は [付録A]({{ '/appendices/appendix-a/' | relative_url }}) を見直します。
 4. 出典や読書会向けの参考文献を確認したい場合は [付録C]({{ '/appendices/appendix-c/' | relative_url }}) を見直します。
 5. 年代、制度、製品仕様、社会的評価を厳密に扱う場合は、本文だけで断定せず一次資料を確認します。
