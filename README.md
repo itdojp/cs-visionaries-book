@@ -9,7 +9,8 @@
 - path role matrix:
   - `src/` = authoring
   - `docs/` = reader-facing output
-  - `docs/_data/navigation.yml` = build-managed data（現行は手動調整が必要）
+  - `docs/_data/navigation.yml` = auto-generated build data
+    （手動編集禁止。更新は `npm run build` を再実行）
   - `docs/_site/` = disposable artifact
   - `cs-visionaries-book/` / `cs-visionaries-book-orig/` = legacy / non-canonical
 - シリーズ: [itdojp/it-engineer-knowledge-architecture](https://github.com/itdojp/it-engineer-knowledge-architecture)
