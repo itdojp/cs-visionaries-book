@@ -542,7 +542,7 @@ IoT（Internet of Things）は「モノのインターネット」と訳され�
 - **各社の AI 倫理原則**：Google、Microsoft、IBMなどの自主的取り組み
 
 **政府・国際機関の取り組み**：
-- **EU AI Act**：世界初の包括的AI規制法案
+- **EU AI Act**：2024年8月1日に発効した、AI システムをリスク別に扱う包括的な規制枠組み（適用は段階的）
 - **米国 AI Bill of Rights**：AI システムに関する市民の権利章典
 - **OECD AI原則**：国際的なAI倫理ガイドライン
 
@@ -1002,6 +1002,7 @@ graph LR
 2. 総務省 (2023). 『令和5年版 情報通信白書』. 日本政府.
 3. OECD. (2023). "OECD Digital Economy Outlook 2023". OECD Publishing.
 4. World Economic Forum. (2023). "The Future of Jobs Report 2023". WEF.
+5. European Commission. (2024). "AI Act enters into force". European Union. https://commission.europa.eu/news/ai-act-enters-force-2024-08-01_en
 
 ### Web3・メタバース関連
 1. Messari. (2023). "Crypto Theses for 2023". Messari Research.

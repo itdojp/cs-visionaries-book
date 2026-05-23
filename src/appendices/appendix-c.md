@@ -4,6 +4,40 @@
 
 注記: 正式な章立て・章題・読み順は、トップページの目次を正としてください。本付録は参考文献・推薦図書への導線です。独立章でなくなったテーマは、読書案内の継続性を優先して補論として残しています。
 
+
+## Phase 5 人物・年代・貢献レビューゲート（2026-05-23 JST）
+
+人物史・技術史を更新する際は、本付録を出典導線として使い、本文の物語上の要約と資料で確認できる事実を分けて扱います。
+
+- 年代、肩書、所属、著作、受賞、製品・制度の状態は、一次資料、公式資料、査読論文、歴史研究を優先する。
+- 複数人物・組織が関わる出来事では、単独人物の「発明」や「主導」と断定せず、委員会、企業、研究コミュニティの役割を併記する。
+- 現代技術への影響は「直線的な起源」としてではなく、設計思想、標準化、運用モデルなどの接点として記述する。
+- 資料同士で年・表現が異なる場合は、確認日と採用根拠を PR 本文または Issue コメントに記録する。
+
+### 2026-05-23 source-audit anchors
+
+- Ada Lovelace / Analytical Engine notes:
+  - Computer History Museum, "Ada Lovelace". https://www.computerhistory.org/babbage/adalovelace/
+- Alan Turing / computability and imitation game:
+  - Turing, A. M. (1936/1937). "On Computable Numbers, with an Application to the Entscheidungsproblem". Proceedings of the London Mathematical Society. https://academic.oup.com/plms/article-pdf/s2-42/1/230/4317544/s2-42-1-230.pdf
+  - Turing, A. M. (1950). "Computing Machinery and Intelligence". Mind. https://academic.oup.com/mind/article/LIX/236/433/986238
+- Grace Hopper / FLOW-MATIC / COBOL:
+  - Computer History Museum, "Hopper, Grace oral history". https://www.computerhistory.org/collections/catalog/102702026
+  - Sammet, Jean E. (1978). "The Early History of COBOL". ACM SIGPLAN Notices 13(8), 121-161. https://doi.org/10.1145/960118.808378
+- Web:
+  - W3C, "A Little History of the World Wide Web". https://www.w3.org/History.html
+  - CERN, "The birth of the Web". https://home.cern/science/computing/birth-web
+- Search / Google:
+  - Google, "How we started and where we are today". https://about.google/our-story/
+- Cloud / AWS:
+  - Amazon, "Amazon Web Services Launches" (2006-03-14). https://press.aboutamazon.com/2006/3/amazon-web-services-launches
+  - AWS, "Our Origins". https://aws.amazon.com/about-aws/our-origins/
+- Generative AI:
+  - OpenAI, "Introducing ChatGPT" (2022-11-30). https://openai.com/index/chatgpt/
+- AI regulation:
+  - European Commission, "AI Act enters into force" (2024-08-01). https://commission.europa.eu/news/ai-act-enters-force-2024-08-01_en
+
+
 ---
 
 ## 序章・第1章：エイダ・ラブレス
