@@ -15,6 +15,18 @@
   - `cs-visionaries-book/` / `cs-visionaries-book-orig/` = legacy / non-canonical
 - シリーズ: [itdojp/it-engineer-knowledge-architecture](https://github.com/itdojp/it-engineer-knowledge-architecture)
 
+
+## Phase 5 人物・年代・貢献レビューゲート
+
+人物史・技術史を更新する PR では、次を確認して PR 本文に記録します。
+
+- 人物名、年代、所属、著作、受賞、製品名は、一次資料・公式資料・査読論文・歴史研究を優先して確認する。
+- 貢献、影響、因果関係は、資料に明記された事実と編集上の解釈を分け、単独人物の功績として過度に単純化しない。
+- `cs-visionaries-book-orig/` やネストした `cs-visionaries-book/` は旧アーカイブであり、現行正本や出典の代替として扱わない。
+- 生成済み `docs/` と GitHub Pages の表示で、年表、付録C、該当章の記述が矛盾しないことを確認する。
+- GitHub Copilot review の本文、inline comment、suggestion を全件確認し、未解決 review thread が 0 件であることを完了条件にする。
+
+
 ## 想定読者（抜粋）
 
 - 一般読者（人物の生涯と業績の物語を中心に読みたい方）
