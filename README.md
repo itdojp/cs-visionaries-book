@@ -24,7 +24,7 @@
 - 貢献、影響、因果関係は、資料に明記された事実と編集上の解釈を分け、単独人物の功績として過度に単純化しない。
 - `cs-visionaries-book-orig/` やネストした `cs-visionaries-book/` は旧アーカイブであり、現行正本や出典の代替として扱わない。
 - 生成済み `docs/` と GitHub Pages の表示で、年表、付録C、該当章の記述が矛盾しないことを確認する。
-- GitHub Copilot review の本文、inline comment、suggestion を全件確認し、未解決 review thread 0 を完了条件にする。
+- GitHub Copilot review の本文、inline comment、suggestion を全件確認し、未解決 review thread が 0 件であることを完了条件にする。
 
 
 ## 想定読者（抜粋）
