@@ -241,9 +241,9 @@ const overlayStyles = `
 `;
 
 // Inject overlay styles
-const styleSheet = document.createElement('style');
-styleSheet.textContent = overlayStyles;
-document.head.appendChild(styleSheet);
+const sidebarStyleSheet = document.createElement('style');
+sidebarStyleSheet.textContent = overlayStyles;
+document.head.appendChild(sidebarStyleSheet);
 
 // Initialize sidebar manager when DOM is ready
 if (document.readyState === 'loading') {
