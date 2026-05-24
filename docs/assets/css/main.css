@@ -192,6 +192,7 @@ body {
 .book-layout {
   display: flex;
   min-height: 100vh;
+  min-width: 0;
 }
 
 .book-header {
@@ -227,12 +228,21 @@ body {
   margin-left: var(--sidebar-width);
   margin-top: var(--header-height);
   min-height: calc(100vh - var(--header-height));
+  min-width: 0;
 }
 
 .book-content {
+  width: 100%;
   max-width: var(--content-max-width);
   margin: 0 auto;
   padding: var(--space-8) var(--space-6);
+  min-width: 0;
+}
+
+.page-content {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 
 /* Typography */
@@ -334,6 +344,8 @@ pre {
   overflow-x: auto;
   margin: var(--space-4) 0;
   line-height: var(--line-height-normal);
+  max-width: 100%;
+  min-width: 0;
 }
 
 pre code {
@@ -489,6 +501,7 @@ img {
   display: flex;
   align-items: center;
   gap: var(--space-3);
+  min-width: 0;
 }
 
 .header-center {
@@ -504,6 +517,7 @@ img {
 .header-title {
   color: var(--color-text-primary);
   text-decoration: none;
+  min-width: 0;
 }
 
 .header-title h1 {
@@ -511,6 +525,9 @@ img {
   padding: 0;
   border: 0;
   font-size: var(--font-size-xl);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .sidebar-toggle,
@@ -719,6 +736,8 @@ img {
 .code-block-wrapper {
   position: relative;
   margin: var(--space-4) 0;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .code-copy-button {
