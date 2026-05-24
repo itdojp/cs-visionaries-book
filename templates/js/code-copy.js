@@ -378,9 +378,9 @@ const copyStyles = `
 `;
 
 // Inject styles
-const styleSheet = document.createElement('style');
-styleSheet.textContent = copyStyles;
-document.head.appendChild(styleSheet);
+const copyStyleSheet = document.createElement('style');
+copyStyleSheet.textContent = copyStyles;
+document.head.appendChild(copyStyleSheet);
 
 // Initialize when DOM is ready
 if (document.readyState === 'loading') {
