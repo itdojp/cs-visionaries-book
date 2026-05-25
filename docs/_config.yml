@@ -1,7 +1,8 @@
 # Jekyll設定
 title: "デジタル革命の舞台裏"
-description: "コンピュータサイエンスを築いた人物と技術潮流の物語 - 計算理論、ソフトウェア基盤、インターネット、AIまで、現代のデジタル社会を形作った発想と意思決定をたどる"
+description: "コンピュータサイエンスを築いた人物と技術潮流の物語 - 計算理論、ソフトウェア基盤、インターネット、AIまで、現代のデジタル社会を形作った発想と意思決定をたどる。"
 author: "ITDO Inc. (株式会社アイティードゥ)"
+version: "1.0.0"
 author_profile:
   github: itdojp
   email: knowledge@itdo.jp

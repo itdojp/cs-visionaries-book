@@ -1,8 +1,8 @@
 {
   "name": "cs-visionaries-book",
-  "version": "2.0.0",
-  "description": "Digital revolution backstage guide: computer science visionaries, trends, and modern technology history",
-  "author": "ITDO JP Contributors",
+  "version": "1.0.0",
+  "description": "コンピュータサイエンスを築いた人物と技術潮流の物語 - 計算理論、ソフトウェア基盤、インターネット、AIまで、現代のデジタル社会を形作った発想と意思決定をたどる。",
+  "author": "ITDO Inc. (株式会社アイティードゥ)",
   "license": "CC-BY-NC-SA-4.0",
   "engines": {
     "node": ">=20.0.0"
@@ -21,7 +21,8 @@
     "lint:light": "markdownlint 'src/**/*.md' --ignore node_modules",
     "test:light": "npm run lint:light && npm run build",
     "test:conflicts": "npm run check-conflicts",
-    "help": "echo 'Available commands:\n  npm run build - Build the book\n  npm run build:safe - Build with conflict detection\n  npm run check-conflicts - Check Jekyll conflicts\n  npm run fix-conflicts - Auto-fix Jekyll conflicts\n  npm run preview - Local preview (docs/)\n  npm run configure:workflows - Disable problematic workflows\n  npm run deploy - Deprecated: deployment is handled outside package.json'"
+    "help": "echo 'Available commands:\n  npm run build - Build the book\n  npm run build:safe - Build with conflict detection\n  npm run check-conflicts - Check Jekyll conflicts\n  npm run fix-conflicts - Auto-fix Jekyll conflicts\n  npm run preview - Local preview (docs/)\n  npm run configure:workflows - Disable problematic workflows\n  npm run deploy - Deprecated: deployment is handled outside package.json'",
+    "check:metadata": "node scripts/check-metadata-consistency.js"
   },
   "dependencies": {
     "fs-extra": "^11.3.0",
@@ -50,5 +51,5 @@
   "bugs": {
     "url": "https://github.com/itdojp/cs-visionaries-book/issues"
   },
-  "homepage": "https://github.com/itdojp/cs-visionaries-book#readme"
+  "homepage": "https://itdojp.github.io/cs-visionaries-book/"
 }
