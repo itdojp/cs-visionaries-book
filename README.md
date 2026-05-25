@@ -16,6 +16,13 @@
 - シリーズ: [itdojp/it-engineer-knowledge-architecture](https://github.com/itdojp/it-engineer-knowledge-architecture)
 
 
+## ローカル品質チェック
+
+```bash
+# package / Jekyll / 公開ページ metadata の整合性を確認
+npm run check:metadata
+```
+
 ## Phase 5 人物・年代・貢献レビューゲート
 
 人物史・技術史を更新する PR では、次を確認して PR 本文に記録します。
