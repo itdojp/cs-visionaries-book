@@ -19,8 +19,17 @@
 ## ローカル品質チェック
 
 ```bash
+# optional 依存を省いた再現可能な軽量QA依存をインストール
+npm ci --omit=optional
+
 # package / Jekyll / 公開ページ metadata の整合性を確認
 npm run check:metadata
+
+# 現行 Markdown スタイルを考慮した軽量lintを確認
+npm run lint:light
+
+# Markdown lint と簡易ビルドを確認
+npm run test:light
 ```
 
 ## Phase 5 人物・年代・貢献レビューゲート
