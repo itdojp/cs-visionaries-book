@@ -29,7 +29,7 @@ flowchart LR
     C["Compute\nGPU/クラウド/分散"]
     D["Data\nWeb/DB/検索/ログ"]
     A["Algorithm\n深層学習/Transformer"]
-    P["Productization\nAPI/UX/運用"]
+    P["Productization\nAPI / UX / 運用"]
     G["Governance\n安全/法令/監査"]
   end
 

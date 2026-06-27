@@ -25,12 +25,18 @@ npm ci --omit=optional
 # package / Jekyll / 公開ページ metadata の整合性を確認
 npm run check:metadata
 
+# optional 依存を除いた audit findings を確認
+npm run check:security
+
 # 現行 Markdown スタイルを考慮した軽量lintを確認
 npm run lint:light
 
 # Markdown lint と簡易ビルドを確認
 npm run test:light
+
 ```
+
+注: CI の Node 20 互換を維持するため `markdownlint-cli` は 0.48 系のまま使い、audit findings は `gray-matter` / `markdownlint-cli` 配下に限定した `overrides` で解消しています。
 
 ## Phase 5 人物・年代・貢献レビューゲート
 
@@ -40,7 +46,7 @@ npm run test:light
 - 貢献、影響、因果関係は、資料に明記された事実と編集上の解釈を分け、単独人物の功績として過度に単純化しない。
 - `cs-visionaries-book-orig/` やネストした `cs-visionaries-book/` は旧アーカイブであり、現行正本や出典の代替として扱わない。
 - 生成済み `docs/` と GitHub Pages の表示で、年表、付録C、該当章の記述が矛盾しないことを確認する。
-- GitHub Copilot review の本文、inline comment、suggestion を全件確認し、未解決 review thread が 0 件であることを完了条件にする。
+- `GitHub Copilot review` の本文、`inline comment`、`suggestion` を全件確認し、未解決 `review thread` が 0 件であることを完了条件にする。
 
 
 ## 想定読者（抜粋）
@@ -51,7 +57,7 @@ npm run test:light
 
 ## フィードバック（誤り指摘・改善提案）
 
-誤字脱字、事実誤認の指摘、改善提案は Issues / PR で受け付けます。
+誤字脱字、事実誤認の指摘、改善提案は Issue / PR で受け付けます。
 
 - GitHub Issues: [itdojp/cs-visionaries-book/issues/new/choose](https://github.com/itdojp/cs-visionaries-book/issues/new/choose)
 - Email: [knowledge@itdo.jp](mailto:knowledge@itdo.jp)
