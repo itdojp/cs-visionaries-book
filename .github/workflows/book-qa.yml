@@ -38,8 +38,8 @@ jobs:
       - name: Install repository dependencies
         run: npm ci --omit=optional
 
-      - name: Run local metadata and lint QA
-        run: npm run check:metadata && npm run lint:light
+      - name: Run local metadata, security, and lint QA
+        run: npm run check:metadata && npm run check:security && npm run lint:light
 
       - name: Install dependencies (book-formatter)
         working-directory: book-formatter
