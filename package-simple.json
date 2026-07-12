@@ -26,10 +26,6 @@
     "http-server": "^14.1.1",
     "markdownlint-cli": "^0.48.0"
   },
-  "optionalDependencies": {
-    "sharp": "^0.34.2",
-    "puppeteer": "^21.0.0"
-  },
   "keywords": [
     "book",
     "computer-science",
