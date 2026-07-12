@@ -641,26 +641,6 @@ img {
   border-top: 1px solid var(--color-border);
 }
 
-mark {
-  padding: 0.125rem 0;
-  color: inherit;
-  background: rgba(255, 235, 59, 0.4);
-  border-radius: 2px;
-}
-
-[data-theme="dark"] mark {
-  background: rgba(255, 235, 59, 0.2);
-}
-
-.search-highlight {
-  animation: search-highlight 2s ease;
-}
-
-@keyframes search-highlight {
-  0% { background: rgba(255, 235, 59, 0.4); }
-  100% { background: transparent; }
-}
-
 .sidebar-nav,
 .sidebar-content {
   height: 100%;
