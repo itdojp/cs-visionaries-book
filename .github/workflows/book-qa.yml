@@ -221,8 +221,11 @@ jobs:
             "assets/css/main.css",
             "assets/css/syntax-highlighting.css",
             "assets/js/theme.js",
+            "assets/js/sidebar.js",
             "assets/js/search.js",
+            "assets/js/code-copy.js",
             "assets/js/code-copy-lightweight.js",
+            "assets/images/itdo_logo_48x48_blue.png",
           ]
           missing_assets = [
             a

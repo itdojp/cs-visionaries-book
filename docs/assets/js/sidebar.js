@@ -9,6 +9,7 @@ class SidebarManager {
         this.overlay = document.getElementById('sidebar-overlay');
         this.toggleButton = document.querySelector('.sidebar-toggle');
         this.main = document.getElementById('main');
+        this.navLinkSelector = '.nav-link, .nav-sublink';
         
         this.isOpen = false;
         this.isMobile = false;
@@ -71,7 +72,7 @@ class SidebarManager {
         });
 
         // Navigation links
-        const navLinks = document.querySelectorAll('.toc-link');
+        const navLinks = document.querySelectorAll(this.navLinkSelector);
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 if (this.isMobile) {
@@ -121,7 +122,7 @@ class SidebarManager {
 
     highlightCurrentPage() {
         const currentPath = window.location.pathname;
-        const navLinks = document.querySelectorAll('.toc-link');
+        const navLinks = document.querySelectorAll(this.navLinkSelector);
         
         navLinks.forEach(link => {
             const linkPath = new URL(link.href).pathname;
@@ -163,7 +164,7 @@ class SidebarManager {
         this.updateToggleButton();
         
         // Focus first navigation item for accessibility
-        const firstNavLink = this.sidebar?.querySelector('.toc-link');
+        const firstNavLink = this.sidebar?.querySelector(this.navLinkSelector);
         if (firstNavLink && this.isMobile) {
             setTimeout(() => firstNavLink.focus(), 100);
         }

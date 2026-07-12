@@ -151,10 +151,16 @@
                 </nav>
                 {% endif %}
 
-                <!-- Edit on GitHub -->
-                {% if repository_url and page.path %}
+                <!-- Edit the canonical authoring source on GitHub -->
+                {% assign edit_path = nil %}
+                {% if page.path == 'index.md' %}
+                    {% assign edit_path = 'templates/index.md' %}
+                {% elsif page.path contains 'introduction/' or page.path contains 'chapters/' or page.path contains 'appendices/' %}
+                    {% capture edit_path %}src/{{ page.path }}{% endcapture %}
+                {% endif %}
+                {% if repository_url and edit_path %}
                 <div class="edit-page">
-                    <a href="{{ repository_url }}/edit/main/docs/{{ page.path }}"
+                    <a href="{{ repository_url }}/edit/main/{{ edit_path | strip }}"
                        target="_blank"
                        rel="noopener"
                        class="edit-link">
