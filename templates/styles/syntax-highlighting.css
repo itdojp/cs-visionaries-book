@@ -323,12 +323,12 @@
     color: black !important;
     border: 1px solid #ccc;
   }
-  
+
   .highlight * {
     color: black !important;
     background: transparent !important;
   }
-  
+
   .highlight .c,
   .highlight .cm,
   .highlight .cp,
@@ -343,7 +343,7 @@
   .highlight {
     border: 2px solid var(--color-border);
   }
-  
+
   .highlight .k,
   .highlight .kd,
   .highlight .kn,

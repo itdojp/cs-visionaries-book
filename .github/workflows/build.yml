@@ -39,3 +39,13 @@ jobs:
       - name: Build book
         run: |
           npm run build
+
+      - name: Verify generated docs are deterministic
+        run: |
+          git diff --exit-code -- docs
+          npm run build
+          git diff --exit-code -- docs
+          if [ -n "$(git status --porcelain --untracked-files=all -- docs)" ]; then
+            git status --short -- docs
+            exit 1
+          fi

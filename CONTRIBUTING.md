@@ -7,9 +7,10 @@
 ### Canonical Source
 
 - reader-facing な正式導線は公開トップページと `docs/index.md` を正とします。
-- `src/` は執筆用ソース、`docs/chapters` / `docs/appendices` は build 後の公開入力として扱います。
+- `src/` は原稿の執筆用ソース、`templates/index.md` は公開トップの執筆用ソースです。`docs/` は `npm run build` で置き換える tracked 公開出力であり、直接編集しません。
+- レイアウト、include、CSS、JavaScript は `templates/`、Jekyll設定と静的アセットは `_config.yml` / `assets/` を編集起点とします。
 - 章番号、章題、付録の役割分担を変更する場合は、まずトップページの目次と付録の導線が整合することを確認してください。
-- `src/` と `docs/` で説明が食い違う場合は、reader-facing な判断では公開トップページと `docs/index.md` を優先し、差分の理由を PR で明示してください。
+- authoring source と `docs/` が食い違う場合は、現行公開内容として意図した側を対応する authoring source に同期し、`npm run build` で `docs/` を再生成してください。
 
 ### 非営利コントリビューション
 以下のコントリビューションは歓迎いたします。

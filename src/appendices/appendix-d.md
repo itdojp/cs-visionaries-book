@@ -1,4 +1,10 @@
+---
+layout: book
+title: "付録D：AI時代形成の統合図（Compute×Data×Algorithm×Productization×Governance）"
+---
+
 # 付録D：AI時代形成の統合図（Compute×Data×Algorithm×Productization×Governance）
+
 
 本書は人物史として章が独立している一方で、読者が「AI時代が“突然”成立したのではなく、複数の基盤が収束して成立した」ことを因果で理解するには、横串の地図が必要になる。
 

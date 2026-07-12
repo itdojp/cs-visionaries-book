@@ -89,6 +89,7 @@
   --radius-xl: 0.75rem;
 
   /* Legacy aliases used by runtime scripts */
+  --primary-color: var(--color-primary);
   --bg-secondary: var(--color-bg-secondary);
   --border-color: var(--color-border);
   --text-primary: var(--color-text-primary);
@@ -596,10 +597,16 @@ img {
   display: block;
 }
 
+.search-results-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
 .search-result-item {
   padding: var(--space-3) var(--space-4);
   cursor: pointer;
   border-bottom: 1px solid var(--color-border);
+  transition: var(--transition-base);
 }
 
 .search-result-item:last-child {
@@ -613,6 +620,7 @@ img {
 .search-result-title {
   font-weight: 600;
   margin-bottom: var(--space-1);
+  color: var(--color-text-primary);
 }
 
 .search-result-snippet,
@@ -620,11 +628,17 @@ img {
 .search-more {
   color: var(--color-text-secondary);
   font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
 }
 
 .search-no-results,
 .search-more {
   padding: var(--space-4);
+  text-align: center;
+}
+
+.search-more {
+  border-top: 1px solid var(--color-border);
 }
 
 .sidebar-nav,
