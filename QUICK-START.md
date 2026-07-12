@@ -36,7 +36,15 @@ src/
 ├── ...
 ├── chapters/chapter12.md
 └── appendices/appendix-a.md ... appendix-d.md
+
+templates/index.md                 # 公開トップページ
+templates/{layouts,includes}/      # Jekyll UI
+templates/{styles,js}/             # CSS / JavaScript
+_config.yml                        # Jekyll 設定
+assets/                            # 画像・印刷用 CSS などの静的アセット
 ```
+
+`docs/` は上記から毎回置き換える tracked build output です。`docs/` を直接編集せず、対応する `src/`、`templates/`、`_config.yml`、`assets/` を変更してください。
 
 ### ローカル preview
 
@@ -58,10 +66,11 @@ bundle exec jekyll serve --livereload --baseurl ""
 
 ## 日常的な更新手順
 
-1. `src/` 側の該当ファイルを編集する
+1. 原稿は `src/`、公開トップは `templates/index.md`、UIは対応する `templates/` / `_config.yml` / `assets/` を編集する
 2. `npm run build` で `docs/` を更新する
-3. 必要に応じて `cd docs && bundle install && bundle exec jekyll build` で公開ページ相当を確認する
-4. 公開版の目次・章導線は `docs/index.md` を正として確認する
+3. `npm run build` を再実行し、2回目の build で追加の tracked 差分が出ないことを確認する
+4. 必要に応じて `cd docs && bundle install && bundle exec jekyll build` で公開ページ相当を確認する
+5. 公開版の目次・章導線は生成後の `docs/index.md` を正として確認する
 
 ## よく使うコマンド
 
@@ -75,7 +84,7 @@ npm run lint:light      # src/**/*.md の軽量 lint
 ## 注意点
 
 - reader-facing な章立て・章番号は公開トップページを正とします。テンプレート由来の古い説明が残っている場合でも、`docs/index.md` を優先してください。
-- 原稿本文の編集は原則 `src/` を起点に行い、`npm run build` 後に `docs/` 側へ意図どおり反映されたことを確認してください。公開導線に関わる変更は `docs/index.md` と該当章・付録の両方で build 結果を確認します。
+- 原稿本文の編集は `src/`、公開トップの編集は `templates/index.md` を起点に行い、`npm run build` 後に `docs/` 側へ意図どおり反映されたことを確認してください。公開導線に関わる変更は `docs/index.md` と該当章・付録の両方で build 結果を確認します。
 - 機密情報や未公開メモはリポジトリに置かないでください。
 
 ## 参照先

@@ -1,4 +1,11 @@
+---
+layout: book
+order: 1
+title: "付録A：コンピュータサイエンス重要事件年表"
+---
+
 # 付録A：コンピュータサイエンス重要事件年表
+
 
 注記: この付録の編集起点は `src/` ですが、reader-facing な確認は build 後の `docs/appendices/appendix-a.md` と GitHub Pages を基準に行ってください。年代と出来事の厳密な出典や追加文献を確認したい場合は、付録Cと一次資料へ戻って検証します。
 

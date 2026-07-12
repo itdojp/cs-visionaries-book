@@ -59,37 +59,9 @@ class SimpleBuild {
 
   async createPublicDirectory() {
     const publicDir = path.join(process.cwd(), 'docs');
-    const indexPath = path.join(publicDir, 'index.md');
-    let indexBackup = null;
-    
-    try {
-      await fs.access(publicDir);
-      
-      // Backup index.md if it exists and has substantial content
-      try {
-        const indexContent = await fs.readFile(indexPath, 'utf-8');
-        if (indexContent.length > 200) {
-          indexBackup = indexContent;
-          this.log('index.mdをバックアップしました');
-        }
-      } catch {
-        // index.md doesn't exist, continue
-      }
-      
-      // Clean existing directory
-      await fs.rm(publicDir, { recursive: true, force: true });
-    } catch {
-      // Directory doesn't exist, which is fine
-    }
-    
+    await fs.rm(publicDir, { recursive: true, force: true });
     await fs.mkdir(publicDir, { recursive: true });
-    
-    // Restore index.md if we had a backup
-    if (indexBackup) {
-      await fs.writeFile(indexPath, indexBackup, 'utf-8');
-      this.log('index.mdを復元しました');
-    }
-    
+
     this.log('公開ディレクトリを準備しました');
     return publicDir;
   }
@@ -268,63 +240,10 @@ title: "${title}"
 
   async generateIndex(publicDir) {
     const indexPath = path.join(publicDir, 'index.md');
-    
-    // Check if index.md already exists with substantial content
-    try {
-      const existingContent = await fs.readFile(indexPath, 'utf-8');
-      if (existingContent.length > 200) {
-        this.log('既存のindex.mdを保持します');
-        return;
-      }
-    } catch {
-      // File doesn't exist, generate new one
-    }
-    
-    // Try to use custom index.md from project root first
-    const customIndexPath = path.join(process.cwd(), 'index.md');
-    try {
-      await fs.access(customIndexPath);
-      await fs.copyFile(customIndexPath, indexPath);
-      this.log('カスタムindex.mdをコピーしました');
-      return;
-    } catch {
-      // No custom index.md, generate from template
-    }
-    
-    // Generate basic index.md with correct author information
-    const book = this.config.book || {};
-    const author = book.author || {};
-    const authorName = author.name || 'Author';
-    
-    const indexContent = `# ${book.title || 'Book Title'}
+    const templatePath = path.join(__dirname, '..', 'templates', 'index.md');
 
-${book.subtitle ? book.subtitle + '\n\n' : ''}## 概要
-
-${book.description || 'Book description'}
-
-## 目次
-
-- [はじめに](introduction/)
-- [第1章](chapters/chapter01/)
-
----
-
-## 著者について
-
-**${authorName}**
-
-${author.email ? `- Email: [${author.email}](mailto:${author.email})\n` : ''}${author.github ? `- GitHub: [@${author.github}](https://github.com/${author.github})\n` : ''}
-## ライセンス
-
-${book.license || `© 2025 ${authorName}. All rights reserved.`}
-
----
-
-Generated from src/ by scripts/build-simple.js
-`;
-
-    await fs.writeFile(indexPath, indexContent);
-    this.log('インデックスページを生成しました');
+    await fs.copyFile(templatePath, indexPath);
+    this.log('インデックスページをテンプレートから生成しました');
   }
 
   async copyJekyllConfig(publicDir) {
@@ -485,33 +404,59 @@ exclude:
       }
     }
 
-    // Process chapters
-    const chaptersPath = path.join(srcDir, 'chapters');
-    try {
-      const chapters = await fs.readdir(chaptersPath, { withFileTypes: true });
-      const sortedChapters = chapters
-        .filter(d => d.isDirectory())
-        .sort((a, b) => {
-          const aNum = parseInt(a.name.match(/\d+/)?.[0] || '0');
-          const bNum = parseInt(b.name.match(/\d+/)?.[0] || '0');
-          return aNum - bNum;
-        });
+    const readNavigationItem = async (entryPath, publicPath, fallbackTitle) => {
+      const content = await fs.readFile(entryPath, 'utf-8');
+      const titleMatch = content.match(/^#\s+(.+)$/m);
+      return {
+        title: titleMatch ? titleMatch[1].trim() : fallbackTitle,
+        path: publicPath
+      };
+    };
 
-      for (const chapter of sortedChapters) {
-        const indexPath = path.join(chaptersPath, chapter.name, 'index.md');
-        try {
-          const content = await fs.readFile(indexPath, 'utf-8');
-          const titleMatch = content.match(/^#\s+(.+)$/m);
-          const title = titleMatch ? titleMatch[1] : `第${chapter.name.match(/\d+/)?.[0]}章`;
-          
-          navigationData.chapters.push({
-            title: title,
-            path: `/chapters/${chapter.name}/`
+    const compareChapterNames = (a, b) => {
+      const aNum = parseInt(a.match(/\d+/)?.[0] || '0', 10);
+      const bNum = parseInt(b.match(/\d+/)?.[0] || '0', 10);
+      return aNum - bNum || a.localeCompare(b, 'en');
+    };
+
+    const discoverMarkdownItems = async (sectionPath, publicSection, compareNames, fallbackTitle) => {
+      const entries = await fs.readdir(sectionPath, { withFileTypes: true });
+      const candidates = [];
+
+      for (const entry of entries) {
+        if (entry.isFile() && entry.name.endsWith('.md') && this.shouldIncludeFile(entry.name)) {
+          candidates.push({
+            name: path.basename(entry.name, '.md'),
+            sourcePath: path.join(sectionPath, entry.name)
           });
-        } catch {
-          // Skip if index.md doesn't exist
+        } else if (entry.isDirectory()) {
+          const indexPath = path.join(sectionPath, entry.name, 'index.md');
+          try {
+            await fs.access(indexPath);
+            candidates.push({ name: entry.name, sourcePath: indexPath });
+          } catch {
+            // A directory without index.md is not a navigable page.
+          }
         }
       }
+
+      candidates.sort((a, b) => compareNames(a.name, b.name));
+      return Promise.all(candidates.map(candidate => readNavigationItem(
+        candidate.sourcePath,
+        `/${publicSection}/${candidate.name}/`,
+        fallbackTitle(candidate.name)
+      )));
+    };
+
+    // Process chapters (flat chapterNN.md and directory chapterNN/index.md)
+    const chaptersPath = path.join(srcDir, 'chapters');
+    try {
+      navigationData.chapters = await discoverMarkdownItems(
+        chaptersPath,
+        'chapters',
+        compareChapterNames,
+        name => `第${name.match(/\d+/)?.[0]}章`
+      );
     } catch {
       this.log('章ディレクトリが見つかりません', 'warning');
     }
@@ -521,26 +466,12 @@ exclude:
     if (appendicesSection && appendicesSection.enabled) {
       const appendicesPath = path.join(srcDir, 'appendices');
       try {
-        const appendices = await fs.readdir(appendicesPath, { withFileTypes: true });
-        const sortedAppendices = appendices
-          .filter(d => d.isDirectory())
-          .sort((a, b) => a.name.localeCompare(b.name));
-
-        for (const appendix of sortedAppendices) {
-          const indexPath = path.join(appendicesPath, appendix.name, 'index.md');
-          try {
-            const content = await fs.readFile(indexPath, 'utf-8');
-            const titleMatch = content.match(/^#\s+(.+)$/m);
-            const title = titleMatch ? titleMatch[1] : `付録${appendix.name.replace('appendix-', '').toUpperCase()}`;
-            
-            navigationData.appendices.push({
-              title: title,
-              path: `/appendices/${appendix.name}/`
-            });
-          } catch {
-            // Skip if index.md doesn't exist
-          }
-        }
+        navigationData.appendices = await discoverMarkdownItems(
+          appendicesPath,
+          'appendices',
+          (a, b) => a.localeCompare(b, 'en'),
+          name => `付録${name.replace('appendix-', '').toUpperCase()}`
+        );
       } catch {
         this.log('付録ディレクトリが見つかりません', 'warning');
       }
@@ -568,26 +499,26 @@ exclude:
     // Write navigation data
     const dataDir = path.join(publicDir, '_data');
     await fs.mkdir(dataDir, { recursive: true });
-    await fs.writeFile(
-      path.join(dataDir, 'navigation.yml'),
-      `# Auto-generated navigation data
-introduction:
-${navigationData.introduction.map(intro => `  - title: "${intro.title}"
-    path: "${intro.path}"`).join('\n')}
+    const serializeItems = items => items.map(item =>
+      `  - title: ${JSON.stringify(item.title)}\n    path: ${JSON.stringify(item.path)}`
+    ).join('\n');
+    const sections = ['introduction', 'chapters', 'appendices', 'afterword']
+      .filter(section => navigationData[section].length > 0)
+      .map(section => `${section}:\n${serializeItems(navigationData[section])}`)
+      .join('\n\n');
+    const header = `# DO NOT EDIT: generated by scripts/build-simple.js
 
-chapters:
-${navigationData.chapters.map(ch => `  - title: "${ch.title}"
-    path: "${ch.path}"`).join('\n')}
+# Navigation canonical: docs/index.md
 
-appendices:
-${navigationData.appendices.map(ap => `  - title: "${ap.title}"
-    path: "${ap.path}"`).join('\n')}
+# Reader-facing preview: GitHub Pages
 
-afterword:
-${navigationData.afterword.map(after => `  - title: "${after.title}"
-    path: "${after.path}"`).join('\n')}
-`
-    );
+# Source of truth: src/ + book-config.json
+
+# Rerun: npm run build
+
+`;
+
+    await fs.writeFile(path.join(dataDir, 'navigation.yml'), `${header}${sections}\n`);
     
     this.log('ナビゲーションデータを生成しました');
   }
@@ -616,7 +547,13 @@ ${navigationData.afterword.map(after => `  - title: "${after.title}"
     this.log('CSSファイルをコピーしました');
     
     // Copy JavaScript files
-    const jsFiles = ['theme.js', 'sidebar.js', 'code-copy.js'];
+    const jsFiles = [
+      'theme.js',
+      'sidebar.js',
+      'search.js',
+      'code-copy.js',
+      'code-copy-lightweight.js'
+    ];
     for (const jsFile of jsFiles) {
       try {
         const jsPath = path.join(templatesDir, 'js', jsFile);
@@ -686,7 +623,10 @@ ${navigationData.afterword.map(after => `  - title: "${after.title}"
             const headingMatch = content.match(/^#\s+.+$/m);
             if (headingMatch) {
               const headingIndex = content.indexOf(headingMatch[0]) + headingMatch[0].length;
-              content = content.slice(0, headingIndex) + '\n\n{% include navigation.html %}\n' + content.slice(headingIndex);
+              const contentAfterHeading = content.slice(headingIndex).replace(/^\r?\n/, '');
+              content = content.slice(0, headingIndex) +
+                '\n\n{% include navigation.html %}\n' +
+                contentAfterHeading;
             }
             
             // Add navigation at the end if not already there

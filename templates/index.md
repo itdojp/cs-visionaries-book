@@ -1,55 +1,234 @@
-# {{ book.title }}
+---
+layout: book
+title: "デジタル革命の舞台裏"
+description: "コンピュータサイエンスを築いた人物と技術潮流の物語 - 計算理論、ソフトウェア基盤、インターネット、AIまで、現代のデジタル社会を形作った発想と意思決定をたどる。"
+author: "ITDO Inc. (株式会社アイティードゥ)"
+version: "1.0.0"
+order: 1
+---
 
-{{ book.subtitle }}
+# デジタル革命の舞台裏
+
+## コンピュータサイエンスを築いた人物と技術潮流の物語
+
+### スマートフォンの中に眠る天才たちの遺産
+
+あなたが毎日手にするスマートフォン。その小さな画面の向こうには、200年にわたる人類の挑戦と革新の歴史が刻まれています。
+
+朝のアラーム、タッチスクリーン、メッセージ、検索、写真撮影—これら全ての技術は、時代を超えた天才たちの夢と情熱の結晶です。
 
 ## 概要
 
-{{ book.description }}
+本書では、計算理論、ソフトウェア基盤、Web、検索、SNS、クラウド、現代AI、量子計算、未来予測といった転換点を、人物史とテーマ章を組み合わせてたどります。先駆者たちの挑戦、苦悩、そして意思決定を通じて、現代テクノロジーの本質とビジネスへの示唆を読み解く一冊です。
+
+## 学習成果
+
+- デジタル革命を支えた主要な革新者たちと技術潮流を、歴史的な背景とあわせて説明できるようになります。
+- スマートフォンやクラウド、インターネットなど身近な技術が、どのような発明や意思決定の積み重ねで生まれてきたのかを物語として語れるようになります。
+- 技術的なブレイクスルーがビジネスや社会に与えたインパクトを整理し、自分のキャリアや現在のプロジェクトに引き寄せて考えられるようになります。
+- 先駆者たちの成功と失敗、チームのあり方から、エンジニア／リーダーとしての行動指針や意思決定のヒントを言語化できるようになります。
+
+## 読み方ガイド
+
+- 技術史の大きな流れをつかみたい場合は、序章の後に本ページの目次順に読み進めてください。現行版は、人物章に加えて Web、検索、SNS、クラウド、現代AI、量子、未来予測のようなテーマ章も含む構成です。
+- 特定の人物やテーマ（暗号、インターネット、クラウド、AIなど）に関心がある場合は、まず該当章から読み始め、その後で前後の章にさかのぼって関連する人物の物語を補完してください。
+- エンジニアとして学びを得たい場合は、各章で扱われる技術的なブレイクスルーや設計の背景に注目し、「自分の開発現場ならどう応用できるか」を考えながら読むと効果的です。
+- マネジメントやビジネスの観点を重視する場合は、各章に散りばめられたビジネス上の教訓や組織・戦略のエピソードを中心に読み、詳細な読み分けは後述の「本書の使い方」を参考にしてください。
+
+### 補助導線
+
+- 年表から全体像を確認したい場合は、[付録A: コンピュータサイエンス重要事件年表]({{ '/appendices/appendix-a/' | relative_url }}) を起点にしてください。
+- 用語や略語を確認したい場合は、[付録B: 用語解説]({{ '/appendices/appendix-b/' | relative_url }}) を併用してください。
+- 参考文献や読書会用の次の一冊を探したい場合は、[付録C: 参考文献・推薦図書]({{ '/appendices/appendix-c/' | relative_url }}) を参照してください。
+- AI時代形成を短時間で整理したい場合は、[付録D: AI時代形成の統合ビュー]({{ '/appendices/appendix-d/' | relative_url }}) を補助地図として先に読み、その後で該当章へ戻ると追いやすくなります。
+- 図版や年表を使って議論する場合は、出典・時点・評価軸を確認し、本文の要約だけで断定しないでください。
+
+
+### Phase 5 人物・年代・貢献レビューゲート
+
+本書の人物史・技術史は大きな流れをつかむために要約しています。厳密な確認が必要な場合は、次の基準で読み直してください。
+
+- 人物名、年代、所属、著作、受賞、製品名は、一次資料・公式資料・査読論文・歴史研究を優先して確認します。
+- 貢献、影響、因果関係は、資料に明記された事実と編集上の解釈を分け、単独人物の功績として過度に単純化しません。
+- 旧原稿アーカイブ `cs-visionaries-book-orig/` は現行正本ではありません。公開トップページ、各章、付録Cを優先してください。
+- 現代AI、制度、製品仕様、社会的評価のように変化しやすい論点は、確認日付きで一次情報へ戻ります。
+
+
+### 付録の使い分け
+
+- 付録A: 年代と出来事の位置関係を確認したいときに使います。
+- 付録B: 用語や略語の意味を確認したいときに使います。
+- 付録C: 出典、推薦図書、読書会の次の一冊を探したいときに使います。
+- 付録D: AI時代形成を要素別に短時間で整理する補助地図として使います。
+
+### 確認したい内容別の正本
+
+| 確認したい内容 | 最初に見る場所 | 正本として扱う場所 |
+| --- | --- | --- |
+| 正式な読み順・章立て | このトップページの目次 | トップページの目次 |
+| 用語・略語の意味 | [付録B]({{ '/appendices/appendix-b/' | relative_url }}) | 付録B |
+| 年代・出来事の並び | [付録A]({{ '/appendices/appendix-a/' | relative_url }}) | 付録A |
+| 出典・推薦図書 | [付録C]({{ '/appendices/appendix-c/' | relative_url }}) | 付録C |
+| AI時代形成の横断図 | [付録D]({{ '/appendices/appendix-d/' | relative_url }}) | 付録D |
+| AI の主導入 | [第10章]({{ '/chapters/chapter10/' | relative_url }}) | 第10章 |
+
+注記: `cs-visionaries-book-orig/`、ネストした `cs-visionaries-book/`、template 由来の旧ガイド文書は reader-facing な正本ではありません。公開トップページ、各章、付録を優先して参照してください。
+
+## クイックスタート
+
+- 最短で全体像をつかみたい場合:
+  - [序章]({{ '/introduction/' | relative_url }}) → [第1章]({{ '/chapters/chapter01/' | relative_url }}) → [第6章]({{ '/chapters/chapter06/' | relative_url }}) → [第10章]({{ '/chapters/chapter10/' | relative_url }}) → [付録A]({{ '/appendices/appendix-a/' | relative_url }})
+- AI時代への接続を先に確認したい場合:
+  - [付録D（補助地図）]({{ '/appendices/appendix-d/' | relative_url }}) → [第10章]({{ '/chapters/chapter10/' | relative_url }}) → [第6章]({{ '/chapters/chapter06/' | relative_url }}) / [第7章]({{ '/chapters/chapter07/' | relative_url }}) / [第9章]({{ '/chapters/chapter09/' | relative_url }}) → [付録C]({{ '/appendices/appendix-c/' | relative_url }})
+- 注記: 現行公開版では、AI の主導入は [第10章]({{ '/chapters/chapter10/' | relative_url }}) です。深層学習の技術史や関連文献を深掘りしたい場合は、[付録C]({{ '/appendices/appendix-c/' | relative_url }}) の AI 関連文献と関連人物章をあわせて参照してください。
+- 用語と背景を引きながら読みたい場合:
+  - [付録B]({{ '/appendices/appendix-b/' | relative_url }}) → [序章]({{ '/introduction/' | relative_url }}) → 興味のある章 → [付録C]({{ '/appendices/appendix-c/' | relative_url }})
+
+## 人物・テーマ選択基準
+
+本書で取り上げる人物・テーマは、以下の基準で選定しました。具体的には次のとおりです。
+
+### 1. 技術的革新性
+- コンピュータサイエンスの発展に不可欠な技術的ブレイクスルー、または転換点を体現する人物・テーマ
+- 後の世代の技術発展の基盤となる概念や理論を確立・普及させた人物、またはその流れを代表するテーマ
+
+### 2. 現代への影響力
+- 現代のデジタル技術に直接的な影響を与えている人物・技術潮流
+- 現代のビジネス環境やライフスタイルに変革をもたらした人物・技術潮流
+
+### 3. 時代横断的な重要性
+- 異なる時代における技術パラダイムの変化を象徴する人物・技術潮流
+- 技術史における重要な転換点に立った人物・テーマ
+
+### 4. 人間的魅力
+- 困難に立ち向かう姿勢や創造性が現代の読者に示唆を与える人物
+- 技術者・経営者としての成功と失敗の両面、または技術選択の転換点から学べる人物・テーマ
+
+## 本書の使い方
+
+### 読者レベル別ガイド
+
+#### 一般読者向け
+- **重点**: 人物の生涯と業績の物語部分
+- **推奨**: 各章の導入部分と「現代への影響」セクション
+- **学習時間**: 各章20〜30分
+
+#### 技術者向け
+- **重点**: 「技術解説コラム」と専門的な技術内容
+- **推奨**: 参考文献と技術的詳細の確認
+- **学習時間**: 各章45〜60分
+
+#### 経営者・リーダー向け
+- **重点**: 「ビジネス教訓」と「現代への応用」セクション
+- **推奨**: 各章のまとめとケーススタディ
+- **学習時間**: 各章30〜40分
+
+### 効果的な学習方法
+
+1. **時系列で読む**: 技術発展の流れを理解するため
+2. **関連章を組み合わせる**: 人物間の関係性を把握するため
+3. **現代との対比**: 各章の教訓を現在の仕事に適用する
+4. **議論の活用**: チームでの読書会や勉強会での活用
+
+## 想定読者
+- コンピュータサイエンス/ITの技術史に関心があり、現代技術の背景を人物史として理解したい読者
+- エンジニア、プロダクトマネージャー、経営層など、技術とビジネスの接点で意思決定を行う読者
+- 読書会/研修などで「技術の本質・教訓」を議論したいチーム
+
+## 前提知識
+- 特別な前提知識は不要（一般的なIT用語に触れた経験があると読み進めやすい）
+- （推奨）インターネット/クラウド/AI など現代技術の概要理解（章内の技術背景と接続しやすい）
+
+## 所要時間
+- 通読: 約5.5〜8.5時間（本文量ベース概算。コードブロック除外、400〜600文字/分換算）
+- 各章の参考文献や関連トピックまで追う場合は、検討範囲により変動します。
 
 ## 目次
 
-- [はじめに](introduction/)
-{% for chapter in chapters %}
-- [{{ chapter.title }}]({{ chapter.path }})
+注記: 公開版の正式な章立て・章題・読み順は、本ページの目次を正とします。序章は導入、付録Cは参考文献導線、付録Dは AI 時代形成を横断して読むための補助地図として参照してください。
+注記: repository view の `docs/index.md` では次の Liquid ループが展開されません。静的な reader-facing 目次を確認する場合は GitHub Pages を参照してください。
+
+### 序章
+{% for item in site.data.navigation.introduction %}
+- [{{ item.title }}]({{ item.path | relative_url }})
 {% endfor %}
-{% if appendices.length > 0 %}
+
+### 本編
+{% for item in site.data.navigation.chapters %}
+- [{{ item.title }}]({{ item.path | relative_url }})
+{% endfor %}
 
 ### 付録
-
-{% for appendix in appendices %}
-- [{{ appendix.title }}]({{ appendix.path }})
+{% for item in site.data.navigation.appendices %}
+- [{{ item.title }}]({{ item.path | relative_url }})
 {% endfor %}
-{% endif %}
-{% if afterword %}
-- [あとがき](afterword/)
-{% endif %}
+
+### 取り上げる人物・テーマ
+
+- **計算理論とプログラミングの起点** - エイダ・ラブレスやアラン・チューリングが切り開いた発想
+- **ソフトウェアの実用化** - グレース・ホッパーに象徴される「機械に言葉を与える」転換
+- **半導体とマイクロプロセッサ** - 日本の技術者たちを含むハードウェア革新の系譜
+- **Webの公開と普及** - オープンな仕様とリンク構造が情報流通を変えた転換点
+- **検索と情報発見** - 膨大な情報から意味のある結果を返す仕組みの成立
+- **SNSと連結の設計** - 人のつながりをプロダクトとして拡張した意思決定
+- **クラウドと運用基盤** - 計算資源をサービス化し、開発速度を変えた転換点
+- **現代AIの社会実装** - 生成AI時代の評価、責任分界、規制対応まで含めた実装の潮流
+- **量子計算と次の計算資源** - 現行計算機では難しい問題へ向き合うための新しい試み
+- **未来のデジタル社会** - Web3、AI倫理、次のプラットフォームをめぐる論点
+
+## 本書の特徴
+
+- **現代との接続** - 各人物の功績が現在のテクノロジーにどう生きているか
+- **人間ドラマ** - 成功だけでなく、失敗、苦悩、人間関係も描写
+- **ビジネス実用性** - 現代のビジネスパーソンが学べる教訓を提示
+- **ビジュアル重視** - 図解、写真、インフォグラフィックで理解を促進
 
 ## 著者について
 
-**{{ book.author.name }}**
+**ITDO Inc. (株式会社アイティードゥ)**
 
-{% if book.author.organization %}
-{{ book.author.organization }}
-{% endif %}
+ITコンサルティング・教育事業を展開。技術の本質を分かりやすく伝えることをミッションとし、企業研修、技術書執筆、講演活動を行っている。
 
-{% if book.author.email %}
-- Email: [{{ book.author.email }}](mailto:{{ book.author.email }})
-{% endif %}
-{% if book.author.github %}
-- GitHub: [@{{ book.author.github }}](https://github.com/{{ book.author.github }})
-{% endif %}
-{% if book.author.website %}
-- Website: [{{ book.author.website }}]({{ book.author.website }})
-{% endif %}
+- Email: [knowledge@itdo.jp](mailto:knowledge@itdo.jp)
+- GitHub: [@itdojp](https://github.com/itdojp)
+- Website: [https://itdo.jp](https://itdo.jp)
 
 ## ライセンス
 
-{% if book.license %}
-{{ book.license }}
-{% else %}
-© 2025 {{ book.author.name }}. All rights reserved.
-{% endif %}
+本書は **Creative Commons BY-NC-SA 4.0** ライセンスで公開しています。
+教育・研究・個人学習での利用は自由ですが、商用利用は別途契約（事前許諾）が必要です。
+
+[詳細なライセンス条件](https://github.com/itdojp/it-engineer-knowledge-architecture/blob/main/LICENSE.md)
+
+## 利用と更新情報
+
+- 公開版: [GitHub Pages](https://itdojp.github.io/cs-visionaries-book/)
+- リポジトリ: [GitHub Repository](https://github.com/itdojp/cs-visionaries-book)
+- 版差確認: [コミット履歴](https://github.com/itdojp/cs-visionaries-book/commits/main/) / [PR 一覧](https://github.com/itdojp/cs-visionaries-book/pulls)
+- 誤り指摘: [Issue template](https://github.com/itdojp/cs-visionaries-book/issues/new/choose)
+- 参考資料: 各章末の参考文献と付録をあわせて参照してください
+
+### 版差・更新確認の手順
+
+1. まず [公開トップページ](https://itdojp.github.io/cs-visionaries-book/) の目次で現行の reader-facing 構成を確認します。
+2. 次に [コミット履歴](https://github.com/itdojp/cs-visionaries-book/commits/main/) と [PR 一覧](https://github.com/itdojp/cs-visionaries-book/pulls) で変更の有無を確認します。
+3. 時系列や出来事の位置関係を確認したい場合は [付録A]({{ '/appendices/appendix-a/' | relative_url }}) を見直します。
+4. 出典や読書会向けの参考文献を確認したい場合は [付録C]({{ '/appendices/appendix-c/' | relative_url }}) を見直します。
+5. 年代、制度、製品仕様、社会的評価を厳密に扱う場合は、本文だけで断定せず一次資料を確認します。
+
+本書は現行の公開構成を前提に整理しています。特に AI、Web3、制度変更、製品仕様、社会的評価のように変化しやすい論点は、本書の要約だけで断定せず、一次資料や更新履歴を確認してください。
+
+人物史や技術史の記述は、読者が大きな流れをつかめるように要約している箇所があります。年代、制度、製品仕様、社会的評価を実務や研究で厳密に扱う場合は、本書だけで断定せず、一次資料や研究書を必ず確認してください。
+
+**お問い合わせ**
+株式会社アイティードゥ（ITDO Inc.）
+Email: [knowledge@itdo.jp](mailto:knowledge@itdo.jp)
 
 ---
 
-Built with [Book Publishing Template v3.0](https://github.com/itdojp/book-publishing-template2)
+© 2025 株式会社アイティードゥ (ITDO Inc.)
+
+---
+
+Built with [book-formatter](https://github.com/itdojp/book-formatter)
+{% include page-navigation.html %}

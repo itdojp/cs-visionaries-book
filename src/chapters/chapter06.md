@@ -1,4 +1,10 @@
+---
+layout: book
+title: "第6章：情報を誰でもアクセス可能にした理想主義者"
+---
+
 # 第6章：情報を誰でもアクセス可能にした理想主義者
+
 ## 〜ティム・バーナーズ＝リー（1955〜）〜
 
 ### ドラマチックな導入
@@ -24,51 +30,51 @@
 ```mermaid
 timeline
     title ティム・バーナーズ＝リーの生涯と業績
-    
+
     1955 : 誕生
          : 6月8日、ロンドンで生まれる
          : コンピューター・エンジニアの家庭
-    
+
     1973 : 大学進学
          : オックスフォード大学物理学科
          : 素粒子物理学への関心
-    
+
     1976 : 学士号取得
          : 物理学学士号を取得
          : 民間企業でのキャリア開始
-    
+
     1980 : CERN初回勤務
          : 6ヶ月間のコンサルタント
          : Enquire プロジェクト開始
-    
+
     1984 : CERN正式復帰
          : 正職員として復帰
          : 情報管理問題の本格的分析
-    
+
     1989 : WWW提案
          : 3月、「情報管理に関する提案」提出
          : 上司からの正式承認は得られず
-    
+
     1990 : WWW開発
          : 世界初のWebサーバー開発
          : 世界初のWebブラウザ開発
-    
+
     1991 : 初のWebサイト
          : 8月6日、info.cern.ch 公開
          : WWW技術の一般公開
-    
+
     1993 : 無償公開宣言
          : CERNがWWW技術を永久無償公開
          : 特許取得を放棄
-    
+
     1994 : W3C設立
          : MITでWorld Wide Web Consortium設立
          : Web標準化組織のリーダーに
-    
+
     2008 : Web Foundation設立
-         : Webの民主化を目指す非利組織
+         : Webの民主化を目指す非営利組織
          : デジタルデバイド解消に取り組み
-    
+
     2018 : Solidプロジェクト
          : 分散Web技術の開発開始
          : 個人データ所有権の回復を目指す
@@ -343,17 +349,17 @@ URL は「http://info.cern.ch/hypertext/WWW/TheProject.html」。シンプルな
 **初期ページの内容**：
 ```text
 World Wide Web
-The WorldWideWeb (W3) is a wide-area hypermedia information 
-retrieval initiative aiming to give universal access to a 
+The WorldWideWeb (W3) is a wide-area hypermedia information
+retrieval initiative aiming to give universal access to a
 large universe of documents.
 
-Everything there is online about W3 is linked directly or 
-indirectly to this document, including an executive summary 
-of the project, Mailing lists, Policy, November's W3 news, 
+Everything there is online about W3 is linked directly or
+indirectly to this document, including an executive summary
+of the project, Mailing lists, Policy, November's W3 news,
 Frequently Asked Questions.
 
 What's out there?
-Pointers to the world's online information, subjects, W3 
+Pointers to the world's online information, subjects, W3
 servers, etc.
 
 Help
@@ -840,7 +846,7 @@ graph TB
 ### 現代技術との比較
 
 | 要素 | 1991年の初期WWW | 現代のWeb | 進化の特徴 |
-| --- | --- | --- | --- |
+| ------ | ------------------ | ------------ | ------------ |
 | 文書形式 | 素のHTML | HTML5 + CSS3 + JavaScript | インタラクティブなコンテンツ |
 | マルチメディア | テキストのみ | 動画・音声・3D | リッチメディア体験 |
 | インタラクション | リンククリック | リアルタイム通信 | ユーザー参加型コンテンツ |

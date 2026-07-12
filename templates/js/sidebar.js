@@ -71,7 +71,7 @@ class SidebarManager {
         });
 
         // Navigation links
-        const navLinks = document.querySelectorAll('.nav-link, .nav-sublink');
+        const navLinks = document.querySelectorAll('.toc-link');
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 if (this.isMobile) {
@@ -121,7 +121,7 @@ class SidebarManager {
 
     highlightCurrentPage() {
         const currentPath = window.location.pathname;
-        const navLinks = document.querySelectorAll('.nav-link, .nav-sublink');
+        const navLinks = document.querySelectorAll('.toc-link');
         
         navLinks.forEach(link => {
             const linkPath = new URL(link.href).pathname;
@@ -163,7 +163,7 @@ class SidebarManager {
         this.updateToggleButton();
         
         // Focus first navigation item for accessibility
-        const firstNavLink = this.sidebar?.querySelector('.nav-link');
+        const firstNavLink = this.sidebar?.querySelector('.toc-link');
         if (firstNavLink && this.isMobile) {
             setTimeout(() => firstNavLink.focus(), 100);
         }
@@ -212,38 +212,6 @@ class SidebarManager {
         };
     }
 }
-
-// Add overlay styles
-const overlayStyles = `
-    .sidebar-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 850;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.25s ease-out, visibility 0.25s ease-out;
-    }
-    
-    .sidebar-overlay.is-visible {
-        opacity: 1;
-        visibility: visible;
-    }
-    
-    @media (min-width: 769px) {
-        .sidebar-overlay {
-            display: none;
-        }
-    }
-`;
-
-// Inject overlay styles
-const sidebarStyleSheet = document.createElement('style');
-sidebarStyleSheet.textContent = overlayStyles;
-document.head.appendChild(sidebarStyleSheet);
 
 // Initialize sidebar manager when DOM is ready
 if (document.readyState === 'loading') {

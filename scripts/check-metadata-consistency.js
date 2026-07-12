@@ -140,7 +140,9 @@ if (bookConfig) {
 
   expectEqual('_config.yml.title', rootConfig.title, book.title);
   expectEqual('_config.yml.description', rootConfig.description, expected.description);
-  expectEqual('_config.yml.author.name', rootConfig.author && rootConfig.author.name, expected.author);
+  expectEqual('_config.yml.author', rootConfig.author, expected.author);
+  expectEqual('_config.yml.author_profile.github', rootConfig.author_profile && rootConfig.author_profile.github, repo.owner);
+  expectEqual('_config.yml.author_profile.email', rootConfig.author_profile && rootConfig.author_profile.email, book.author && book.author.email);
   expectEqual('_config.yml.version', rootConfig.version, expected.version);
   expectEqual('_config.yml.baseurl', rootConfig.baseurl, `/${repo.name}`);
   expectEqual('_config.yml.url', rootConfig.url, `https://${repo.owner}.github.io`);
@@ -149,6 +151,8 @@ if (bookConfig) {
   expectEqual('docs/_config.yml.title', docsConfig.title, book.title);
   expectEqual('docs/_config.yml.description', docsConfig.description, expected.description);
   expectEqual('docs/_config.yml.author', docsConfig.author, expected.author);
+  expectEqual('docs/_config.yml.author_profile.github', docsConfig.author_profile && docsConfig.author_profile.github, repo.owner);
+  expectEqual('docs/_config.yml.author_profile.email', docsConfig.author_profile && docsConfig.author_profile.email, book.author && book.author.email);
   expectEqual('docs/_config.yml.version', docsConfig.version, expected.version);
   expectEqual('docs/_config.yml.baseurl', docsConfig.baseurl, `/${repo.name}`);
   expectEqual('docs/_config.yml.url', docsConfig.url, `https://${repo.owner}.github.io`);

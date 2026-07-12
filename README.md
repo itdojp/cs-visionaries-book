@@ -4,16 +4,22 @@
 
 - 公開トップページ: [cs-visionaries-book](https://itdojp.github.io/cs-visionaries-book/)
 - 現行の reader-facing な正式導線は公開トップページを正とします。`docs/index.md` はその公開入力です。
-- 編集起点は `src/` です。公開向けの確認は `docs/` と GitHub Pages を基準に行います。
+- 原稿本文の編集起点は `src/` です。公開向けの確認は生成後の `docs/` と GitHub Pages を基準に行います。
 - `cs-visionaries-book-orig/` は旧原稿アーカイブであり、現行の正本ではありません。
 - path role matrix:
-  - `src/` = authoring
-  - `docs/` = reader-facing output
+  - `src/` = 章・付録・序章の authoring source
+  - `templates/index.md` = 公開トップページの authoring source
+  - `templates/{layouts,includes,styles,js}/` = 公開UIの authoring source
+  - `_config.yml` / `assets/` = Jekyll設定・静的アセットの authoring source
+  - `docs/` = `npm run build` で置き換える tracked reader-facing output（直接編集禁止）
   - `docs/_data/navigation.yml` = auto-generated build data
     （手動編集禁止。更新は `npm run build` を再実行）
   - `docs/_site/` = disposable artifact
+  - `src/afterword.md` = 現行 `book-config.json` で無効な非公開legacy原稿（公開対象に戻す場合はcontentSections・navigation・トップ導線を同時更新）
   - `cs-visionaries-book/` / `cs-visionaries-book-orig/` = legacy / non-canonical
 - シリーズ: [itdojp/it-engineer-knowledge-architecture](https://github.com/itdojp/it-engineer-knowledge-architecture)
+
+`npm run build` は上記 authoring source から `docs/` 全体を再生成します。生成結果を反映した状態でもう一度実行して新たな tracked 差分が出ないことを、ローカル確認と CI の決定性ゲートで保証します。
 
 
 ## ローカル品質チェック

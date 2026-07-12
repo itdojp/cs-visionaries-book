@@ -1,13 +1,15 @@
 # Jekyll設定
 title: "デジタル革命の舞台裏"
 description: "コンピュータサイエンスを築いた人物と技術潮流の物語 - 計算理論、ソフトウェア基盤、インターネット、AIまで、現代のデジタル社会を形作った発想と意思決定をたどる。"
-author:
-  name: ITDO Inc. (株式会社アイティードゥ)
+author: "ITDO Inc. (株式会社アイティードゥ)"
+version: "1.0.0"
+author_profile:
   github: itdojp
   email: knowledge@itdo.jp
-version: "1.0.0"
 baseurl: "/cs-visionaries-book"
 url: "https://itdojp.github.io"
+contact:
+  email: knowledge@itdo.jp
 
 # Repository settings for links
 repository:
@@ -21,6 +23,7 @@ plugins:
 
 # 言語設定
 lang: ja
+permalink: pretty
 
 # その他の設定
 show_downloads: false
