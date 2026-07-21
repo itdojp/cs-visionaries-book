@@ -7,6 +7,8 @@ on:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+  PUPPETEER_SKIP_DOWNLOAD: 'true'
+  STATIC_DIAGRAMS_VERIFY_ONLY: '1'
 
 jobs:
   qa:

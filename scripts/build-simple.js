@@ -10,6 +10,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 const { renderAll: renderStaticDiagrams } = require('./render-mermaid-diagrams');
+const { checkStaticDiagrams } = require('./check-static-diagrams');
 
 // Color output for better UX
 const colors = {
@@ -681,8 +682,13 @@ exclude:
     
     try {
       await this.loadConfig();
-      renderStaticDiagrams();
-      this.log('静的SVG図を生成しました');
+      if (process.env.STATIC_DIAGRAMS_VERIFY_ONLY === '1') {
+        checkStaticDiagrams(process.cwd());
+        this.log('コミット済み静的SVG図を検証しました');
+      } else {
+        renderStaticDiagrams();
+        this.log('静的SVG図を生成しました');
+      }
       
       const srcDir = path.join(process.cwd(), 'src');
       const publicDir = await this.createPublicDirectory();

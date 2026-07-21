@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const { spawnSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..');
@@ -72,6 +73,23 @@ function escapeXml(value) {
     .replace(/'/g, '&apos;');
 }
 
+function sha256(value) {
+  return crypto.createHash('sha256').update(value).digest('hex');
+}
+
+function computeRenderProvenance(manifest, diagram, definition, mermaidConfig, puppeteerConfig) {
+  return {
+    sourceSha256: sha256(definition),
+    renderContractSha256: sha256(JSON.stringify({
+      renderer: manifest.renderer,
+      diagram,
+      definition,
+      mermaidConfig,
+      puppeteerConfig
+    }))
+  };
+}
+
 function escapeRegex(value) {
   return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
@@ -103,6 +121,10 @@ function ensureAccessibleSvg(svg, diagram) {
   return svg;
 }
 
+function ensureRenderProvenance(svg, provenance) {
+  return svg.replace(/<svg\b/, `<svg data-source-sha256="${provenance.sourceSha256}" data-render-contract-sha256="${provenance.renderContractSha256}"`);
+}
+
 function validateDefinition(definition, diagram) {
   const failures = [];
   if (Buffer.byteLength(definition, 'utf8') > 50 * 1024) failures.push('definition exceeds 50 KiB');
@@ -121,7 +143,7 @@ function browserEnvironment() {
   return Object.fromEntries(Object.entries(process.env).filter(([key]) => !sensitiveName.test(key)));
 }
 
-function verifySvg(svg, diagram) {
+function verifySvg(svg, diagram, provenance) {
   const failures = [];
   if (!svg.includes('<svg')) failures.push('svg root');
   if (!svg.includes('aria-labelledby=')) failures.push('aria-labelledby');
@@ -133,6 +155,8 @@ function verifySvg(svg, diagram) {
   const described = svg.match(/aria-describedby=["']([^"']+)["']/)?.[1];
   if (referencedElementText(svg, 'title', labelled) !== diagram.title) failures.push('aria-labelledby target text');
   if (referencedElementText(svg, 'desc', described) !== diagram.description) failures.push('aria-describedby target text');
+  if (!provenance || !svg.includes(`data-source-sha256="${provenance.sourceSha256}"`)) failures.push('source provenance');
+  if (!provenance || !svg.includes(`data-render-contract-sha256="${provenance.renderContractSha256}"`)) failures.push('render contract provenance');
   if (/<script\b|<iframe\b|<object\b|<embed\b|\son[a-z]+\s*=|javascript:|@import/i.test(svg)) failures.push('unsafe active content');
   const hrefs = [...svg.matchAll(/(?:href|xlink:href)\s*=\s*["']([^"']+)["']/gi)].map(match => match[1].trim());
   if (hrefs.some(value => !value.startsWith('#'))) failures.push('external resource reference');
@@ -153,6 +177,8 @@ function renderAll() {
   const config = assertInsideRoot(manifest.renderer.config, 'renderer config');
   const puppeteerConfig = assertInsideRoot(manifest.renderer.puppeteerConfig, 'Puppeteer config');
   validateRendererConfigs(config, puppeteerConfig);
+  const mermaidConfigContent = fs.readFileSync(config, 'utf8');
+  const puppeteerConfigContent = fs.readFileSync(puppeteerConfig, 'utf8');
   const executable = path.join(ROOT, 'node_modules', '@mermaid-js', 'mermaid-cli', 'src', 'cli.js');
   if (!fs.existsSync(executable)) throw new Error('Mermaid CLI is unavailable; run npm ci first');
   for (const diagram of manifest.diagrams) {
@@ -160,6 +186,7 @@ function renderAll() {
     const output = assertInsideRoot(diagram.output, `${diagram.id} output`);
     const definition = fs.readFileSync(source, 'utf8');
     validateDefinition(definition, diagram);
+    const provenance = computeRenderProvenance(manifest, diagram, definition, mermaidConfigContent, puppeteerConfigContent);
     fs.mkdirSync(path.dirname(output), { recursive: true });
 
     const result = spawnSync(process.execPath, [executable,
@@ -181,8 +208,9 @@ function renderAll() {
       throw new Error(`Mermaid render failed for ${diagram.id}: ${details || `exit ${result.status}`}`);
     }
     const accessibleSvg = ensureAccessibleSvg(fs.readFileSync(output, 'utf8'), diagram);
-    verifySvg(accessibleSvg, diagram);
-    fs.writeFileSync(output, accessibleSvg, 'utf8');
+    const verifiedSvg = ensureRenderProvenance(accessibleSvg, provenance);
+    verifySvg(verifiedSvg, diagram, provenance);
+    fs.writeFileSync(output, verifiedSvg, 'utf8');
     console.log(`Rendered ${diagram.source} -> ${diagram.output}`);
   }
 }
@@ -196,4 +224,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { assertInsideRoot, browserEnvironment, ensureAccessibleSvg, readManifest, referencedElementText, renderAll, validateDefinition, validateRendererConfigs, verifySvg };
+module.exports = { assertInsideRoot, browserEnvironment, computeRenderProvenance, ensureAccessibleSvg, ensureRenderProvenance, readManifest, referencedElementText, renderAll, validateDefinition, validateRendererConfigs, verifySvg };

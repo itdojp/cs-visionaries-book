@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 const DEFAULT_ROOT = path.resolve(__dirname, '..');
 const EXPECTED_VERSION = '11.16.0';
@@ -27,6 +28,23 @@ class StaticDiagramError extends Error {}
 
 function readJson(file) {
   return JSON.parse(fs.readFileSync(file, 'utf8'));
+}
+
+function sha256(value) {
+  return crypto.createHash('sha256').update(value).digest('hex');
+}
+
+function computeRenderProvenance(manifest, diagram, definition, mermaidConfig, puppeteerConfig) {
+  return {
+    sourceSha256: sha256(definition),
+    renderContractSha256: sha256(JSON.stringify({
+      renderer: manifest.renderer,
+      diagram,
+      definition,
+      mermaidConfig,
+      puppeteerConfig
+    }))
+  };
 }
 
 function listFiles(directory, suffix) {
@@ -68,7 +86,7 @@ function assertSafeRelative(root, value, label, failures) {
   return resolved;
 }
 
-function verifySvg(svg, diagram, label, failures) {
+function verifySvg(svg, diagram, label, failures, provenance) {
   const checks = [
     [/<svg\b/, 'svg root'],
     [/aria-labelledby=/, 'aria-labelledby'],
@@ -86,6 +104,8 @@ function verifySvg(svg, diagram, label, failures) {
   const described = svg.match(/aria-describedby=["']([^"']+)["']/)?.[1];
   if (referencedElementText(svg, 'title', labelled) !== diagram.title) failures.push(`${label}: aria-labelledby target text mismatch`);
   if (referencedElementText(svg, 'desc', described) !== diagram.description) failures.push(`${label}: aria-describedby target text mismatch`);
+  if (!provenance || !svg.includes(`data-source-sha256="${provenance.sourceSha256}"`)) failures.push(`${label}: source provenance mismatch`);
+  if (!provenance || !svg.includes(`data-render-contract-sha256="${provenance.renderContractSha256}"`)) failures.push(`${label}: render contract provenance mismatch`);
   if (/<script\b|<iframe\b|<object\b|<embed\b|\son[a-z]+\s*=|javascript:|@import/i.test(svg)) failures.push(`${label}: unsafe active content`);
   const hrefs = [...svg.matchAll(/(?:href|xlink:href)\s*=\s*["']([^"']+)["']/gi)].map(match => match[1].trim());
   if (hrefs.some(value => !value.startsWith('#'))) failures.push(`${label}: external resource reference`);
@@ -147,7 +167,10 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
 
   const configPath = assertSafeRelative(root, manifest.renderer?.config, 'renderer config', failures);
   const puppeteerConfigPath = assertSafeRelative(root, manifest.renderer?.puppeteerConfig, 'Puppeteer config', failures);
+  let mermaidConfigContent = '';
+  let puppeteerConfigContent = '';
   if (configPath && fs.existsSync(configPath)) {
+    mermaidConfigContent = fs.readFileSync(configPath, 'utf8');
     const config = readJson(configPath);
     if (config.securityLevel !== 'strict') failures.push('Mermaid securityLevel must be strict');
     if (config.deterministicIds !== true || typeof config.deterministicIDSeed !== 'string') failures.push('Mermaid deterministic IDs must be enabled with a seed');
@@ -156,6 +179,7 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
     failures.push('renderer config is missing');
   }
   if (puppeteerConfigPath && fs.existsSync(puppeteerConfigPath)) {
+    puppeteerConfigContent = fs.readFileSync(puppeteerConfigPath, 'utf8');
     const puppeteerConfig = readJson(puppeteerConfigPath);
     if (puppeteerConfig.headless !== true) failures.push('Puppeteer must run headless');
     const args = Array.isArray(puppeteerConfig.args) ? puppeteerConfig.args : [];
@@ -182,15 +206,18 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
     if (publicOutput) expectedPublicOutputs.push(relative(root, publicOutput));
     if (diagram.publicPath !== `/${diagram.output}`) failures.push(`${diagram.id}: publicPath must match output`);
 
+    let definition = '';
+    let provenance = null;
     if (source && fs.existsSync(source)) {
-      const definition = fs.readFileSync(source, 'utf8');
+      definition = fs.readFileSync(source, 'utf8');
       if (!definition.includes(`accTitle: ${diagram.title}`)) failures.push(`${diagram.id}: source accTitle mismatch`);
       if (!definition.includes(`accDescr: ${diagram.description}`)) failures.push(`${diagram.id}: source accDescr mismatch`);
+      provenance = computeRenderProvenance(manifest, diagram, definition, mermaidConfigContent, puppeteerConfigContent);
     } else if (source) failures.push(`${diagram.id}: source definition is missing`);
 
     if (output && fs.existsSync(output)) {
       const svg = fs.readFileSync(output, 'utf8');
-      verifySvg(svg, diagram, diagram.output, failures);
+      verifySvg(svg, diagram, diagram.output, failures, provenance);
       if (publicOutput && fs.existsSync(publicOutput)) {
         if (!fs.readFileSync(output).equals(fs.readFileSync(publicOutput))) failures.push(`${diagram.id}: source and docs SVG differ`);
       } else if (publicOutput) failures.push(`${diagram.id}: docs SVG is missing`);
@@ -234,6 +261,7 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
   const renderIndex = buildScript.indexOf('renderStaticDiagrams();');
   const publicIndex = buildScript.indexOf('await this.createPublicDirectory();');
   if (importIndex < 0 || renderIndex < 0 || publicIndex < 0 || renderIndex > publicIndex) failures.push('build must render static diagrams before recreating docs');
+  if (!buildScript.includes("process.env.STATIC_DIAGRAMS_VERIFY_ONLY === '1'") || !buildScript.includes('checkStaticDiagrams(process.cwd());')) failures.push('build must support browser-free committed artifact verification');
 
   const renderer = fs.readFileSync(path.join(root, 'scripts', 'render-mermaid-diagrams.js'), 'utf8');
   for (const marker of ['--svgId', '--quiet', '--puppeteerConfigFile', 'browserEnvironment', 'sensitiveName', 'ensureAccessibleSvg', 'validateDefinition', 'validateRendererConfigs', 'verifySvg', 'foreignObject', 'external resource reference']) {
@@ -248,6 +276,9 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
   if (!bookQa.includes('git status --porcelain --untracked-files=all -- assets/images/diagrams docs')) failures.push('Book QA must reject untracked generated outputs');
   if (!buildWorkflow.includes('npm run check:static-diagrams && npm run check:static-diagrams-regression')) failures.push('Build workflow must validate diagram inputs before rendering');
   if (count(buildWorkflow, 'git diff --exit-code -- assets/images/diagrams docs') < 2) failures.push('Build workflow must verify diagram determinism twice');
+  for (const [label, workflow] of [['Book QA', bookQa], ['Build', buildWorkflow]]) {
+    if (!workflow.includes("PUPPETEER_SKIP_DOWNLOAD: 'true'") || !workflow.includes("STATIC_DIAGRAMS_VERIFY_ONLY: '1'")) failures.push(`${label} must verify committed diagrams without launching Chromium`);
+  }
 
   if (options.siteDir) {
     const siteRoot = path.resolve(root, options.siteDir);
@@ -270,7 +301,11 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
       for (const diagram of diagrams) {
         const publishedSvg = path.join(siteRoot, diagram.output);
         if (!fs.existsSync(publishedSvg)) failures.push(`built site SVG is missing: ${relative(root, publishedSvg)}`);
-        else verifySvg(fs.readFileSync(publishedSvg, 'utf8'), diagram, relative(root, publishedSvg), failures);
+        else {
+          const definition = fs.readFileSync(path.join(root, diagram.source), 'utf8');
+          const provenance = computeRenderProvenance(manifest, diagram, definition, mermaidConfigContent, puppeteerConfigContent);
+          verifySvg(fs.readFileSync(publishedSvg, 'utf8'), diagram, relative(root, publishedSvg), failures, provenance);
+        }
       }
     }
   }
@@ -292,4 +327,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { checkStaticDiagrams, referencedElementText, StaticDiagramError, verifySvg };
+module.exports = { checkStaticDiagrams, computeRenderProvenance, referencedElementText, StaticDiagramError, verifySvg };

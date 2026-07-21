@@ -33,6 +33,7 @@ function replaceTagText(file, tag, value) {
 const tests = [
   ['raw-mermaid-source', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter10.md'), '\n```mermaid\ngraph LR\n```\n')],
   ['raw-mermaid-docs', dir => fs.appendFileSync(path.join(dir, 'docs/appendices/appendix-d.md'), '\n```mermaid\ngraph LR\n```\n')],
+  ['source-render-drift', dir => replaceOnce(path.join(dir, 'diagrams/mermaid/neural-network-layer-flow.mmd'), 'I1[入力1]', 'I1[変更された入力1]')],
   ['missing-source-svg', dir => fs.unlinkSync(path.join(dir, 'assets/images/diagrams/neural-network-layer-flow.svg'))],
   ['missing-docs-svg', dir => fs.unlinkSync(path.join(dir, 'docs/assets/images/diagrams/neural-network-layer-flow.svg'))],
   ['missing-title', dir => replaceOnce(path.join(dir, 'assets/images/diagrams/hinton-ai-history-timeline.svg'), '<title', '<metadata')],
@@ -65,6 +66,7 @@ const tests = [
   ['missing-book-qa-wiring', dir => replaceOnce(path.join(dir, '.github/workflows/book-qa.yml'), 'npm run check:static-diagrams && ', '')],
   ['missing-book-qa-untracked-gate', dir => replaceOnce(path.join(dir, '.github/workflows/book-qa.yml'), 'git status --porcelain --untracked-files=all -- assets/images/diagrams docs', 'git status --porcelain -- docs')],
   ['missing-build-preflight', dir => replaceOnce(path.join(dir, '.github/workflows/build.yml'), 'npm run check:static-diagrams && npm run check:static-diagrams-regression', 'echo diagram-checks-removed')],
+  ['missing-ci-verify-only', dir => replaceOnce(path.join(dir, '.github/workflows/build.yml'), "STATIC_DIAGRAMS_VERIFY_ONLY: '1'", "STATIC_DIAGRAMS_VERIFY_ONLY: '0'")],
   ['weakened-sync-gate', dir => replaceOnce(path.join(dir, '.github/workflows/book-qa.yml'), 'git diff --exit-code -- assets/images/diagrams docs', 'git diff --exit-code -- docs')]
 ];
 
