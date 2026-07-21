@@ -89,8 +89,8 @@ title: "付録A：コンピュータサイエンス重要事件年表"
 - 世界初のプログラム制御式コンピュータ
 
 **1942〜1944年**
-- **1942年**：チューリング、Lorenz暗号に対する統計的手法「Turingery」を考案
-- **1943年**：Max NewmanがNewmanryを組織し、統計的検査の機械化を推進
+- **1942年までに**：チューリング、Lorenz暗号に対する統計的手法「Turingery」を考案
+- **1943年2月**：Government Code and Cypher School（GC&CS）がMax Newmanの指揮下にNewmanryを正式設置し、統計的検査の機械化を推進
 - **1944年2月**：最初のColossusがBletchley Parkで実用稼働
   - Tommy Flowers率いるGPO teamが設計・製作したTunny暗号解析用の目的特化machine
   - switch・plug panel・patch panelで検査を設定できるが、programmabilityは限定的

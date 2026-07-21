@@ -61,8 +61,8 @@ timeline
               : ブレッチリー・パーク勤務
               : エニグマ暗号解読とLorenz暗号解析
 
-    1942 : Turingery
-         : Lorenz暗号に対する統計的手法を考案
+    1942年まで : Turingery
+              : Lorenz暗号に対する統計的手法を考案
 
     1943〜1944 : Colossus
               : Newmanryが機械化を推進
