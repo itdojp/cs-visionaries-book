@@ -39,7 +39,7 @@ jobs:
         run: npm ci --omit=optional
 
       - name: Run local metadata, security, and lint QA
-        run: npm run check:metadata && npm run check:security && npm run lint:light && npm run check:history-claims && npm run check:history-claims-regression && npm run check:colossus-history && npm run check:colossus-history-regression
+        run: npm run check:metadata && npm run check:security && npm run lint:light && npm run check:history-claims && npm run check:history-claims-regression && npm run check:colossus-history && npm run check:colossus-history-regression && npm run check:glossary-coverage && npm run check:glossary-coverage-regression
 
       - name: Verify generated docs are synchronized with authoring sources
         run: |

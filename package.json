@@ -19,7 +19,7 @@
     "check-conflicts": "node scripts/jekyll-conflict-detector.js src --dry-run",
     "fix-conflicts": "node scripts/jekyll-conflict-detector.js src --fix",
     "lint:light": "markdownlint 'src/**/*.md' --ignore node_modules",
-    "test:light": "npm run lint:light && npm run check:history-claims && npm run check:history-claims-regression && npm run check:colossus-history && npm run check:colossus-history-regression && npm run build",
+    "test:light": "npm run lint:light && npm run check:history-claims && npm run check:history-claims-regression && npm run check:colossus-history && npm run check:colossus-history-regression && npm run check:glossary-coverage && npm run check:glossary-coverage-regression && npm run build",
     "test:conflicts": "npm run check-conflicts",
     "help": "echo 'Available commands:\n  npm run build - Build the book\n  npm run build:safe - Build with conflict detection\n  npm run check-conflicts - Check Jekyll conflicts\n  npm run fix-conflicts - Auto-fix Jekyll conflicts\n  npm run preview - Local preview (docs/)\n  npm run configure:workflows - Disable problematic workflows\n  npm run deploy - Deprecated: deployment is handled outside package.json'",
     "check:metadata": "node scripts/check-metadata-consistency.js",
@@ -27,7 +27,9 @@
     "check:history-claims": "node scripts/check-history-claims.js",
     "check:history-claims-regression": "node scripts/check-history-claims-regression.js",
     "check:colossus-history": "node scripts/check-colossus-history.js",
-    "check:colossus-history-regression": "node scripts/check-colossus-history-regression.js"
+    "check:colossus-history-regression": "node scripts/check-colossus-history-regression.js",
+    "check:glossary-coverage": "node scripts/check-glossary-coverage.js",
+    "check:glossary-coverage-regression": "node scripts/check-glossary-coverage-regression.js"
   },
   "dependencies": {
     "fs-extra": "^11.3.0",
