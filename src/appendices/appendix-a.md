@@ -196,14 +196,12 @@ title: "付録A：コンピュータサイエンス重要事件年表"
 - 最初のメッセージ：UCLA→スタンフォード研究所
 - インターネットの直接的起源
 - **UNIX**開発開始（ベル研究所、ケン・トンプソン、デニス・リッチー）
+- Busicomがcalculator用chip setをIntelへ依頼
+- 嶋正利とIntel teamによるMCS-4共同開発projectが開始
 
 ---
 
 ## 1970年代：パーソナルコンピュータ革命の前夜
-
-**1969年**
-- Busicomがcalculator用chip setをIntelへ依頼
-- 嶋正利とIntel teamによるMCS-4共同開発projectが開始
 
 **1971年**
 - **5月**：IntelがBusicomへの開発投資60,000 USD返還と引き換えに、calculator以外の販売権を再取得
