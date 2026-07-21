@@ -186,7 +186,17 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
     if (JSON.stringify(args) !== JSON.stringify(EXPECTED_PUPPETEER_ARGS)) failures.push('Puppeteer arguments must match the audited sandbox-preserving set');
   } else if (puppeteerConfigPath) failures.push('Puppeteer config is missing');
   const puppeteerRc = path.join(root, '.puppeteerrc.cjs');
-  if (!fs.existsSync(puppeteerRc) || !fs.readFileSync(puppeteerRc, 'utf8').includes("'.codex-local', 'cache', 'puppeteer'")) failures.push('Puppeteer cache must remain inside the checkout');
+  if (!fs.existsSync(puppeteerRc)) failures.push('Puppeteer cache config is missing');
+  else {
+    try {
+      delete require.cache[require.resolve(puppeteerRc)];
+      const configured = require(puppeteerRc).cacheDirectory;
+      const expected = path.join(root, '.codex-local', 'cache', 'puppeteer');
+      if (path.resolve(configured || '') !== expected) failures.push('Puppeteer cache must remain inside the checkout');
+    } catch (error) {
+      failures.push(`Puppeteer cache config cannot be loaded: ${error.message}`);
+    }
+  }
 
   const expectedSources = [];
   const expectedOutputs = [];

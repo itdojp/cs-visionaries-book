@@ -101,23 +101,32 @@ function referencedElementText(svg, tag, id) {
 }
 
 function ensureAccessibleSvg(svg, diagram) {
-  const titleId = `diagram-${diagram.id}-title`;
-  const descriptionId = `diagram-${diagram.id}-description`;
+  const ensureElement = (tag, fallbackId, text) => {
+    const pattern = new RegExp(`<${tag}\\b([^>]*)>([\\s\\S]*?)<\\/${tag}>`);
+    const match = svg.match(pattern);
+    if (!match) {
+      svg = svg.replace(/(<svg\b[^>]*>)/, `$1<${tag} id="${fallbackId}">${escapeXml(text)}</${tag}>`);
+      return fallbackId;
+    }
+    const idMatch = match[1].match(/\bid=["']([^"']+)["']/);
+    if (idMatch && idMatch[1] && !/\s/.test(idMatch[1])) return idMatch[1];
+    const attributes = /\bid=["'][^"']*["']/.test(match[1])
+      ? match[1].replace(/\bid=["'][^"']*["']/, `id="${fallbackId}"`)
+      : `${match[1]} id="${fallbackId}"`;
+    svg = svg.replace(pattern, `<${tag}${attributes}>$2</${tag}>`);
+    return fallbackId;
+  };
+  const setRootAttribute = (name, value) => {
+    const pattern = new RegExp(`(<svg\\b[^>]*?)\\s${name}=["'][^"']*["']`);
+    svg = pattern.test(svg)
+      ? svg.replace(pattern, `$1 ${name}="${value}"`)
+      : svg.replace(/<svg\b/, `<svg ${name}="${value}"`);
+  };
 
-  // Mermaid's timeline renderer currently ignores accTitle/accDescr. Add the
-  // same metadata after rendering so every checked-in SVG has one contract.
-  if (!/aria-labelledby=/.test(svg)) {
-    svg = svg.replace(/<svg\b/, `<svg aria-labelledby="${titleId}"`);
-  }
-  if (!/aria-describedby=/.test(svg)) {
-    svg = svg.replace(/<svg\b/, `<svg aria-describedby="${descriptionId}"`);
-  }
-  if (!/<title\b/.test(svg)) {
-    svg = svg.replace(/(<svg\b[^>]*>)/, `$1<title id="${titleId}">${escapeXml(diagram.title)}</title>`);
-  }
-  if (!/<desc\b/.test(svg)) {
-    svg = svg.replace(/(<svg\b[^>]*>(?:<title\b[^>]*>[\s\S]*?<\/title>)?)/, `$1<desc id="${descriptionId}">${escapeXml(diagram.description)}</desc>`);
-  }
+  const titleId = ensureElement('title', `diagram-${diagram.id}-title`, diagram.title);
+  const descriptionId = ensureElement('desc', `diagram-${diagram.id}-description`, diagram.description);
+  setRootAttribute('aria-labelledby', titleId);
+  setRootAttribute('aria-describedby', descriptionId);
   return svg;
 }
 

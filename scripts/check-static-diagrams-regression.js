@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { checkStaticDiagrams } = require('./check-static-diagrams');
+const { ensureAccessibleSvg } = require('./render-mermaid-diagrams');
 
 const ROOT = path.resolve(__dirname, '..');
 const TEMP_ROOT = path.join(ROOT, '.codex-local', 'tmp', 'static-diagram-regression');
@@ -67,6 +68,7 @@ const tests = [
   ['missing-book-qa-untracked-gate', dir => replaceOnce(path.join(dir, '.github/workflows/book-qa.yml'), 'git status --porcelain --untracked-files=all -- assets/images/diagrams docs', 'git status --porcelain -- docs')],
   ['missing-build-preflight', dir => replaceOnce(path.join(dir, '.github/workflows/build.yml'), 'npm run check:static-diagrams && npm run check:static-diagrams-regression', 'echo diagram-checks-removed')],
   ['missing-ci-verify-only', dir => replaceOnce(path.join(dir, '.github/workflows/build.yml'), "STATIC_DIAGRAMS_VERIFY_ONLY: '1'", "STATIC_DIAGRAMS_VERIFY_ONLY: '0'")],
+  ['external-puppeteer-cache', dir => replaceOnce(path.join(dir, '.puppeteerrc.cjs'), "'.codex-local', 'cache', 'puppeteer'", "'outside-workspace', 'puppeteer'")],
   ['weakened-sync-gate', dir => replaceOnce(path.join(dir, '.github/workflows/book-qa.yml'), 'git diff --exit-code -- assets/images/diagrams docs', 'git diff --exit-code -- docs')]
 ];
 
@@ -78,6 +80,15 @@ try {
   const positive = path.join(TEMP_ROOT, 'positive');
   copyFixture(positive);
   checkStaticDiagrams(positive);
+  const normalized = ensureAccessibleSvg(
+    '<svg aria-roledescription="flowchart"><title>題名</title><desc id="existing-description">説明</desc></svg>',
+    { id: 'fixture', title: '題名', description: '説明' }
+  );
+  if (!/<title id="diagram-fixture-title">題名<\/title>/.test(normalized) ||
+      !/aria-labelledby="diagram-fixture-title"/.test(normalized) ||
+      !/aria-describedby="existing-description"/.test(normalized)) {
+    throw new Error('accessibility normalization positive case failed');
+  }
 
   for (const [name, mutate] of tests) {
     const fixture = path.join(TEMP_ROOT, name);
