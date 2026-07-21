@@ -61,6 +61,21 @@ title: "付録C：参考文献・推薦図書"
 
 確認日はいずれも2026-07-21。方式、完成/稼働、用途、開発主体、販売権を別fieldとして読み、「最初」を無条件に横並びしない。
 
+### 2026-07-21 Colossus / Turing audit anchors
+
+- Colossusの用途、限定的programmability、general-purposeではないこと:
+  - The National Museum of Computing, "Colossus". https://www.tnmoc.org/colossus
+- switch・plug panel・patch panelによる検査設定:
+  - The National Museum of Computing, "Rebuilding Colossus". https://www.tnmoc.org/rebuilding-colossus
+- Turingeryと、TuringがColossusの設計・製作に直接関与していないこと:
+  - Bletchley Park Trust, "Alan Turing" (PDF). https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf
+- Max Newman / NewmanryとFlowers率いるGPO teamの役割:
+  - Bletchley Park Trust, "Max Newman" (PDF). https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1861.pdf
+- Turing machineの原典:
+  - Turing, A. M. (1936/1937). "On Computable Numbers, with an Application to the Entscheidungsproblem". https://academic.oup.com/plms/article-pdf/s2-42/1/230/4317544/s2-42-1-230.pdf
+
+確認日は2026-07-21。Colossusの「programmable」は設定可能な統計的検査という範囲に限定し、general-purpose、stored-program、抽象的Turing machineをそれぞれ別の分類軸として扱う。
+
 
 ---
 

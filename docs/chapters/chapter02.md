@@ -63,7 +63,15 @@ timeline
 
     1939〜1945 : 戦時貢献
               : ブレッチリー・パーク勤務
-              : エニグマ暗号解読
+              : エニグマ暗号解読とLorenz暗号解析
+
+    1942 : Turingery
+         : Lorenz暗号に対する統計的手法を考案
+
+    1943〜1944 : Colossus
+              : Newmanryが機械化を推進
+              : Flowers率いるGPO teamが設計・製作
+              : TuringはColossusを直接開発していない
 
     1950 : AI研究
          : チューリングテスト提唱
@@ -272,16 +280,23 @@ timeline
 
 ### コロッサスコンピュータとの関わり
 
-1943年、ドイツ軍はエニグマよりもさらに複雑な暗号システム「ローレンツ暗号」を導入した。この暗号は、ヒトラーと最高司令部の間の最重要通信に使用された。
+ドイツ最高司令部のteleprinter通信にはLorenz暗号機が使われ、Bletchley Parkはその通信を「Tunny」と呼んだ。Colossusは、紙テープからTunny通信を読み取り、Lorenz暗号機のchi-wheel設定を推定する統計的検査を高速化するための**目的特化machine**だった。
 
-ローレンツ暗号の解読のため、ブレッチリー・パークではより高度な機械が必要となった。トミー・フラワーズが設計した「コロッサス」である。
+実行する検査やcounterの組み合わせは、switch・plug panel・patch panelで設定できた。入力テープは処理対象のdataであり、命令列をmemoryへ格納する方式ではない。このため、Colossusには設定を変更できる**限定的programmability**があった一方、任意のapplicationを動かすgeneral-purpose computerでも、stored-program computerでもなかった。
 
-コロッサスは、世界初のプログラム可能な電子計算機だった：
-- **真空管**：2,400本（後に5,500本）
-- **処理速度**：1秒間に25,000文字
-- **プログラム可能**：配線の変更で異なる処理が可能
+The National Museum of Computing（TNMOC）は、Colossusをdigital・electronic・programmableという3条件を備えた最初のmachineと説明している。ただし同館も、そのprogrammabilityは現代の基準では限定的だったと注記している。「最初」という表現は、この3条件と用途上の制約を併記して初めて意味を持つ。
 
-アランは直接コロッサスの開発に関わったわけではないが、その理論的基盤となる考え方—プログラム可能な機械という概念—を提供していた。コロッサスは、チューリングマシンの理論を実際の機械として実現した最初の例の一つだった。
+開発と暗号解析の役割は、次のように区別する必要がある。
+
+| 人物・組織 | Colossusとの関係 |
+| --- | --- |
+| Alan Turing | Lorenz暗号に対する統計的手法「Turingery」を考案し、Max Newmanとの議論を通じて機械化の背景に寄与した。Colossusの設計・製作には直接関与していない。 |
+| Max Newman / Newmanry | 統計的検査を機械化する問題を整理し、機械を運用する部門Newmanryを率いた。 |
+| Tommy Flowers / General Post Office（GPO）team | Newmanryが示した問題と検査を電子回路で処理するColossusを設計・製作した。 |
+
+Turing machineは、algorithmによる計算可能性を分析するための**抽象的な数学model**である。Colossusのhardware architectureを記述した設計図ではなく、Colossusを「Turing machineの直接実装」と位置づけることはできない。両者は、理論modelと目的特化machineという異なる水準で理解する。
+
+この区別は、[TNMOCのColossus解説](https://www.tnmoc.org/colossus)、[Colossus再建記録](https://www.tnmoc.org/rebuilding-colossus)、[Bletchley ParkのAlan Turing資料](https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf)、[Max Newman資料](https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1861.pdf)で確認できる（いずれも2026-07-21確認）。
 
 ### 戦争を短縮させた功績
 
@@ -678,6 +693,10 @@ graph LR
 1. The Turing Archive for the History of Computing. http://www.alanturing.net/ (最終アクセス日: 2025-07-15)
 2. Bletchley Park Trust. "Alan Turing". https://bletchleypark.org.uk/our-story/alan-turing/ (最終アクセス日: 2025-07-15)
 3. The National Archives (UK). "Alan Turing: The codebreaker who saved millions of lives". https://www.nationalarchives.gov.uk/ (最終アクセス日: 2025-07-15)
+4. The National Museum of Computing. "Colossus". https://www.tnmoc.org/colossus (最終アクセス日: 2026-07-21)
+5. The National Museum of Computing. "Rebuilding Colossus". https://www.tnmoc.org/rebuilding-colossus (最終アクセス日: 2026-07-21)
+6. Bletchley Park Trust. "Alan Turing" (PDF). https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf (最終アクセス日: 2026-07-21)
+7. Bletchley Park Trust. "Max Newman" (PDF). https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1861.pdf (最終アクセス日: 2026-07-21)
 
 ### 脚注
 [^1]: The National Archives, CRIM 1/4418, "Regina v. Turing and Murray", 31 March 1952. 裁判記録によれば、チューリングは事実を認めつつも、道徳的な誤りはないと主張した。
