@@ -582,7 +582,7 @@ Intel 4004の成功により、嶋正利は日本に帰国後、半導体技術�
 
 ### 基本構造/原理
 
-マイクロプロセッサは、一つの集積回路チップ上にコンピュータの中央処理装置（CPU）の機能を集約したものである。嶋正利とテッド・ホフが開発したIntel 4004は、この概念を世界で初めて実現した。
+マイクロプロセッサは、一つの集積回路チップ上にコンピュータの中央処理装置（CPU）の機能を集約したものである。Intel 4004は、CPUの演算・制御機能をsingle chipへ集積したgeneral-purpose processorであり、Intelは「first general-purpose microprocessor」と位置づける。開発には、Busicomの嶋正利とIntelのTed Hoff、Stan Mazor、Federico Fagginらが貢献した。
 
 ```mermaid
 graph TB

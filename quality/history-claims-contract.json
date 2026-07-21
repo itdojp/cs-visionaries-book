@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.1",
   "verifiedAt": "2026-07-21",
   "sources": {
     "chapter04": "src/chapters/chapter04.md",
@@ -28,6 +28,7 @@
       "60,000 USDを返還する代わりに",
       "calculator以外の用途へ販売する権利",
       "単一の「性能比」では比較しない",
+      "CPUの演算・制御機能をsingle chipへ集積したgeneral-purpose processor",
       "[IPSJ Computer Museum: FUJIC](https://museum.ipsj.or.jp/computer/dawn/0010.html)",
       "[IPSJ Computer Museum: Hiroshi Wada](https://museum.ipsj.or.jp/pioneer/h-wada.html)",
       "[Intel, “The Intel 4004”](https://www.intel.com/content/www/us/en/history/virtual-vault/articles/the-intel-4004.html)",
@@ -73,6 +74,14 @@
     "- **特許**：共同所有",
     "嶋正利・高橋秀俊：マイクロプロセッサの共同開発者",
     "マイクロプロセッサを共同発明した男",
-    "世界初のマイクロプロセッサ"
+    "世界初のマイクロプロセッサ",
+    "この概念を世界で初めて実現した"
+  ],
+  "forbiddenPatterns": [
+    {
+      "name": "unqualified Intel 4004 world-first claim",
+      "pattern": "(?:Intel\\s*4004[^\\n。]{0,100}(?:世界(?:で)?初|世界最初)|(?:世界(?:で)?初|世界最初)[^\\n。]{0,100}Intel\\s*4004|この概念を世界で初めて実現した)",
+      "flags": "i"
+    }
   ]
 }

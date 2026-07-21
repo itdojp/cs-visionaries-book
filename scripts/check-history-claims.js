@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { isDeepStrictEqual } = require('node:util');
 
 const EXPECTED_SOURCES = {
   chapter04: 'src/chapters/chapter04.md',
@@ -30,6 +31,7 @@ const EXPECTED_REQUIRED = {
     '60,000 USDを返還する代わりに',
     'calculator以外の用途へ販売する権利',
     '単一の「性能比」では比較しない',
+    'CPUの演算・制御機能をsingle chipへ集積したgeneral-purpose processor',
     '[IPSJ Computer Museum: FUJIC](https://museum.ipsj.or.jp/computer/dawn/0010.html)',
     '[IPSJ Computer Museum: Hiroshi Wada](https://museum.ipsj.or.jp/pioneer/h-wada.html)',
     '[Intel, “The Intel 4004”](https://www.intel.com/content/www/us/en/history/virtual-vault/articles/the-intel-4004.html)',
@@ -75,7 +77,15 @@ const EXPECTED_FORBIDDEN = [
   '- **特許**：共同所有',
   '嶋正利・高橋秀俊：マイクロプロセッサの共同開発者',
   'マイクロプロセッサを共同発明した男',
-  '世界初のマイクロプロセッサ'
+  '世界初のマイクロプロセッサ',
+  'この概念を世界で初めて実現した'
+];
+const EXPECTED_FORBIDDEN_PATTERNS = [
+  {
+    name: 'unqualified Intel 4004 world-first claim',
+    pattern: '(?:Intel\\s*4004[^\\n。]{0,100}(?:世界(?:で)?初|世界最初)|(?:世界(?:で)?初|世界最初)[^\\n。]{0,100}Intel\\s*4004|この概念を世界で初めて実現した)',
+    flags: 'i'
+  }
 ];
 
 function readJson(file, label, errors) {
@@ -97,7 +107,7 @@ function readText(root, relative, errors) {
 }
 
 function equalJson(left, right) {
-  return JSON.stringify(left) === JSON.stringify(right);
+  return isDeepStrictEqual(left, right);
 }
 
 function validate(root) {
@@ -105,13 +115,16 @@ function validate(root) {
   const contract = readJson(path.join(root, 'quality/history-claims-contract.json'), 'history contract', errors);
   if (!contract) return errors;
 
-  if (contract.schemaVersion !== '1.0' || contract.verifiedAt !== '2026-07-21') {
+  if (contract.schemaVersion !== '1.1' || contract.verifiedAt !== '2026-07-21') {
     errors.push('history contract version/date mismatch');
   }
   if (!equalJson(contract.sources, EXPECTED_SOURCES)) errors.push('history source inventory mismatch');
   if (!equalJson(contract.generated, EXPECTED_GENERATED)) errors.push('history generated inventory mismatch');
   if (!equalJson(contract.required, EXPECTED_REQUIRED)) errors.push('history required inventory mismatch');
   if (!equalJson(contract.forbidden, EXPECTED_FORBIDDEN)) errors.push('history forbidden inventory mismatch');
+  if (!equalJson(contract.forbiddenPatterns, EXPECTED_FORBIDDEN_PATTERNS)) {
+    errors.push('history forbidden pattern inventory mismatch');
+  }
   if (!contract.required || typeof contract.required !== 'object' || Array.isArray(contract.required)) {
     errors.push('history required markers must be an object');
     return errors;
@@ -143,13 +156,38 @@ function validate(root) {
   for (const forbidden of EXPECTED_FORBIDDEN) {
     if (allTexts.some(text => text.includes(forbidden))) errors.push(`forbidden historical claim found: ${forbidden}`);
   }
+  for (const entry of EXPECTED_FORBIDDEN_PATTERNS) {
+    let expression;
+    try {
+      expression = new RegExp(entry.pattern, entry.flags);
+    } catch (error) {
+      errors.push(`invalid forbidden historical pattern: ${entry.name}: ${error.message}`);
+      continue;
+    }
+    if (allTexts.some(text => expression.test(text))) {
+      errors.push(`forbidden historical pattern found: ${entry.name}`);
+    }
+  }
 
   return errors;
 }
 
+function resolveRoot(argv) {
+  const rootArg = argv.indexOf('--root');
+  if (rootArg < 0) return path.resolve(__dirname, '..');
+  const value = argv[rootArg + 1];
+  if (!value || value.startsWith('-')) throw new Error('missing value for --root');
+  return path.resolve(value);
+}
+
 function main() {
-  const rootArg = process.argv.indexOf('--root');
-  const root = path.resolve(rootArg >= 0 ? process.argv[rootArg + 1] : path.join(__dirname, '..'));
+  let root;
+  try {
+    root = resolveRoot(process.argv.slice(2));
+  } catch (error) {
+    console.error(error.message);
+    process.exit(2);
+  }
   const errors = validate(root);
   if (errors.length) {
     errors.forEach(error => console.error(error));
@@ -160,4 +198,4 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = { validate };
+module.exports = { resolveRoot, validate };
