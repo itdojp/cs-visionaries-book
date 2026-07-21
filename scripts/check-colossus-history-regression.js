@@ -60,6 +60,8 @@ function main() {
     ['missing-source-marker', dir => replaceOnce(path.join(dir, 'src/chapters/chapter02.md'), '限定的programmability', '設定可能性'), 'Colossus marker must occur exactly once'],
     ['forbidden-old-claim', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nコロッサスは、世界初のプログラム可能な電子計算機だった。\n'), 'forbidden Colossus claim found'],
     ['unqualified-first-variant', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nColossusは世界初のprogrammable electronic computerである。\n'), 'forbidden Colossus pattern found'],
+    ['first-electronic-digital-order', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nColossusは最初のelectronic digital programmable computerだった。\n'), 'forbidden Colossus pattern found'],
+    ['programmable-japanese-variant', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nコロッサスは最初のプログラマブル電子計算機だった。\n'), 'forbidden Colossus pattern found'],
     ['direct-realization-variant', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nColossusはTuring machineの直接実装である。\n'), 'forbidden Colossus pattern found'],
     ['direct-developer-variant', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nTuringはColossusの開発者だった。\n'), 'forbidden Colossus pattern found'],
     ['generated-drift', dir => replaceOnce(path.join(dir, 'docs/appendices/appendix-b.md'), '**Colossus（コロッサス）**', '**Colossus**'), 'generated Colossus marker must occur exactly once'],
@@ -95,6 +97,9 @@ function main() {
       data.sources = Object.fromEntries(Object.entries(data.sources).reverse());
       data.generated = Object.fromEntries(Object.entries(data.generated).reverse());
       fs.writeFileSync(file, `${JSON.stringify(data, null, 2)}\n`);
+    }],
+    ['negated-developer-claim', dir => {
+      fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nTuringはColossusを直接開発したわけではない。\n');
     }]
   ];
 

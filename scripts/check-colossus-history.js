@@ -68,7 +68,7 @@ const EXPECTED_FORBIDDEN = [
 const EXPECTED_FORBIDDEN_PATTERNS = [
   {
     name: 'unqualified Colossus world-first programmable claim',
-    pattern: '(?:Colossus|コロッサス)[^\\n。]{0,80}(?:世界(?:で)?初|世界最初)[^\\n。]{0,80}(?:programmable|プログラム可能)',
+    pattern: '(?:Colossus|コロッサス)[^\\n。]{0,80}(?:(?:世界(?:で)?初|世界最初|最初|first)(?:の)?)[^\\n。]{0,80}(?:programmable|プログラマブル|プログラム可能)[^\\n。]{0,40}(?:な|の)?(?:electronic|電子)?(?:computer|計算機|machine)',
     flags: 'i'
   },
   {
@@ -78,7 +78,7 @@ const EXPECTED_FORBIDDEN_PATTERNS = [
   },
   {
     name: 'Turing as a direct Colossus developer',
-    pattern: '(?:Turing|チューリング)[^\\n。]{0,80}(?:Colossus|コロッサス)[^\\n。]{0,80}(?:開発者|設計者|直接開発した|開発を主導した)',
+    pattern: '(?:Turing|チューリング)[^\\n。]{0,80}(?:Colossus|コロッサス)[^\\n。]{0,80}(?:(?:の)?(?:開発者|設計者)(?:だった|である|だ)|(?:直接開発した|開発を主導した)(?!わけではない|のではない|ものではない|とはいえない|とは言えない))',
     flags: 'i'
   }
 ];
