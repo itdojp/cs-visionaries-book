@@ -47,6 +47,24 @@ title: "付録C：参考文献・推薦図書"
 - AI regulation:
   - European Commission, "AI Act enters into force" (2024-08-01). https://commission.europa.eu/news/ai-act-enters-force-2024-08-01_en
 
+### 2026-07-21 Japanese computer / Intel 4004 audit anchors
+
+- ETL Mark I（1952年・relay式試作）:
+  - 情報処理学会コンピュータ博物館, "ETL Mark I リレー式自動計算機". https://museum.ipsj.or.jp/computer/dawn/0005.html
+- ETL Mark II（1955年11月・relay式実用大型機）:
+  - 情報処理学会コンピュータ博物館, "ETL Mark II リレー式大型自動計算機". https://museum.ipsj.or.jp/computer/dawn/0009.html
+- FUJIC（1956年3月・真空管式・日本で最初に稼働した電子計算機）:
+  - 情報処理学会コンピュータ博物館, "FUJIC". https://museum.ipsj.or.jp/computer/dawn/0010.html
+- ETL Mark III（1956年7月稼働・transistor式・国内2番目の自動電子計算機）:
+  - 情報処理学会コンピュータ博物館, "ETL Mark III トランジスタ式計算機". https://museum.ipsj.or.jp/computer/dawn/0011.html
+  - 情報処理学会コンピュータ博物館, "和田 弘". https://museum.ipsj.or.jp/pioneer/h-wada.html
+- Intel 4004の技術貢献とBusicom契約・販売権:
+  - Intel, "The Intel 4004". https://www.intel.com/content/www/us/en/history/virtual-vault/articles/the-intel-4004.html
+  - Intel, "The Intel 4004: 50th Anniversary". https://download.intel.com/newsroom/2021/data-center/4004-infographic.pdf
+  - Computer History Museum, "The Intel 4004". https://www.computerhistory.org/revolution/digital-logic/12/329
+
+確認日はいずれも2026-07-21。方式、完成/稼働、用途、開発主体、販売権を別fieldとして読み、「最初」を無条件に横並びしない。
+
 
 ---
 

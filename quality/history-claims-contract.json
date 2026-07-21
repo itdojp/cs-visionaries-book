@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "1.0",
+  "verifiedAt": "2026-07-21",
+  "sources": {
+    "chapter04": "src/chapters/chapter04.md",
+    "introduction": "src/introduction/index.md",
+    "appendixA": "src/appendices/appendix-a.md",
+    "appendixB": "src/appendices/appendix-b.md",
+    "appendixC": "src/appendices/appendix-c.md",
+    "timeline": "src/comprehensive-timeline.md"
+  },
+  "generated": {
+    "chapter04": "docs/chapters/chapter04.md",
+    "introduction": "docs/introduction/index.md",
+    "appendixA": "docs/appendices/appendix-a.md",
+    "appendixB": "docs/appendices/appendix-b.md",
+    "appendixC": "docs/appendices/appendix-c.md"
+  },
+  "required": {
+    "chapter04": [
+      "### 「日本初」を方式と用途で分類する",
+      "| ETL Mark I | relay式、完全非同期 | 1952年に試作 |",
+      "| ETL Mark II | relay式、完全非同期 | 1955年11月完成 |",
+      "| FUJIC | 真空管式、2進3-address | 1956年3月完成・稼働 |",
+      "| ETL Mark III | transistor式、stored-program | 1956年7月稼働 |",
+      "## 4.2 Intel 4004の共同開発を担った技術者",
+      "### 契約と販売権を技術的貢献から分ける",
+      "60,000 USDを返還する代わりに",
+      "calculator以外の用途へ販売する権利",
+      "単一の「性能比」では比較しない",
+      "[IPSJ Computer Museum: FUJIC](https://museum.ipsj.or.jp/computer/dawn/0010.html)",
+      "[IPSJ Computer Museum: Hiroshi Wada](https://museum.ipsj.or.jp/pioneer/h-wada.html)",
+      "[Intel, “The Intel 4004”](https://www.intel.com/content/www/us/en/history/virtual-vault/articles/the-intel-4004.html)",
+      "[Intel 4004 50周年資料](https://download.intel.com/newsroom/2021/data-center/4004-infographic.pdf)"
+    ],
+    "introduction": [
+      "嶋正利：Busicom側技術者としてIntel 4004を共同開発。高橋秀俊：ETLのtransistor計算機研究を率いた先駆者。"
+    ],
+    "appendixA": [
+      "relay式試作機**ETL Mark I**",
+      "relay式実用大型機**ETL Mark II**",
+      "真空管式**FUJIC**を完成",
+      "transistor式**ETL Mark III**を稼働",
+      "calculator以外の販売権を再取得"
+    ],
+    "appendixB": [
+      "single-chip、general-purpose、commercial releaseなどの分類条件"
+    ],
+    "appendixC": [
+      "### 2026-07-21 Japanese computer / Intel 4004 audit anchors",
+      "https://museum.ipsj.or.jp/computer/dawn/0005.html",
+      "https://museum.ipsj.or.jp/computer/dawn/0009.html",
+      "https://museum.ipsj.or.jp/computer/dawn/0010.html",
+      "https://museum.ipsj.or.jp/computer/dawn/0011.html",
+      "https://museum.ipsj.or.jp/pioneer/h-wada.html",
+      "https://www.intel.com/content/www/us/en/history/virtual-vault/articles/the-intel-4004.html",
+      "https://download.intel.com/newsroom/2021/data-center/4004-infographic.pdf"
+    ],
+    "timeline": [
+      "## ETL・FUJIC・Intel 4004の分類済み節目",
+      "| 1956年3月 | FUJIC |",
+      "| 1971年5月 | IntelがBusicomとの契約を変更 |"
+    ]
+  },
+  "forbidden": [
+    "1954 : FUJIC完成",
+    "ETL Mark I (1952) → ETL Mark II (1954) → ETL Mark III (1957)",
+    "FUJIC (1954) → 各社独自路線",
+    "1954年、富士写真フイルム（現在の富士フイルム）が「FUJIC",
+    "ETL Mark I」だった。これは、真空管を使用した",
+    "高橋秀俊、ETL Mark I設計開始（日本初の電子計算機研究）",
+    "手のひらサイズのチップが、従来の大型コンピュータと同等の処理能力",
+    "- **特許**：共同所有",
+    "嶋正利・高橋秀俊：マイクロプロセッサの共同開発者",
+    "マイクロプロセッサを共同発明した男",
+    "世界初のマイクロプロセッサ"
+  ]
+}
