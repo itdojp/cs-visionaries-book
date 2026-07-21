@@ -132,6 +132,14 @@ AIの品質を継続的に測る仕組み。単体テストのように「期待
 **GPS（Global Positioning System）**
 衛星を使った位置測定システム。スマートフォンの地図アプリや車のナビゲーションシステムで、現在地を特定するために使用される。元々は軍事目的で開発されたが、現在は民間でも広く利用されている。
 
+### GPU（Graphics Processing Unit） {#glossary-gpu}
+
+- **種別**: 多数の演算を並列処理するhardware。algorithmやdatasetではない。
+- **人物史との関係**: Alex Krizhevsky、Ilya Sutskever、Geoffrey Hintonは、AlexNetの学習で2台のNVIDIA GTX 580 GPUを使った。GPU自体の発明者ではなく、既存hardwareを深層学習へ活用した側に位置づける。
+- **時点依存**: 並列計算という役割は安定しているが、製品名、性能、memory容量、対応softwareは世代ごとに変わるため、具体的仕様には製品と確認日が必要になる。
+- **一次資料**: [Krizhevsky, Sutskever & Hinton, “ImageNet Classification with Deep Convolutional Neural Networks” (NeurIPS 2012)](https://papers.nips.cc/paper_files/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html)（2026-07-21確認）。
+- **関連**: [第10章]({{ '/chapters/chapter10/' | relative_url }}) / [付録D]({{ '/appendices/appendix-d/' | relative_url }})
+
 **Guardrails（ガードレール）**
 AIがやってよいこと/避けるべきことを、ルール・検査・運用で制約する仕組み。例：秘密情報のマスキング、危険手順のブロック、参照元（根拠）の提示要求、ツール実行の権限分離。Evals（評価）と組み合わせて継続運用する。
 
@@ -148,6 +156,14 @@ AIがやってよいこと/避けるべきことを、ルール・検査・運�
 ---
 
 ## I
+
+### ImageNet {#glossary-imagenet}
+
+- **種別**: WordNetの概念階層に画像を対応づけた大規模image datasetであり、その部分集合を使う画像認識benchmark/competitionとは区別する。
+- **人物史との関係**: Jia Deng、Li Fei-Feiらがdatasetを構築した。Alex Krizhevsky、Ilya Sutskever、Geoffrey HintonはImageNetを作ったのではなく、ILSVRCでAlexNetを学習・評価した研究teamである。
+- **時点依存**: datasetのimage数、class/split、配布状況、competitionの運営状態は版と時点で変わり得る。数値を使うときはdataset/ILSVRCの版と確認日を併記する。
+- **一次資料**: [Deng et al., “ImageNet: A Large-Scale Hierarchical Image Database” (CVPR 2009)](https://image-net.org/static_files/papers/imagenet_cvpr09.pdf)（2026-07-21確認）。
+- **関連**: [第10章]({{ '/chapters/chapter10/' | relative_url }}) / [付録D]({{ '/appendices/appendix-d/' | relative_url }})
 
 **IoT（Internet of Things / モノのインターネット）**
 従来インターネットに接続されていなかった物体（家電、自動車、センサーなど）をネットワークに接続し、相互に通信できるようにする技術。例：スマート家電（エアコン、冷蔵庫）、スマートウォッチ、自動運転車。
@@ -225,6 +241,14 @@ CPU（中央処理装置）の演算・制御機能をsingle chipへ集積した
 
 ## P
 
+### PageRank（ページランク） {#glossary-pagerank}
+
+- **種別**: Webを有向link graphとして扱い、重要なpageから参照されるpageへ高い重みを与えるranking algorithm。検索serviceそのものではない。
+- **人物史との関係**: Lawrence Page、Sergey Brin、Rajeev Motwani、Terry Winogradが、Stanford InfoLabの技術報告でPageRankを説明した。Pageの名を冠するが、後年の検索service全体や現代Google検索の全ranking処理と同一ではない。
+- **時点依存**: 原論文のalgorithm定義は固定される一方、検索serviceが使うranking signal、index規模、実装は時点依存である。「現在も原型だけで検索している」とはみなさない。
+- **一次資料**: [Page, Brin, Motwani & Winograd, “The PageRank Citation Ranking: Bringing Order to the Web” (Stanford InfoLab Technical Report, 1999)](https://ilpubs.stanford.edu/422/)（2026-07-21確認）。Google prototypeとの関係は[Brin & Page, “The Anatomy of a Large-Scale Hypertextual Web Search Engine” (1998)](https://research.google/pubs/the-anatomy-of-a-large-scale-hypertextual-web-search-engine/)も参照。
+- **関連**: [第7章]({{ '/chapters/chapter07/' | relative_url }}) / [付録D]({{ '/appendices/appendix-d/' | relative_url }})
+
 **プログラミング言語（Programming Language）**
 人間がコンピュータに指示を与えるための人工言語。英語や日本語のような自然言語と、機械語の中間に位置し、人間にとって理解しやすく、かつコンピュータが実行できる形に変換可能。例：Python、Java、C++、JavaScript。
 
@@ -276,6 +300,14 @@ AIが回答を生成する際に、外部の検索結果や社内ドキュメン
 ---
 
 ## T
+
+### Transformer {#glossary-transformer}
+
+- **種別**: self-attentionを中心に系列内の関係を処理するneural network architecture。特定の製品名や単一のlarge language modelを指す語ではない。
+- **人物史との関係**: Ashish VaswaniらGoogleの研究teamが2017年に提示した。第10章のHinton/AlexNetとは別の研究系譜であり、GPTはTransformerを利用する後続model familyである。
+- **時点依存**: 原論文のarchitectureは固定されるが、context長、parameter数、学習data、attention実装など個別modelの仕様は版ごとに変わる。
+- **一次資料**: [Vaswani et al., “Attention Is All You Need” (NeurIPS 2017)](https://papers.nips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html)（2026-07-21確認）。
+- **関連**: [第10章]({{ '/chapters/chapter10/' | relative_url }}) / [付録D]({{ '/appendices/appendix-d/' | relative_url }})
 
 **Tool calling（ツール呼び出し）**
 AIが外部ツール（検索、DB問い合わせ、コード実行、チケット更新など）を呼び出し、結果を使って次の判断を行う仕組み。エージェントの構成要素になりやすい。誤操作や権限逸脱を防ぐため、実行権限と監査ログの設計が重要になる。

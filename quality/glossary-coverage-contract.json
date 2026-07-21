@@ -1,0 +1,164 @@
+{
+  "schemaVersion": "1.0",
+  "verifiedAt": "2026-07-21",
+  "sources": {
+    "top": "templates/index.md",
+    "chapter07": "src/chapters/chapter07.md",
+    "chapter10": "src/chapters/chapter10.md",
+    "appendixB": "src/appendices/appendix-b.md",
+    "appendixD": "src/appendices/appendix-d.md"
+  },
+  "generated": {
+    "top": "docs/index.md",
+    "chapter07": "docs/chapters/chapter07.md",
+    "chapter10": "docs/chapters/chapter10.md",
+    "appendixB": "docs/appendices/appendix-b.md",
+    "appendixD": "docs/appendices/appendix-d.md"
+  },
+  "required": {
+    "top": [
+      "用語や略語を確認したい場合は、[付録B: 用語解説]({{ '/appendices/appendix-b/' | relative_url }}) を併用してください。"
+    ],
+    "chapter07": [
+      "[PageRank]({{ '/appendices/appendix-b/#glossary-pagerank' | relative_url }})",
+      "初期PageRankだけで検索結果を説明することはできない。",
+      "PageRankをすべての現代AIの直接的な基盤とみなすことはできない。"
+    ],
+    "chapter10": [
+      "[ImageNet]({{ '/appendices/appendix-b/#glossary-imagenet' | relative_url }})",
+      "[GPU]({{ '/appendices/appendix-b/#glossary-gpu' | relative_url }})",
+      "[Transformerアーキテクチャ]({{ '/appendices/appendix-b/#glossary-transformer' | relative_url }})"
+    ],
+    "appendixB": [
+      "用語・略語の確認は本付録を正とします。"
+    ],
+    "appendixD": [
+      "{% assign glossary_gpu_url = '/appendices/appendix-b/#glossary-gpu' | relative_url %}",
+      "{% assign glossary_imagenet_url = '/appendices/appendix-b/#glossary-imagenet' | relative_url %}",
+      "{% assign glossary_pagerank_url = '/appendices/appendix-b/#glossary-pagerank' | relative_url %}",
+      "{% assign glossary_transformer_url = '/appendices/appendix-b/#glossary-transformer' | relative_url %}",
+      "[GPU]({{ glossary_gpu_url }})",
+      "[ImageNet]({{ glossary_imagenet_url }})",
+      "[PageRank]({{ glossary_pagerank_url }})",
+      "[Transformer]({{ glossary_transformer_url }})"
+    ]
+  },
+  "terms": {
+    "gpu": {
+      "heading": "### GPU（Graphics Processing Unit） {#glossary-gpu}",
+      "required": [
+        "- **種別**: 多数の演算を並列処理するhardware。algorithmやdatasetではない。",
+        "Alex Krizhevsky、Ilya Sutskever、Geoffrey Hintonは、AlexNetの学習で2台のNVIDIA GTX 580 GPUを使った。",
+        "GPU自体の発明者ではなく、既存hardwareを深層学習へ活用した側",
+        "製品名、性能、memory容量、対応softwareは世代ごとに変わる",
+        "https://papers.nips.cc/paper_files/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html",
+        "- **関連**: [第10章]({{ '/chapters/chapter10/' | relative_url }}) / [付録D]({{ '/appendices/appendix-d/' | relative_url }})"
+      ]
+    },
+    "imagenet": {
+      "heading": "### ImageNet {#glossary-imagenet}",
+      "required": [
+        "- **種別**: WordNetの概念階層に画像を対応づけた大規模image dataset",
+        "Alex Krizhevsky、Ilya Sutskever、Geoffrey HintonはImageNetを作ったのではなく",
+        "datasetのimage数、class/split、配布状況、competitionの運営状態は版と時点で変わり得る",
+        "https://image-net.org/static_files/papers/imagenet_cvpr09.pdf",
+        "- **関連**: [第10章]({{ '/chapters/chapter10/' | relative_url }}) / [付録D]({{ '/appendices/appendix-d/' | relative_url }})"
+      ]
+    },
+    "pagerank": {
+      "heading": "### PageRank（ページランク） {#glossary-pagerank}",
+      "required": [
+        "- **種別**: Webを有向link graphとして扱い",
+        "Lawrence Page、Sergey Brin、Rajeev Motwani、Terry Winogradが、Stanford InfoLabの技術報告でPageRankを説明した",
+        "現代Google検索の全ranking処理と同一ではない",
+        "検索serviceが使うranking signal、index規模、実装は時点依存",
+        "https://ilpubs.stanford.edu/422/",
+        "https://research.google/pubs/the-anatomy-of-a-large-scale-hypertextual-web-search-engine/",
+        "- **関連**: [第7章]({{ '/chapters/chapter07/' | relative_url }}) / [付録D]({{ '/appendices/appendix-d/' | relative_url }})"
+      ]
+    },
+    "transformer": {
+      "heading": "### Transformer {#glossary-transformer}",
+      "required": [
+        "- **種別**: self-attentionを中心に系列内の関係を処理するneural network architecture",
+        "Ashish VaswaniらGoogleの研究teamが2017年に提示した",
+        "第10章のHinton/AlexNetとは別の研究系譜",
+        "context長、parameter数、学習data、attention実装など個別modelの仕様は版ごとに変わる",
+        "https://papers.nips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html",
+        "- **関連**: [第10章]({{ '/chapters/chapter10/' | relative_url }}) / [付録D]({{ '/appendices/appendix-d/' | relative_url }})"
+      ]
+    }
+  },
+  "firstLinks": {
+    "chapter07": [
+      {
+        "term": "PageRank",
+        "marker": "[PageRank]({{ '/appendices/appendix-b/#glossary-pagerank' | relative_url }})"
+      }
+    ],
+    "chapter10": [
+      {
+        "term": "ImageNet",
+        "marker": "[ImageNet]({{ '/appendices/appendix-b/#glossary-imagenet' | relative_url }})"
+      },
+      {
+        "term": "GPU",
+        "marker": "[GPU]({{ '/appendices/appendix-b/#glossary-gpu' | relative_url }})"
+      },
+      {
+        "term": "Transformer",
+        "marker": "[Transformerアーキテクチャ]({{ '/appendices/appendix-b/#glossary-transformer' | relative_url }})"
+      }
+    ],
+    "appendixD": [
+      {
+        "term": "GPU",
+        "marker": "[GPU]({{ glossary_gpu_url }})"
+      },
+      {
+        "term": "ImageNet",
+        "marker": "[ImageNet]({{ glossary_imagenet_url }})"
+      },
+      {
+        "term": "PageRank",
+        "marker": "[PageRank]({{ glossary_pagerank_url }})"
+      },
+      {
+        "term": "Transformer",
+        "marker": "[Transformer]({{ glossary_transformer_url }})"
+      }
+    ]
+  },
+  "forbidden": [
+    "この夜、「PageRank」アルゴリズムの原型が生まれた",
+    "26年前に二人の学生が考案したアルゴリズムが、瞬時に数兆のWebページから最適な答えを見つけ出している",
+    "ラリー・ペイジとセルゲイ・ブリンが1996年に開発したPageRank は、現在のAI技術の基盤ともなっている",
+    "見つめていた。ImageNet画像認識コンテスト",
+    "- **GPU並列計算**：NVIDIA GeForce GTX 580による高速化",
+    "### Transformer アーキテクチャの登場",
+    "|Compute|学習・推論を成立させる計算資源（GPU、クラウド、分散処理）",
+    "|Algorithm|モデルと学習法（深層学習、Transformer、最適化）"
+  ],
+  "forbiddenPatterns": [
+    {
+      "name": "GPU misclassified as algorithm or dataset",
+      "pattern": "GPU[^\\n。]{0,60}(?:algorithm|アルゴリズム|dataset|データセット)(?:である|だ)(?=。|$)",
+      "flags": "i"
+    },
+    {
+      "name": "ImageNet misclassified as model architecture",
+      "pattern": "ImageNet[^\\n。]{0,60}(?:model|モデル|architecture|アーキテクチャ|neural network|ニューラルネットワーク)(?:である|だ)(?=。|$)",
+      "flags": "i"
+    },
+    {
+      "name": "Transformer misclassified as dataset or product",
+      "pattern": "Transformer[^\\n。]{0,60}(?:dataset|データセット|製品名?|product)(?:である|だ)(?=。|$)",
+      "flags": "i"
+    },
+    {
+      "name": "PageRank conflated with all current Google ranking",
+      "pattern": "PageRank[^\\n。]{0,80}(?:現在|現代)(?:の)?Google検索[^\\n。]{0,50}(?:すべて|全て|全ranking|全体)[^\\n。]{0,30}(?:処理|順位付け)する(?:(?:algorithm|アルゴリズム)(?:である|だ))?(?=。|$)",
+      "flags": "i"
+    }
+  ]
+}
