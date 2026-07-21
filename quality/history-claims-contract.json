@@ -28,6 +28,7 @@
       "60,000 USDを返還する代わりに",
       "calculator以外の用途へ販売する権利",
       "単一の「性能比」では比較しない",
+      "比較では、先に目的と測定条件を固定する",
       "CPUの演算・制御機能をsingle chipへ集積したgeneral-purpose processor",
       "[IPSJ Computer Museum: FUJIC](https://museum.ipsj.or.jp/computer/dawn/0010.html)",
       "[IPSJ Computer Museum: Hiroshi Wada](https://museum.ipsj.or.jp/pioneer/h-wada.html)",
@@ -75,7 +76,9 @@
     "嶋正利・高橋秀俊：マイクロプロセッサの共同開発者",
     "マイクロプロセッサを共同発明した男",
     "世界初のマイクロプロセッサ",
-    "この概念を世界で初めて実現した"
+    "この概念を世界で初めて実現した",
+    "| 項目 | Intel 4004 (1971) | Apple M3 (2023) | 進化率 |",
+    "| 性能/ワット | 基準 | 100万倍以上 | - |"
   ],
   "forbiddenPatterns": [
     {

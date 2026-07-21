@@ -64,6 +64,7 @@ function main() {
     ['forbidden-old-claim', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter04.md'), '\n- **特許**：共同所有\n'), 'forbidden historical claim found'],
     ['unqualified-first', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter04.md'), '\n世界初のマイクロプロセッサ\n'), 'forbidden historical claim found'],
     ['unqualified-first-variant', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter04.md'), '\nIntel 4004はCPU機能を世界で初めて実現した。\n'), 'forbidden historical pattern found'],
+    ['scalar-performance-table', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter04.md'), '\n| 性能/ワット | 基準 | 100万倍以上 | - |\n'), 'forbidden historical claim found'],
     ['inventorship-heading', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter04.md'), '\n## 4.2 マイクロプロセッサを共同発明した男\n'), 'forbidden historical claim found'],
     ['prewar-etl-claim', dir => fs.appendFileSync(path.join(dir, 'src/appendices/appendix-a.md'), '\n高橋秀俊、ETL Mark I設計開始（日本初の電子計算機研究）\n'), 'forbidden historical claim found'],
     ['generated-drift', dir => replaceOnce(path.join(dir, 'docs/appendices/appendix-b.md'), 'single-chip、general-purpose、commercial releaseなどの分類条件', '世界初'), 'generated history marker must occur exactly once'],
