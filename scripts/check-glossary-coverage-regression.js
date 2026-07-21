@@ -73,6 +73,11 @@ function main() {
     ['chapter10-mermaid-transformer-first-link', dir => replaceOnce(path.join(dir, 'src/chapters/chapter10.md'), '2017年: Attention Is All You Need発表', '2017年: Transformer'), 'first reader-facing glossary link mismatch'],
     ['appendix-d-first-link', dir => replaceOnce(path.join(dir, 'src/appendices/appendix-d.md'), '[GPU]({{ glossary_gpu_url }})', 'GPU'), 'first reader-facing glossary link mismatch'],
     ['appendix-d-portable-route', dir => replaceOnce(path.join(dir, 'src/appendices/appendix-d.md'), "{% assign glossary_gpu_url = '/appendices/appendix-b/#glossary-gpu' | relative_url %}", "{% assign glossary_gpu_url = 'https://example.invalid/glossary-gpu' %}"), 'glossary marker must occur exactly once'],
+    ['appendix-d-pagerank-data-misclassification', dir => {
+      const file = path.join(dir, 'src/appendices/appendix-d.md');
+      replaceOnce(file, '|Data|学習・評価・運用に必要なデータ基盤（[ImageNet]({{ glossary_imagenet_url }})、DB、Web、検索インデックス、ログ）', '|Data|学習・評価・運用に必要なデータ基盤（[ImageNet]({{ glossary_imagenet_url }})、DB、Web、検索/[PageRank]({{ glossary_pagerank_url }})、ログ）');
+      replaceOnce(file, '|Algorithm|モデルと学習法（深層学習、[PageRank]({{ glossary_pagerank_url }})、[Transformer]({{ glossary_transformer_url }})、最適化）', '|Algorithm|モデルと学習法（深層学習、[Transformer]({{ glossary_transformer_url }})、最適化）');
+    }, 'glossary marker must occur exactly once'],
     ['missing-backlink', dir => replaceOnce(path.join(dir, 'src/appendices/appendix-b.md'), "- **関連**: [第7章]({{ '/chapters/chapter07/' | relative_url }}) / [付録D]({{ '/appendices/appendix-d/' | relative_url }})", '- **関連**: 第7章 / 付録D'), 'glossary marker must occur exactly once'],
     ['generated-drift', dir => replaceOnce(path.join(dir, 'docs/appendices/appendix-b.md'), '### Transformer {#glossary-transformer}', '### Transformer'), 'glossary term heading missing'],
     ['top-route-missing', dir => replaceOnce(path.join(dir, 'templates/index.md'), "[付録B: 用語解説]({{ '/appendices/appendix-b/' | relative_url }})", '付録B: 用語解説'), 'glossary marker must occur exactly once'],

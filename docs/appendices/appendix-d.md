@@ -29,8 +29,8 @@ title: "付録D：AI時代形成の統合図（Compute×Data×Algorithm×Product
 |要素|最小定義（本書での意味）|典型的な論点|
 |---|---|---|
 |Compute|学習・推論を成立させる計算資源（[GPU]({{ glossary_gpu_url }})、クラウド、分散処理）|コスト、スケール、可観測性、運用|
-|Data|学習・評価・運用に必要なデータ基盤（[ImageNet]({{ glossary_imagenet_url }})、DB、Web、検索/[PageRank]({{ glossary_pagerank_url }})、ログ）|品質、偏り、権利、データガバナンス|
-|Algorithm|モデルと学習法（深層学習、[Transformer]({{ glossary_transformer_url }})、最適化）|性能、汎化、推論、解釈可能性|
+|Data|学習・評価・運用に必要なデータ基盤（[ImageNet]({{ glossary_imagenet_url }})、DB、Web、検索インデックス、ログ）|品質、偏り、権利、データガバナンス|
+|Algorithm|モデルと学習法（深層学習、[PageRank]({{ glossary_pagerank_url }})、[Transformer]({{ glossary_transformer_url }})、最適化）|性能、汎化、推論、解釈可能性|
 |Productization (+Distribution)|プロダクトに落とす仕組み（API、UX、統合、SLO、監視）|提供形態、導入障壁、失敗モード|
 |Governance|安全・法令・倫理・監査（規制、セキュリティ、説明責任）|誤用、漏えい、責任分界、規制対応|
 

@@ -40,7 +40,8 @@
       "[GPU]({{ glossary_gpu_url }})",
       "[ImageNet]({{ glossary_imagenet_url }})",
       "[PageRank]({{ glossary_pagerank_url }})",
-      "[Transformer]({{ glossary_transformer_url }})"
+      "[Transformer]({{ glossary_transformer_url }})",
+      "|Algorithm|モデルと学習法（深層学習、[PageRank]({{ glossary_pagerank_url }})、[Transformer]({{ glossary_transformer_url }})、最適化）|性能、汎化、推論、解釈可能性|"
     ]
   },
   "terms": {
@@ -137,7 +138,8 @@
     "- **GPU並列計算**：NVIDIA GeForce GTX 580による高速化",
     "### Transformer アーキテクチャの登場",
     "|Compute|学習・推論を成立させる計算資源（GPU、クラウド、分散処理）",
-    "|Algorithm|モデルと学習法（深層学習、Transformer、最適化）"
+    "|Algorithm|モデルと学習法（深層学習、Transformer、最適化）",
+    "|Data|学習・評価・運用に必要なデータ基盤（[ImageNet]({{ glossary_imagenet_url }})、DB、Web、検索/[PageRank]({{ glossary_pagerank_url }})、ログ）"
   ],
   "forbiddenPatterns": [
     {
