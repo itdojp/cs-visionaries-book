@@ -1,0 +1,15 @@
+flowchart TB
+    accTitle: 従来AIと深層学習AIの処理比較
+    accDescr: 従来AIでは人間が作成したルールや特徴を推論・機械学習へ渡すのに対し、深層学習では大量の生データから特徴を自動抽出してタスクを解く流れを示す。
+
+    subgraph Traditional["従来のAI（1980〜2000年代）"]
+        Rules[人間が作成したルール] --> Logic[論理推論エンジン]
+        Features[人間が設計した特徴] --> ML[機械学習アルゴリズム]
+    end
+    subgraph DeepLearning["深層学習AI（2010年代以降）"]
+        Data[大量の生データ] --> DL[深層ニューラルネットワーク]
+        DL --> Auto[自動特徴抽出]
+        Auto --> Task[タスク解決]
+    end
+
+    Logic ~~~ Data

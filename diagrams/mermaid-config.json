@@ -1,0 +1,11 @@
+{
+  "theme": "default",
+  "securityLevel": "strict",
+  "deterministicIds": true,
+  "deterministicIDSeed": "cs-visionaries-book-static-diagrams",
+  "fontFamily": "Arial, 'Noto Sans JP', sans-serif",
+  "htmlLabels": false,
+  "flowchart": {
+    "htmlLabels": false
+  }
+}

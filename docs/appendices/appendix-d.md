@@ -34,32 +34,25 @@ title: "付録D：AI時代形成の統合図（Compute×Data×Algorithm×Product
 |Productization (+Distribution)|プロダクトに落とす仕組み（API、UX、統合、SLO、監視）|提供形態、導入障壁、失敗モード|
 |Governance|安全・法令・倫理・監査（規制、セキュリティ、説明責任）|誤用、漏えい、責任分界、規制対応|
 
-## 2. 収束の因果（Mermaid 図）
+## 2. 収束の因果（静的図）
 
 以下は「どの基盤が揃うと社会実装が加速するか」を示す最小の因果図である（年号の詳細は付録A、一次情報は付録Cを参照）。
 
-```mermaid
-flowchart LR
-  subgraph Base["基盤（2010s〜）"]
-    C["Compute\nGPU/クラウド/分散"]
-    D["Data\nWeb/DB/検索/ログ"]
-    A["Algorithm\n深層学習/Transformer"]
-    P["Productization\nAPI / UX / 運用"]
-    G["Governance\n安全/法令/監査"]
-  end
+<figure class="book-figure">
+  <img src="{{ '/assets/images/diagrams/ai-convergence-five-elements.svg' | relative_url }}" alt="Compute、Data、Algorithmが基盤モデルを成立させ、ProductizationとGovernanceも加わって生成AIの社会実装へ収束する関係">
+  <figcaption>図D-1　AI時代形成の5要素と社会実装の収束</figcaption>
+</figure>
 
-  C --> FM["Foundation Models（基盤モデル）"]
-  D --> FM
-  A --> FM
+### 図の代替説明：5要素が社会実装へ収束する流れ
 
-  FM --> App["生成AIの社会実装（2022〜）\n生成/検索/支援/自動化"]
-  P --> App
-  G --> App
-```
+1. **Compute**（GPU、クラウド、分散）、**Data**（Web、DB、検索、ログ）、**Algorithm**（深層学習、Transformer）の3要素が、基盤モデルを成立させる。
+2. 成立した**基盤モデル**は、生成、検索、支援、自動化といった生成AIの社会実装を可能にする。
+3. **Productization**（API、UX、運用）は、基盤モデルを利用可能なプロダクトとして提供するために社会実装へ合流する。
+4. **Governance**（安全、法令、監査）は、社会実装を継続的かつ統制された形で運用するために合流する。
 
 注記:
 - **Foundation Models（基盤モデル）**は、巨大モデルを指す“モデルサイズ”の話ではなく、**多用途に転用される学習済みモデル**という性質を指す（モデルの詳細が非公開の場合は、出典に基づき「非公開」と明記する）。
-- Mermaid は環境によってレンダリングされないことがある。必要に応じて GitHub の Markdown 表示や Mermaid Live Editor 等で確認する。
+- 図を表示できない環境では、直前の「図の代替説明」を参照する。
 
 ## 3. マイルストーン（要素別の最小セット）
 

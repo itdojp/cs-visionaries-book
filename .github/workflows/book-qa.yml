@@ -39,12 +39,16 @@ jobs:
         run: npm ci --omit=optional
 
       - name: Run local metadata, security, and lint QA
-        run: npm run check:metadata && npm run check:security && npm run lint:light && npm run check:history-claims && npm run check:history-claims-regression && npm run check:colossus-history && npm run check:colossus-history-regression && npm run check:glossary-coverage && npm run check:glossary-coverage-regression
+        run: npm run check:metadata && npm run check:security && npm run lint:light && npm run check:history-claims && npm run check:history-claims-regression && npm run check:colossus-history && npm run check:colossus-history-regression && npm run check:glossary-coverage && npm run check:glossary-coverage-regression && npm run check:static-diagrams && npm run check:static-diagrams-regression
 
       - name: Verify generated docs are synchronized with authoring sources
         run: |
           npm run build
-          git diff --exit-code -- docs
+          git diff --exit-code -- assets/images/diagrams docs
+          if [ -n "$(git status --porcelain --untracked-files=all -- assets/images/diagrams docs)" ]; then
+            git status --short -- assets/images/diagrams docs
+            exit 1
+          fi
 
       - name: Install dependencies (book-formatter)
         working-directory: book-formatter
@@ -98,6 +102,9 @@ jobs:
         with:
           source: ./${{ steps.scan.outputs.dir }}
           destination: ./_site
+
+      - name: Verify target pages contain only static accessible diagrams
+        run: node scripts/check-static-diagrams.js --site-dir _site
 
       - name: Smoke check built site (top + navigation + assets)
         shell: bash

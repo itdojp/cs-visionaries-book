@@ -1,0 +1,18 @@
+flowchart LR
+    accTitle: AI時代形成の5要素と社会実装の収束
+    accDescr: Compute、Data、Algorithmが基盤モデルを成立させ、基盤モデルにProductizationとGovernanceが加わって生成AIの社会実装へ収束する関係を示す。
+
+    subgraph Base["基盤（2010s〜）"]
+        C["Compute<br/>GPU・クラウド・分散"]
+        D["Data<br/>Web・DB・検索・ログ"]
+        A["Algorithm<br/>深層学習・Transformer"]
+        P["Productization<br/>API・UX・運用"]
+        G["Governance<br/>安全・法令・監査"]
+    end
+
+    C --> FM["Foundation Models<br/>基盤モデル"]
+    D --> FM
+    A --> FM
+    FM --> App["生成AIの社会実装（2022〜）<br/>生成・検索・支援・自動化"]
+    P --> App
+    G --> App

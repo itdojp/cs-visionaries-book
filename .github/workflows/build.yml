@@ -35,6 +35,9 @@ jobs:
       - name: Check Jekyll Liquid conflicts
         run: |
           npm run check-conflicts
+
+      - name: Validate static diagram inputs and committed outputs
+        run: npm run check:static-diagrams && npm run check:static-diagrams-regression
         
       - name: Build book
         run: |
@@ -42,10 +45,10 @@ jobs:
 
       - name: Verify generated docs are deterministic
         run: |
-          git diff --exit-code -- docs
+          git diff --exit-code -- assets/images/diagrams docs
           npm run build
-          git diff --exit-code -- docs
-          if [ -n "$(git status --porcelain --untracked-files=all -- docs)" ]; then
-            git status --short -- docs
+          git diff --exit-code -- assets/images/diagrams docs
+          if [ -n "$(git status --porcelain --untracked-files=all -- assets/images/diagrams docs)" ]; then
+            git status --short -- assets/images/diagrams docs
             exit 1
           fi
