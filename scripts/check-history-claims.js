@@ -9,8 +9,7 @@ const EXPECTED_SOURCES = {
   introduction: 'src/introduction/index.md',
   appendixA: 'src/appendices/appendix-a.md',
   appendixB: 'src/appendices/appendix-b.md',
-  appendixC: 'src/appendices/appendix-c.md',
-  timeline: 'src/comprehensive-timeline.md'
+  appendixC: 'src/appendices/appendix-c.md'
 };
 const EXPECTED_GENERATED = {
   chapter04: 'docs/chapters/chapter04.md',
@@ -60,11 +59,6 @@ const EXPECTED_REQUIRED = {
     'https://museum.ipsj.or.jp/pioneer/h-wada.html',
     'https://www.intel.com/content/www/us/en/history/virtual-vault/articles/the-intel-4004.html',
     'https://download.intel.com/newsroom/2021/data-center/4004-infographic.pdf'
-  ],
-  timeline: [
-    '## ETL・FUJIC・Intel 4004の分類済み節目',
-    '| 1956年3月 | FUJIC |',
-    '| 1971年5月 | IntelがBusicomとの契約を変更 |'
   ]
 };
 const EXPECTED_FORBIDDEN = [

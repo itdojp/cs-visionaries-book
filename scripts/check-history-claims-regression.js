@@ -14,7 +14,6 @@ const FILES = [
   'src/appendices/appendix-a.md',
   'src/appendices/appendix-b.md',
   'src/appendices/appendix-c.md',
-  'src/comprehensive-timeline.md',
   'docs/chapters/chapter04.md',
   'docs/introduction/index.md',
   'docs/appendices/appendix-a.md',

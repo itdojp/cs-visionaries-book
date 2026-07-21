@@ -52,19 +52,6 @@ gantt
     ChatGPT登場                        :milestone, 2022, 0
 ```
 
-## ETL・FUJIC・Intel 4004の分類済み節目
-
-| 年月 | 節目 | 分類 |
-| --- | --- | --- |
-| 1952年 | ETL Mark I | relay式試作、日本初のdigital式自動計算機 |
-| 1955年11月 | ETL Mark II | relay式実用大型機 |
-| 1956年3月 | FUJIC | 真空管式、日本で最初に稼働した電子計算機 |
-| 1956年7月 | ETL Mark III | transistor式、日本初のtransistor計算機 |
-| 1971年5月 | IntelがBusicomとの契約を変更 | calculator以外の販売権をIntelが再取得 |
-| 1971年11月 | Intel 4004発表 | single-chip 4-bit general-purpose microprocessor |
-
-出典と確認日は[付録C](appendices/appendix-c.md#2026-07-21-japanese-computer--intel-4004-audit-anchors)を正本とする。
-
 ## 技術系譜図
 
 ```mermaid
