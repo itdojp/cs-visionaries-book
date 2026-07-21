@@ -68,6 +68,10 @@ function main() {
     ['reverse-developer-english', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nColossus was directly developed by Turing.\n'), 'forbidden Colossus pattern found'],
     ['reverse-developer-japanese', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nコロッサスの直接開発者はチューリングだった。\n'), 'forbidden Colossus pattern found'],
     ['reverse-realization', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nTuring machineをColossusとして直接実装した。\n'), 'forbidden Colossus pattern found'],
+    ['english-realization-turing-first', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nTuring machine was directly implemented as Colossus.\n'), 'forbidden Colossus pattern found'],
+    ['english-realization-colossus-first', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nColossus directly implemented the Turing machine.\n'), 'forbidden Colossus pattern found'],
+    ['english-realized-as', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nThe Turing machine was realized as Colossus.\n'), 'forbidden Colossus pattern found'],
+    ['english-direct-implementation', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nColossus was a direct implementation of the Turing machine.\n'), 'forbidden Colossus pattern found'],
     ['generated-drift', dir => replaceOnce(path.join(dir, 'docs/appendices/appendix-b.md'), '**Colossus（コロッサス）**', '**Colossus**'), 'generated Colossus marker must occur exactly once'],
     ['weakened-required', dir => {
       const file = path.join(dir, 'quality/colossus-history-contract.json');
@@ -113,6 +117,11 @@ function main() {
       fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nColossus was not directly developed by Turing.\n');
       fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nコロッサスの直接開発者はチューリングではない。\n');
       fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nTuring machineをColossusとして直接実装したわけではない。\n');
+    }],
+    ['negated-english-realization-claims', dir => {
+      fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nTuring machine was not directly implemented as Colossus.\n');
+      fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nColossus did not directly implement the Turing machine.\n');
+      fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nColossus was not a direct implementation of the Turing machine.\n');
     }]
   ];
 

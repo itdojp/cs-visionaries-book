@@ -87,6 +87,11 @@
       "name": "reverse-order Turing-machine realization claim",
       "pattern": "(?:Turing machine|チューリングマシン)[^\\n。]{0,160}(?:Colossus|コロッサス)[^\\n。]{0,100}(?:として|に)?(?:直接)?(?:実装|実現)した(?!わけではない|のではない|ものではない|とはいえない|とは言えない)",
       "flags": "i"
+    },
+    {
+      "name": "English Colossus/Turing-machine realization claim",
+      "pattern": "(?:(?:the\\s+)?Turing machine\\s+(?:was|is)\\s+(?:directly\\s+)?(?:implemented|realized)\\s+as\\s+Colossus|Colossus\\s+(?:directly\\s+)?(?:implemented|realized)\\s+(?:the\\s+)?Turing machine|Colossus\\s+(?:was|is)\\s+(?:a\\s+)?direct\\s+(?:implementation|realization)\\s+of\\s+(?:the\\s+)?Turing machine)",
+      "flags": "i"
     }
   ]
 }
