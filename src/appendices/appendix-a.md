@@ -88,10 +88,13 @@ title: "付録A：コンピュータサイエンス重要事件年表"
 - コンラード・ツーゼ（ドイツ）、Z3完成
 - 世界初のプログラム制御式コンピュータ
 
-**1943年**
-- **1月**：コロッサス Mark I（イギリス）運用開始
-  - ドイツ軍暗号解読用の電子計算機
-  - チューリングも開発に関与
+**1942〜1944年**
+- **1942年までに**：チューリング、Lorenz暗号に対する統計的手法「Turingery」を考案
+- **1943年2月**：Government Code and Cypher School（GC&CS）がMax Newmanの指揮下にNewmanryを正式設置し、統計的検査の機械化を推進
+- **1944年2月**：最初のColossusがBletchley Parkで実用稼働
+  - Tommy Flowers率いるGPO teamが設計・製作したTunny暗号解析用の目的特化machine
+  - switch・plug panel・patch panelで検査を設定できるが、programmabilityは限定的
+  - general-purpose / stored-program computerではなく、チューリングは設計・製作に直接関与していない
 - **12月**：嶋正利誕生（12月22日、静岡県）
 
 **1944年**

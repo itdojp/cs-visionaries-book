@@ -1,5 +1,6 @@
 # Dependencies
 node_modules/
+.codex-local/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

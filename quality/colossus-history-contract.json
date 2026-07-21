@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "1.0",
+  "verifiedAt": "2026-07-21",
+  "sources": {
+    "chapter02": "src/chapters/chapter02.md",
+    "appendixA": "src/appendices/appendix-a.md",
+    "appendixB": "src/appendices/appendix-b.md",
+    "appendixC": "src/appendices/appendix-c.md"
+  },
+  "generated": {
+    "chapter02": "docs/chapters/chapter02.md",
+    "appendixA": "docs/appendices/appendix-a.md",
+    "appendixB": "docs/appendices/appendix-b.md",
+    "appendixC": "docs/appendices/appendix-c.md"
+  },
+  "required": {
+    "chapter02": [
+      "### コロッサスコンピュータとの関わり",
+      "1942年まで : Turingery",
+      "Tunny通信を読み取り、Lorenz暗号機のchi-wheel設定を推定する統計的検査",
+      "switch・plug panel・patch panelで設定できた",
+      "限定的programmability",
+      "general-purpose computerでも、stored-program computerでもなかった",
+      "digital・electronic・programmableという3条件",
+      "| Alan Turing | Lorenz暗号に対する統計的手法「Turingery」を考案し、Max Newmanとの議論を通じて機械化の背景に寄与した。Colossusの設計・製作には直接関与していない。 |",
+      "| Max Newman / Newmanry | 統計的検査を機械化する問題を整理し、機械を運用する部門Newmanryを率いた。 |",
+      "| Tommy Flowers / General Post Office（GPO）team | Newmanryが示した問題と検査を電子回路で処理するColossusを設計・製作した。 |",
+      "Turing machineは、algorithmによる計算可能性を分析するための**抽象的な数学model**",
+      "Colossusを「Turing machineの直接実装」と位置づけることはできない",
+      "[TNMOCのColossus解説](https://www.tnmoc.org/colossus)",
+      "[Colossus再建記録](https://www.tnmoc.org/rebuilding-colossus)",
+      "[Bletchley ParkのAlan Turing資料](https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf)",
+      "[Max Newman資料](https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1861.pdf)"
+    ],
+    "appendixA": [
+      "**1942〜1944年**",
+      "チューリング、Lorenz暗号に対する統計的手法「Turingery」を考案",
+      "GC&CS）がMax Newmanの指揮下にNewmanryを正式設置し、統計的検査の機械化を推進",
+      "Tommy Flowers率いるGPO teamが設計・製作したTunny暗号解析用の目的特化machine",
+      "general-purpose / stored-program computerではなく、チューリングは設計・製作に直接関与していない"
+    ],
+    "appendixB": [
+      "**Colossus（コロッサス）**",
+      "switch・plug panel・patch panelで検査を設定できる限定的programmability",
+      "Colossusなど特定hardwareのarchitectureや設計図を指すものではない"
+    ],
+    "appendixC": [
+      "### 2026-07-21 Colossus / Turing audit anchors",
+      "https://www.tnmoc.org/colossus",
+      "https://www.tnmoc.org/rebuilding-colossus",
+      "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf",
+      "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1861.pdf",
+      "- Turing, A. M. (1936/1937). \"On Computable Numbers, with an Application to the Entscheidungsproblem\". https://academic.oup.com/plms/article-pdf/s2-42/1/230/4317544/s2-42-1-230.pdf"
+    ]
+  },
+  "forbidden": [
+    "1943年、ドイツ軍はエニグマよりもさらに複雑な暗号システム「ローレンツ暗号」を導入した",
+    "コロッサスは、世界初のプログラム可能な電子計算機だった",
+    "**処理速度**：1秒間に25,000文字",
+    "**プログラム可能**：配線の変更で異なる処理が可能",
+    "その理論的基盤となる考え方—プログラム可能な機械という概念—を提供していた",
+    "コロッサスは、チューリングマシンの理論を実際の機械として実現した最初の例の一つだった",
+    "チューリングも開発に関与"
+  ],
+  "forbiddenPatterns": [
+    {
+      "name": "unqualified Colossus world-first programmable claim",
+      "pattern": "(?:Colossus|コロッサス)(?![^\\n。]{0,80}\\b(?:is|was|were)?\\s*not\\b[^\\n。]{0,80}\\bfirst\\b)[^\\n。]{0,80}(?:(?:世界(?:で)?初|世界最初|最初|first)(?:の)?)(?!ではない|ではなく|でない|ではありません)[^\\n。]{0,80}(?:programmable|プログラマブル|プログラム可能)[^\\n。]{0,60}(?:computer|計算機|machine)(?!ではない|ではなく|でない|ではありません)",
+      "flags": "i"
+    },
+    {
+      "name": "Colossus as a direct Turing-machine realization",
+      "pattern": "(?:Colossus|コロッサス)[^\\n。]{0,160}(?:Turing machine|チューリングマシン)[^\\n。]{0,100}(?:理論を実際の機械として実現した(?!わけではない|のではない|ものではない)|直接実装(?:である|だった|だ|した(?!わけではない|のではない|ものではない|とはいえない|とは言えない))|実装例(?:である|だった|だ|となった))",
+      "flags": "i"
+    },
+    {
+      "name": "Turing as a direct Colossus developer",
+      "pattern": "(?:Turing|チューリング)[^\\n。]{0,80}(?:Colossus|コロッサス)[^\\n。]{0,80}(?:(?:の)?(?:開発者|設計者)(?:だった|である|だ)|(?:直接開発した|開発を主導した)(?!わけではない|のではない|ものではない|とはいえない|とは言えない))",
+      "flags": "i"
+    },
+    {
+      "name": "reverse-order Colossus/Turing developer claim",
+      "pattern": "(?:(?:Colossus)[^\\n.]{0,80}\\b(?:was|is)\\s+directly\\s+(?:developed|designed)\\s+by\\s+(?:Alan\\s+)?Turing|(?:Turing|Alan\\s+Turing)[^\\n.]{0,40}directly\\s+(?:developed|designed)[^\\n.]{0,40}Colossus|コロッサス[^\\n。]{0,80}(?:直接)?(?:開発者|設計者)(?:は|が)(?:アラン(?:・|\\s))?チューリング(?:だった|である|だ))",
+      "flags": "i"
+    },
+    {
+      "name": "reverse-order Turing-machine realization claim",
+      "pattern": "(?:Turing machine|チューリングマシン)[^\\n。]{0,160}(?:Colossus|コロッサス)[^\\n。]{0,100}(?:として|に)?(?:直接)?(?:実装|実現)した(?!わけではない|のではない|ものではない|とはいえない|とは言えない)",
+      "flags": "i"
+    },
+    {
+      "name": "English Colossus/Turing-machine realization claim",
+      "pattern": "(?:(?:the\\s+)?Turing machine\\s+(?:was|is)\\s+(?:directly\\s+)?(?:implemented|realized)\\s+as\\s+Colossus|Colossus\\s+(?:directly\\s+)?(?:implemented|realized)\\s+(?:the\\s+)?Turing machine|Colossus\\s+(?:was|is)\\s+(?:a\\s+)?direct\\s+(?:implementation|realization)\\s+of\\s+(?:the\\s+)?Turing machine)",
+      "flags": "i"
+    }
+  ]
+}
