@@ -10,6 +10,7 @@
   "scripts": {
     "setup": "node -e \"console.error('Deprecated: npm run setup is disabled for this repository. Use README.md, QUICK-START.md, and REPOSITORY-ACCESS-GUIDE.md.'); process.exit(1)\"",
     "build": "node scripts/build-simple.js",
+    "render:diagrams": "node scripts/render-mermaid-diagrams.js",
     "build:safe": "node scripts/build-with-conflict-detection.js",
     "build:full": "npm run build:safe",
     "preview": "npm run build && python3 -m http.server 8080 --directory docs",
@@ -19,7 +20,7 @@
     "check-conflicts": "node scripts/jekyll-conflict-detector.js src --dry-run",
     "fix-conflicts": "node scripts/jekyll-conflict-detector.js src --fix",
     "lint:light": "markdownlint 'src/**/*.md' --ignore node_modules",
-    "test:light": "npm run lint:light && npm run check:history-claims && npm run check:history-claims-regression && npm run check:colossus-history && npm run check:colossus-history-regression && npm run check:glossary-coverage && npm run check:glossary-coverage-regression && npm run build",
+    "test:light": "npm run lint:light && npm run check:history-claims && npm run check:history-claims-regression && npm run check:colossus-history && npm run check:colossus-history-regression && npm run check:glossary-coverage && npm run check:glossary-coverage-regression && npm run check:static-diagrams && npm run check:static-diagrams-regression && npm run build",
     "test:conflicts": "npm run check-conflicts",
     "help": "echo 'Available commands:\n  npm run build - Build the book\n  npm run build:safe - Build with conflict detection\n  npm run check-conflicts - Check Jekyll conflicts\n  npm run fix-conflicts - Auto-fix Jekyll conflicts\n  npm run preview - Local preview (docs/)\n  npm run configure:workflows - Disable problematic workflows\n  npm run deploy - Deprecated: deployment is handled outside package.json'",
     "check:metadata": "node scripts/check-metadata-consistency.js",
@@ -29,14 +30,18 @@
     "check:colossus-history": "node scripts/check-colossus-history.js",
     "check:colossus-history-regression": "node scripts/check-colossus-history-regression.js",
     "check:glossary-coverage": "node scripts/check-glossary-coverage.js",
-    "check:glossary-coverage-regression": "node scripts/check-glossary-coverage-regression.js"
+    "check:glossary-coverage-regression": "node scripts/check-glossary-coverage-regression.js",
+    "check:static-diagrams": "node scripts/check-static-diagrams.js",
+    "check:static-diagrams-regression": "node scripts/check-static-diagrams-regression.js"
   },
   "dependencies": {
     "fs-extra": "^11.3.0",
     "gray-matter": "^4.0.3"
   },
   "devDependencies": {
-    "markdownlint-cli": "^0.48.0"
+    "@mermaid-js/mermaid-cli": "11.16.0",
+    "markdownlint-cli": "^0.48.0",
+    "puppeteer": "24.43.1"
   },
   "keywords": [
     "book",

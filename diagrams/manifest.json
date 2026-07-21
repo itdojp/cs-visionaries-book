@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "renderer": {
+    "package": "@mermaid-js/mermaid-cli",
+    "version": "11.16.0",
+    "config": "diagrams/mermaid-config.json",
+    "puppeteerConfig": "diagrams/puppeteer-config.json"
+  },
+  "diagrams": [
+    {
+      "id": "hinton-ai-history-timeline",
+      "source": "diagrams/mermaid/hinton-ai-history-timeline.mmd",
+      "output": "assets/images/diagrams/hinton-ai-history-timeline.svg",
+      "publicPath": "/assets/images/diagrams/hinton-ai-history-timeline.svg",
+      "title": "ジェフリー・ヒントンとAI発展の歴史",
+      "description": "1947年のヒントン誕生から、学習と研究の節目、AI冬の時代、深層学習の発展、2018年のチューリング賞、2023年のGoogle退職までを時系列で示す。",
+      "document": "src/chapters/chapter10.md",
+      "alternativeMarker": "### 図の代替説明：ヒントンとAI発展の年表"
+    },
+    {
+      "id": "neural-network-layer-flow",
+      "source": "diagrams/mermaid/neural-network-layer-flow.mmd",
+      "output": "assets/images/diagrams/neural-network-layer-flow.svg",
+      "publicPath": "/assets/images/diagrams/neural-network-layer-flow.svg",
+      "title": "入力層から出力層までのニューラルネットワーク",
+      "description": "3つの入力が第1隠れ層の3ニューロンへ接続し、さらに第2隠れ層の2ニューロンを経て2つの出力へ伝わる全結合ネットワークを示す。",
+      "document": "src/chapters/chapter10.md",
+      "alternativeMarker": "### 図の代替説明：ニューラルネットワークの接続"
+    },
+    {
+      "id": "traditional-ai-vs-deep-learning",
+      "source": "diagrams/mermaid/traditional-ai-vs-deep-learning.mmd",
+      "output": "assets/images/diagrams/traditional-ai-vs-deep-learning.svg",
+      "publicPath": "/assets/images/diagrams/traditional-ai-vs-deep-learning.svg",
+      "title": "従来AIと深層学習AIの処理比較",
+      "description": "従来AIでは人間が作成したルールや特徴を推論・機械学習へ渡すのに対し、深層学習では大量の生データから特徴を自動抽出してタスクを解く流れを示す。",
+      "document": "src/chapters/chapter10.md",
+      "alternativeMarker": "### 図の代替説明：従来AIと深層学習AIの違い"
+    },
+    {
+      "id": "ai-convergence-five-elements",
+      "source": "diagrams/mermaid/ai-convergence-five-elements.mmd",
+      "output": "assets/images/diagrams/ai-convergence-five-elements.svg",
+      "publicPath": "/assets/images/diagrams/ai-convergence-five-elements.svg",
+      "title": "AI時代形成の5要素と社会実装の収束",
+      "description": "Compute、Data、Algorithmが基盤モデルを成立させ、基盤モデルにProductizationとGovernanceが加わって生成AIの社会実装へ収束する関係を示す。",
+      "document": "src/appendices/appendix-d.md",
+      "alternativeMarker": "### 図の代替説明：5要素が社会実装へ収束する流れ"
+    }
+  ]
+}

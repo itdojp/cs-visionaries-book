@@ -1,0 +1,12 @@
+{
+  "headless": true,
+  "args": [
+    "--disable-background-networking",
+    "--disable-component-update",
+    "--disable-default-apps",
+    "--disable-domain-reliability",
+    "--disable-sync",
+    "--metrics-recording-only",
+    "--no-first-run"
+  ]
+}

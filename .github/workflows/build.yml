@@ -11,6 +11,8 @@ env:
   # Temporary opt-in during GitHub Actions' Node 20 -> Node 24 transition.
   # Ref: https://github.blog/changelog/2026-03-06-github-actions-transitions-from-node-20-to-node-24/
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+  PUPPETEER_SKIP_DOWNLOAD: 'true'
+  STATIC_DIAGRAMS_VERIFY_ONLY: '1'
 
 permissions:
   contents: read
@@ -35,6 +37,9 @@ jobs:
       - name: Check Jekyll Liquid conflicts
         run: |
           npm run check-conflicts
+
+      - name: Validate static diagram inputs and committed outputs
+        run: npm run check:static-diagrams && npm run check:static-diagrams-regression
         
       - name: Build book
         run: |
@@ -42,10 +47,10 @@ jobs:
 
       - name: Verify generated docs are deterministic
         run: |
-          git diff --exit-code -- docs
+          git diff --exit-code -- assets/images/diagrams docs
           npm run build
-          git diff --exit-code -- docs
-          if [ -n "$(git status --porcelain --untracked-files=all -- docs)" ]; then
-            git status --short -- docs
+          git diff --exit-code -- assets/images/diagrams docs
+          if [ -n "$(git status --porcelain --untracked-files=all -- assets/images/diagrams docs)" ]; then
+            git status --short -- assets/images/diagrams docs
             exit 1
           fi
