@@ -62,8 +62,12 @@ function main() {
     ['unqualified-first-variant', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nColossusは世界初のprogrammable electronic computerである。\n'), 'forbidden Colossus pattern found'],
     ['first-electronic-digital-order', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nColossusは最初のelectronic digital programmable computerだった。\n'), 'forbidden Colossus pattern found'],
     ['programmable-japanese-variant', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nコロッサスは最初のプログラマブル電子計算機だった。\n'), 'forbidden Colossus pattern found'],
+    ['world-first-english-variant', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nColossus was the first programmable electronic digital computer.\n'), 'forbidden Colossus pattern found'],
     ['direct-realization-variant', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nColossusはTuring machineの直接実装である。\n'), 'forbidden Colossus pattern found'],
     ['direct-developer-variant', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nTuringはColossusの開発者だった。\n'), 'forbidden Colossus pattern found'],
+    ['reverse-developer-english', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nColossus was directly developed by Turing.\n'), 'forbidden Colossus pattern found'],
+    ['reverse-developer-japanese', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nコロッサスの直接開発者はチューリングだった。\n'), 'forbidden Colossus pattern found'],
+    ['reverse-realization', dir => fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nTuring machineをColossusとして直接実装した。\n'), 'forbidden Colossus pattern found'],
     ['generated-drift', dir => replaceOnce(path.join(dir, 'docs/appendices/appendix-b.md'), '**Colossus（コロッサス）**', '**Colossus**'), 'generated Colossus marker must occur exactly once'],
     ['weakened-required', dir => {
       const file = path.join(dir, 'quality/colossus-history-contract.json');
@@ -100,6 +104,15 @@ function main() {
     }],
     ['negated-developer-claim', dir => {
       fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nTuringはColossusを直接開発したわけではない。\n');
+    }],
+    ['negated-world-first-claims', dir => {
+      fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nコロッサスは最初のプログラマブル電子計算機ではない。\n');
+      fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nColossus was not the first programmable electronic computer.\n');
+    }],
+    ['negated-reverse-role-claims', dir => {
+      fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nColossus was not directly developed by Turing.\n');
+      fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nコロッサスの直接開発者はチューリングではない。\n');
+      fs.appendFileSync(path.join(dir, 'src/chapters/chapter02.md'), '\nTuring machineをColossusとして直接実装したわけではない。\n');
     }]
   ];
 

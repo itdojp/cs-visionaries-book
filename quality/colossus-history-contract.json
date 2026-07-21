@@ -65,17 +65,27 @@
   "forbiddenPatterns": [
     {
       "name": "unqualified Colossus world-first programmable claim",
-      "pattern": "(?:Colossus|コロッサス)[^\\n。]{0,80}(?:(?:世界(?:で)?初|世界最初|最初|first)(?:の)?)[^\\n。]{0,80}(?:programmable|プログラマブル|プログラム可能)[^\\n。]{0,40}(?:な|の)?(?:electronic|電子)?(?:computer|計算機|machine)",
+      "pattern": "(?:Colossus|コロッサス)(?![^\\n。]{0,80}\\b(?:is|was|were)?\\s*not\\b[^\\n。]{0,80}\\bfirst\\b)[^\\n。]{0,80}(?:(?:世界(?:で)?初|世界最初|最初|first)(?:の)?)(?!ではない|ではなく|でない|ではありません)[^\\n。]{0,80}(?:programmable|プログラマブル|プログラム可能)[^\\n。]{0,60}(?:computer|計算機|machine)(?!ではない|ではなく|でない|ではありません)",
       "flags": "i"
     },
     {
       "name": "Colossus as a direct Turing-machine realization",
-      "pattern": "(?:Colossus|コロッサス)[^\\n。]{0,160}(?:Turing machine|チューリングマシン)[^\\n。]{0,100}(?:理論を実際の機械として実現した|直接実装(?:である|した)|実装例(?:である|となった))",
+      "pattern": "(?:Colossus|コロッサス)[^\\n。]{0,160}(?:Turing machine|チューリングマシン)[^\\n。]{0,100}(?:理論を実際の機械として実現した(?!わけではない|のではない|ものではない)|直接実装(?:である|だった|だ|した(?!わけではない|のではない|ものではない|とはいえない|とは言えない))|実装例(?:である|だった|だ|となった))",
       "flags": "i"
     },
     {
       "name": "Turing as a direct Colossus developer",
       "pattern": "(?:Turing|チューリング)[^\\n。]{0,80}(?:Colossus|コロッサス)[^\\n。]{0,80}(?:(?:の)?(?:開発者|設計者)(?:だった|である|だ)|(?:直接開発した|開発を主導した)(?!わけではない|のではない|ものではない|とはいえない|とは言えない))",
+      "flags": "i"
+    },
+    {
+      "name": "reverse-order Colossus/Turing developer claim",
+      "pattern": "(?:(?:Colossus)[^\\n.]{0,80}\\b(?:was|is)\\s+directly\\s+(?:developed|designed)\\s+by\\s+(?:Alan\\s+)?Turing|(?:Turing|Alan\\s+Turing)[^\\n.]{0,40}directly\\s+(?:developed|designed)[^\\n.]{0,40}Colossus|コロッサス[^\\n。]{0,80}(?:直接)?(?:開発者|設計者)(?:は|が)(?:アラン(?:・|\\s))?チューリング(?:だった|である|だ))",
+      "flags": "i"
+    },
+    {
+      "name": "reverse-order Turing-machine realization claim",
+      "pattern": "(?:Turing machine|チューリングマシン)[^\\n。]{0,160}(?:Colossus|コロッサス)[^\\n。]{0,100}(?:として|に)?(?:直接)?(?:実装|実現)した(?!わけではない|のではない|ものではない|とはいえない|とは言えない)",
       "flags": "i"
     }
   ]
