@@ -207,6 +207,7 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
   if (puppeteerConfigPath && fs.existsSync(puppeteerConfigPath)) {
     puppeteerConfigContent = fs.readFileSync(puppeteerConfigPath, 'utf8');
     const puppeteerConfig = readJson(puppeteerConfigPath);
+    if (Object.keys(puppeteerConfig).sort().join(',') !== 'args,headless') failures.push('Puppeteer config may contain only headless and args');
     if (puppeteerConfig.headless !== true) failures.push('Puppeteer must run headless');
     const args = Array.isArray(puppeteerConfig.args) ? puppeteerConfig.args : [];
     if (JSON.stringify(args) !== JSON.stringify(EXPECTED_PUPPETEER_ARGS)) failures.push('Puppeteer arguments must match the audited sandbox-preserving set');
@@ -300,9 +301,10 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
   if (!buildScript.includes("process.env.STATIC_DIAGRAMS_VERIFY_ONLY === '1'") || !buildScript.includes('checkStaticDiagrams(process.cwd());')) failures.push('build must support browser-free committed artifact verification');
 
   const renderer = fs.readFileSync(path.join(root, 'scripts', 'render-mermaid-diagrams.js'), 'utf8');
-  for (const marker of ['--svgId', '--quiet', '--puppeteerConfigFile', 'browserEnvironment', 'sensitiveName', 'ensureAccessibleSvg', 'validateDefinition', 'validateRendererConfigs', 'validateRendererRuntime(manifest, packageJson);', 'PUPPETEER_REVISIONS', 'process.versions.node', 'verifySvg', 'foreignObject', 'external resource reference']) {
+  for (const marker of ['--svgId', '--quiet', '--puppeteerConfigFile', 'browserEnvironment', 'sensitiveName', 'ensureAccessibleSvg', 'validateDefinition', 'validateRendererConfigs', 'validateBrowserSelectionEnvironment', 'validateRendererRuntime(manifest, packageJson);', 'PUPPETEER_EXECUTABLE_PATH', 'PUPPETEER_REVISIONS', 'process.versions.node', 'verifySvg', 'foreignObject', 'external resource reference']) {
     if (!renderer.includes(marker)) failures.push(`renderer safety marker is missing: ${marker}`);
   }
+  if (count(renderer, 'validateBrowserSelectionEnvironment();') !== 2) failures.push('renderer must reject browser selection overrides before validation and launch');
 
   const bookQa = fs.readFileSync(path.join(root, '.github', 'workflows', 'book-qa.yml'), 'utf8');
   const buildWorkflow = fs.readFileSync(path.join(root, '.github', 'workflows', 'build.yml'), 'utf8');

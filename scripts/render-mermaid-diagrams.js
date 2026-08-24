@@ -12,6 +12,11 @@ const EXPECTED_RUNTIME = Object.freeze({
   puppeteer: '25.8.0',
   browserRevision: 'chrome@152.0.7977.42'
 });
+const FORBIDDEN_BROWSER_SELECTION_ENV = Object.freeze([
+  'PUPPETEER_EXECUTABLE_PATH',
+  'PUPPETEER_BROWSER',
+  'PUPPETEER_PRODUCT'
+]);
 const EXPECTED_DIAGRAMS = [
   ['hinton-ai-history-timeline', 'diagrams/mermaid/hinton-ai-history-timeline.mmd', 'assets/images/diagrams/hinton-ai-history-timeline.svg', 'src/chapters/chapter10.md'],
   ['neural-network-layer-flow', 'diagrams/mermaid/neural-network-layer-flow.mmd', 'assets/images/diagrams/neural-network-layer-flow.svg', 'src/chapters/chapter10.md'],
@@ -58,12 +63,23 @@ function validateRendererConfigs(configPath, puppeteerConfigPath) {
     throw new Error('Mermaid renderer security and determinism config mismatch');
   }
   const puppeteerConfig = JSON.parse(fs.readFileSync(puppeteerConfigPath, 'utf8'));
-  if (puppeteerConfig.headless !== true || JSON.stringify(puppeteerConfig.args) !== JSON.stringify(EXPECTED_PUPPETEER_ARGS)) {
+  if (Object.keys(puppeteerConfig).sort().join(',') !== 'args,headless' ||
+      puppeteerConfig.headless !== true || JSON.stringify(puppeteerConfig.args) !== JSON.stringify(EXPECTED_PUPPETEER_ARGS)) {
     throw new Error('Puppeteer config must use the audited sandbox-preserving argument set');
   }
 }
 
+function validateBrowserSelectionEnvironment(environment = process.env) {
+  const present = FORBIDDEN_BROWSER_SELECTION_ENV.filter(key =>
+    Object.prototype.hasOwnProperty.call(environment, key)
+  );
+  if (present.length) {
+    throw new Error(`browser selection overrides are forbidden: ${present.join(', ')}`);
+  }
+}
+
 function validateRendererRuntime(manifest, packageJson) {
+  validateBrowserSelectionEnvironment();
   const installedPuppeteer = require('puppeteer/package.json').version;
   const { PUPPETEER_REVISIONS } = require('puppeteer-core/internal/revisions.js');
   const actual = {
@@ -174,6 +190,7 @@ function validateDefinition(definition, diagram) {
 }
 
 function browserEnvironment() {
+  validateBrowserSelectionEnvironment();
   const sensitiveName = /(?:TOKEN|SECRET|PASSWORD|CREDENTIAL|API_KEY|AUTH|COOKIE|SESSION|THREAD|CODEX|BRAVE)/i;
   return Object.fromEntries(Object.entries(process.env).filter(([key]) => !sensitiveName.test(key)));
 }
@@ -260,4 +277,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { assertInsideRoot, browserEnvironment, computeRenderProvenance, ensureAccessibleSvg, ensureRenderProvenance, readManifest, referencedElementText, renderAll, validateDefinition, validateRendererConfigs, validateRendererRuntime, verifySvg };
+module.exports = { assertInsideRoot, browserEnvironment, computeRenderProvenance, ensureAccessibleSvg, ensureRenderProvenance, readManifest, referencedElementText, renderAll, validateBrowserSelectionEnvironment, validateDefinition, validateRendererConfigs, validateRendererRuntime, verifySvg };

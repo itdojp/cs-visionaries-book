@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { checkStaticDiagrams, computeRenderProvenance: computeCheckedProvenance } = require('./check-static-diagrams');
-const { computeRenderProvenance: computeRenderedProvenance, ensureAccessibleSvg } = require('./render-mermaid-diagrams');
+const { computeRenderProvenance: computeRenderedProvenance, ensureAccessibleSvg, validateBrowserSelectionEnvironment } = require('./render-mermaid-diagrams');
 
 const ROOT = path.resolve(__dirname, '..');
 const TEMP_ROOT = path.join(ROOT, '.codex-local', 'tmp', 'static-diagram-regression');
@@ -76,12 +76,14 @@ const tests = [
   ['unsafe-config', dir => replaceOnce(path.join(dir, 'diagrams/mermaid-config.json'), '"securityLevel": "strict"', '"securityLevel": "loose"')],
   ['disabled-sandbox', dir => replaceOnce(path.join(dir, 'diagrams/puppeteer-config.json'), '"--no-first-run"', '"--no-sandbox"')],
   ['extra-browser-argument', dir => replaceOnce(path.join(dir, 'diagrams/puppeteer-config.json'), '"--no-first-run"', '"--no-first-run",\n    "--disable-web-security"')],
+  ['browser-executable-config-override', dir => replaceOnce(path.join(dir, 'diagrams/puppeteer-config.json'), '"headless": true,', '"headless": true,\n  "executablePath": "/synthetic/browser",')],
   ['missing-build-wiring', dir => replaceOnce(path.join(dir, 'scripts/build-simple.js'), 'renderStaticDiagrams();', '// removed')],
   ['missing-book-qa-wiring', dir => replaceOnce(path.join(dir, '.github/workflows/book-qa.yml'), 'npm run check:static-diagrams && ', '')],
   ['missing-book-qa-untracked-gate', dir => replaceOnce(path.join(dir, '.github/workflows/book-qa.yml'), 'git status --porcelain --untracked-files=all -- assets/images/diagrams docs', 'git status --porcelain -- docs')],
   ['missing-build-preflight', dir => replaceOnce(path.join(dir, '.github/workflows/build.yml'), 'npm run check:static-diagrams && npm run check:static-diagrams-regression', 'echo diagram-checks-removed')],
   ['missing-ci-verify-only', dir => replaceOnce(path.join(dir, '.github/workflows/build.yml'), "STATIC_DIAGRAMS_VERIFY_ONLY: '1'", "STATIC_DIAGRAMS_VERIFY_ONLY: '0'")],
   ['external-puppeteer-cache', dir => replaceOnce(path.join(dir, '.puppeteerrc.cjs'), "'.codex-local', 'cache', 'puppeteer'", "'outside-workspace', 'puppeteer'")],
+  ['missing-browser-selection-gate', dir => replaceOnce(path.join(dir, 'scripts/render-mermaid-diagrams.js'), 'validateBrowserSelectionEnvironment();', '// browser selection gate removed')],
   ['missing-renderer-runtime-validation', dir => replaceOnce(path.join(dir, 'scripts/render-mermaid-diagrams.js'), 'validateRendererRuntime(manifest, packageJson);', '// runtime validation removed')],
   ['weakened-sync-gate', dir => replaceOnce(path.join(dir, '.github/workflows/book-qa.yml'), 'git diff --exit-code -- assets/images/diagrams docs', 'git diff --exit-code -- docs')]
 ];
@@ -108,6 +110,13 @@ try {
       checkedProvenance.renderContractSha256 === changedRuntimeProvenance.renderContractSha256) {
     throw new Error('renderer and checker must share runtime-bound render provenance');
   }
+  let browserOverrideRejected = false;
+  try {
+    validateBrowserSelectionEnvironment({ PUPPETEER_EXECUTABLE_PATH: '/synthetic/browser' });
+  } catch {
+    browserOverrideRejected = true;
+  }
+  if (!browserOverrideRejected) throw new Error('browser executable override must be rejected');
   const normalized = ensureAccessibleSvg(
     '<svg aria-roledescription="flowchart"><title>題名</title><desc id="existing-description">説明</desc></svg>',
     { id: 'fixture', title: '題名', description: '説明' }
