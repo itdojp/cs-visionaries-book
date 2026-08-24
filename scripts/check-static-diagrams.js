@@ -9,6 +9,7 @@ const EXPECTED_VERSION = '11.16.0';
 const EXPECTED_PACKAGE = '@mermaid-js/mermaid-cli';
 const EXPECTED_PUPPETEER_VERSION = '25.8.0';
 const EXPECTED_NODE_VERSION = '22.22.2';
+const EXPECTED_BROWSER_REVISION = 'chrome@152.0.7977.42';
 const EXPECTED_SECURITY_COMMAND = 'npm audit --omit=optional --audit-level=high';
 const EXPECTED_DIAGRAMS = [
   ['hinton-ai-history-timeline', 'diagrams/mermaid/hinton-ai-history-timeline.mmd', 'assets/images/diagrams/hinton-ai-history-timeline.svg', 'src/chapters/chapter10.md'],
@@ -144,6 +145,9 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
   if (manifest.renderer?.version !== EXPECTED_VERSION) failures.push(`renderer version must be ${EXPECTED_VERSION}`);
   if (manifest.renderer?.config !== 'diagrams/mermaid-config.json') failures.push('renderer config path mismatch');
   if (manifest.renderer?.puppeteerConfig !== 'diagrams/puppeteer-config.json') failures.push('Puppeteer config path mismatch');
+  if (manifest.renderer?.runtime?.node !== EXPECTED_NODE_VERSION) failures.push(`renderer runtime Node must be exactly ${EXPECTED_NODE_VERSION}`);
+  if (manifest.renderer?.runtime?.puppeteer !== EXPECTED_PUPPETEER_VERSION) failures.push(`renderer runtime Puppeteer must be exactly ${EXPECTED_PUPPETEER_VERSION}`);
+  if (manifest.renderer?.runtime?.browserRevision !== EXPECTED_BROWSER_REVISION) failures.push(`renderer browser revision must be exactly ${EXPECTED_BROWSER_REVISION}`);
   if (!Array.isArray(manifest.diagrams) || manifest.diagrams.length !== 4) failures.push('manifest must define exactly 4 active diagrams');
 
   const diagrams = Array.isArray(manifest.diagrams) ? manifest.diagrams : [];
@@ -180,6 +184,8 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
   if (packageLock.packages?.['']?.devDependencies?.puppeteer !== EXPECTED_PUPPETEER_VERSION) failures.push('lockfile root Puppeteer pin mismatch');
   if (packageLock.packages?.[`node_modules/${EXPECTED_PACKAGE}`]?.version !== EXPECTED_VERSION) failures.push('lockfile installed Mermaid CLI version mismatch');
   if (packageLock.packages?.['node_modules/puppeteer']?.version !== EXPECTED_PUPPETEER_VERSION) failures.push('lockfile installed Puppeteer version mismatch');
+  if (manifest.renderer?.runtime?.node !== packageJson.engines?.node) failures.push('renderer runtime Node must match package.json engine');
+  if (manifest.renderer?.runtime?.puppeteer !== packageJson.devDependencies?.puppeteer) failures.push('renderer runtime Puppeteer must match package.json pin');
   if (packageJson.scripts?.['render:diagrams'] !== 'node scripts/render-mermaid-diagrams.js') failures.push('render:diagrams script mismatch');
   if (!packageJson.scripts?.['test:light']?.includes('check:static-diagrams') || !packageJson.scripts?.['test:light']?.includes('check:static-diagrams-regression')) {
     failures.push('test:light must run static diagram checks');
@@ -294,7 +300,7 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
   if (!buildScript.includes("process.env.STATIC_DIAGRAMS_VERIFY_ONLY === '1'") || !buildScript.includes('checkStaticDiagrams(process.cwd());')) failures.push('build must support browser-free committed artifact verification');
 
   const renderer = fs.readFileSync(path.join(root, 'scripts', 'render-mermaid-diagrams.js'), 'utf8');
-  for (const marker of ['--svgId', '--quiet', '--puppeteerConfigFile', 'browserEnvironment', 'sensitiveName', 'ensureAccessibleSvg', 'validateDefinition', 'validateRendererConfigs', 'verifySvg', 'foreignObject', 'external resource reference']) {
+  for (const marker of ['--svgId', '--quiet', '--puppeteerConfigFile', 'browserEnvironment', 'sensitiveName', 'ensureAccessibleSvg', 'validateDefinition', 'validateRendererConfigs', 'validateRendererRuntime(manifest, packageJson);', 'PUPPETEER_REVISIONS', 'process.versions.node', 'verifySvg', 'foreignObject', 'external resource reference']) {
     if (!renderer.includes(marker)) failures.push(`renderer safety marker is missing: ${marker}`);
   }
 

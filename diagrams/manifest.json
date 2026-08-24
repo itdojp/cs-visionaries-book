@@ -4,7 +4,12 @@
     "package": "@mermaid-js/mermaid-cli",
     "version": "11.16.0",
     "config": "diagrams/mermaid-config.json",
-    "puppeteerConfig": "diagrams/puppeteer-config.json"
+    "puppeteerConfig": "diagrams/puppeteer-config.json",
+    "runtime": {
+      "node": "22.22.2",
+      "puppeteer": "25.8.0",
+      "browserRevision": "chrome@152.0.7977.42"
+    }
   },
   "diagrams": [
     {

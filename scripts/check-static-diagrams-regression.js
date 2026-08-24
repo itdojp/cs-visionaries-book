@@ -2,8 +2,8 @@
 
 const fs = require('fs');
 const path = require('path');
-const { checkStaticDiagrams } = require('./check-static-diagrams');
-const { ensureAccessibleSvg } = require('./render-mermaid-diagrams');
+const { checkStaticDiagrams, computeRenderProvenance: computeCheckedProvenance } = require('./check-static-diagrams');
+const { computeRenderProvenance: computeRenderedProvenance, ensureAccessibleSvg } = require('./render-mermaid-diagrams');
 
 const ROOT = path.resolve(__dirname, '..');
 const TEMP_ROOT = path.join(ROOT, '.codex-local', 'tmp', 'static-diagram-regression');
@@ -60,6 +60,9 @@ const tests = [
   ['unexpected-docs-svg', dir => fs.writeFileSync(path.join(dir, 'docs/assets/images/diagrams/unexpected.svg'), '<svg/>')],
   ['mutable-package-pin', dir => replaceOnce(path.join(dir, 'package.json'), '"@mermaid-js/mermaid-cli": "11.16.0"', '"@mermaid-js/mermaid-cli": "^11.16.0"')],
   ['mutable-puppeteer-pin', dir => replaceOnce(path.join(dir, 'package.json'), '"puppeteer": "25.8.0"', '"puppeteer": "^25.8.0"')],
+  ['manifest-runtime-node-drift', dir => replaceOnce(path.join(dir, 'diagrams/manifest.json'), '"node": "22.22.2"', '"node": "22"')],
+  ['manifest-runtime-puppeteer-drift', dir => replaceOnce(path.join(dir, 'diagrams/manifest.json'), '"puppeteer": "25.8.0"', '"puppeteer": "25"')],
+  ['manifest-runtime-browser-drift', dir => replaceOnce(path.join(dir, 'diagrams/manifest.json'), '"browserRevision": "chrome@152.0.7977.42"', '"browserRevision": "latest"')],
   ['package-node-engine-drift', dir => replaceOnce(path.join(dir, 'package.json'), '"node": "22.22.2"', '"node": ">=22.0.0"')],
   ['simple-package-node-engine-drift', dir => replaceOnce(path.join(dir, 'package-simple.json'), '"node": "22.22.2"', '"node": ">=22.0.0"')],
   ['lockfile-node-engine-drift', dir => replaceOnce(path.join(dir, 'package-lock.json'), '"node": "22.22.2"', '"node": ">=22.0.0"')],
@@ -79,6 +82,7 @@ const tests = [
   ['missing-build-preflight', dir => replaceOnce(path.join(dir, '.github/workflows/build.yml'), 'npm run check:static-diagrams && npm run check:static-diagrams-regression', 'echo diagram-checks-removed')],
   ['missing-ci-verify-only', dir => replaceOnce(path.join(dir, '.github/workflows/build.yml'), "STATIC_DIAGRAMS_VERIFY_ONLY: '1'", "STATIC_DIAGRAMS_VERIFY_ONLY: '0'")],
   ['external-puppeteer-cache', dir => replaceOnce(path.join(dir, '.puppeteerrc.cjs'), "'.codex-local', 'cache', 'puppeteer'", "'outside-workspace', 'puppeteer'")],
+  ['missing-renderer-runtime-validation', dir => replaceOnce(path.join(dir, 'scripts/render-mermaid-diagrams.js'), 'validateRendererRuntime(manifest, packageJson);', '// runtime validation removed')],
   ['weakened-sync-gate', dir => replaceOnce(path.join(dir, '.github/workflows/book-qa.yml'), 'git diff --exit-code -- assets/images/diagrams docs', 'git diff --exit-code -- docs')]
 ];
 
@@ -90,6 +94,20 @@ try {
   const positive = path.join(TEMP_ROOT, 'positive');
   copyFixture(positive);
   checkStaticDiagrams(positive);
+  const manifest = JSON.parse(fs.readFileSync(path.join(positive, 'diagrams/manifest.json'), 'utf8'));
+  const diagram = manifest.diagrams[0];
+  const definition = fs.readFileSync(path.join(positive, diagram.source), 'utf8');
+  const mermaidConfig = fs.readFileSync(path.join(positive, manifest.renderer.config), 'utf8');
+  const puppeteerConfig = fs.readFileSync(path.join(positive, manifest.renderer.puppeteerConfig), 'utf8');
+  const checkedProvenance = computeCheckedProvenance(manifest, diagram, definition, mermaidConfig, puppeteerConfig);
+  const renderedProvenance = computeRenderedProvenance(manifest, diagram, definition, mermaidConfig, puppeteerConfig);
+  const changedRuntimeManifest = JSON.parse(JSON.stringify(manifest));
+  changedRuntimeManifest.renderer.runtime.puppeteer = 'fixture-drift';
+  const changedRuntimeProvenance = computeCheckedProvenance(changedRuntimeManifest, diagram, definition, mermaidConfig, puppeteerConfig);
+  if (checkedProvenance.renderContractSha256 !== renderedProvenance.renderContractSha256 ||
+      checkedProvenance.renderContractSha256 === changedRuntimeProvenance.renderContractSha256) {
+    throw new Error('renderer and checker must share runtime-bound render provenance');
+  }
   const normalized = ensureAccessibleSvg(
     '<svg aria-roledescription="flowchart"><title>題名</title><desc id="existing-description">説明</desc></svg>',
     { id: 'fixture', title: '題名', description: '説明' }

@@ -7,6 +7,11 @@ const { spawnSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..');
 const MANIFEST_PATH = path.join(ROOT, 'diagrams', 'manifest.json');
+const EXPECTED_RUNTIME = Object.freeze({
+  node: '22.22.2',
+  puppeteer: '25.8.0',
+  browserRevision: 'chrome@152.0.7977.42'
+});
 const EXPECTED_DIAGRAMS = [
   ['hinton-ai-history-timeline', 'diagrams/mermaid/hinton-ai-history-timeline.mmd', 'assets/images/diagrams/hinton-ai-history-timeline.svg', 'src/chapters/chapter10.md'],
   ['neural-network-layer-flow', 'diagrams/mermaid/neural-network-layer-flow.mmd', 'assets/images/diagrams/neural-network-layer-flow.svg', 'src/chapters/chapter10.md'],
@@ -32,6 +37,11 @@ function readManifest() {
       manifest.renderer?.config !== 'diagrams/mermaid-config.json' || manifest.renderer?.puppeteerConfig !== 'diagrams/puppeteer-config.json') {
     throw new Error('static diagram renderer contract mismatch');
   }
+  const runtime = manifest.renderer?.runtime;
+  if (!runtime || Object.keys(runtime).sort().join(',') !== Object.keys(EXPECTED_RUNTIME).sort().join(',') ||
+      Object.entries(EXPECTED_RUNTIME).some(([key, value]) => runtime[key] !== value)) {
+    throw new Error('static diagram renderer runtime contract mismatch');
+  }
   for (const [id, source, output, document] of EXPECTED_DIAGRAMS) {
     const diagram = manifest.diagrams.find(item => item.id === id);
     if (!diagram || diagram.source !== source || diagram.output !== output || diagram.publicPath !== `/${output}` || diagram.document !== document) {
@@ -50,6 +60,22 @@ function validateRendererConfigs(configPath, puppeteerConfigPath) {
   const puppeteerConfig = JSON.parse(fs.readFileSync(puppeteerConfigPath, 'utf8'));
   if (puppeteerConfig.headless !== true || JSON.stringify(puppeteerConfig.args) !== JSON.stringify(EXPECTED_PUPPETEER_ARGS)) {
     throw new Error('Puppeteer config must use the audited sandbox-preserving argument set');
+  }
+}
+
+function validateRendererRuntime(manifest, packageJson) {
+  const installedPuppeteer = require('puppeteer/package.json').version;
+  const { PUPPETEER_REVISIONS } = require('puppeteer-core/internal/revisions.js');
+  const actual = {
+    node: process.versions.node,
+    puppeteer: installedPuppeteer,
+    browserRevision: `chrome@${PUPPETEER_REVISIONS.chrome}`
+  };
+  if (Object.entries(actual).some(([key, value]) => manifest.renderer.runtime[key] !== value)) {
+    throw new Error(`renderer runtime differs from manifest: ${JSON.stringify(actual)}`);
+  }
+  if (packageJson.engines?.node !== actual.node || packageJson.devDependencies?.puppeteer !== actual.puppeteer) {
+    throw new Error('renderer runtime differs from package contract');
   }
 }
 
@@ -182,6 +208,7 @@ function renderAll() {
   if (pinned !== manifest.renderer.version) {
     throw new Error(`${manifest.renderer.package} must be pinned to ${manifest.renderer.version}; found ${pinned || 'missing'}`);
   }
+  validateRendererRuntime(manifest, packageJson);
 
   const config = assertInsideRoot(manifest.renderer.config, 'renderer config');
   const puppeteerConfig = assertInsideRoot(manifest.renderer.puppeteerConfig, 'Puppeteer config');
@@ -233,4 +260,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { assertInsideRoot, browserEnvironment, computeRenderProvenance, ensureAccessibleSvg, ensureRenderProvenance, readManifest, referencedElementText, renderAll, validateDefinition, validateRendererConfigs, verifySvg };
+module.exports = { assertInsideRoot, browserEnvironment, computeRenderProvenance, ensureAccessibleSvg, ensureRenderProvenance, readManifest, referencedElementText, renderAll, validateDefinition, validateRendererConfigs, validateRendererRuntime, verifySvg };
