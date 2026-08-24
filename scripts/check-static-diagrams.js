@@ -7,7 +7,9 @@ const crypto = require('crypto');
 const DEFAULT_ROOT = path.resolve(__dirname, '..');
 const EXPECTED_VERSION = '11.16.0';
 const EXPECTED_PACKAGE = '@mermaid-js/mermaid-cli';
-const EXPECTED_PUPPETEER_VERSION = '24.43.1';
+const EXPECTED_PUPPETEER_VERSION = '25.8.0';
+const EXPECTED_NODE_VERSION = '22.22.2';
+const EXPECTED_SECURITY_COMMAND = 'npm audit --omit=optional --audit-level=high';
 const EXPECTED_DIAGRAMS = [
   ['hinton-ai-history-timeline', 'diagrams/mermaid/hinton-ai-history-timeline.mmd', 'assets/images/diagrams/hinton-ai-history-timeline.svg', 'src/chapters/chapter10.md'],
   ['neural-network-layer-flow', 'diagrams/mermaid/neural-network-layer-flow.mmd', 'assets/images/diagrams/neural-network-layer-flow.svg', 'src/chapters/chapter10.md'],
@@ -153,9 +155,14 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
   }
 
   const packageJson = readJson(path.join(root, 'package.json'));
+  const packageSimple = readJson(path.join(root, 'package-simple.json'));
   const packageLock = readJson(path.join(root, 'package-lock.json'));
+  if (packageJson.engines?.node !== EXPECTED_NODE_VERSION) failures.push(`package.json Node engine must be exactly ${EXPECTED_NODE_VERSION}`);
+  if (packageSimple.engines?.node !== EXPECTED_NODE_VERSION) failures.push(`package-simple.json Node engine must be exactly ${EXPECTED_NODE_VERSION}`);
+  if (packageLock.packages?.['']?.engines?.node !== EXPECTED_NODE_VERSION) failures.push(`lockfile root Node engine must be exactly ${EXPECTED_NODE_VERSION}`);
+  if (packageJson.scripts?.['check:security'] !== EXPECTED_SECURITY_COMMAND) failures.push(`check:security must be exactly: ${EXPECTED_SECURITY_COMMAND}`);
   if (packageJson.devDependencies?.[EXPECTED_PACKAGE] !== EXPECTED_VERSION) failures.push('Mermaid CLI devDependency must use the audited exact version');
-  if (packageJson.devDependencies?.puppeteer !== EXPECTED_PUPPETEER_VERSION) failures.push('Puppeteer devDependency must use the audited exact Node 20-compatible version');
+  if (packageJson.devDependencies?.puppeteer !== EXPECTED_PUPPETEER_VERSION) failures.push('Puppeteer devDependency must use the audited exact Node 22-compatible version');
   if (packageLock.packages?.['']?.devDependencies?.[EXPECTED_PACKAGE] !== EXPECTED_VERSION) failures.push('lockfile root Mermaid CLI pin mismatch');
   if (packageLock.packages?.['']?.devDependencies?.puppeteer !== EXPECTED_PUPPETEER_VERSION) failures.push('lockfile root Puppeteer pin mismatch');
   if (packageLock.packages?.[`node_modules/${EXPECTED_PACKAGE}`]?.version !== EXPECTED_VERSION) failures.push('lockfile installed Mermaid CLI version mismatch');
@@ -287,6 +294,7 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
   if (!buildWorkflow.includes('npm run check:static-diagrams && npm run check:static-diagrams-regression')) failures.push('Build workflow must validate diagram inputs before rendering');
   if (count(buildWorkflow, 'git diff --exit-code -- assets/images/diagrams docs') < 2) failures.push('Build workflow must verify diagram determinism twice');
   for (const [label, workflow] of [['Book QA', bookQa], ['Build', buildWorkflow]]) {
+    if (count(workflow, 'node-version:') !== 1 || !workflow.includes(`node-version: '${EXPECTED_NODE_VERSION}'`)) failures.push(`${label} must use Node ${EXPECTED_NODE_VERSION} exactly`);
     if (!workflow.includes("PUPPETEER_SKIP_DOWNLOAD: 'true'") || !workflow.includes("STATIC_DIAGRAMS_VERIFY_ONLY: '1'")) failures.push(`${label} must verify committed diagrams without launching Chromium`);
   }
 

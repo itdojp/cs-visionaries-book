@@ -92,19 +92,39 @@
 
 ### ビルドが失敗する場合
 
-1. **依存関係のインストール**
+ローカル検証には Node.js 22.22.2 を使用し、目的に応じて次のいずれか一方を選びます。
+
+1. **ブラウザ不要の verify-only QA**
+
+   コミット済み静的図を検証し、renderer を起動しない経路です。
+
    ```bash
-   npm ci
+   export PUPPETEER_SKIP_DOWNLOAD=true
+   export STATIC_DIAGRAMS_VERIFY_ONLY=1
+   npm ci --omit=optional
+   npm run test:light
    ```
 
-2. **手動ビルド実行**
+2. **実レンダリングと手動 build**
+
+   Puppeteer 25.8.0 が固定するブラウザを通常 `npm ci` で導入します。build と preview はブラウザ不要ではありません。
+
    ```bash
+   unset PUPPETEER_SKIP_DOWNLOAD
+   unset STATIC_DIAGRAMS_VERIFY_ONLY
+   npm ci
+   npm run render:diagrams
    npm run build
+   ```
+
+3. **Jekyll build**
+
+   ```bash
    cd docs && bundle install
    bundle exec jekyll build
    ```
 
-3. **ログの確認**
+4. **ログの確認**
    - GitHub Actions のログで詳細なエラーメッセージを確認
 
 ### サイトが古い内容を表示する場合

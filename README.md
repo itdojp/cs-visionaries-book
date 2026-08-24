@@ -24,14 +24,21 @@
 
 ## ローカル品質チェック
 
+### ブラウザ不要の verify-only QA
+
+コミット済み静的SVGを検証するだけで、新しい図をレンダリングしない経路です。CI と同様に、ブラウザ取得を抑止し、build を verify-only に固定します。
+
 ```bash
-# optional 依存を省いた再現可能な軽量QA依存をインストール
+export PUPPETEER_SKIP_DOWNLOAD=true
+export STATIC_DIAGRAMS_VERIFY_ONLY=1
+
+# optional 依存と Puppeteer のブラウザ取得を省いた再現可能なQA依存をインストール
 npm ci --omit=optional
 
 # package / Jekyll / 公開ページ metadata の整合性を確認
 npm run check:metadata
 
-# optional 依存を除いた audit findings を確認
+# optional 依存を除いた high 以上の audit findings を確認
 npm run check:security
 
 # 現行 Markdown スタイルを考慮した軽量lintを確認
@@ -39,10 +46,25 @@ npm run lint:light
 
 # Markdown lint と簡易ビルドを確認
 npm run test:light
-
 ```
 
-注: CI の Node 20 互換を維持するため `markdownlint-cli` は 0.48 系のまま使い、audit findings は `gray-matter` / `markdownlint-cli` 配下に限定した `overrides` で解消しています。
+この経路の `npm run test:light` / `npm run build` は、renderer を起動せず、コミット済み図と `docs/` の同期を検証します。図の新規生成や更新には使用できません。
+
+### 実レンダリング・build・preview
+
+図をレンダリングする `npm run render:diagrams`、通常の `npm run build`、build を内包する `npm run preview` には Chrome が必要です。Puppeteer 25.8.0 が固定するブラウザを postinstall で導入するため、verify-only 用の環境変数を解除して通常インストールします。
+
+```bash
+unset PUPPETEER_SKIP_DOWNLOAD
+unset STATIC_DIAGRAMS_VERIFY_ONLY
+npm ci
+
+npm run render:diagrams
+npm run build
+npm run preview
+```
+
+注: ローカル QA と CI は Node.js 22.22.2、`markdownlint-cli` 0.49.1、Puppeteer 25.8.0 を厳密に使用します。`gray-matter` は互換な `js-yaml` 3 系の修正版を使用します。
 
 ## Phase 5 人物・年代・貢献レビューゲート
 
