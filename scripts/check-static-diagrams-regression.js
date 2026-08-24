@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { checkStaticDiagrams, computeRenderProvenance: computeCheckedProvenance } = require('./check-static-diagrams');
-const { computeRenderProvenance: computeRenderedProvenance, ensureAccessibleSvg, validateBrowserSelectionEnvironment } = require('./render-mermaid-diagrams');
+const { computeRenderProvenance: computeRenderedProvenance, ensureAccessibleSvg, FORBIDDEN_BROWSER_SELECTION_ENV, validateBrowserSelectionEnvironment } = require('./render-mermaid-diagrams');
 
 const ROOT = path.resolve(__dirname, '..');
 const TEMP_ROOT = path.join(ROOT, '.codex-local', 'tmp', 'static-diagram-regression');
@@ -63,6 +63,7 @@ const tests = [
   ['manifest-runtime-node-drift', dir => replaceOnce(path.join(dir, 'diagrams/manifest.json'), '"node": "22.22.2"', '"node": "22"')],
   ['manifest-runtime-puppeteer-drift', dir => replaceOnce(path.join(dir, 'diagrams/manifest.json'), '"puppeteer": "25.8.0"', '"puppeteer": "25"')],
   ['manifest-runtime-browser-drift', dir => replaceOnce(path.join(dir, 'diagrams/manifest.json'), '"browserRevision": "chrome@152.0.7977.42"', '"browserRevision": "latest"')],
+  ['manifest-runtime-unknown-key', dir => replaceOnce(path.join(dir, 'diagrams/manifest.json'), '"browserRevision": "chrome@152.0.7977.42"', '"browserRevision": "chrome@152.0.7977.42",\n      "channel": "stable"')],
   ['package-node-engine-drift', dir => replaceOnce(path.join(dir, 'package.json'), '"node": "22.22.2"', '"node": ">=22.0.0"')],
   ['simple-package-node-engine-drift', dir => replaceOnce(path.join(dir, 'package-simple.json'), '"node": "22.22.2"', '"node": ">=22.0.0"')],
   ['lockfile-node-engine-drift', dir => replaceOnce(path.join(dir, 'package-lock.json'), '"node": "22.22.2"', '"node": ">=22.0.0"')],
@@ -85,6 +86,17 @@ const tests = [
   ['external-puppeteer-cache', dir => replaceOnce(path.join(dir, '.puppeteerrc.cjs'), "'.codex-local', 'cache', 'puppeteer'", "'outside-workspace', 'puppeteer'")],
   ['repository-puppeteer-executable-override', dir => replaceOnce(path.join(dir, '.puppeteerrc.cjs'), "cacheDirectory: path.join(__dirname, '.codex-local', 'cache', 'puppeteer')", "cacheDirectory: path.join(__dirname, '.codex-local', 'cache', 'puppeteer'),\n  executablePath: '/synthetic/browser'")],
   ['repository-puppeteer-browser-override', dir => replaceOnce(path.join(dir, '.puppeteerrc.cjs'), "cacheDirectory: path.join(__dirname, '.codex-local', 'cache', 'puppeteer')", "cacheDirectory: path.join(__dirname, '.codex-local', 'cache', 'puppeteer'),\n  defaultBrowser: 'firefox'")],
+  ['alternate-puppeteer-config', dir => {
+    const file = path.join(dir, '.config/puppeteer.config.cjs');
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.writeFileSync(file, "module.exports = { executablePath: '/synthetic/browser' };\n", 'utf8');
+  }],
+  ['package-puppeteer-config', dir => {
+    const file = path.join(dir, 'package.json');
+    const value = JSON.parse(fs.readFileSync(file, 'utf8'));
+    value.puppeteer = { executablePath: '/synthetic/browser' };
+    fs.writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`, 'utf8');
+  }],
   ['missing-browser-selection-gate', dir => replaceOnce(path.join(dir, 'scripts/render-mermaid-diagrams.js'), 'validateBrowserSelectionEnvironment();', '// browser selection gate removed')],
   ['missing-renderer-runtime-validation', dir => replaceOnce(path.join(dir, 'scripts/render-mermaid-diagrams.js'), 'validateRendererRuntime(manifest, packageJson);', '// runtime validation removed')],
   ['weakened-sync-gate', dir => replaceOnce(path.join(dir, '.github/workflows/book-qa.yml'), 'git diff --exit-code -- assets/images/diagrams docs', 'git diff --exit-code -- docs')]
@@ -112,13 +124,15 @@ try {
       checkedProvenance.renderContractSha256 === changedRuntimeProvenance.renderContractSha256) {
     throw new Error('renderer and checker must share runtime-bound render provenance');
   }
-  let browserOverrideRejected = false;
-  try {
-    validateBrowserSelectionEnvironment({ PUPPETEER_EXECUTABLE_PATH: '/synthetic/browser' });
-  } catch {
-    browserOverrideRejected = true;
+  for (const variable of FORBIDDEN_BROWSER_SELECTION_ENV) {
+    let browserOverrideRejected = false;
+    try {
+      validateBrowserSelectionEnvironment({ [variable]: 'synthetic-override' });
+    } catch {
+      browserOverrideRejected = true;
+    }
+    if (!browserOverrideRejected) throw new Error(`browser selection override must be rejected: ${variable}`);
   }
-  if (!browserOverrideRejected) throw new Error('browser executable override must be rejected');
   const normalized = ensureAccessibleSvg(
     '<svg aria-roledescription="flowchart"><title>題名</title><desc id="existing-description">説明</desc></svg>',
     { id: 'fixture', title: '題名', description: '説明' }

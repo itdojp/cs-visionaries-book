@@ -15,7 +15,23 @@ const EXPECTED_RUNTIME = Object.freeze({
 const FORBIDDEN_BROWSER_SELECTION_ENV = Object.freeze([
   'PUPPETEER_EXECUTABLE_PATH',
   'PUPPETEER_BROWSER',
-  'PUPPETEER_PRODUCT'
+  'PUPPETEER_PRODUCT',
+  'PUPPETEER_CHROME_VERSION',
+  'PUPPETEER_CHROME_HEADLESS_SHELL_VERSION',
+  'PUPPETEER_FIREFOX_VERSION'
+]);
+const FORBIDDEN_PUPPETEER_CONFIG_PATHS = Object.freeze([
+  '.config/puppeteer.config.cjs',
+  '.config/puppeteer.config.js',
+  '.config/puppeteerrc.cjs',
+  '.config/puppeteerrc.js',
+  '.config/puppeteerrc.json',
+  '.config/puppeteerrc',
+  '.puppeteerrc.js',
+  '.puppeteerrc.json',
+  '.puppeteerrc',
+  'puppeteer.config.cjs',
+  'puppeteer.config.js'
 ]);
 const EXPECTED_DIAGRAMS = [
   ['hinton-ai-history-timeline', 'diagrams/mermaid/hinton-ai-history-timeline.mmd', 'assets/images/diagrams/hinton-ai-history-timeline.svg', 'src/chapters/chapter10.md'],
@@ -78,7 +94,12 @@ function validateBrowserSelectionEnvironment(environment = process.env) {
   }
 }
 
-function validateRepositoryPuppeteerConfig() {
+function validateRepositoryPuppeteerConfig(packageJson) {
+  if (Object.prototype.hasOwnProperty.call(packageJson, 'puppeteer')) {
+    throw new Error('package.json Puppeteer configuration is forbidden');
+  }
+  const alternateConfig = FORBIDDEN_PUPPETEER_CONFIG_PATHS.find(relative => fs.existsSync(path.join(ROOT, relative)));
+  if (alternateConfig) throw new Error(`alternate Puppeteer configuration is forbidden: ${alternateConfig}`);
   const file = path.join(ROOT, '.puppeteerrc.cjs');
   delete require.cache[require.resolve(file)];
   const config = require(file);
@@ -91,9 +112,10 @@ function validateRepositoryPuppeteerConfig() {
 
 function validateRendererRuntime(manifest, packageJson) {
   validateBrowserSelectionEnvironment();
-  validateRepositoryPuppeteerConfig();
+  validateRepositoryPuppeteerConfig(packageJson);
   const installedPuppeteer = require('puppeteer/package.json').version;
-  const { PUPPETEER_REVISIONS } = require('puppeteer-core/internal/revisions.js');
+  const { PUPPETEER_REVISIONS } = require('puppeteer');
+  if (!PUPPETEER_REVISIONS?.chrome) throw new Error('Puppeteer did not expose its pinned Chrome revision');
   const actual = {
     node: process.versions.node,
     puppeteer: installedPuppeteer,
@@ -289,4 +311,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { assertInsideRoot, browserEnvironment, computeRenderProvenance, ensureAccessibleSvg, ensureRenderProvenance, readManifest, referencedElementText, renderAll, validateBrowserSelectionEnvironment, validateDefinition, validateRendererConfigs, validateRendererRuntime, validateRepositoryPuppeteerConfig, verifySvg };
+module.exports = { assertInsideRoot, browserEnvironment, computeRenderProvenance, ensureAccessibleSvg, ensureRenderProvenance, FORBIDDEN_BROWSER_SELECTION_ENV, readManifest, referencedElementText, renderAll, validateBrowserSelectionEnvironment, validateDefinition, validateRendererConfigs, validateRendererRuntime, validateRepositoryPuppeteerConfig, verifySvg };

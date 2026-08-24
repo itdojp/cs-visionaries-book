@@ -10,6 +10,20 @@ const EXPECTED_PACKAGE = '@mermaid-js/mermaid-cli';
 const EXPECTED_PUPPETEER_VERSION = '25.8.0';
 const EXPECTED_NODE_VERSION = '22.22.2';
 const EXPECTED_BROWSER_REVISION = 'chrome@152.0.7977.42';
+const EXPECTED_RUNTIME_KEYS = ['browserRevision', 'node', 'puppeteer'];
+const FORBIDDEN_PUPPETEER_CONFIG_PATHS = [
+  '.config/puppeteer.config.cjs',
+  '.config/puppeteer.config.js',
+  '.config/puppeteerrc.cjs',
+  '.config/puppeteerrc.js',
+  '.config/puppeteerrc.json',
+  '.config/puppeteerrc',
+  '.puppeteerrc.js',
+  '.puppeteerrc.json',
+  '.puppeteerrc',
+  'puppeteer.config.cjs',
+  'puppeteer.config.js'
+];
 const EXPECTED_SECURITY_COMMAND = 'npm audit --omit=optional --audit-level=high';
 const EXPECTED_DIAGRAMS = [
   ['hinton-ai-history-timeline', 'diagrams/mermaid/hinton-ai-history-timeline.mmd', 'assets/images/diagrams/hinton-ai-history-timeline.svg', 'src/chapters/chapter10.md'],
@@ -145,6 +159,7 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
   if (manifest.renderer?.version !== EXPECTED_VERSION) failures.push(`renderer version must be ${EXPECTED_VERSION}`);
   if (manifest.renderer?.config !== 'diagrams/mermaid-config.json') failures.push('renderer config path mismatch');
   if (manifest.renderer?.puppeteerConfig !== 'diagrams/puppeteer-config.json') failures.push('Puppeteer config path mismatch');
+  if (Object.keys(manifest.renderer?.runtime || {}).sort().join(',') !== EXPECTED_RUNTIME_KEYS.join(',')) failures.push('renderer runtime keys must match the frozen schema');
   if (manifest.renderer?.runtime?.node !== EXPECTED_NODE_VERSION) failures.push(`renderer runtime Node must be exactly ${EXPECTED_NODE_VERSION}`);
   if (manifest.renderer?.runtime?.puppeteer !== EXPECTED_PUPPETEER_VERSION) failures.push(`renderer runtime Puppeteer must be exactly ${EXPECTED_PUPPETEER_VERSION}`);
   if (manifest.renderer?.runtime?.browserRevision !== EXPECTED_BROWSER_REVISION) failures.push(`renderer browser revision must be exactly ${EXPECTED_BROWSER_REVISION}`);
@@ -166,6 +181,7 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
   const packageJson = readJson(path.join(root, 'package.json'));
   const packageSimple = readJson(path.join(root, 'package-simple.json'));
   const packageLock = readJson(path.join(root, 'package-lock.json'));
+  if (Object.prototype.hasOwnProperty.call(packageJson, 'puppeteer')) failures.push('package.json Puppeteer configuration is forbidden');
   const npmConfigLines = fs.readFileSync(path.join(root, '.npmrc'), 'utf8')
     .split(/\r?\n/)
     .map(line => line.trim())
@@ -213,6 +229,9 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
     if (JSON.stringify(args) !== JSON.stringify(EXPECTED_PUPPETEER_ARGS)) failures.push('Puppeteer arguments must match the audited sandbox-preserving set');
   } else if (puppeteerConfigPath) failures.push('Puppeteer config is missing');
   const puppeteerRc = path.join(root, '.puppeteerrc.cjs');
+  for (const forbiddenPath of FORBIDDEN_PUPPETEER_CONFIG_PATHS) {
+    if (fs.existsSync(path.join(root, forbiddenPath))) failures.push(`alternate Puppeteer configuration is forbidden: ${forbiddenPath}`);
+  }
   if (!fs.existsSync(puppeteerRc)) failures.push('Puppeteer cache config is missing');
   else {
     try {
@@ -306,7 +325,7 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
   if (!buildScript.includes("process.env.STATIC_DIAGRAMS_VERIFY_ONLY === '1'") || !buildScript.includes('checkStaticDiagrams(process.cwd());')) failures.push('build must support browser-free committed artifact verification');
 
   const renderer = fs.readFileSync(path.join(root, 'scripts', 'render-mermaid-diagrams.js'), 'utf8');
-  for (const marker of ['--svgId', '--quiet', '--puppeteerConfigFile', 'browserEnvironment', 'sensitiveName', 'ensureAccessibleSvg', 'validateDefinition', 'validateRendererConfigs', 'validateBrowserSelectionEnvironment', 'validateRepositoryPuppeteerConfig();', 'validateRendererRuntime(manifest, packageJson);', 'PUPPETEER_EXECUTABLE_PATH', 'PUPPETEER_REVISIONS', 'process.versions.node', 'verifySvg', 'foreignObject', 'external resource reference']) {
+  for (const marker of ['--svgId', '--quiet', '--puppeteerConfigFile', 'browserEnvironment', 'sensitiveName', 'ensureAccessibleSvg', 'validateDefinition', 'validateRendererConfigs', 'validateBrowserSelectionEnvironment', 'validateRepositoryPuppeteerConfig(packageJson);', 'validateRendererRuntime(manifest, packageJson);', 'PUPPETEER_EXECUTABLE_PATH', 'PUPPETEER_CHROME_VERSION', 'PUPPETEER_REVISIONS', 'process.versions.node', 'verifySvg', 'foreignObject', 'external resource reference']) {
     if (!renderer.includes(marker)) failures.push(`renderer safety marker is missing: ${marker}`);
   }
   if (count(renderer, 'validateBrowserSelectionEnvironment();') !== 2) failures.push('renderer must reject browser selection overrides before validation and launch');
