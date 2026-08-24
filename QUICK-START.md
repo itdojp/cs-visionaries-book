@@ -18,7 +18,7 @@ cd cs-visionaries-book
 
 ### 実レンダリング・build・preview を行う場合
 
-通常の build と preview は静的図 renderer を起動するため Chrome が必要です。Puppeteer 25.8.0 が固定するブラウザを導入します。
+verify-only 用の環境変数を解除して静的図を再生成するこの経路では、build と preview に Chrome が必要です。Puppeteer 25.8.0 が固定するブラウザを導入します。
 
 ```bash
 unset PUPPETEER_SKIP_DOWNLOAD
@@ -70,7 +70,7 @@ assets/                            # 画像・印刷用 CSS などの静的ア�
 
 ### ローカル preview
 
-簡易 preview も内部で通常 build を行うため、固定ブラウザが必要です。
+次のコマンドは現在の環境変数を引き継ぎます。通常経路では固定ブラウザで図を再生成し、`STATIC_DIAGRAMS_VERIFY_ONLY=1` の経路ではコミット済み図だけを検証して preview します。
 
 ```bash
 npm run preview

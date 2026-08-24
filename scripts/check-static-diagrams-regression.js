@@ -66,6 +66,7 @@ const tests = [
   ['weakened-security-threshold', dir => replaceOnce(path.join(dir, 'package.json'), 'npm audit --omit=optional --audit-level=high', 'npm audit --omit=optional --audit-level=critical')],
   ['build-node-version-drift', dir => replaceOnce(path.join(dir, '.github/workflows/build.yml'), "node-version: '22.22.2'", "node-version: '22'")],
   ['book-qa-node-version-drift', dir => replaceOnce(path.join(dir, '.github/workflows/book-qa.yml'), "node-version: '22.22.2'", "node-version: '22'")],
+  ['extra-build-job-node-version-drift', dir => fs.appendFileSync(path.join(dir, '.github/workflows/build.yml'), "\n  incompatible-runtime-fixture:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/setup-node@v6\n        with:\n          node-version: '20'\n")],
   ['disabled-engine-strict', dir => replaceOnce(path.join(dir, '.npmrc'), 'engine-strict=true', 'engine-strict=false')],
   ['legacy-template-node-version-drift', dir => replaceOnce(path.join(dir, 'templates/github-workflows/build-legacy.yml'), "node-version: '22.22.2'", "node-version: '20'")],
   ['actions-template-node-version-drift', dir => replaceOnce(path.join(dir, 'templates/github-workflows/build-actions.yml'), "node-version: '22.22.2'", "node-version: '20'")],

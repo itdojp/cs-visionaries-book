@@ -61,6 +61,11 @@ function count(content, needle) {
   return content.split(needle).length - 1;
 }
 
+function workflowNodeVersions(content) {
+  return [...content.matchAll(/^\s*node-version:\s*['"]?([^'"\s#]+)['"]?\s*(?:#.*)?$/gm)]
+    .map(match => match[1]);
+}
+
 function relative(root, file) {
   return path.relative(root, file).replace(/\\/g, '/');
 }
@@ -161,8 +166,10 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
     .split(/\r?\n/)
     .map(line => line.trim())
     .filter(line => line && !line.startsWith('#') && !line.startsWith(';'));
-  const engineStrictLines = npmConfigLines.filter(line => /^engine-strict\s*=/.test(line));
-  if (engineStrictLines.length !== 1 || engineStrictLines[0] !== 'engine-strict=true') failures.push('.npmrc must enable engine-strict exactly once');
+  const engineStrictEntries = npmConfigLines
+    .map(line => line.match(/^engine-strict\s*=\s*(\S+)\s*$/))
+    .filter(Boolean);
+  if (engineStrictEntries.length !== 1 || engineStrictEntries[0][1].toLowerCase() !== 'true') failures.push('.npmrc must enable engine-strict exactly once');
   if (packageJson.engines?.node !== EXPECTED_NODE_VERSION) failures.push(`package.json Node engine must be exactly ${EXPECTED_NODE_VERSION}`);
   if (packageSimple.engines?.node !== EXPECTED_NODE_VERSION) failures.push(`package-simple.json Node engine must be exactly ${EXPECTED_NODE_VERSION}`);
   if (packageLock.packages?.['']?.engines?.node !== EXPECTED_NODE_VERSION) failures.push(`lockfile root Node engine must be exactly ${EXPECTED_NODE_VERSION}`);
@@ -302,11 +309,13 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
   if (!buildWorkflow.includes('npm run check:static-diagrams && npm run check:static-diagrams-regression')) failures.push('Build workflow must validate diagram inputs before rendering');
   if (count(buildWorkflow, 'git diff --exit-code -- assets/images/diagrams docs') < 2) failures.push('Build workflow must verify diagram determinism twice');
   for (const [label, workflow] of [['Book QA', bookQa], ['Build', buildWorkflow]]) {
-    if (count(workflow, 'node-version:') !== 1 || !workflow.includes(`node-version: '${EXPECTED_NODE_VERSION}'`)) failures.push(`${label} must use Node ${EXPECTED_NODE_VERSION} exactly`);
+    const versions = workflowNodeVersions(workflow);
+    if (versions.length === 0 || versions.some(version => version !== EXPECTED_NODE_VERSION)) failures.push(`${label} must use Node ${EXPECTED_NODE_VERSION} for every setup-node job`);
     if (!workflow.includes("PUPPETEER_SKIP_DOWNLOAD: 'true'") || !workflow.includes("STATIC_DIAGRAMS_VERIFY_ONLY: '1'")) failures.push(`${label} must verify committed diagrams without launching Chromium`);
   }
   for (const [label, workflow] of [['Legacy workflow template', legacyWorkflowTemplate], ['Actions workflow template', actionsWorkflowTemplate]]) {
-    if (count(workflow, 'node-version:') !== 1 || !workflow.includes(`node-version: '${EXPECTED_NODE_VERSION}'`)) failures.push(`${label} must use Node ${EXPECTED_NODE_VERSION} exactly`);
+    const versions = workflowNodeVersions(workflow);
+    if (versions.length === 0 || versions.some(version => version !== EXPECTED_NODE_VERSION)) failures.push(`${label} must use Node ${EXPECTED_NODE_VERSION} for every setup-node job`);
   }
 
   if (options.siteDir) {

@@ -107,7 +107,7 @@
 
 2. **実レンダリングと手動 build**
 
-   Puppeteer 25.8.0 が固定するブラウザを通常 `npm ci` で導入します。build と preview はブラウザ不要ではありません。
+   verify-only 用の環境変数を解除して図を再生成する通常経路です。Puppeteer 25.8.0 が固定するブラウザを通常 `npm ci` で導入します。
 
    ```bash
    unset PUPPETEER_SKIP_DOWNLOAD

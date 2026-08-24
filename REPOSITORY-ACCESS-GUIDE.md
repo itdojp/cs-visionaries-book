@@ -74,7 +74,7 @@ verify-only 経路はコミット済み静的図を検証し、renderer を起�
 補足:
 - 通常の `npm run build` は静的図をレンダリングしてから `src/` から `docs/` を更新します。
 - `STATIC_DIAGRAMS_VERIFY_ONLY=1` の `npm run build` はコミット済み図だけを検証します。
-- `npm run preview` は通常 build 後の `docs/` を簡易 preview するため、固定ブラウザが必要です。
+- `npm run preview` は現在の環境変数を引き継ぎます。通常経路では固定ブラウザで図を再生成し、verify-only 経路ではコミット済み図を検証してから `docs/` を簡易 preview します。
 - Jekyll include や公開導線を厳密に確認する場合は `cd docs && bundle exec jekyll build` を使います。
 
 ## 競合検出

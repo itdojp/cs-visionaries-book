@@ -52,7 +52,7 @@ npm run test:light
 
 ### 実レンダリング・build・preview
 
-図をレンダリングする `npm run render:diagrams`、通常の `npm run build`、build を内包する `npm run preview` には Chrome が必要です。Puppeteer 25.8.0 が固定するブラウザを postinstall で導入するため、verify-only 用の環境変数を解除して通常インストールします。
+verify-only 用の環境変数を解除して図を再生成する通常経路では、`npm run render:diagrams`、`npm run build`、build を内包する `npm run preview` に Chrome が必要です。Puppeteer 25.8.0 が固定するブラウザを postinstall で導入します。
 
 ```bash
 unset PUPPETEER_SKIP_DOWNLOAD
