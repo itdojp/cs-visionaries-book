@@ -10,7 +10,7 @@ const TEMP_ROOT = path.join(ROOT, '.codex-local', 'tmp', 'static-diagram-regress
 
 function copyFixture(destination) {
   fs.mkdirSync(destination, { recursive: true });
-  for (const value of ['package.json', 'package-simple.json', 'package-lock.json', '.npmrc', '.puppeteerrc.cjs', 'diagrams', 'assets/images/diagrams', 'src/chapters/chapter10.md', 'src/appendices/appendix-d.md', 'docs/chapters/chapter10.md', 'docs/appendices/appendix-d.md', 'docs/assets/images/diagrams', 'scripts/build-simple.js', 'scripts/render-mermaid-diagrams.js', '.github/workflows/book-qa.yml', '.github/workflows/build.yml']) {
+  for (const value of ['package.json', 'package-simple.json', 'package-lock.json', '.npmrc', '.puppeteerrc.cjs', 'diagrams', 'assets/images/diagrams', 'src/chapters/chapter10.md', 'src/appendices/appendix-d.md', 'docs/chapters/chapter10.md', 'docs/appendices/appendix-d.md', 'docs/assets/images/diagrams', 'scripts/build-simple.js', 'scripts/render-mermaid-diagrams.js', '.github/workflows/book-qa.yml', '.github/workflows/build.yml', 'templates/github-workflows/build-legacy.yml', 'templates/github-workflows/build-actions.yml']) {
     const source = path.join(ROOT, value);
     const target = path.join(destination, value);
     fs.mkdirSync(path.dirname(target), { recursive: true });
@@ -67,6 +67,8 @@ const tests = [
   ['build-node-version-drift', dir => replaceOnce(path.join(dir, '.github/workflows/build.yml'), "node-version: '22.22.2'", "node-version: '22'")],
   ['book-qa-node-version-drift', dir => replaceOnce(path.join(dir, '.github/workflows/book-qa.yml'), "node-version: '22.22.2'", "node-version: '22'")],
   ['disabled-engine-strict', dir => replaceOnce(path.join(dir, '.npmrc'), 'engine-strict=true', 'engine-strict=false')],
+  ['legacy-template-node-version-drift', dir => replaceOnce(path.join(dir, 'templates/github-workflows/build-legacy.yml'), "node-version: '22.22.2'", "node-version: '20'")],
+  ['actions-template-node-version-drift', dir => replaceOnce(path.join(dir, 'templates/github-workflows/build-actions.yml'), "node-version: '22.22.2'", "node-version: '20'")],
   ['unsafe-config', dir => replaceOnce(path.join(dir, 'diagrams/mermaid-config.json'), '"securityLevel": "strict"', '"securityLevel": "loose"')],
   ['disabled-sandbox', dir => replaceOnce(path.join(dir, 'diagrams/puppeteer-config.json'), '"--no-first-run"', '"--no-sandbox"')],
   ['extra-browser-argument', dir => replaceOnce(path.join(dir, 'diagrams/puppeteer-config.json'), '"--no-first-run"', '"--no-first-run",\n    "--disable-web-security"')],

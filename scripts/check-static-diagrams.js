@@ -293,6 +293,8 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
 
   const bookQa = fs.readFileSync(path.join(root, '.github', 'workflows', 'book-qa.yml'), 'utf8');
   const buildWorkflow = fs.readFileSync(path.join(root, '.github', 'workflows', 'build.yml'), 'utf8');
+  const legacyWorkflowTemplate = fs.readFileSync(path.join(root, 'templates', 'github-workflows', 'build-legacy.yml'), 'utf8');
+  const actionsWorkflowTemplate = fs.readFileSync(path.join(root, 'templates', 'github-workflows', 'build-actions.yml'), 'utf8');
   if (!bookQa.includes('npm run check:static-diagrams && npm run check:static-diagrams-regression')) failures.push('Book QA must run both static diagram checks in order');
   if (!bookQa.includes('node scripts/check-static-diagrams.js --site-dir _site')) failures.push('Book QA must inspect built HTML');
   if (!bookQa.includes('git diff --exit-code -- assets/images/diagrams docs')) failures.push('Book QA must verify source SVG and docs synchronization');
@@ -302,6 +304,9 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
   for (const [label, workflow] of [['Book QA', bookQa], ['Build', buildWorkflow]]) {
     if (count(workflow, 'node-version:') !== 1 || !workflow.includes(`node-version: '${EXPECTED_NODE_VERSION}'`)) failures.push(`${label} must use Node ${EXPECTED_NODE_VERSION} exactly`);
     if (!workflow.includes("PUPPETEER_SKIP_DOWNLOAD: 'true'") || !workflow.includes("STATIC_DIAGRAMS_VERIFY_ONLY: '1'")) failures.push(`${label} must verify committed diagrams without launching Chromium`);
+  }
+  for (const [label, workflow] of [['Legacy workflow template', legacyWorkflowTemplate], ['Actions workflow template', actionsWorkflowTemplate]]) {
+    if (count(workflow, 'node-version:') !== 1 || !workflow.includes(`node-version: '${EXPECTED_NODE_VERSION}'`)) failures.push(`${label} must use Node ${EXPECTED_NODE_VERSION} exactly`);
   }
 
   if (options.siteDir) {
