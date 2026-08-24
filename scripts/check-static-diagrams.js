@@ -14,15 +14,19 @@ const EXPECTED_RUNTIME_KEYS = ['browserRevision', 'node', 'puppeteer'];
 const FORBIDDEN_PUPPETEER_CONFIG_PATHS = [
   '.config/puppeteer.config.cjs',
   '.config/puppeteer.config.js',
+  '.config/puppeteer.config.mjs',
   '.config/puppeteerrc.cjs',
   '.config/puppeteerrc.js',
+  '.config/puppeteerrc.mjs',
   '.config/puppeteerrc.json',
   '.config/puppeteerrc',
   '.puppeteerrc.js',
+  '.puppeteerrc.mjs',
   '.puppeteerrc.json',
   '.puppeteerrc',
   'puppeteer.config.cjs',
-  'puppeteer.config.js'
+  'puppeteer.config.js',
+  'puppeteer.config.mjs'
 ];
 const EXPECTED_SECURITY_COMMAND = 'npm audit --omit=optional --audit-level=high';
 const EXPECTED_DIAGRAMS = [
@@ -182,7 +186,10 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
   const packageSimple = readJson(path.join(root, 'package-simple.json'));
   const packageLock = readJson(path.join(root, 'package-lock.json'));
   if (Object.prototype.hasOwnProperty.call(packageJson, 'puppeteer')) failures.push('package.json Puppeteer configuration is forbidden');
-  const npmConfigLines = fs.readFileSync(path.join(root, '.npmrc'), 'utf8')
+  const npmConfigPath = path.join(root, '.npmrc');
+  let npmConfigLines = [];
+  if (!fs.existsSync(npmConfigPath)) failures.push('.npmrc is missing');
+  else npmConfigLines = fs.readFileSync(npmConfigPath, 'utf8')
     .split(/\r?\n/)
     .map(line => line.trim())
     .filter(line => line && !line.startsWith('#') && !line.startsWith(';'));

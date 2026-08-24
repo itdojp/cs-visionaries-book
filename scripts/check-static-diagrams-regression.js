@@ -72,6 +72,7 @@ const tests = [
   ['book-qa-node-version-drift', dir => replaceOnce(path.join(dir, '.github/workflows/book-qa.yml'), "node-version: '22.22.2'", "node-version: '22'")],
   ['extra-build-job-node-version-drift', dir => fs.appendFileSync(path.join(dir, '.github/workflows/build.yml'), "\n  incompatible-runtime-fixture:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/setup-node@v6\n        with:\n          node-version: '20'\n")],
   ['disabled-engine-strict', dir => replaceOnce(path.join(dir, '.npmrc'), 'engine-strict=true', 'engine-strict=false')],
+  ['missing-npmrc', dir => fs.unlinkSync(path.join(dir, '.npmrc'))],
   ['legacy-template-node-version-drift', dir => replaceOnce(path.join(dir, 'templates/github-workflows/build-legacy.yml'), "node-version: '22.22.2'", "node-version: '20'")],
   ['actions-template-node-version-drift', dir => replaceOnce(path.join(dir, 'templates/github-workflows/build-actions.yml'), "node-version: '22.22.2'", "node-version: '20'")],
   ['unsafe-config', dir => replaceOnce(path.join(dir, 'diagrams/mermaid-config.json'), '"securityLevel": "strict"', '"securityLevel": "loose"')],
@@ -91,6 +92,8 @@ const tests = [
     fs.mkdirSync(path.dirname(file), { recursive: true });
     fs.writeFileSync(file, "module.exports = { executablePath: '/synthetic/browser' };\n", 'utf8');
   }],
+  ['alternate-esm-puppeteer-config', dir => fs.writeFileSync(path.join(dir, '.puppeteerrc.mjs'), "export default { executablePath: '/synthetic/browser' };\n", 'utf8')],
+  ['missing-repository-puppeteer-config', dir => fs.unlinkSync(path.join(dir, '.puppeteerrc.cjs'))],
   ['package-puppeteer-config', dir => {
     const file = path.join(dir, 'package.json');
     const value = JSON.parse(fs.readFileSync(file, 'utf8'));

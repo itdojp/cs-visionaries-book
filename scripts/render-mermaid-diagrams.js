@@ -23,15 +23,19 @@ const FORBIDDEN_BROWSER_SELECTION_ENV = Object.freeze([
 const FORBIDDEN_PUPPETEER_CONFIG_PATHS = Object.freeze([
   '.config/puppeteer.config.cjs',
   '.config/puppeteer.config.js',
+  '.config/puppeteer.config.mjs',
   '.config/puppeteerrc.cjs',
   '.config/puppeteerrc.js',
+  '.config/puppeteerrc.mjs',
   '.config/puppeteerrc.json',
   '.config/puppeteerrc',
   '.puppeteerrc.js',
+  '.puppeteerrc.mjs',
   '.puppeteerrc.json',
   '.puppeteerrc',
   'puppeteer.config.cjs',
-  'puppeteer.config.js'
+  'puppeteer.config.js',
+  'puppeteer.config.mjs'
 ]);
 const EXPECTED_DIAGRAMS = [
   ['hinton-ai-history-timeline', 'diagrams/mermaid/hinton-ai-history-timeline.mmd', 'assets/images/diagrams/hinton-ai-history-timeline.svg', 'src/chapters/chapter10.md'],
@@ -101,8 +105,14 @@ function validateRepositoryPuppeteerConfig(packageJson) {
   const alternateConfig = FORBIDDEN_PUPPETEER_CONFIG_PATHS.find(relative => fs.existsSync(path.join(ROOT, relative)));
   if (alternateConfig) throw new Error(`alternate Puppeteer configuration is forbidden: ${alternateConfig}`);
   const file = path.join(ROOT, '.puppeteerrc.cjs');
-  delete require.cache[require.resolve(file)];
-  const config = require(file);
+  if (!fs.existsSync(file)) throw new Error('repository Puppeteer config is missing: .puppeteerrc.cjs');
+  let config;
+  try {
+    delete require.cache[require.resolve(file)];
+    config = require(file);
+  } catch (error) {
+    throw new Error(`repository Puppeteer config cannot be loaded: ${error.message}`);
+  }
   const expectedCache = path.join(ROOT, '.codex-local', 'cache', 'puppeteer');
   if (!config || typeof config !== 'object' || Array.isArray(config) ||
       Object.keys(config).join(',') !== 'cacheDirectory' || path.resolve(config.cacheDirectory || '') !== expectedCache) {
