@@ -44,18 +44,37 @@ path role matrix:
 
 ## 代表的なコマンド
 
+実レンダリング・通常 build・preview の経路:
+
 ```bash
+unset PUPPETEER_SKIP_DOWNLOAD
+unset STATIC_DIAGRAMS_VERIFY_ONLY
 npm ci
+npm run render:diagrams
 npm run build
 npm run build:safe
-npm run check-conflicts
-npm run lint:light
 npm run preview
 ```
 
+Puppeteer 25.8.0 が固定するブラウザを通常 `npm ci` の postinstall で導入します。上記コマンドはブラウザ不要ではありません。
+
+ブラウザ不要の verify-only QA 経路:
+
+```bash
+export PUPPETEER_SKIP_DOWNLOAD=true
+export STATIC_DIAGRAMS_VERIFY_ONLY=1
+npm ci --omit=optional
+npm run check-conflicts
+npm run lint:light
+npm run test:light
+```
+
+verify-only 経路はコミット済み静的図を検証し、renderer を起動しません。図の生成・更新には実レンダリング経路を使用します。
+
 補足:
-- `npm run build` は `src/` から `docs/` を更新します。
-- `npm run preview` は `docs/` を簡易 preview します。
+- 通常の `npm run build` は静的図をレンダリングしてから `src/` から `docs/` を更新します。
+- `STATIC_DIAGRAMS_VERIFY_ONLY=1` の `npm run build` はコミット済み図だけを検証します。
+- `npm run preview` は現在の環境変数を引き継ぎます。通常経路では固定ブラウザで図を再生成し、verify-only 経路ではコミット済み図を検証してから `docs/` を簡易 preview します。
 - Jekyll include や公開導線を厳密に確認する場合は `cd docs && bundle exec jekyll build` を使います。
 
 ## 競合検出

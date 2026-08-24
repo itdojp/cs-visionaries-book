@@ -78,10 +78,9 @@ class EasySetup {
     
     // Node.js version check
     const nodeVersion = process.version;
-    const majorVersion = parseInt(nodeVersion.slice(1).split('.')[0]);
-    
-    if (majorVersion < 20) {
-      throw new Error(`Node.js 20以上が必要です。現在: ${nodeVersion}`);
+
+    if (nodeVersion !== 'v22.22.2') {
+      throw new Error(`Node.js 22.22.2が必要です。現在: ${nodeVersion}`);
     }
     
     // Git check

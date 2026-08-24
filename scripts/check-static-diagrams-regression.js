@@ -2,15 +2,15 @@
 
 const fs = require('fs');
 const path = require('path');
-const { checkStaticDiagrams } = require('./check-static-diagrams');
-const { ensureAccessibleSvg } = require('./render-mermaid-diagrams');
+const { checkStaticDiagrams, computeRenderProvenance: computeCheckedProvenance } = require('./check-static-diagrams');
+const { computeRenderProvenance: computeRenderedProvenance, ensureAccessibleSvg, FORBIDDEN_BROWSER_SELECTION_ENV, validateBrowserSelectionEnvironment } = require('./render-mermaid-diagrams');
 
 const ROOT = path.resolve(__dirname, '..');
 const TEMP_ROOT = path.join(ROOT, '.codex-local', 'tmp', 'static-diagram-regression');
 
 function copyFixture(destination) {
   fs.mkdirSync(destination, { recursive: true });
-  for (const value of ['package.json', 'package-lock.json', '.puppeteerrc.cjs', 'diagrams', 'assets/images/diagrams', 'src/chapters/chapter10.md', 'src/appendices/appendix-d.md', 'docs/chapters/chapter10.md', 'docs/appendices/appendix-d.md', 'docs/assets/images/diagrams', 'scripts/build-simple.js', 'scripts/render-mermaid-diagrams.js', '.github/workflows/book-qa.yml', '.github/workflows/build.yml']) {
+  for (const value of ['package.json', 'package-simple.json', 'package-lock.json', '.npmrc', '.puppeteerrc.cjs', 'diagrams', 'assets/images/diagrams', 'src/chapters/chapter10.md', 'src/appendices/appendix-d.md', 'docs/chapters/chapter10.md', 'docs/appendices/appendix-d.md', 'docs/assets/images/diagrams', 'scripts/build-simple.js', 'scripts/render-mermaid-diagrams.js', '.github/workflows/book-qa.yml', '.github/workflows/build.yml', 'templates/github-workflows/build-legacy.yml', 'templates/github-workflows/build-actions.yml']) {
     const source = path.join(ROOT, value);
     const target = path.join(destination, value);
     fs.mkdirSync(path.dirname(target), { recursive: true });
@@ -59,16 +59,49 @@ const tests = [
   ['unexpected-source-svg', dir => fs.writeFileSync(path.join(dir, 'assets/images/diagrams/unexpected.svg'), '<svg/>')],
   ['unexpected-docs-svg', dir => fs.writeFileSync(path.join(dir, 'docs/assets/images/diagrams/unexpected.svg'), '<svg/>')],
   ['mutable-package-pin', dir => replaceOnce(path.join(dir, 'package.json'), '"@mermaid-js/mermaid-cli": "11.16.0"', '"@mermaid-js/mermaid-cli": "^11.16.0"')],
-  ['mutable-puppeteer-pin', dir => replaceOnce(path.join(dir, 'package.json'), '"puppeteer": "24.43.1"', '"puppeteer": "^24.43.1"')],
+  ['mutable-puppeteer-pin', dir => replaceOnce(path.join(dir, 'package.json'), '"puppeteer": "25.8.0"', '"puppeteer": "^25.8.0"')],
+  ['manifest-runtime-node-drift', dir => replaceOnce(path.join(dir, 'diagrams/manifest.json'), '"node": "22.22.2"', '"node": "22"')],
+  ['manifest-runtime-puppeteer-drift', dir => replaceOnce(path.join(dir, 'diagrams/manifest.json'), '"puppeteer": "25.8.0"', '"puppeteer": "25"')],
+  ['manifest-runtime-browser-drift', dir => replaceOnce(path.join(dir, 'diagrams/manifest.json'), '"browserRevision": "chrome@152.0.7977.42"', '"browserRevision": "latest"')],
+  ['manifest-runtime-unknown-key', dir => replaceOnce(path.join(dir, 'diagrams/manifest.json'), '"browserRevision": "chrome@152.0.7977.42"', '"browserRevision": "chrome@152.0.7977.42",\n      "channel": "stable"')],
+  ['package-node-engine-drift', dir => replaceOnce(path.join(dir, 'package.json'), '"node": "22.22.2"', '"node": ">=22.0.0"')],
+  ['simple-package-node-engine-drift', dir => replaceOnce(path.join(dir, 'package-simple.json'), '"node": "22.22.2"', '"node": ">=22.0.0"')],
+  ['lockfile-node-engine-drift', dir => replaceOnce(path.join(dir, 'package-lock.json'), '"node": "22.22.2"', '"node": ">=22.0.0"')],
+  ['weakened-security-threshold', dir => replaceOnce(path.join(dir, 'package.json'), 'npm audit --omit=optional --audit-level=high', 'npm audit --omit=optional --audit-level=critical')],
+  ['build-node-version-drift', dir => replaceOnce(path.join(dir, '.github/workflows/build.yml'), "node-version: '22.22.2'", "node-version: '22'")],
+  ['book-qa-node-version-drift', dir => replaceOnce(path.join(dir, '.github/workflows/book-qa.yml'), "node-version: '22.22.2'", "node-version: '22'")],
+  ['extra-build-job-node-version-drift', dir => fs.appendFileSync(path.join(dir, '.github/workflows/build.yml'), "\n  incompatible-runtime-fixture:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/setup-node@v6\n        with:\n          node-version: '20'\n")],
+  ['disabled-engine-strict', dir => replaceOnce(path.join(dir, '.npmrc'), 'engine-strict=true', 'engine-strict=false')],
+  ['missing-npmrc', dir => fs.unlinkSync(path.join(dir, '.npmrc'))],
+  ['legacy-template-node-version-drift', dir => replaceOnce(path.join(dir, 'templates/github-workflows/build-legacy.yml'), "node-version: '22.22.2'", "node-version: '20'")],
+  ['actions-template-node-version-drift', dir => replaceOnce(path.join(dir, 'templates/github-workflows/build-actions.yml'), "node-version: '22.22.2'", "node-version: '20'")],
   ['unsafe-config', dir => replaceOnce(path.join(dir, 'diagrams/mermaid-config.json'), '"securityLevel": "strict"', '"securityLevel": "loose"')],
   ['disabled-sandbox', dir => replaceOnce(path.join(dir, 'diagrams/puppeteer-config.json'), '"--no-first-run"', '"--no-sandbox"')],
   ['extra-browser-argument', dir => replaceOnce(path.join(dir, 'diagrams/puppeteer-config.json'), '"--no-first-run"', '"--no-first-run",\n    "--disable-web-security"')],
+  ['browser-executable-config-override', dir => replaceOnce(path.join(dir, 'diagrams/puppeteer-config.json'), '"headless": true,', '"headless": true,\n  "executablePath": "/synthetic/browser",')],
   ['missing-build-wiring', dir => replaceOnce(path.join(dir, 'scripts/build-simple.js'), 'renderStaticDiagrams();', '// removed')],
   ['missing-book-qa-wiring', dir => replaceOnce(path.join(dir, '.github/workflows/book-qa.yml'), 'npm run check:static-diagrams && ', '')],
   ['missing-book-qa-untracked-gate', dir => replaceOnce(path.join(dir, '.github/workflows/book-qa.yml'), 'git status --porcelain --untracked-files=all -- assets/images/diagrams docs', 'git status --porcelain -- docs')],
   ['missing-build-preflight', dir => replaceOnce(path.join(dir, '.github/workflows/build.yml'), 'npm run check:static-diagrams && npm run check:static-diagrams-regression', 'echo diagram-checks-removed')],
   ['missing-ci-verify-only', dir => replaceOnce(path.join(dir, '.github/workflows/build.yml'), "STATIC_DIAGRAMS_VERIFY_ONLY: '1'", "STATIC_DIAGRAMS_VERIFY_ONLY: '0'")],
   ['external-puppeteer-cache', dir => replaceOnce(path.join(dir, '.puppeteerrc.cjs'), "'.codex-local', 'cache', 'puppeteer'", "'outside-workspace', 'puppeteer'")],
+  ['repository-puppeteer-executable-override', dir => replaceOnce(path.join(dir, '.puppeteerrc.cjs'), "cacheDirectory: path.join(__dirname, '.codex-local', 'cache', 'puppeteer')", "cacheDirectory: path.join(__dirname, '.codex-local', 'cache', 'puppeteer'),\n  executablePath: '/synthetic/browser'")],
+  ['repository-puppeteer-browser-override', dir => replaceOnce(path.join(dir, '.puppeteerrc.cjs'), "cacheDirectory: path.join(__dirname, '.codex-local', 'cache', 'puppeteer')", "cacheDirectory: path.join(__dirname, '.codex-local', 'cache', 'puppeteer'),\n  defaultBrowser: 'firefox'")],
+  ['alternate-puppeteer-config', dir => {
+    const file = path.join(dir, '.config/puppeteer.config.cjs');
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.writeFileSync(file, "module.exports = { executablePath: '/synthetic/browser' };\n", 'utf8');
+  }],
+  ['alternate-esm-puppeteer-config', dir => fs.writeFileSync(path.join(dir, '.puppeteerrc.mjs'), "export default { executablePath: '/synthetic/browser' };\n", 'utf8')],
+  ['missing-repository-puppeteer-config', dir => fs.unlinkSync(path.join(dir, '.puppeteerrc.cjs'))],
+  ['package-puppeteer-config', dir => {
+    const file = path.join(dir, 'package.json');
+    const value = JSON.parse(fs.readFileSync(file, 'utf8'));
+    value.puppeteer = { executablePath: '/synthetic/browser' };
+    fs.writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`, 'utf8');
+  }],
+  ['missing-browser-selection-gate', dir => replaceOnce(path.join(dir, 'scripts/render-mermaid-diagrams.js'), 'validateBrowserSelectionEnvironment();', '// browser selection gate removed')],
+  ['missing-renderer-runtime-validation', dir => replaceOnce(path.join(dir, 'scripts/render-mermaid-diagrams.js'), 'validateRendererRuntime(manifest, packageJson);', '// runtime validation removed')],
   ['weakened-sync-gate', dir => replaceOnce(path.join(dir, '.github/workflows/book-qa.yml'), 'git diff --exit-code -- assets/images/diagrams docs', 'git diff --exit-code -- docs')]
 ];
 
@@ -80,6 +113,29 @@ try {
   const positive = path.join(TEMP_ROOT, 'positive');
   copyFixture(positive);
   checkStaticDiagrams(positive);
+  const manifest = JSON.parse(fs.readFileSync(path.join(positive, 'diagrams/manifest.json'), 'utf8'));
+  const diagram = manifest.diagrams[0];
+  const definition = fs.readFileSync(path.join(positive, diagram.source), 'utf8');
+  const mermaidConfig = fs.readFileSync(path.join(positive, manifest.renderer.config), 'utf8');
+  const puppeteerConfig = fs.readFileSync(path.join(positive, manifest.renderer.puppeteerConfig), 'utf8');
+  const checkedProvenance = computeCheckedProvenance(manifest, diagram, definition, mermaidConfig, puppeteerConfig);
+  const renderedProvenance = computeRenderedProvenance(manifest, diagram, definition, mermaidConfig, puppeteerConfig);
+  const changedRuntimeManifest = JSON.parse(JSON.stringify(manifest));
+  changedRuntimeManifest.renderer.runtime.puppeteer = 'fixture-drift';
+  const changedRuntimeProvenance = computeCheckedProvenance(changedRuntimeManifest, diagram, definition, mermaidConfig, puppeteerConfig);
+  if (checkedProvenance.renderContractSha256 !== renderedProvenance.renderContractSha256 ||
+      checkedProvenance.renderContractSha256 === changedRuntimeProvenance.renderContractSha256) {
+    throw new Error('renderer and checker must share runtime-bound render provenance');
+  }
+  for (const variable of FORBIDDEN_BROWSER_SELECTION_ENV) {
+    let browserOverrideRejected = false;
+    try {
+      validateBrowserSelectionEnvironment({ [variable]: 'synthetic-override' });
+    } catch {
+      browserOverrideRejected = true;
+    }
+    if (!browserOverrideRejected) throw new Error(`browser selection override must be rejected: ${variable}`);
+  }
   const normalized = ensureAccessibleSvg(
     '<svg aria-roledescription="flowchart"><title>題名</title><desc id="existing-description">説明</desc></svg>',
     { id: 'fixture', title: '題名', description: '説明' }

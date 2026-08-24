@@ -4,7 +4,7 @@
 
 ## 前提条件
 
-- Node.js 20 以上
+- Node.js 22.22.2
 - npm
 - Ruby / Bundler（Jekyll preview を使う場合）
 - Git
@@ -14,7 +14,27 @@
 ```bash
 git clone https://github.com/itdojp/cs-visionaries-book.git
 cd cs-visionaries-book
+```
+
+### 実レンダリング・build・preview を行う場合
+
+verify-only 用の環境変数を解除して静的図を再生成するこの経路では、build と preview に Chrome が必要です。Puppeteer 25.8.0 が固定するブラウザを導入します。
+
+```bash
+unset PUPPETEER_SKIP_DOWNLOAD
+unset STATIC_DIAGRAMS_VERIFY_ONLY
 npm ci
+```
+
+### ブラウザ不要の verify-only QA を行う場合
+
+コミット済み静的図を検証し、新しい図をレンダリングしない場合だけ使用します。
+
+```bash
+export PUPPETEER_SKIP_DOWNLOAD=true
+export STATIC_DIAGRAMS_VERIFY_ONLY=1
+npm ci --omit=optional
+npm run test:light
 ```
 
 注記: `npm run setup` / `easy-setup.js` は template 由来の legacy スクリプトであり、この repository の正規導線ではありません。現行 repo では `README.md`、`QUICK-START.md`、`REPOSITORY-ACCESS-GUIDE.md` の手順を基準にしてください。
@@ -22,6 +42,8 @@ npm ci
 ## ビルドと確認
 
 ### 公開用 Markdown を再生成
+
+この操作は実レンダリング経路です。前節の通常 `npm ci` で固定ブラウザを導入してから実行します。
 
 ```bash
 npm run build
@@ -48,7 +70,7 @@ assets/                            # 画像・印刷用 CSS などの静的ア�
 
 ### ローカル preview
 
-簡易 preview:
+次のコマンドは現在の環境変数を引き継ぎます。通常経路では固定ブラウザで図を再生成し、`STATIC_DIAGRAMS_VERIFY_ONLY=1` の経路ではコミット済み図だけを検証して preview します。
 
 ```bash
 npm run preview
@@ -77,6 +99,7 @@ bundle exec jekyll serve --livereload --baseurl ""
 ```bash
 npm run build           # docs/ を更新
 npm run build:safe      # 競合検出込みの build
+npm run render:diagrams # 固定ブラウザで静的図を生成
 npm run check-conflicts # Jekyll conflict を dry-run 検査
 npm run lint:light      # src/**/*.md の軽量 lint
 ```

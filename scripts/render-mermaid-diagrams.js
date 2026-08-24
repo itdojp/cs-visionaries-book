@@ -7,6 +7,36 @@ const { spawnSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..');
 const MANIFEST_PATH = path.join(ROOT, 'diagrams', 'manifest.json');
+const EXPECTED_RUNTIME = Object.freeze({
+  node: '22.22.2',
+  puppeteer: '25.8.0',
+  browserRevision: 'chrome@152.0.7977.42'
+});
+const FORBIDDEN_BROWSER_SELECTION_ENV = Object.freeze([
+  'PUPPETEER_EXECUTABLE_PATH',
+  'PUPPETEER_BROWSER',
+  'PUPPETEER_PRODUCT',
+  'PUPPETEER_CHROME_VERSION',
+  'PUPPETEER_CHROME_HEADLESS_SHELL_VERSION',
+  'PUPPETEER_FIREFOX_VERSION'
+]);
+const FORBIDDEN_PUPPETEER_CONFIG_PATHS = Object.freeze([
+  '.config/puppeteer.config.cjs',
+  '.config/puppeteer.config.js',
+  '.config/puppeteer.config.mjs',
+  '.config/puppeteerrc.cjs',
+  '.config/puppeteerrc.js',
+  '.config/puppeteerrc.mjs',
+  '.config/puppeteerrc.json',
+  '.config/puppeteerrc',
+  '.puppeteerrc.js',
+  '.puppeteerrc.mjs',
+  '.puppeteerrc.json',
+  '.puppeteerrc',
+  'puppeteer.config.cjs',
+  'puppeteer.config.js',
+  'puppeteer.config.mjs'
+]);
 const EXPECTED_DIAGRAMS = [
   ['hinton-ai-history-timeline', 'diagrams/mermaid/hinton-ai-history-timeline.mmd', 'assets/images/diagrams/hinton-ai-history-timeline.svg', 'src/chapters/chapter10.md'],
   ['neural-network-layer-flow', 'diagrams/mermaid/neural-network-layer-flow.mmd', 'assets/images/diagrams/neural-network-layer-flow.svg', 'src/chapters/chapter10.md'],
@@ -32,6 +62,11 @@ function readManifest() {
       manifest.renderer?.config !== 'diagrams/mermaid-config.json' || manifest.renderer?.puppeteerConfig !== 'diagrams/puppeteer-config.json') {
     throw new Error('static diagram renderer contract mismatch');
   }
+  const runtime = manifest.renderer?.runtime;
+  if (!runtime || Object.keys(runtime).sort().join(',') !== Object.keys(EXPECTED_RUNTIME).sort().join(',') ||
+      Object.entries(EXPECTED_RUNTIME).some(([key, value]) => runtime[key] !== value)) {
+    throw new Error('static diagram renderer runtime contract mismatch');
+  }
   for (const [id, source, output, document] of EXPECTED_DIAGRAMS) {
     const diagram = manifest.diagrams.find(item => item.id === id);
     if (!diagram || diagram.source !== source || diagram.output !== output || diagram.publicPath !== `/${output}` || diagram.document !== document) {
@@ -48,8 +83,59 @@ function validateRendererConfigs(configPath, puppeteerConfigPath) {
     throw new Error('Mermaid renderer security and determinism config mismatch');
   }
   const puppeteerConfig = JSON.parse(fs.readFileSync(puppeteerConfigPath, 'utf8'));
-  if (puppeteerConfig.headless !== true || JSON.stringify(puppeteerConfig.args) !== JSON.stringify(EXPECTED_PUPPETEER_ARGS)) {
+  if (Object.keys(puppeteerConfig).sort().join(',') !== 'args,headless' ||
+      puppeteerConfig.headless !== true || JSON.stringify(puppeteerConfig.args) !== JSON.stringify(EXPECTED_PUPPETEER_ARGS)) {
     throw new Error('Puppeteer config must use the audited sandbox-preserving argument set');
+  }
+}
+
+function validateBrowserSelectionEnvironment(environment = process.env) {
+  const present = FORBIDDEN_BROWSER_SELECTION_ENV.filter(key =>
+    Object.prototype.hasOwnProperty.call(environment, key)
+  );
+  if (present.length) {
+    throw new Error(`browser selection overrides are forbidden: ${present.join(', ')}`);
+  }
+}
+
+function validateRepositoryPuppeteerConfig(packageJson) {
+  if (Object.prototype.hasOwnProperty.call(packageJson, 'puppeteer')) {
+    throw new Error('package.json Puppeteer configuration is forbidden');
+  }
+  const alternateConfig = FORBIDDEN_PUPPETEER_CONFIG_PATHS.find(relative => fs.existsSync(path.join(ROOT, relative)));
+  if (alternateConfig) throw new Error(`alternate Puppeteer configuration is forbidden: ${alternateConfig}`);
+  const file = path.join(ROOT, '.puppeteerrc.cjs');
+  if (!fs.existsSync(file)) throw new Error('repository Puppeteer config is missing: .puppeteerrc.cjs');
+  let config;
+  try {
+    delete require.cache[require.resolve(file)];
+    config = require(file);
+  } catch (error) {
+    throw new Error(`repository Puppeteer config cannot be loaded: ${error.message}`);
+  }
+  const expectedCache = path.join(ROOT, '.codex-local', 'cache', 'puppeteer');
+  if (!config || typeof config !== 'object' || Array.isArray(config) ||
+      Object.keys(config).join(',') !== 'cacheDirectory' || path.resolve(config.cacheDirectory || '') !== expectedCache) {
+    throw new Error('repository Puppeteer config may contain only the checkout-local cacheDirectory');
+  }
+}
+
+function validateRendererRuntime(manifest, packageJson) {
+  validateBrowserSelectionEnvironment();
+  validateRepositoryPuppeteerConfig(packageJson);
+  const installedPuppeteer = require('puppeteer/package.json').version;
+  const { PUPPETEER_REVISIONS } = require('puppeteer');
+  if (!PUPPETEER_REVISIONS?.chrome) throw new Error('Puppeteer did not expose its pinned Chrome revision');
+  const actual = {
+    node: process.versions.node,
+    puppeteer: installedPuppeteer,
+    browserRevision: `chrome@${PUPPETEER_REVISIONS.chrome}`
+  };
+  if (Object.entries(actual).some(([key, value]) => manifest.renderer.runtime[key] !== value)) {
+    throw new Error(`renderer runtime differs from manifest: ${JSON.stringify(actual)}`);
+  }
+  if (packageJson.engines?.node !== actual.node || packageJson.devDependencies?.puppeteer !== actual.puppeteer) {
+    throw new Error('renderer runtime differs from package contract');
   }
 }
 
@@ -148,6 +234,7 @@ function validateDefinition(definition, diagram) {
 }
 
 function browserEnvironment() {
+  validateBrowserSelectionEnvironment();
   const sensitiveName = /(?:TOKEN|SECRET|PASSWORD|CREDENTIAL|API_KEY|AUTH|COOKIE|SESSION|THREAD|CODEX|BRAVE)/i;
   return Object.fromEntries(Object.entries(process.env).filter(([key]) => !sensitiveName.test(key)));
 }
@@ -182,6 +269,7 @@ function renderAll() {
   if (pinned !== manifest.renderer.version) {
     throw new Error(`${manifest.renderer.package} must be pinned to ${manifest.renderer.version}; found ${pinned || 'missing'}`);
   }
+  validateRendererRuntime(manifest, packageJson);
 
   const config = assertInsideRoot(manifest.renderer.config, 'renderer config');
   const puppeteerConfig = assertInsideRoot(manifest.renderer.puppeteerConfig, 'Puppeteer config');
@@ -233,4 +321,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { assertInsideRoot, browserEnvironment, computeRenderProvenance, ensureAccessibleSvg, ensureRenderProvenance, readManifest, referencedElementText, renderAll, validateDefinition, validateRendererConfigs, verifySvg };
+module.exports = { assertInsideRoot, browserEnvironment, computeRenderProvenance, ensureAccessibleSvg, ensureRenderProvenance, FORBIDDEN_BROWSER_SELECTION_ENV, readManifest, referencedElementText, renderAll, validateBrowserSelectionEnvironment, validateDefinition, validateRendererConfigs, validateRendererRuntime, validateRepositoryPuppeteerConfig, verifySvg };

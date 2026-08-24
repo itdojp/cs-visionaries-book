@@ -7,7 +7,28 @@ const crypto = require('crypto');
 const DEFAULT_ROOT = path.resolve(__dirname, '..');
 const EXPECTED_VERSION = '11.16.0';
 const EXPECTED_PACKAGE = '@mermaid-js/mermaid-cli';
-const EXPECTED_PUPPETEER_VERSION = '24.43.1';
+const EXPECTED_PUPPETEER_VERSION = '25.8.0';
+const EXPECTED_NODE_VERSION = '22.22.2';
+const EXPECTED_BROWSER_REVISION = 'chrome@152.0.7977.42';
+const EXPECTED_RUNTIME_KEYS = ['browserRevision', 'node', 'puppeteer'];
+const FORBIDDEN_PUPPETEER_CONFIG_PATHS = [
+  '.config/puppeteer.config.cjs',
+  '.config/puppeteer.config.js',
+  '.config/puppeteer.config.mjs',
+  '.config/puppeteerrc.cjs',
+  '.config/puppeteerrc.js',
+  '.config/puppeteerrc.mjs',
+  '.config/puppeteerrc.json',
+  '.config/puppeteerrc',
+  '.puppeteerrc.js',
+  '.puppeteerrc.mjs',
+  '.puppeteerrc.json',
+  '.puppeteerrc',
+  'puppeteer.config.cjs',
+  'puppeteer.config.js',
+  'puppeteer.config.mjs'
+];
+const EXPECTED_SECURITY_COMMAND = 'npm audit --omit=optional --audit-level=high';
 const EXPECTED_DIAGRAMS = [
   ['hinton-ai-history-timeline', 'diagrams/mermaid/hinton-ai-history-timeline.mmd', 'assets/images/diagrams/hinton-ai-history-timeline.svg', 'src/chapters/chapter10.md'],
   ['neural-network-layer-flow', 'diagrams/mermaid/neural-network-layer-flow.mmd', 'assets/images/diagrams/neural-network-layer-flow.svg', 'src/chapters/chapter10.md'],
@@ -57,6 +78,11 @@ function listFiles(directory, suffix) {
 
 function count(content, needle) {
   return content.split(needle).length - 1;
+}
+
+function workflowNodeVersions(content) {
+  return [...content.matchAll(/^\s*node-version:\s*['"]?([^'"\s#]+)['"]?\s*(?:#.*)?$/gm)]
+    .map(match => match[1]);
 }
 
 function relative(root, file) {
@@ -137,6 +163,10 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
   if (manifest.renderer?.version !== EXPECTED_VERSION) failures.push(`renderer version must be ${EXPECTED_VERSION}`);
   if (manifest.renderer?.config !== 'diagrams/mermaid-config.json') failures.push('renderer config path mismatch');
   if (manifest.renderer?.puppeteerConfig !== 'diagrams/puppeteer-config.json') failures.push('Puppeteer config path mismatch');
+  if (Object.keys(manifest.renderer?.runtime || {}).sort().join(',') !== EXPECTED_RUNTIME_KEYS.join(',')) failures.push('renderer runtime keys must match the frozen schema');
+  if (manifest.renderer?.runtime?.node !== EXPECTED_NODE_VERSION) failures.push(`renderer runtime Node must be exactly ${EXPECTED_NODE_VERSION}`);
+  if (manifest.renderer?.runtime?.puppeteer !== EXPECTED_PUPPETEER_VERSION) failures.push(`renderer runtime Puppeteer must be exactly ${EXPECTED_PUPPETEER_VERSION}`);
+  if (manifest.renderer?.runtime?.browserRevision !== EXPECTED_BROWSER_REVISION) failures.push(`renderer browser revision must be exactly ${EXPECTED_BROWSER_REVISION}`);
   if (!Array.isArray(manifest.diagrams) || manifest.diagrams.length !== 4) failures.push('manifest must define exactly 4 active diagrams');
 
   const diagrams = Array.isArray(manifest.diagrams) ? manifest.diagrams : [];
@@ -153,13 +183,32 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
   }
 
   const packageJson = readJson(path.join(root, 'package.json'));
+  const packageSimple = readJson(path.join(root, 'package-simple.json'));
   const packageLock = readJson(path.join(root, 'package-lock.json'));
+  if (Object.prototype.hasOwnProperty.call(packageJson, 'puppeteer')) failures.push('package.json Puppeteer configuration is forbidden');
+  const npmConfigPath = path.join(root, '.npmrc');
+  let npmConfigLines = [];
+  if (!fs.existsSync(npmConfigPath)) failures.push('.npmrc is missing');
+  else npmConfigLines = fs.readFileSync(npmConfigPath, 'utf8')
+    .split(/\r?\n/)
+    .map(line => line.trim())
+    .filter(line => line && !line.startsWith('#') && !line.startsWith(';'));
+  const engineStrictEntries = npmConfigLines
+    .map(line => line.match(/^engine-strict\s*=\s*(\S+)\s*$/))
+    .filter(Boolean);
+  if (engineStrictEntries.length !== 1 || engineStrictEntries[0][1].toLowerCase() !== 'true') failures.push('.npmrc must enable engine-strict exactly once');
+  if (packageJson.engines?.node !== EXPECTED_NODE_VERSION) failures.push(`package.json Node engine must be exactly ${EXPECTED_NODE_VERSION}`);
+  if (packageSimple.engines?.node !== EXPECTED_NODE_VERSION) failures.push(`package-simple.json Node engine must be exactly ${EXPECTED_NODE_VERSION}`);
+  if (packageLock.packages?.['']?.engines?.node !== EXPECTED_NODE_VERSION) failures.push(`lockfile root Node engine must be exactly ${EXPECTED_NODE_VERSION}`);
+  if (packageJson.scripts?.['check:security'] !== EXPECTED_SECURITY_COMMAND) failures.push(`check:security must be exactly: ${EXPECTED_SECURITY_COMMAND}`);
   if (packageJson.devDependencies?.[EXPECTED_PACKAGE] !== EXPECTED_VERSION) failures.push('Mermaid CLI devDependency must use the audited exact version');
-  if (packageJson.devDependencies?.puppeteer !== EXPECTED_PUPPETEER_VERSION) failures.push('Puppeteer devDependency must use the audited exact Node 20-compatible version');
+  if (packageJson.devDependencies?.puppeteer !== EXPECTED_PUPPETEER_VERSION) failures.push('Puppeteer devDependency must use the audited exact Node 22-compatible version');
   if (packageLock.packages?.['']?.devDependencies?.[EXPECTED_PACKAGE] !== EXPECTED_VERSION) failures.push('lockfile root Mermaid CLI pin mismatch');
   if (packageLock.packages?.['']?.devDependencies?.puppeteer !== EXPECTED_PUPPETEER_VERSION) failures.push('lockfile root Puppeteer pin mismatch');
   if (packageLock.packages?.[`node_modules/${EXPECTED_PACKAGE}`]?.version !== EXPECTED_VERSION) failures.push('lockfile installed Mermaid CLI version mismatch');
   if (packageLock.packages?.['node_modules/puppeteer']?.version !== EXPECTED_PUPPETEER_VERSION) failures.push('lockfile installed Puppeteer version mismatch');
+  if (manifest.renderer?.runtime?.node !== packageJson.engines?.node) failures.push('renderer runtime Node must match package.json engine');
+  if (manifest.renderer?.runtime?.puppeteer !== packageJson.devDependencies?.puppeteer) failures.push('renderer runtime Puppeteer must match package.json pin');
   if (packageJson.scripts?.['render:diagrams'] !== 'node scripts/render-mermaid-diagrams.js') failures.push('render:diagrams script mismatch');
   if (!packageJson.scripts?.['test:light']?.includes('check:static-diagrams') || !packageJson.scripts?.['test:light']?.includes('check:static-diagrams-regression')) {
     failures.push('test:light must run static diagram checks');
@@ -181,16 +230,25 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
   if (puppeteerConfigPath && fs.existsSync(puppeteerConfigPath)) {
     puppeteerConfigContent = fs.readFileSync(puppeteerConfigPath, 'utf8');
     const puppeteerConfig = readJson(puppeteerConfigPath);
+    if (Object.keys(puppeteerConfig).sort().join(',') !== 'args,headless') failures.push('Puppeteer config may contain only headless and args');
     if (puppeteerConfig.headless !== true) failures.push('Puppeteer must run headless');
     const args = Array.isArray(puppeteerConfig.args) ? puppeteerConfig.args : [];
     if (JSON.stringify(args) !== JSON.stringify(EXPECTED_PUPPETEER_ARGS)) failures.push('Puppeteer arguments must match the audited sandbox-preserving set');
   } else if (puppeteerConfigPath) failures.push('Puppeteer config is missing');
   const puppeteerRc = path.join(root, '.puppeteerrc.cjs');
+  for (const forbiddenPath of FORBIDDEN_PUPPETEER_CONFIG_PATHS) {
+    if (fs.existsSync(path.join(root, forbiddenPath))) failures.push(`alternate Puppeteer configuration is forbidden: ${forbiddenPath}`);
+  }
   if (!fs.existsSync(puppeteerRc)) failures.push('Puppeteer cache config is missing');
   else {
     try {
       delete require.cache[require.resolve(puppeteerRc)];
-      const configured = require(puppeteerRc).cacheDirectory;
+      const puppeteerRepositoryConfig = require(puppeteerRc);
+      if (!puppeteerRepositoryConfig || typeof puppeteerRepositoryConfig !== 'object' || Array.isArray(puppeteerRepositoryConfig) ||
+          Object.keys(puppeteerRepositoryConfig).join(',') !== 'cacheDirectory') {
+        failures.push('repository Puppeteer config may contain only cacheDirectory');
+      }
+      const configured = puppeteerRepositoryConfig?.cacheDirectory;
       const expected = path.join(root, '.codex-local', 'cache', 'puppeteer');
       if (path.resolve(configured || '') !== expected) failures.push('Puppeteer cache must remain inside the checkout');
     } catch (error) {
@@ -274,12 +332,15 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
   if (!buildScript.includes("process.env.STATIC_DIAGRAMS_VERIFY_ONLY === '1'") || !buildScript.includes('checkStaticDiagrams(process.cwd());')) failures.push('build must support browser-free committed artifact verification');
 
   const renderer = fs.readFileSync(path.join(root, 'scripts', 'render-mermaid-diagrams.js'), 'utf8');
-  for (const marker of ['--svgId', '--quiet', '--puppeteerConfigFile', 'browserEnvironment', 'sensitiveName', 'ensureAccessibleSvg', 'validateDefinition', 'validateRendererConfigs', 'verifySvg', 'foreignObject', 'external resource reference']) {
+  for (const marker of ['--svgId', '--quiet', '--puppeteerConfigFile', 'browserEnvironment', 'sensitiveName', 'ensureAccessibleSvg', 'validateDefinition', 'validateRendererConfigs', 'validateBrowserSelectionEnvironment', 'validateRepositoryPuppeteerConfig(packageJson);', 'validateRendererRuntime(manifest, packageJson);', 'PUPPETEER_EXECUTABLE_PATH', 'PUPPETEER_CHROME_VERSION', 'PUPPETEER_REVISIONS', 'process.versions.node', 'verifySvg', 'foreignObject', 'external resource reference']) {
     if (!renderer.includes(marker)) failures.push(`renderer safety marker is missing: ${marker}`);
   }
+  if (count(renderer, 'validateBrowserSelectionEnvironment();') !== 2) failures.push('renderer must reject browser selection overrides before validation and launch');
 
   const bookQa = fs.readFileSync(path.join(root, '.github', 'workflows', 'book-qa.yml'), 'utf8');
   const buildWorkflow = fs.readFileSync(path.join(root, '.github', 'workflows', 'build.yml'), 'utf8');
+  const legacyWorkflowTemplate = fs.readFileSync(path.join(root, 'templates', 'github-workflows', 'build-legacy.yml'), 'utf8');
+  const actionsWorkflowTemplate = fs.readFileSync(path.join(root, 'templates', 'github-workflows', 'build-actions.yml'), 'utf8');
   if (!bookQa.includes('npm run check:static-diagrams && npm run check:static-diagrams-regression')) failures.push('Book QA must run both static diagram checks in order');
   if (!bookQa.includes('node scripts/check-static-diagrams.js --site-dir _site')) failures.push('Book QA must inspect built HTML');
   if (!bookQa.includes('git diff --exit-code -- assets/images/diagrams docs')) failures.push('Book QA must verify source SVG and docs synchronization');
@@ -287,7 +348,13 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
   if (!buildWorkflow.includes('npm run check:static-diagrams && npm run check:static-diagrams-regression')) failures.push('Build workflow must validate diagram inputs before rendering');
   if (count(buildWorkflow, 'git diff --exit-code -- assets/images/diagrams docs') < 2) failures.push('Build workflow must verify diagram determinism twice');
   for (const [label, workflow] of [['Book QA', bookQa], ['Build', buildWorkflow]]) {
+    const versions = workflowNodeVersions(workflow);
+    if (versions.length === 0 || versions.some(version => version !== EXPECTED_NODE_VERSION)) failures.push(`${label} must use Node ${EXPECTED_NODE_VERSION} for every setup-node job`);
     if (!workflow.includes("PUPPETEER_SKIP_DOWNLOAD: 'true'") || !workflow.includes("STATIC_DIAGRAMS_VERIFY_ONLY: '1'")) failures.push(`${label} must verify committed diagrams without launching Chromium`);
+  }
+  for (const [label, workflow] of [['Legacy workflow template', legacyWorkflowTemplate], ['Actions workflow template', actionsWorkflowTemplate]]) {
+    const versions = workflowNodeVersions(workflow);
+    if (versions.length === 0 || versions.some(version => version !== EXPECTED_NODE_VERSION)) failures.push(`${label} must use Node ${EXPECTED_NODE_VERSION} for every setup-node job`);
   }
 
   if (options.siteDir) {
