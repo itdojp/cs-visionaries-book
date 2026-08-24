@@ -157,6 +157,12 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
   const packageJson = readJson(path.join(root, 'package.json'));
   const packageSimple = readJson(path.join(root, 'package-simple.json'));
   const packageLock = readJson(path.join(root, 'package-lock.json'));
+  const npmConfigLines = fs.readFileSync(path.join(root, '.npmrc'), 'utf8')
+    .split(/\r?\n/)
+    .map(line => line.trim())
+    .filter(line => line && !line.startsWith('#') && !line.startsWith(';'));
+  const engineStrictLines = npmConfigLines.filter(line => /^engine-strict\s*=/.test(line));
+  if (engineStrictLines.length !== 1 || engineStrictLines[0] !== 'engine-strict=true') failures.push('.npmrc must enable engine-strict exactly once');
   if (packageJson.engines?.node !== EXPECTED_NODE_VERSION) failures.push(`package.json Node engine must be exactly ${EXPECTED_NODE_VERSION}`);
   if (packageSimple.engines?.node !== EXPECTED_NODE_VERSION) failures.push(`package-simple.json Node engine must be exactly ${EXPECTED_NODE_VERSION}`);
   if (packageLock.packages?.['']?.engines?.node !== EXPECTED_NODE_VERSION) failures.push(`lockfile root Node engine must be exactly ${EXPECTED_NODE_VERSION}`);
