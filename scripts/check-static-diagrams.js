@@ -217,7 +217,12 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
   else {
     try {
       delete require.cache[require.resolve(puppeteerRc)];
-      const configured = require(puppeteerRc).cacheDirectory;
+      const puppeteerRepositoryConfig = require(puppeteerRc);
+      if (!puppeteerRepositoryConfig || typeof puppeteerRepositoryConfig !== 'object' || Array.isArray(puppeteerRepositoryConfig) ||
+          Object.keys(puppeteerRepositoryConfig).join(',') !== 'cacheDirectory') {
+        failures.push('repository Puppeteer config may contain only cacheDirectory');
+      }
+      const configured = puppeteerRepositoryConfig?.cacheDirectory;
       const expected = path.join(root, '.codex-local', 'cache', 'puppeteer');
       if (path.resolve(configured || '') !== expected) failures.push('Puppeteer cache must remain inside the checkout');
     } catch (error) {
@@ -301,7 +306,7 @@ function checkStaticDiagrams(root = DEFAULT_ROOT, options = {}) {
   if (!buildScript.includes("process.env.STATIC_DIAGRAMS_VERIFY_ONLY === '1'") || !buildScript.includes('checkStaticDiagrams(process.cwd());')) failures.push('build must support browser-free committed artifact verification');
 
   const renderer = fs.readFileSync(path.join(root, 'scripts', 'render-mermaid-diagrams.js'), 'utf8');
-  for (const marker of ['--svgId', '--quiet', '--puppeteerConfigFile', 'browserEnvironment', 'sensitiveName', 'ensureAccessibleSvg', 'validateDefinition', 'validateRendererConfigs', 'validateBrowserSelectionEnvironment', 'validateRendererRuntime(manifest, packageJson);', 'PUPPETEER_EXECUTABLE_PATH', 'PUPPETEER_REVISIONS', 'process.versions.node', 'verifySvg', 'foreignObject', 'external resource reference']) {
+  for (const marker of ['--svgId', '--quiet', '--puppeteerConfigFile', 'browserEnvironment', 'sensitiveName', 'ensureAccessibleSvg', 'validateDefinition', 'validateRendererConfigs', 'validateBrowserSelectionEnvironment', 'validateRepositoryPuppeteerConfig();', 'validateRendererRuntime(manifest, packageJson);', 'PUPPETEER_EXECUTABLE_PATH', 'PUPPETEER_REVISIONS', 'process.versions.node', 'verifySvg', 'foreignObject', 'external resource reference']) {
     if (!renderer.includes(marker)) failures.push(`renderer safety marker is missing: ${marker}`);
   }
   if (count(renderer, 'validateBrowserSelectionEnvironment();') !== 2) failures.push('renderer must reject browser selection overrides before validation and launch');

@@ -78,8 +78,20 @@ function validateBrowserSelectionEnvironment(environment = process.env) {
   }
 }
 
+function validateRepositoryPuppeteerConfig() {
+  const file = path.join(ROOT, '.puppeteerrc.cjs');
+  delete require.cache[require.resolve(file)];
+  const config = require(file);
+  const expectedCache = path.join(ROOT, '.codex-local', 'cache', 'puppeteer');
+  if (!config || typeof config !== 'object' || Array.isArray(config) ||
+      Object.keys(config).join(',') !== 'cacheDirectory' || path.resolve(config.cacheDirectory || '') !== expectedCache) {
+    throw new Error('repository Puppeteer config may contain only the checkout-local cacheDirectory');
+  }
+}
+
 function validateRendererRuntime(manifest, packageJson) {
   validateBrowserSelectionEnvironment();
+  validateRepositoryPuppeteerConfig();
   const installedPuppeteer = require('puppeteer/package.json').version;
   const { PUPPETEER_REVISIONS } = require('puppeteer-core/internal/revisions.js');
   const actual = {
@@ -277,4 +289,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { assertInsideRoot, browserEnvironment, computeRenderProvenance, ensureAccessibleSvg, ensureRenderProvenance, readManifest, referencedElementText, renderAll, validateBrowserSelectionEnvironment, validateDefinition, validateRendererConfigs, validateRendererRuntime, verifySvg };
+module.exports = { assertInsideRoot, browserEnvironment, computeRenderProvenance, ensureAccessibleSvg, ensureRenderProvenance, readManifest, referencedElementText, renderAll, validateBrowserSelectionEnvironment, validateDefinition, validateRendererConfigs, validateRendererRuntime, validateRepositoryPuppeteerConfig, verifySvg };
